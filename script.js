@@ -286,7 +286,7 @@ function applyPortfolioMasonry() {
     grid.style.height = `${maxGridHeight}px`;
 }
 
-// In-Place Expand Video Card Logic with Hover-Only Overlay & 5px Masking
+// In-Place Expand Video Card Logic with Hover-Only Overlay, 5px Masking & Zero Letterbox Scaling
 window.expandVideoCard = function(element, rawVideoUrl) {
     if (!element) return;
 
@@ -318,11 +318,11 @@ window.expandVideoCard = function(element, rawVideoUrl) {
         infoBox.classList.add('hidden');
     }
     
-    // 6. Replace media box with aspect-video iframe & hover-only top controls (Strict 5px Corner Mask)
+    // 6. Replace media box with aspect-video iframe & hover-only top controls (Strict 5px Mask & Zero Letterbox Scale)
     mediaBox.classList.remove('aspect-[4/3]');
     mediaBox.classList.add('aspect-video', 'rounded-[5px]');
     mediaBox.innerHTML = `
-        <div class="relative w-full h-full bg-black overflow-hidden rounded-[5px] group video-frame-fadein">
+        <div class="relative w-full h-full bg-black overflow-hidden rounded-[5px] group video-frame-fadein flex justify-center items-center">
             <!-- Top Overlay Bar (Title top-left, Close/Drive top-right - HOVER ONLY) -->
             <div class="absolute top-0 inset-x-0 p-3 z-30 flex justify-between items-center bg-gradient-to-b from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none group-hover:pointer-events-auto">
                 <span class="text-white font-bold text-xs sm:text-sm font-mono-custom tracking-wide truncate max-w-[55%] px-2.5 py-1 bg-black/60 backdrop-blur-md rounded-[3px] border border-white/10 shadow-lg">
@@ -341,7 +341,7 @@ window.expandVideoCard = function(element, rawVideoUrl) {
                     </button>
                 </div>
             </div>
-            <iframe class="w-full h-full border-0 rounded-[5px]" src="${videoData.embedUrl}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+            <iframe class="w-full h-full border-0 rounded-[5px] scale-[1.025]" src="${videoData.embedUrl}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
         </div>
     `;
 
