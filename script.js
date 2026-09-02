@@ -186,17 +186,22 @@ function playAudioClick() {
     } catch(e) {}
 }
 
-// Populate Content on Load
-document.addEventListener("DOMContentLoaded", () => {
-
+// Render Content Safely
+function initPortfolio() {
     // Contact Links
-    document.getElementById('contact-email').innerHTML = `<a href="mailto:${siteData.general.email}" class="dotted-btn p-1 hover:text-[#C0FE04] transition">${siteData.general.email}</a>`;
-    document.getElementById('contact-phone').innerHTML = `<a href="tel:${siteData.general.phone}" class="dotted-btn p-1 hover:text-[#C0FE04] transition">${siteData.general.phone}</a>`;
+    const emailEl = document.getElementById('contact-email');
+    if (emailEl && siteData.general.email) {
+        emailEl.innerHTML = `<a href="mailto:${siteData.general.email}" class="dotted-btn p-1 hover:text-[#C0FE04] transition">${siteData.general.email}</a>`;
+    }
+    const phoneEl = document.getElementById('contact-phone');
+    if (phoneEl && siteData.general.phone) {
+        phoneEl.innerHTML = `<a href="tel:${siteData.general.phone}" class="dotted-btn p-1 hover:text-[#C0FE04] transition">${siteData.general.phone}</a>`;
+    }
 
     // Portfolio Grid Matrix
     const portfolioGrid = document.getElementById('portfolio-grid');
-    siteData.portfolio.forEach(item => {
-        portfolioGrid.innerHTML += `
+    if (portfolioGrid) {
+        portfolioGrid.innerHTML = siteData.portfolio.map(item => `
             <div onclick="openVideoModal('${item.videoUrl}')" class="b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger">
                 <div class="aspect-[4/3] overflow-hidden relative">
                     <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-black/80 backdrop-blur-md border border-white/10 font-mono-custom text-[10px] text-[#C0FE04] uppercase tracking-wider">${item.badge}</span>
@@ -212,13 +217,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     <h4 class="text-lg font-bold text-white group-hover:text-[#C0FE04] transition">${item.title}</h4>
                 </div>
             </div>
-        `;
-    });
+        `).join('');
+    }
 
     // Digital Products Grid Matrix
     const productsGrid = document.getElementById('products-grid');
-    siteData.products.forEach(product => {
-        productsGrid.innerHTML += `
+    if (productsGrid) {
+        productsGrid.innerHTML = siteData.products.map(product => `
             <div class="b44-card rounded-2xl p-6 md:p-8 flex flex-col justify-between group hover-trigger">
                 <div>
                     <div class="flex justify-between items-start mb-4">
@@ -232,13 +237,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     View Details &amp; Download <i class="fa-solid fa-arrow-right ml-2"></i>
                 </button>
             </div>
-        `;
-    });
+        `).join('');
+    }
 
     // Services Grid
     const servicesGrid = document.getElementById('services-grid');
-    siteData.services.forEach(service => {
-        servicesGrid.innerHTML += `
+    if (servicesGrid) {
+        servicesGrid.innerHTML = siteData.services.map(service => `
             <div class="b44-card p-6 rounded-2xl group hover-trigger">
                 <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex justify-center items-center text-xl text-[#C0FE04] mb-6 group-hover:bg-[#C0FE04] group-hover:text-black transition duration-300">
                     <i class="fa-solid ${service.icon}"></i>
@@ -246,13 +251,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 <h4 class="text-lg font-bold text-white mb-2">${service.title}</h4>
                 <p class="text-xs text-[#888888] leading-relaxed">${service.desc}</p>
             </div>
-        `;
-    });
+        `).join('');
+    }
 
     // Testimonials Grid
     const testimonialGrid = document.getElementById('testimonial-grid');
-    siteData.testimonials.forEach(test => {
-        testimonialGrid.innerHTML += `
+    if (testimonialGrid) {
+        testimonialGrid.innerHTML = siteData.testimonials.map(test => `
             <div class="b44-card p-6 md:p-8 rounded-2xl">
                 <p class="text-sm text-gray-300 leading-relaxed mb-6">"${test.review}"</p>
                 <div class="flex items-center space-x-3">
@@ -265,19 +270,26 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 </div>
             </div>
-        `;
-    });
+        `).join('');
+    }
 
-    // Social Links
+    // Footer Socials
     const footerSocials = document.getElementById('footer-socials');
-    siteData.socials.forEach(social => {
-        footerSocials.innerHTML += `
+    if (footerSocials) {
+        footerSocials.innerHTML = siteData.socials.map(social => `
             <a href="${social.url}" target="_blank" rel="noopener noreferrer" class="dotted-btn px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-xs font-mono-custom text-gray-300 hover:text-[#C0FE04] transition hover-trigger">
                 <i class="fa-brands ${social.icon} mr-2"></i>${social.name}
             </a>
-        `;
-    });
-});
+        `).join('');
+    }
+}
+
+// Immediate execution check for DOM readiness
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPortfolio);
+} else {
+    initPortfolio();
+}
 
 // Live Coordinate Tracker & Cursor Logic
 const cursorDot = document.querySelector('.cursor-dot');
@@ -372,28 +384,41 @@ if (mobileClose) mobileClose.addEventListener('click', closeMenu);
 mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
 
 // Lenis Smooth Scroll Engine
-const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    direction: 'vertical',
-    gestureDirection: 'vertical',
-    smooth: true,
-});
+if (typeof Lenis !== 'undefined') {
+    const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        gestureDirection: 'vertical',
+        smooth: true,
+    });
 
-function raf(time) {
-    lenis.raf(time);
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
     requestAnimationFrame(raf);
 }
-requestAnimationFrame(raf);
 
-// GSAP Animations & Loader Timeline
-gsap.registerPlugin(ScrollTrigger);
+// Safe Loader Dismissal Function
+function hideLoader() {
+    const loader = document.getElementById('loader');
+    if (!loader) return;
+    if (typeof gsap !== 'undefined') {
+        const tl = gsap.timeline();
+        tl.to("#loader-progress", { width: "100%", duration: 0.8, ease: "power3.inOut" })
+          .to("#loader", { y: "-100%", duration: 0.6, ease: "power4.inOut" });
+    } else {
+        loader.style.display = 'none';
+    }
+}
 
-window.addEventListener("load", () => {
-    const tl = gsap.timeline();
-    tl.to("#loader-progress", { width: "100%", duration: 1.2, ease: "power3.inOut" })
-      .to("#loader", { y: "-100%", duration: 0.8, ease: "power4.inOut" });
-});
+if (document.readyState === 'complete') {
+    hideLoader();
+} else {
+    window.addEventListener('load', hideLoader);
+    setTimeout(hideLoader, 2000); // 2s fallback so loader never blocks DOM
+}
 
 // Modal Handlers
 const modalBackdrop = document.getElementById('product-modal-backdrop');
