@@ -156,7 +156,7 @@
         </div>
     </section>
 
-    <!-- Showreel Section (Thumbnail with Center Play Button Only) -->
+    <!-- Showreel Section (5px Corner Radius + Edge-to-Edge Fit Thumbnail) -->
     <section class="py-16 border-b border-black/10 relative z-10" id="showreel">
         <div class="max-w-5xl mx-auto px-6 lg:px-12">
             <div class="text-center mb-8">
@@ -164,18 +164,18 @@
                 <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">Motion Reel 2026</h2>
             </div>
 
-            <!-- Showreel Video Container (Clean Thumbnail + Direct Play Click) -->
-            <div class="b44-card rounded-3xl overflow-hidden bg-black border border-black/10 shadow-2xl relative group max-w-3xl mx-auto cursor-pointer hover-trigger" 
+            <!-- Showreel Video Container (5px Radius + Edge-to-Edge Crop) -->
+            <div class="b44-card rounded-[5px] overflow-hidden bg-black border border-black/10 shadow-2xl relative group max-w-3xl mx-auto cursor-pointer hover-trigger" 
                  id="showreel-card"
                  onclick="playShowreelVideo()">
-                <div class="aspect-video w-full relative overflow-hidden flex justify-center items-center" id="showreel-player-box">
+                <div class="aspect-video w-full relative overflow-hidden flex justify-center items-center rounded-[5px]" id="showreel-player-box">
                     <img src="https://img.youtube.com/vi/pdp05Yl0Bp4/maxresdefault.jpg" 
                          alt="Noor Motion Showreel 2026" 
-                         class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                         class="w-full h-full object-cover scale-[1.03] transition duration-700 group-hover:scale-110" />
                     
                     <div class="absolute inset-0 bg-slate-900/40 group-hover:bg-slate-900/20 transition duration-300 flex justify-center items-center pointer-events-none">
-                        <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#2563EB] text-white flex justify-center items-center shadow-2xl transform scale-90 group-hover:scale-110 transition duration-500 ring-8 ring-white/20">
-                            <i class="fa-solid fa-play text-2xl sm:text-3xl ml-1.5"></i>
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#2563EB] text-white flex justify-center items-center shadow-2xl transform scale-90 group-hover:scale-110 transition duration-500 ring-4 ring-white/20">
+                            <i class="fa-solid fa-play text-xl sm:text-2xl ml-1"></i>
                         </div>
                     </div>
                 </div>
