@@ -162,6 +162,68 @@ const siteData = {
     ]
 };
 
+// In-Place Expand Video Card Logic
+window.expandVideoCard = function(element, videoUrl) {
+    if (!element) return;
+
+    // 1. If clicking on already expanded card, do nothing
+    if (element.classList.contains('portfolio-card-expanded')) return;
+
+    // 2. Collapse any currently expanded card in grid
+    const currentExpanded = document.querySelector('.portfolio-card-expanded');
+    if (currentExpanded) {
+        collapseVideoCard(currentExpanded);
+    }
+
+    // 3. Save original HTML of media box
+    const mediaBox = element.querySelector('.media-box');
+    if (!mediaBox) return;
+    if (!element.dataset.originalMedia) {
+        element.dataset.originalMedia = mediaBox.innerHTML;
+    }
+
+    // Convert Drive / Youtube URL to Embed
+    let embedUrl = videoUrl;
+    if (videoUrl.includes('drive.google.com')) {
+        embedUrl = videoUrl.replace('/view', '/preview').replace('?t=', '#t=');
+    } else if (videoUrl.includes('youtube.com/watch')) {
+        const videoId = new URLSearchParams(new URL(videoUrl).search).get('v');
+        embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+    }
+
+    // 4. Expand card across grid columns
+    element.classList.add('portfolio-card-expanded', 'col-span-1', 'md:col-span-2', 'lg:col-span-3', 'ring-2', 'ring-[#2563EB]', 'shadow-2xl');
+    
+    // 5. Replace media box with full aspect-video iframe & close button
+    mediaBox.classList.remove('aspect-[4/3]');
+    mediaBox.classList.add('aspect-video');
+    mediaBox.innerHTML = `
+        <div class="relative w-full h-full bg-black overflow-hidden rounded-t-2xl">
+            <button onclick="event.stopPropagation(); collapseVideoCard(this.closest('.portfolio-card-expanded'))" 
+                    class="absolute top-4 right-4 z-30 px-3 py-1.5 bg-black/80 backdrop-blur-md text-white font-mono-custom text-xs uppercase rounded-lg border border-white/20 hover:bg-red-600 hover:border-red-600 transition flex items-center space-x-2 shadow-lg">
+                <span>Close [X]</span>
+            </button>
+            <iframe class="w-full h-full border-0" src="${embedUrl}" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    `;
+
+    // 6. Smooth scroll to expanded card
+    setTimeout(() => {
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
+};
+
+window.collapseVideoCard = function(element) {
+    if (!element) return;
+    element.classList.remove('portfolio-card-expanded', 'col-span-1', 'md:col-span-2', 'lg:col-span-3', 'ring-2', 'ring-[#2563EB]', 'shadow-2xl');
+    const mediaBox = element.querySelector('.media-box');
+    if (mediaBox && element.dataset.originalMedia) {
+        mediaBox.classList.remove('aspect-video');
+        mediaBox.classList.add('aspect-[4/3]');
+        mediaBox.innerHTML = element.dataset.originalMedia;
+    }
+};
+
 // Audio Synthesis Controller
 let soundEnabled = true;
 
@@ -368,7 +430,7 @@ if (modalBackdrop) {
     });
 }
 
-// Video Modal Player Logic
+// Video Modal Player Logic (kept for hero video & fallback)
 const videoModal = document.getElementById('video-modal');
 const videoIframe = document.getElementById('video-modal-iframe');
 

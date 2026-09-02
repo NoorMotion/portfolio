@@ -146,7 +146,7 @@
         </div>
     </section>
 
-    <!-- Selected Works / Portfolio Section (Pre-rendered Static HTML) -->
+    <!-- Selected Works / Portfolio Section (In-Place Expanding Cards) -->
     <section class="py-24 border-b border-slate-200 relative z-10 bg-slate-50/50" id="portfolio">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 space-y-4 md:space-y-0">
@@ -154,14 +154,14 @@
                     <span class="font-mono-custom text-xs text-[#2563EB] uppercase tracking-widest block mb-2">// SELECTED PROJECTS</span>
                     <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-slate-900">Featured Motion Works</h2>
                 </div>
-                <span class="font-mono-custom text-xs text-slate-500 uppercase">8 Completed Projects</span>
+                <span class="font-mono-custom text-xs text-slate-500 uppercase">Click card to play in-place</span>
             </div>
 
             <!-- Grid Matrix -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
                 <!-- Card 1 -->
-                <div onclick="openVideoModal('https://drive.google.com/file/d/1p22ilqvf2cyatv4v5cVLOdEq7K0-tfoT/view')" class="b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200">
-                    <div class="aspect-[4/3] overflow-hidden relative">
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1p22ilqvf2cyatv4v5cVLOdEq7K0-tfoT/view')" class="portfolio-item-card b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                    <div class="media-box aspect-[4/3] overflow-hidden relative">
                         <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">MOTION PROJECT</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video11_thumbnail.jpg?v=86a3e49b" alt="DrivePhase.ai Explainer" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
@@ -177,8 +177,8 @@
                 </div>
 
                 <!-- Card 2 -->
-                <div onclick="openVideoModal('https://drive.google.com/file/d/1A7NU3RcdVyAI4CL4w2_hnXHDGuPmpLJX/view?t=4.689')" class="b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200">
-                    <div class="aspect-[4/3] overflow-hidden relative">
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1A7NU3RcdVyAI4CL4w2_hnXHDGuPmpLJX/view?t=4.689')" class="portfolio-item-card b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                    <div class="media-box aspect-[4/3] overflow-hidden relative">
                         <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">MOTION PROJECT</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video04_thumbnail.jpg?v=86a3e49b" alt="School Management Software" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
@@ -194,8 +194,8 @@
                 </div>
 
                 <!-- Card 3 -->
-                <div onclick="openVideoModal('https://drive.google.com/file/d/1h89xJaYIL_Crq97M6JXh0eWEN1u3d4Xr/view')" class="b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200">
-                    <div class="aspect-[4/3] overflow-hidden relative">
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1h89xJaYIL_Crq97M6JXh0eWEN1u3d4Xr/view')" class="portfolio-item-card b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                    <div class="media-box aspect-[4/3] overflow-hidden relative">
                         <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">PLUGIN PROMO</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video05_thumbnail.jpg?v=86a3e49b" alt="Next Video Review" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
@@ -211,8 +211,8 @@
                 </div>
 
                 <!-- Card 4 -->
-                <div onclick="openVideoModal('https://drive.google.com/file/d/1lIxJSS9FBU143EQFGamtFwmglblQvbgW/view')" class="b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200">
-                    <div class="aspect-[4/3] overflow-hidden relative">
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1lIxJSS9FBU143EQFGamtFwmglblQvbgW/view')" class="portfolio-item-card b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                    <div class="media-box aspect-[4/3] overflow-hidden relative">
                         <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">PLUGIN EXPLAINER</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video08_thumbnail.jpg?v=86a3e49b" alt="Washer Service Booking" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
@@ -228,8 +228,8 @@
                 </div>
 
                 <!-- Card 5 -->
-                <div onclick="openVideoModal('https://drive.google.com/file/d/1hc2joGAoRFD3e0jqdivD9inTIYIXckZJ/view')" class="b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200">
-                    <div class="aspect-[4/3] overflow-hidden relative">
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1hc2joGAoRFD3e0jqdivD9inTIYIXckZJ/view')" class="portfolio-item-card b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                    <div class="media-box aspect-[4/3] overflow-hidden relative">
                         <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">PROMO VIDEO</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video06_thumbnail.jpg?v=86a3e49b" alt="Salonly Salon Booking" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
@@ -245,8 +245,8 @@
                 </div>
 
                 <!-- Card 6 -->
-                <div onclick="openVideoModal('https://drive.google.com/file/d/13WzQi1z3SSCRwcKSTVyWQV6fb5FwYucF/view?t=3.924')" class="b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200">
-                    <div class="aspect-[4/3] overflow-hidden relative">
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/13WzQi1z3SSCRwcKSTVyWQV6fb5FwYucF/view?t=3.924')" class="portfolio-item-card b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                    <div class="media-box aspect-[4/3] overflow-hidden relative">
                         <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">PROMO VIDEO</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video09_thumbnail.jpg?v=86a3e49b" alt="Cleanly Booking System" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
@@ -262,8 +262,8 @@
                 </div>
 
                 <!-- Card 7 -->
-                <div onclick="openVideoModal('https://drive.google.com/file/d/1a_OsNZAlauYXjLN6Meoh6ryZhqQE0Y9r/view')" class="b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200">
-                    <div class="aspect-[4/3] overflow-hidden relative">
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1a_OsNZAlauYXjLN6Meoh6ryZhqQE0Y9r/view')" class="portfolio-item-card b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                    <div class="media-box aspect-[4/3] overflow-hidden relative">
                         <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">SAAS EXPLAINER</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video01_thumbnail.jpg?v=86a3e49b" alt="NextCRM Marketing Automation" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
@@ -279,8 +279,8 @@
                 </div>
 
                 <!-- Card 8 -->
-                <div onclick="openVideoModal('https://drive.google.com/file/d/1R0L7_DTxNBJHL_B7PMc1OStOiCMcGAEC/view?t=4.721')" class="b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200">
-                    <div class="aspect-[4/3] overflow-hidden relative">
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1R0L7_DTxNBJHL_B7PMc1OStOiCMcGAEC/view?t=4.721')" class="portfolio-item-card b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                    <div class="media-box aspect-[4/3] overflow-hidden relative">
                         <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">PLUGIN PROMO</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video03_thumbnail.jpg?v=86a3e49b" alt="Next3 Offload Optimizer" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
@@ -520,7 +520,7 @@
         </div>
     </div>
 
-    <!-- Video Modal Player -->
+    <!-- Video Modal Player (kept for hero video & fallback) -->
     <div id="video-modal" class="fixed inset-0 z-50 bg-slate-900/90 flex justify-center items-center p-4 hidden opacity-0 transition-opacity duration-300">
         <div class="relative w-full max-w-4xl aspect-video rounded-2xl overflow-hidden border border-slate-200 bg-black">
             <button onclick="closeVideoModal()" class="absolute top-4 right-4 z-20 text-white text-2xl bg-black/60 w-10 h-10 rounded-full flex justify-center items-center hover:bg-red-600 transition">
