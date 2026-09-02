@@ -134,23 +134,23 @@
 
                 <!-- Action CTA Group -->
                 <div class="flex flex-wrap gap-4 pt-4">
-                    <a href="#portfolio" class="dotted-btn px-8 py-4 bg-[#2563EB] text-white font-bold text-sm rounded-lg hover:bg-slate-900 transition-all hover-trigger" id="hero-btn-1">
+                    <a href="#portfolio" class="dotted-btn px-8 py-4 bg-[#2563EB] text-white font-bold text-sm rounded-[5px] hover:bg-slate-900 transition-all hover-trigger" id="hero-btn-1">
                         See Selected Works
                     </a>
-                    <a href="#showreel" class="dotted-btn px-8 py-4 border border-black/15 bg-black/5 text-slate-900 font-bold text-sm rounded-lg hover:bg-black/10 transition-all flex items-center space-x-3 hover-trigger">
+                    <a href="#showreel" class="dotted-btn px-8 py-4 border border-black/15 bg-black/5 text-slate-900 font-bold text-sm rounded-[5px] hover:bg-black/10 transition-all flex items-center space-x-3 hover-trigger">
                         <i class="fa-solid fa-play text-[#2563EB]"></i>
                         <span>Watch Showreel</span>
                     </a>
                 </div>
             </div>
 
-            <!-- Right: Portrait Badge Container -->
+            <!-- Right: Portrait Badge Container (5px Corner Radius) -->
             <div class="lg:col-span-4 flex justify-center lg:justify-end">
-                <div class="relative w-72 h-72 sm:w-80 sm:h-80 rounded-3xl b44-card p-4 flex justify-center items-center group overflow-hidden bg-white border border-black/10 shadow-lg">
+                <div class="relative w-72 h-72 sm:w-80 sm:h-80 rounded-[5px] b44-card p-3 flex justify-center items-center group overflow-hidden bg-white border border-black/10 shadow-lg">
                     <img id="hero-portrait-img" 
                          src="https://nooralam.carrd.co/assets/images/image01.png?v=1e1d6b0a" 
                          alt="Noor Motion" 
-                         class="w-full h-full object-cover rounded-2xl transition duration-500 transform group-hover:scale-105">
+                         class="w-full h-full object-cover rounded-[5px] transition duration-500 transform group-hover:scale-105">
                 </div>
             </div>
         </div>
@@ -183,7 +183,7 @@
         </div>
     </section>
 
-    <!-- Selected Works / Portfolio Section (In-Place Expanding Cards) -->
+    <!-- Selected Works / Portfolio Section (In-Place Expanding Cards - 5px Radius) -->
     <section class="py-24 border-b border-black/10 relative z-10" id="portfolio">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 space-y-4 md:space-y-0">
@@ -197,9 +197,9 @@
             <!-- Grid Matrix -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
                 <!-- Card 1 -->
-                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1p22ilqvf2cyatv4v5cVLOdEq7K0-tfoT/view')" class="portfolio-item-card b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
-                    <div class="media-box aspect-[4/3] overflow-hidden relative">
-                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">MOTION PROJECT</span>
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1p22ilqvf2cyatv4v5cVLOdEq7K0-tfoT/view')" class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                    <div class="media-box aspect-[4/3] overflow-hidden relative rounded-t-[5px]">
+                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">MOTION PROJECT</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video11_thumbnail.jpg?v=86a3e49b" alt="DrivePhase.ai Explainer" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
                             <div class="w-14 h-14 rounded-full bg-[#2563EB] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
@@ -214,9 +214,9 @@
                 </div>
 
                 <!-- Card 2 -->
-                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1A7NU3RcdVyAI4CL4w2_hnXHDGuPmpLJX/view')" class="portfolio-item-card b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
-                    <div class="media-box aspect-[4/3] overflow-hidden relative">
-                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">MOTION PROJECT</span>
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1A7NU3RcdVyAI4CL4w2_hnXHDGuPmpLJX/view')" class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                    <div class="media-box aspect-[4/3] overflow-hidden relative rounded-t-[5px]">
+                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">MOTION PROJECT</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video04_thumbnail.jpg?v=86a3e49b" alt="School Management Software" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
                             <div class="w-14 h-14 rounded-full bg-[#2563EB] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
@@ -231,9 +231,9 @@
                 </div>
 
                 <!-- Card 3 -->
-                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1h89xJaYIL_Crq97M6JXh0eWEN1u3d4Xr/view')" class="portfolio-item-card b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
-                    <div class="media-box aspect-[4/3] overflow-hidden relative">
-                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">PLUGIN PROMO</span>
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1h89xJaYIL_Crq97M6JXh0eWEN1u3d4Xr/view')" class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                    <div class="media-box aspect-[4/3] overflow-hidden relative rounded-t-[5px]">
+                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">PLUGIN PROMO</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video05_thumbnail.jpg?v=86a3e49b" alt="Next Video Review" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
                             <div class="w-14 h-14 rounded-full bg-[#2563EB] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
@@ -248,9 +248,9 @@
                 </div>
 
                 <!-- Card 4 -->
-                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1lIxJSS9FBU143EQFGamtFwmglblQvbgW/view')" class="portfolio-item-card b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
-                    <div class="media-box aspect-[4/3] overflow-hidden relative">
-                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">PLUGIN EXPLAINER</span>
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1lIxJSS9FBU143EQFGamtFwmglblQvbgW/view')" class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                    <div class="media-box aspect-[4/3] overflow-hidden relative rounded-t-[5px]">
+                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">PLUGIN EXPLAINER</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video08_thumbnail.jpg?v=86a3e49b" alt="Washer Service Booking" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
                             <div class="w-14 h-14 rounded-full bg-[#2563EB] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
@@ -265,9 +265,9 @@
                 </div>
 
                 <!-- Card 5 -->
-                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1hc2joGAoRFD3e0jqdivD9inTIYIXckZJ/view')" class="portfolio-item-card b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
-                    <div class="media-box aspect-[4/3] overflow-hidden relative">
-                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">PROMO VIDEO</span>
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1hc2joGAoRFD3e0jqdivD9inTIYIXckZJ/view')" class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                    <div class="media-box aspect-[4/3] overflow-hidden relative rounded-t-[5px]">
+                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">PROMO VIDEO</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video06_thumbnail.jpg?v=86a3e49b" alt="Salonly Salon Booking" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
                             <div class="w-14 h-14 rounded-full bg-[#2563EB] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
@@ -282,9 +282,9 @@
                 </div>
 
                 <!-- Card 6 -->
-                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/13WzQi1z3SSCRwcKSTVyWQV6fb5FwYucF/view')" class="portfolio-item-card b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
-                    <div class="media-box aspect-[4/3] overflow-hidden relative">
-                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">PROMO VIDEO</span>
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/13WzQi1z3SSCRwcKSTVyWQV6fb5FwYucF/view')" class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                    <div class="media-box aspect-[4/3] overflow-hidden relative rounded-t-[5px]">
+                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">PROMO VIDEO</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video09_thumbnail.jpg?v=86a3e49b" alt="Cleanly Booking System" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
                             <div class="w-14 h-14 rounded-full bg-[#2563EB] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
@@ -299,9 +299,9 @@
                 </div>
 
                 <!-- Card 7 -->
-                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1a_OsNZAlauYXjLN6Meoh6ryZhqQE0Y9r/view')" class="portfolio-item-card b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
-                    <div class="media-box aspect-[4/3] overflow-hidden relative">
-                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">SAAS EXPLAINER</span>
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1a_OsNZAlauYXjLN6Meoh6ryZhqQE0Y9r/view')" class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                    <div class="media-box aspect-[4/3] overflow-hidden relative rounded-t-[5px]">
+                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">SAAS EXPLAINER</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video01_thumbnail.jpg?v=86a3e49b" alt="NextCRM Marketing Automation" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
                             <div class="w-14 h-14 rounded-full bg-[#2563EB] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
@@ -316,9 +316,9 @@
                 </div>
 
                 <!-- Card 8 -->
-                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1R0L7_DTxNBJHL_B7PMc1OStOiCMcGAEC/view')" class="portfolio-item-card b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
-                    <div class="media-box aspect-[4/3] overflow-hidden relative">
-                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">PLUGIN PROMO</span>
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1R0L7_DTxNBJHL_B7PMc1OStOiCMcGAEC/view')" class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                    <div class="media-box aspect-[4/3] overflow-hidden relative rounded-t-[5px]">
+                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">PLUGIN PROMO</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video03_thumbnail.jpg?v=86a3e49b" alt="Next3 Offload Optimizer" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
                             <div class="w-14 h-14 rounded-full bg-[#2563EB] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
@@ -335,7 +335,7 @@
         </div>
     </section>
 
-    <!-- AE Scripts & Digital Products Section -->
+    <!-- AE Scripts & Digital Products Section (5px Corner Radius) -->
     <section class="py-24 border-b border-black/10 relative z-10" id="products">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 space-y-4 md:space-y-0">
@@ -346,13 +346,13 @@
                 <span class="font-mono-custom text-xs text-slate-500 uppercase">Free &amp; Open Tools</span>
             </div>
 
-            <!-- Product Grid Matrix with Thumbnails -->
+            <!-- Product Grid Matrix with Thumbnails (5px Corner Radius) -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="products-grid">
                 <!-- Product 1 -->
-                <div class="b44-card rounded-2xl overflow-hidden group hover-trigger bg-white border border-slate-200 flex flex-col justify-between">
+                <div class="b44-card rounded-[5px] overflow-hidden group hover-trigger bg-white border border-slate-200 flex flex-col justify-between">
                     <div>
-                        <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200">
-                            <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">AE TOOL</span>
+                        <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200 rounded-t-[5px]">
+                            <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">AE TOOL</span>
                             <img src="https://noormotion.carrd.co/assets/images/gallery02/541290cb.jpg?v=86a3e49b" alt="CompSync 2.0" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         </div>
                         <div class="p-6">
@@ -365,17 +365,17 @@
                         </div>
                     </div>
                     <div class="p-6 pt-0">
-                        <button onclick="openProductModal(1)" class="dotted-btn w-full py-3 bg-slate-100 border border-slate-200 rounded-lg text-slate-900 font-mono-custom text-xs uppercase hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB] transition">
+                        <button onclick="openProductModal(1)" class="dotted-btn w-full py-3 bg-slate-100 border border-slate-200 rounded-[5px] text-slate-900 font-mono-custom text-xs uppercase hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB] transition">
                             View Details &amp; Download <i class="fa-solid fa-arrow-right ml-2"></i>
                         </button>
                     </div>
                 </div>
 
                 <!-- Product 2 -->
-                <div class="b44-card rounded-2xl overflow-hidden group hover-trigger bg-white border border-slate-200 flex flex-col justify-between">
+                <div class="b44-card rounded-[5px] overflow-hidden group hover-trigger bg-white border border-slate-200 flex flex-col justify-between">
                     <div>
-                        <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200">
-                            <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">AE PRESET</span>
+                        <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200 rounded-t-[5px]">
+                            <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">AE PRESET</span>
                             <img src="https://noormotion.carrd.co/assets/images/gallery02/d186352f.jpg?v=86a3e49b" alt="AutoCaption 2.0" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         </div>
                         <div class="p-6">
@@ -388,17 +388,17 @@
                         </div>
                     </div>
                     <div class="p-6 pt-0">
-                        <button onclick="openProductModal(2)" class="dotted-btn w-full py-3 bg-slate-100 border border-slate-200 rounded-lg text-slate-900 font-mono-custom text-xs uppercase hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB] transition">
+                        <button onclick="openProductModal(2)" class="dotted-btn w-full py-3 bg-slate-100 border border-slate-200 rounded-[5px] text-slate-900 font-mono-custom text-xs uppercase hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB] transition">
                             View Details &amp; Download <i class="fa-solid fa-arrow-right ml-2"></i>
                         </button>
                     </div>
                 </div>
 
                 <!-- Product 3 -->
-                <div class="b44-card rounded-2xl overflow-hidden group hover-trigger bg-white border border-slate-200 flex flex-col justify-between">
+                <div class="b44-card rounded-[5px] overflow-hidden group hover-trigger bg-white border border-slate-200 flex flex-col justify-between">
                     <div>
-                        <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200">
-                            <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">TYPOGRAPHY PRESET</span>
+                        <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200 rounded-t-[5px]">
+                            <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">TYPOGRAPHY PRESET</span>
                             <img src="https://noormotion.carrd.co/assets/images/gallery02/b70ecfc2.jpg?v=86a3e49b" alt="textEco Text Animator" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         </div>
                         <div class="p-6">
@@ -411,17 +411,17 @@
                         </div>
                     </div>
                     <div class="p-6 pt-0">
-                        <button onclick="openProductModal(3)" class="dotted-btn w-full py-3 bg-[#2563EB]/10 border border-[#2563EB]/20 rounded-lg text-[#2563EB] font-mono-custom text-xs uppercase hover:bg-[#2563EB] hover:text-white transition">
+                        <button onclick="openProductModal(3)" class="dotted-btn w-full py-3 bg-[#2563EB]/10 border border-[#2563EB]/20 rounded-[5px] text-[#2563EB] font-mono-custom text-xs uppercase hover:bg-[#2563EB] hover:text-white transition">
                             View Details &amp; Download <i class="fa-solid fa-arrow-right ml-2"></i>
                         </button>
                     </div>
                 </div>
 
                 <!-- Product 4 -->
-                <div class="b44-card rounded-2xl overflow-hidden group hover-trigger bg-white border border-slate-200 flex flex-col justify-between">
+                <div class="b44-card rounded-[5px] overflow-hidden group hover-trigger bg-white border border-slate-200 flex flex-col justify-between">
                     <div>
-                        <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200">
-                            <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">MASKING TOOL</span>
+                        <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200 rounded-t-[5px]">
+                            <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">MASKING TOOL</span>
                             <img src="https://noormotion.carrd.co/assets/images/gallery02/a65c20db.jpg?v=86a3e49b" alt="Master Mask" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         </div>
                         <div class="p-6">
@@ -434,7 +434,7 @@
                         </div>
                     </div>
                     <div class="p-6 pt-0">
-                        <button onclick="openProductModal(4)" class="dotted-btn w-full py-3 bg-slate-100 border border-slate-200 rounded-lg text-slate-900 font-mono-custom text-xs uppercase hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB] transition">
+                        <button onclick="openProductModal(4)" class="dotted-btn w-full py-3 bg-slate-100 border border-slate-200 rounded-[5px] text-slate-900 font-mono-custom text-xs uppercase hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB] transition">
                             View Details &amp; Download <i class="fa-solid fa-arrow-right ml-2"></i>
                         </button>
                     </div>
@@ -443,7 +443,7 @@
         </div>
     </section>
 
-    <!-- Services Section -->
+    <!-- Services Section (5px Corner Radius) -->
     <section class="py-24 border-b border-black/10 relative z-10" id="services">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="mb-16">
@@ -451,31 +451,31 @@
                 <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-slate-900">Services &amp; Solutions</h2>
             </div>
 
-            <!-- Services Cards Grid -->
+            <!-- Services Cards Grid (5px Corner Radius) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="services-grid">
-                <div class="b44-card p-6 rounded-2xl group hover-trigger bg-white border border-slate-200">
-                    <div class="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200 flex justify-center items-center text-xl text-[#2563EB] mb-6 group-hover:bg-[#2563EB] group-hover:text-white transition duration-300">
+                <div class="b44-card p-6 rounded-[5px] group hover-trigger bg-white border border-slate-200">
+                    <div class="w-12 h-12 rounded-[5px] bg-slate-100 border border-slate-200 flex justify-center items-center text-xl text-[#2563EB] mb-6 group-hover:bg-[#2563EB] group-hover:text-white transition duration-300">
                         <i class="fa-solid fa-video"></i>
                     </div>
                     <h4 class="text-lg font-bold text-slate-900 mb-2">SaaS Explainer Videos</h4>
                     <p class="text-xs text-slate-600 leading-relaxed">High-end product explainer and SaaS promo animations.</p>
                 </div>
-                <div class="b44-card p-6 rounded-2xl group hover-trigger bg-white border border-slate-200">
-                    <div class="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200 flex justify-center items-center text-xl text-[#2563EB] mb-6 group-hover:bg-[#2563EB] group-hover:text-white transition duration-300">
+                <div class="b44-card p-6 rounded-[5px] group hover-trigger bg-white border border-slate-200">
+                    <div class="w-12 h-12 rounded-[5px] bg-slate-100 border border-slate-200 flex justify-center items-center text-xl text-[#2563EB] mb-6 group-hover:bg-[#2563EB] group-hover:text-white transition duration-300">
                         <i class="fa-solid fa-film"></i>
                     </div>
                     <h4 class="text-lg font-bold text-slate-900 mb-2">Brand Commercials</h4>
                     <p class="text-xs text-slate-600 leading-relaxed">Cinematic promotional and commercial videos for products.</p>
                 </div>
-                <div class="b44-card p-6 rounded-2xl group hover-trigger bg-white border border-slate-200">
-                    <div class="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200 flex justify-center items-center text-xl text-[#2563EB] mb-6 group-hover:bg-[#2563EB] group-hover:text-white transition duration-300">
+                <div class="b44-card p-6 rounded-[5px] group hover-trigger bg-white border border-slate-200">
+                    <div class="w-12 h-12 rounded-[5px] bg-slate-100 border border-slate-200 flex justify-center items-center text-xl text-[#2563EB] mb-6 group-hover:bg-[#2563EB] group-hover:text-white transition duration-300">
                         <i class="fa-solid fa-cubes"></i>
                     </div>
                     <h4 class="text-lg font-bold text-slate-900 mb-2">3D Motion Graphics</h4>
                     <p class="text-xs text-slate-600 leading-relaxed">Premium 3D designs, abstract visual elements, and renders.</p>
                 </div>
-                <div class="b44-card p-6 rounded-2xl group hover-trigger bg-white border border-slate-200">
-                    <div class="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200 flex justify-center items-center text-xl text-[#2563EB] mb-6 group-hover:bg-[#2563EB] group-hover:text-white transition duration-300">
+                <div class="b44-card p-6 rounded-[5px] group hover-trigger bg-white border border-slate-200">
+                    <div class="w-12 h-12 rounded-[5px] bg-slate-100 border border-slate-200 flex justify-center items-center text-xl text-[#2563EB] mb-6 group-hover:bg-[#2563EB] group-hover:text-white transition duration-300">
                         <i class="fa-solid fa-code"></i>
                     </div>
                     <h4 class="text-lg font-bold text-slate-900 mb-2">AE Scripts &amp; Tools</h4>
@@ -485,7 +485,7 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
+    <!-- Testimonials Section (5px Corner Radius) -->
     <section class="py-24 border-b border-black/10 relative z-10" id="testimonials">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="mb-16">
@@ -493,9 +493,9 @@
                 <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-slate-900">Client Recommendations</h2>
             </div>
 
-            <!-- Testimonials Grid -->
+            <!-- Testimonials Grid (5px Corner Radius) -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="testimonial-grid">
-                <div class="b44-card p-6 md:p-8 rounded-2xl bg-white border border-slate-200">
+                <div class="b44-card p-6 md:p-8 rounded-[5px] bg-white border border-slate-200">
                     <p class="text-sm text-slate-700 leading-relaxed mb-6">"Outstanding work quality! Our product launch explainer video became this successful because of his motion design."</p>
                     <div class="flex items-center space-x-3">
                         <div class="w-10 h-10 rounded-full bg-[#2563EB] text-white font-bold flex justify-center items-center text-sm">A</div>
@@ -505,7 +505,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="b44-card p-6 md:p-8 rounded-2xl bg-white border border-slate-200">
+                <div class="b44-card p-6 md:p-8 rounded-[5px] bg-white border border-slate-200">
                     <p class="text-sm text-slate-700 leading-relaxed mb-6">"Never got such beautiful 3D work while strictly maintaining the timeline before. Highly recommended!"</p>
                     <div class="flex items-center space-x-3">
                         <div class="w-10 h-10 rounded-full bg-[#2563EB] text-white font-bold flex justify-center items-center text-sm">S</div>
@@ -515,7 +515,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="b44-card p-6 md:p-8 rounded-2xl bg-white border border-slate-200">
+                <div class="b44-card p-6 md:p-8 rounded-[5px] bg-white border border-slate-200">
                     <p class="text-sm text-slate-700 leading-relaxed mb-6">"His sense of animation is very modern. He gave our brand identity a whole new look."</p>
                     <div class="flex items-center space-x-3">
                         <div class="w-10 h-10 rounded-full bg-[#2563EB] text-white font-bold flex justify-center items-center text-sm">R</div>
@@ -547,11 +547,11 @@
 
             <!-- Social Links -->
             <div class="flex flex-wrap items-center gap-4 pt-8 border-t border-black/10" id="footer-socials">
-                <a href="https://www.linkedin.com/in/motionoor-alam-/" target="_blank" rel="noopener noreferrer" class="dotted-btn px-4 py-2 bg-white border border-slate-200 rounded-lg text-xs font-mono-custom text-slate-700 hover:text-[#2563EB] transition hover-trigger"><i class="fa-brands fa-linkedin-in mr-2"></i>LinkedIn</a>
-                <a href="https://www.youtube.com/@Motionoor" target="_blank" rel="noopener noreferrer" class="dotted-btn px-4 py-2 bg-white border border-slate-200 rounded-lg text-xs font-mono-custom text-slate-700 hover:text-[#2563EB] transition hover-trigger"><i class="fa-brands fa-youtube mr-2"></i>YouTube</a>
-                <a href="https://www.facebook.com/Nr.Alm96" target="_blank" rel="noopener noreferrer" class="dotted-btn px-4 py-2 bg-white border border-slate-200 rounded-lg text-xs font-mono-custom text-slate-700 hover:text-[#2563EB] transition hover-trigger"><i class="fa-brands fa-facebook-f mr-2"></i>Facebook</a>
-                <a href="https://wa.me/+8801867739749" target="_blank" rel="noopener noreferrer" class="dotted-btn px-4 py-2 bg-white border border-slate-200 rounded-lg text-xs font-mono-custom text-slate-700 hover:text-[#2563EB] transition hover-trigger"><i class="fa-brands fa-whatsapp mr-2"></i>WhatsApp</a>
-                <a href="https://t.me/+8801867739749" target="_blank" rel="noopener noreferrer" class="dotted-btn px-4 py-2 bg-white border border-slate-200 rounded-lg text-xs font-mono-custom text-slate-700 hover:text-[#2563EB] transition hover-trigger"><i class="fa-brands fa-telegram mr-2"></i>Telegram</a>
+                <a href="https://www.linkedin.com/in/motionoor-alam-/" target="_blank" rel="noopener noreferrer" class="dotted-btn px-4 py-2 bg-white border border-slate-200 rounded-[5px] text-xs font-mono-custom text-slate-700 hover:text-[#2563EB] transition hover-trigger"><i class="fa-brands fa-linkedin-in mr-2"></i>LinkedIn</a>
+                <a href="https://www.youtube.com/@Motionoor" target="_blank" rel="noopener noreferrer" class="dotted-btn px-4 py-2 bg-white border border-slate-200 rounded-[5px] text-xs font-mono-custom text-slate-700 hover:text-[#2563EB] transition hover-trigger"><i class="fa-brands fa-youtube mr-2"></i>YouTube</a>
+                <a href="https://www.facebook.com/Nr.Alm96" target="_blank" rel="noopener noreferrer" class="dotted-btn px-4 py-2 bg-white border border-slate-200 rounded-[5px] text-xs font-mono-custom text-slate-700 hover:text-[#2563EB] transition hover-trigger"><i class="fa-brands fa-facebook-f mr-2"></i>Facebook</a>
+                <a href="https://wa.me/+8801867739749" target="_blank" rel="noopener noreferrer" class="dotted-btn px-4 py-2 bg-white border border-slate-200 rounded-[5px] text-xs font-mono-custom text-slate-700 hover:text-[#2563EB] transition hover-trigger"><i class="fa-brands fa-whatsapp mr-2"></i>WhatsApp</a>
+                <a href="https://t.me/+8801867739749" target="_blank" rel="noopener noreferrer" class="dotted-btn px-4 py-2 bg-white border border-slate-200 rounded-[5px] text-xs font-mono-custom text-slate-700 hover:text-[#2563EB] transition hover-trigger"><i class="fa-brands fa-telegram mr-2"></i>Telegram</a>
             </div>
 
             <!-- Live Cursor Coordinates & Copyright Bar -->
@@ -563,9 +563,9 @@
         </div>
     </footer>
 
-    <!-- Product Modal -->
+    <!-- Product Modal (5px Corner Radius) -->
     <div id="product-modal-backdrop" class="fixed inset-0 z-50 bg-slate-900/80 flex justify-center items-center p-4 hidden opacity-0 transition-opacity duration-300">
-        <div id="product-modal-content" class="bg-white border border-slate-200 rounded-2xl max-w-2xl w-full p-6 md:p-8 transform scale-95 transition-transform duration-300 relative max-h-[90vh] overflow-y-auto">
+        <div id="product-modal-content" class="bg-white border border-slate-200 rounded-[5px] max-w-2xl w-full p-6 md:p-8 transform scale-95 transition-transform duration-300 relative max-h-[90vh] overflow-y-auto">
             <button onclick="closeProductModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-900 text-xl">
                 <i class="fa-solid fa-xmark"></i>
             </button>
@@ -573,7 +573,7 @@
             <span id="modal-subtitle" class="font-mono-custom text-xs text-[#2563EB] uppercase tracking-wider block mb-1"></span>
             <h3 id="modal-title" class="text-2xl font-bold text-slate-900 mb-4"></h3>
 
-            <div id="modal-media-container" class="aspect-video w-full rounded-xl overflow-hidden mb-6 bg-slate-900 relative border border-slate-200"></div>
+            <div id="modal-media-container" class="aspect-video w-full rounded-[5px] overflow-hidden mb-6 bg-slate-900 relative border border-slate-200"></div>
 
             <p id="modal-details" class="text-slate-700 text-sm leading-relaxed mb-6"></p>
 
@@ -581,7 +581,7 @@
                 <span id="modal-price" class="text-xl font-bold text-[#2563EB]"></span>
                 
                 <div id="gumroad-button-container">
-                    <a id="gumroad-link" href="#" target="_blank" rel="noopener noreferrer" class="dotted-btn px-6 py-3 bg-[#2563EB] text-white font-bold text-xs uppercase rounded-lg hover:bg-slate-900 transition">
+                    <a id="gumroad-link" href="#" target="_blank" rel="noopener noreferrer" class="dotted-btn px-6 py-3 bg-[#2563EB] text-white font-bold text-xs uppercase rounded-[5px] hover:bg-slate-900 transition">
                         Download / Get Tool <i class="fa-solid fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -589,13 +589,13 @@
         </div>
     </div>
 
-    <!-- Video Modal Player (kept for hero video & fallback) -->
+    <!-- Video Modal Player (5px Corner Radius) -->
     <div id="video-modal" class="fixed inset-0 z-50 bg-slate-900/90 flex justify-center items-center p-4 hidden opacity-0 transition-opacity duration-300">
-        <div class="relative w-full max-w-4xl aspect-video rounded-2xl overflow-hidden border border-slate-200 bg-black">
+        <div class="relative w-full max-w-4xl aspect-video rounded-[5px] overflow-hidden border border-slate-200 bg-black">
             <button onclick="closeVideoModal()" class="absolute top-4 right-4 z-20 text-white text-2xl bg-black/60 w-10 h-10 rounded-full flex justify-center items-center hover:bg-red-600 transition">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <iframe id="video-modal-iframe" class="w-full h-full border-0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <iframe id="video-modal-iframe" class="w-full h-full border-0 rounded-[5px]" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
     </div>
 

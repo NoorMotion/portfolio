@@ -61,10 +61,6 @@ html.lenis {
     scroll-behavior: auto;
 }
 
-.lenis.lenis-smooth [data-lenis-prevent] {
-    overscroll-behavior: contain;
-}
-
 .lenis.lenis-stopped {
     overflow: hidden;
 }
@@ -140,10 +136,11 @@ body.dark-mode ::-webkit-scrollbar-thumb {
     border-color: var(--accent-lime);
 }
 
-/* Base44 Crisp White Elevated Cards */
+/* Base44 Crisp White Elevated Cards (5px Corner Radius Globally) */
 .b44-card {
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
+    border-radius: 5px !important;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
                 box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
@@ -174,11 +171,14 @@ body.dark-mode .b44-card:hover {
 
 /* Smooth Card Expansion & Morphing Player */
 .portfolio-item-card {
+    border-radius: 5px !important;
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, width, height;
 }
 
 .portfolio-item-card .media-box {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 

@@ -308,16 +308,16 @@ window.expandVideoCard = function(element, rawVideoUrl) {
     mediaBox.classList.remove('aspect-[4/3]');
     mediaBox.classList.add('aspect-video');
     mediaBox.innerHTML = `
-        <div class="relative w-full h-full bg-black overflow-hidden rounded-t-2xl group video-frame-fadein">
+        <div class="relative w-full h-full bg-black overflow-hidden rounded-t-[5px] group video-frame-fadein">
             <div class="absolute top-4 right-4 z-30 flex items-center space-x-2">
                 <a href="${videoData.rawUrl}" target="_blank" rel="noopener noreferrer" 
                    onclick="event.stopPropagation()"
-                   class="px-3 py-1.5 bg-black/80 backdrop-blur-md text-white font-mono-custom text-xs uppercase rounded-lg border border-white/20 hover:bg-[#2563EB] hover:border-[#2563EB] transition flex items-center space-x-1 shadow-lg">
+                   class="px-3 py-1.5 bg-black/80 backdrop-blur-md text-white font-mono-custom text-xs uppercase rounded-[5px] border border-white/20 hover:bg-[#2563EB] hover:border-[#2563EB] transition flex items-center space-x-1 shadow-lg">
                     <span>Open Drive HD</span>
                     <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i>
                 </a>
                 <button onclick="event.stopPropagation(); collapseVideoCard(this.closest('.portfolio-card-expanded'))" 
-                        class="px-3 py-1.5 bg-black/80 backdrop-blur-md text-white font-mono-custom text-xs uppercase rounded-lg border border-white/20 hover:bg-red-600 hover:border-red-600 transition flex items-center space-x-1 shadow-lg">
+                        class="px-3 py-1.5 bg-black/80 backdrop-blur-md text-white font-mono-custom text-xs uppercase rounded-[5px] border border-white/20 hover:bg-red-600 hover:border-red-600 transition flex items-center space-x-1 shadow-lg">
                     <span>Close [X]</span>
                 </button>
             </div>
@@ -529,9 +529,9 @@ window.openProductModal = function (productId) {
 
     const mediaContainer = document.getElementById('modal-media-container');
     if (product.youtubeUrl && product.youtubeUrl !== "") {
-        mediaContainer.innerHTML = `<iframe class="w-full h-full" src="${product.youtubeUrl}?autoplay=1&mute=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        mediaContainer.innerHTML = `<iframe class="w-full h-full rounded-[5px]" src="${product.youtubeUrl}?autoplay=1&mute=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
     } else {
-        mediaContainer.innerHTML = `<img src="${product.image}" class="w-full h-full object-cover" alt="${product.title}" />`;
+        mediaContainer.innerHTML = `<img src="${product.image}" class="w-full h-full object-cover rounded-[5px]" alt="${product.title}" />`;
     }
 
     const gumroadLink = document.getElementById('gumroad-link');
