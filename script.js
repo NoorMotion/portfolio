@@ -26,8 +26,8 @@ const siteData = {
     },
     hero: {
         badge: "Professional Motion Designer & AE Toolmaker",
-        titleLine1: "I bring craft & taste",
-        titleLine2: "to motion design & tools.",
+        titleLine1: "Your digital product",
+        titleLine2: "Moves in motion",
         description: "I craft SaaS product explainer videos, 3D visual graphics, and custom Adobe After Effects workflow automation tools that elevate brand stories.",
         primaryBtn: "See Selected Works",
         secondaryBtn: "Watch Showreel"
@@ -192,6 +192,20 @@ function parseVideoEmbed(url) {
 
     return { embedUrl: url, rawUrl: url };
 }
+
+// Showreel Single Click Video Player Handler
+window.playShowreelVideo = function(container) {
+    if (!container) return;
+    const box = container.querySelector('#showreel-player-box');
+    if (!box) return;
+    box.innerHTML = `
+        <iframe class="w-full h-full border-0 video-frame-fadein" 
+                src="https://www.youtube.com/embed/pdp05Yl0Bp4?autoplay=1" 
+                title="Noor Motion Showreel 2026" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen></iframe>
+    `;
+};
 
 // ==========================================
 // 🧩 DYNAMIC MASONRY ENGINE (Zero Gap Packing)
