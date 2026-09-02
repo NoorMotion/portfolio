@@ -51,6 +51,7 @@
 
         <!-- Desktop Menu Nav -->
         <nav class="hidden md:flex items-center space-x-8 text-slate-600">
+            <a href="#showreel" class="dotted-btn p-2 hover:text-slate-900 transition hover-trigger">Showreel</a>
             <a href="#portfolio" class="dotted-btn p-2 hover:text-slate-900 transition hover-trigger">Work</a>
             <a href="#products" class="dotted-btn p-2 hover:text-slate-900 transition hover-trigger">Tools / Presets</a>
             <a href="#services" class="dotted-btn p-2 hover:text-slate-900 transition hover-trigger">Services</a>
@@ -84,6 +85,7 @@
         <button id="mobile-menu-close" class="absolute top-6 right-6 text-2xl text-slate-900">
             <i class="fa-solid fa-xmark"></i>
         </button>
+        <a href="#showreel" class="mobile-link text-slate-900 hover:text-[#2563EB]">Showreel</a>
         <a href="#portfolio" class="mobile-link text-slate-900 hover:text-[#2563EB]">Work</a>
         <a href="#products" class="mobile-link text-slate-900 hover:text-[#2563EB]">Tools / Presets</a>
         <a href="#services" class="mobile-link text-slate-900 hover:text-[#2563EB]">Services</a>
@@ -126,11 +128,10 @@
                     <a href="#portfolio" class="dotted-btn px-8 py-4 bg-[#2563EB] text-white font-bold text-sm rounded-lg hover:bg-slate-900 transition-all hover-trigger" id="hero-btn-1">
                         See Selected Works
                     </a>
-                    <button onclick="openVideoModal('https://www.youtube.com/watch?v=pdp05Yl0Bp4')" 
-                            class="dotted-btn px-8 py-4 border border-black/15 bg-black/5 text-slate-900 font-bold text-sm rounded-lg hover:bg-black/10 transition-all flex items-center space-x-3 hover-trigger">
+                    <a href="#showreel" class="dotted-btn px-8 py-4 border border-black/15 bg-black/5 text-slate-900 font-bold text-sm rounded-lg hover:bg-black/10 transition-all flex items-center space-x-3 hover-trigger">
                         <i class="fa-solid fa-play text-[#2563EB]"></i>
                         <span>Watch Showreel</span>
-                    </button>
+                    </a>
                 </div>
             </div>
 
@@ -141,6 +142,51 @@
                          src="https://nooralam.carrd.co/assets/images/image01.png?v=1e1d6b0a" 
                          alt="Noor Motion" 
                          class="w-full h-full object-cover rounded-2xl transition duration-500 transform group-hover:scale-105">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Showreel Section (Under Hero) -->
+    <section class="py-24 border-b border-black/10 relative z-10" id="showreel">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 space-y-4 md:space-y-0">
+                <div>
+                    <span class="font-mono-custom text-xs text-[#2563EB] uppercase tracking-widest block mb-2">// FEATURED SHOWREEL</span>
+                    <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-slate-900">Motion Reel 2026</h2>
+                </div>
+                <p class="text-sm text-slate-600 max-w-md">
+                    A curated compilation highlighting SaaS product animations, 3D visual graphics, and custom motion tools.
+                </p>
+            </div>
+
+            <!-- Showreel Video Container -->
+            <div class="b44-card rounded-3xl overflow-hidden bg-black border border-black/10 shadow-2xl relative group">
+                <div class="aspect-video w-full relative overflow-hidden" id="showreel-player-box">
+                    <iframe class="w-full h-full border-0" 
+                            src="https://www.youtube.com/embed/pdp05Yl0Bp4?enablejsapi=1" 
+                            title="Noor Motion Showreel 2026" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+
+                <!-- Bottom Metadata Bar -->
+                <div class="p-6 bg-white border-t border-slate-200 flex flex-wrap justify-between items-center gap-4 font-mono-custom text-xs">
+                    <div class="flex items-center space-x-6">
+                        <span class="inline-flex items-center text-slate-900 font-bold">
+                            <span class="w-2 h-2 rounded-full bg-[#2563EB] mr-2 animate-pulse"></span>
+                            MONTAGE REEL
+                        </span>
+                        <span class="text-slate-500">DUR: 01:30</span>
+                        <span class="hidden sm:inline-block text-slate-500">RES: 4K UHD</span>
+                    </div>
+
+                    <div class="flex items-center space-x-3">
+                        <span class="px-3 py-1 bg-slate-100 border border-slate-200 rounded text-slate-700 uppercase">Selected Works</span>
+                        <a href="#portfolio" class="dotted-btn px-4 py-1.5 bg-[#2563EB] text-white font-bold rounded hover:bg-slate-900 transition">
+                            Explore Projects <i class="fa-solid fa-arrow-down ml-1"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
