@@ -2,618 +2,283 @@
 <html lang="en">
 
 <head>
-    <meta charset='UTF-8' />
-    <meta content='width=device-width, initial-scale=1.0' name='viewport' />
-    <title>Noor Alam | Professional Motion Designer Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noor Motion | Motion Designer & Design Engineer</title>
+    <meta name="description" content="Portfolio of Noor Motion — Motion Designer, SaaS Explainer Specialist & AE Script Builder.">
 
-    <!-- Google Fonts: Hind Siliguri -->
-    <link href='https://fonts.googleapis.com' rel='preconnect' />
-    <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect' />
-    <link href='https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&amp;display=swap'
-        rel='stylesheet' />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome -->
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css' rel='stylesheet' />
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Tailwind CSS -->
-    <script src='https://cdn.tailwindcss.com' ></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- GSAP & Lenis Smooth Scroll -->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js' ></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js' ></script>
-    <script src='https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js' ></script>
+    <!-- Animation Libraries (GSAP & Lenis) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
 
+    <!-- Custom Design System Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class='antialiased selection:bg-primary selection:text-white'>
+<body class="antialiased selection:bg-[#C0FE04] selection:text-black">
 
+    <!-- Custom Interactive Cursor -->
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
 
-    <!-- Custom Cursor -->
-    <div class='cursor-dot hidden md:block' ></div>
-    <div class='cursor-outline hidden md:block' ></div>
-
-    <!-- Loader -->
-    <div id='loader'>
-        <h1 class='text-4xl font-bold tracking-wider text-gradient' id='loader-logo' ></h1>
-        <div class='loader-bar'>
-            <div class='loader-progress' id='loader-progress' ></div>
+    <!-- Page Loader -->
+    <div id="loader">
+        <h1 class="text-3xl font-bold tracking-widest font-mono-custom text-white" id="loader-logo">NOOR<span class="text-[#C0FE04]">MOTION</span></h1>
+        <div class="loader-bar">
+            <div class="loader-progress" id="loader-progress"></div>
         </div>
-        <p class='mt-4 text-sm text-gray-500 tracking-widest' id='loader-text'>Loading Visuals...</p>
+        <p class="mt-4 text-xs font-mono-custom text-[#888888] tracking-widest uppercase" id="loader-text">Loading System Visuals...</p>
     </div>
 
-    <!-- Navbar -->
-    <nav class='fixed w-full z-50 transition-all duration-300' id='navbar'>
-        <div class='absolute inset-0 glass -z-10' ></div>
-        <div class='max-w-7xl mx-auto px-6 py-4 flex justify-between items-center'>
-            <a class='text-2xl font-bold tracking-wider text-white hover-trigger' href='#' id='nav-logo' ></a>
+    <!-- System Header Navigation Bar (haoqi.design Terminal Bar) -->
+    <header class="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-6 py-4 lg:px-12 backdrop-blur-md border-b border-white/5 font-mono-custom text-xs uppercase">
+        <!-- Logo -->
+        <a href="#" class="dotted-btn p-2 font-bold text-sm text-white tracking-wider hover-trigger" id="nav-logo">
+            NOOR<span class="text-[#C0FE04]">MOTION</span>
+        </a>
 
-            <!-- Desktop Menu -->
-            <div class='hidden md:flex space-x-8 items-center'>
-                <a class='text-sm font-medium text-gray-300 hover:text-primary transition hover-trigger'
-                    href='#about'>About</a>
-                <a class='text-sm font-medium text-gray-300 hover:text-primary transition hover-trigger'
-                    href='#services'>Services</a>
-                <a class='text-sm font-medium text-gray-300 hover:text-primary transition hover-trigger'
-                    href='#portfolio'>Portfolio</a>
-                <a class='text-sm font-medium text-gray-300 hover:text-primary transition hover-trigger'
-                    href='#products'>Store</a>
-                <a class='px-6 py-2.5 rounded-full bg-white/10 border border-white/20 text-white hover:bg-primary hover:text-white hover:border-primary transition duration-300 magnetic-btn hover-trigger'
-                    href='#contact'>Let&#39;s Talk</a>
+        <!-- Desktop Menu Nav -->
+        <nav class="hidden md:flex items-center space-x-8 text-[#888888]">
+            <a href="#portfolio" class="dotted-btn p-2 hover:text-white transition hover-trigger">Work</a>
+            <a href="#products" class="dotted-btn p-2 hover:text-white transition hover-trigger">Tools / Presets</a>
+            <a href="#services" class="dotted-btn p-2 hover:text-white transition hover-trigger">Services</a>
+            <a href="#about" class="dotted-btn p-2 hover:text-white transition hover-trigger">About</a>
+            <a href="#contact" class="dotted-btn p-2 text-[#C0FE04] font-bold hover:text-white transition hover-trigger">Contact</a>
+        </nav>
 
-                <!-- Theme Toggle Button (Desktop) -->
-                <button
-                    class='w-10 h-10 rounded-full bg-white/10 border border-white/20 flex justify-center items-center text-white hover:bg-primary hover:text-white hover:border-primary transition duration-300 magnetic-btn hover-trigger'
-                    id='theme-toggle-desktop' title='Toggle Theme'>
-                    <i class='fa-solid fa-sun' ></i>
-                </button>
-            </div>
-
-            <!-- Mobile Actions -->
-            <div class='flex items-center space-x-5 md:hidden'>
-                <!-- Theme Toggle Button (Mobile) -->
-                <button class='text-white text-xl hover-trigger' id='theme-toggle-mobile' title='Toggle Theme'>
-                    <i class='fa-solid fa-sun' ></i>
-                </button>
-                <!-- Mobile Menu Toggle -->
-                <button class='text-white text-2xl' id='mobile-menu-btn'>
-                    <i class='fa-solid fa-bars' ></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div class='fixed inset-0 bg-[#030303] z-40 flex flex-col justify-center items-center space-y-8 transform translate-x-full transition-transform duration-500'
-            id='mobile-menu'>
-            <button class='absolute top-6 right-6 text-3xl text-white' id='mobile-menu-close'>
-                <i class='fa-solid fa-xmark' ></i>
-            </button>
-            <a class='text-2xl font-semibold mobile-link' href='#about'>About</a>
-            <a class='text-2xl font-semibold mobile-link' href='#services'>Services</a>
-            <a class='text-2xl font-semibold mobile-link' href='#portfolio'>Portfolio</a>
-            <a class='text-2xl font-semibold mobile-link' href='#products'>Digital Products</a>
-            <a class='text-2xl font-semibold text-primary mobile-link' href='#contact'>Contact</a>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class='relative min-h-screen flex items-center pt-20 overflow-hidden' id='hero'>
-        <!-- Background Video (Showreel) -->
-        <div class='absolute top-20 bottom-0 left-0 right-0 overflow-hidden pointer-events-none z-0 opacity-50'>
-            <!-- Vignette Overlays to fade out all sides -->
-            <div class='absolute inset-0 z-10 video-vignette-vertical' ></div>
-            <div class='absolute inset-0 z-10 video-vignette-horizontal' ></div>
+        <!-- System Controls (Clock, Theme, Sound) -->
+        <div class="flex items-center space-x-4">
+            <span class="hidden sm:inline-block text-[#888888] px-2 py-1 bg-white/5 rounded border border-white/5" id="live-clock">GMT+6 BD 00:00</span>
             
-            <iframe class='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[177.77vh] h-[56.25vw] min-w-full min-h-full aspect-video border-0' 
-                    src='https://www.youtube.com/embed/pdp05Yl0Bp4?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=pdp05Yl0Bp4&amp;controls=0&amp;showinfo=0&amp;rel=0&amp;iv_load_policy=3&amp;modestbranding=1' 
-                    allow='autoplay; encrypted-media'></iframe>
+            <!-- Theme Toggle Button -->
+            <button id="theme-toggle-desktop" class="dotted-btn p-2 text-white hover-trigger" title="Toggle Theme">
+                THEME[<span class="text-[#C0FE04]">A</span>]
+            </button>
+
+            <!-- Sound Toggle Button -->
+            <button id="sound-toggle-desktop" class="hidden sm:inline-flex dotted-btn p-2 text-white hover-trigger" title="Toggle Sound Feedback">
+                SOUND[<span class="text-[#C0FE04]">|</span>]
+            </button>
+
+            <!-- Mobile Hamburger -->
+            <button id="mobile-menu-btn" class="md:hidden text-white text-lg p-2">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Slide-out Menu -->
+    <div id="mobile-menu" class="fixed inset-0 bg-[#050505] z-50 flex flex-col justify-center items-center space-y-8 transform translate-x-full transition-transform duration-500 font-mono-custom text-xl">
+        <button id="mobile-menu-close" class="absolute top-6 right-6 text-2xl text-white">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <a href="#portfolio" class="mobile-link text-white hover:text-[#C0FE04]">Work</a>
+        <a href="#products" class="mobile-link text-white hover:text-[#C0FE04]">Tools / Presets</a>
+        <a href="#services" class="mobile-link text-white hover:text-[#C0FE04]">Services</a>
+        <a href="#about" class="mobile-link text-white hover:text-[#C0FE04]">About</a>
+        <a href="#contact" class="mobile-link text-[#C0FE04]">Contact</a>
+    </div>
+
+    <!-- Hero Section (Kinetic Typography & Showreel Background) -->
+    <section class="relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden border-b border-white/5" id="hero">
+        <!-- Background Showreel Ambient Overlay -->
+        <div class="absolute inset-0 pointer-events-none opacity-20">
+            <div class="video-vignette-vertical"></div>
+            <div class="video-vignette-horizontal"></div>
+            <iframe class="w-full h-full object-cover aspect-video filter blur-sm scale-110" 
+                    src="https://www.youtube.com/embed/pdp05Yl0Bp4?autoplay=1&mute=1&loop=1&playlist=pdp05Yl0Bp4&controls=0&showinfo=0&rel=0" 
+                    allow="autoplay; encrypted-media"></iframe>
         </div>
 
-        <!-- Background Glows -->
-        <div class='glow-orb bg-primary/25 w-[500px] h-[500px] top-[-100px] left-[-100px]' ></div>
-        <div class='glow-orb bg-purple-500/15 w-[600px] h-[600px] bottom-[-200px] right-[-100px]' ></div>
-
-        <div class='max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10'>
-
-            <!-- Left: Content -->
-            <div class='hero-content flex flex-col items-start space-y-6'>
-                <div
-                    class='inline-flex items-center space-x-2 px-4 py-2 rounded-full border border-surfaceBorder bg-surface backdrop-blur-md gs-reveal'>
-                    <span class='w-2 h-2 rounded-full bg-primary animate-pulse' ></span>
-                    <span class='text-sm text-gray-300' id='hero-badge' ></span>
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+            <div class="lg:col-span-8 flex flex-col items-start space-y-6">
+                <!-- Badge -->
+                <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 font-mono-custom text-xs text-[#888888]">
+                    <span class="w-2 h-2 rounded-full bg-[#C0FE04] animate-pulse"></span>
+                    <span id="hero-badge">Professional Motion Designer & AE Toolmaker</span>
                 </div>
 
-                <h1 class='text-5xl md:text-7xl font-bold leading-tight gs-reveal'>
-                    <span class='block text-gradient' id='hero-title-1' ></span>
-                    <span class='block text-gradient-primary mt-2' id='hero-title-2' ></span>
+                <!-- Hero Kinetic Title -->
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] text-white">
+                    <span class="block" id="hero-title-1">I bring craft &amp; taste</span>
+                    <span class="block text-[#C0FE04]" id="hero-title-2">to motion design &amp; tools.</span>
                 </h1>
 
-                <p class='text-lg md:text-xl text-gray-400 max-w-lg leading-relaxed gs-reveal' id='hero-desc' ></p>
+                <!-- Hero Subtitle -->
+                <p class="text-lg text-[#888888] max-w-2xl leading-relaxed" id="hero-desc">
+                    I craft SaaS product explainer videos, 3D visual graphics, and custom Adobe After Effects workflow automation tools that elevate brand stories.
+                </p>
 
-                <div class='flex flex-wrap gap-4 pt-4 gs-reveal'>
-                    <a class='px-8 py-4 rounded-full bg-primary text-white font-semibold shadow-[0_0_20px_rgba(58,134,255,0.4)] hover:shadow-[0_0_30px_rgba(58,134,255,0.6)] transition-all hover:-translate-y-1 magnetic-btn hover-trigger'
-                        href='#portfolio' id='hero-btn-1' ></a>
-                    <button
-                        class='px-8 py-4 rounded-full border border-surfaceBorder bg-surface backdrop-blur-md text-white font-semibold hover:bg-white/5 transition-all flex items-center space-x-2 magnetic-btn hover-trigger'
-                        onclick='openVideoModal(&apos;https://www.youtube.com/watch?v=pdp05Yl0Bp4&apos;)'>
-                        <i class='fa-solid fa-play text-primary' ></i>
-                        <span>Showreel</span>
+                <!-- Action CTA Group -->
+                <div class="flex flex-wrap gap-4 pt-4">
+                    <a href="#portfolio" class="dotted-btn px-8 py-4 bg-[#C0FE04] text-black font-bold text-sm rounded-lg hover:bg-white transition-all hover-trigger" id="hero-btn-1">
+                        See Selected Works
+                    </a>
+                    <button onclick="openVideoModal('https://www.youtube.com/watch?v=pdp05Yl0Bp4')" 
+                            class="dotted-btn px-8 py-4 border border-white/20 bg-white/5 text-white font-bold text-sm rounded-lg hover:bg-white/10 transition-all flex items-center space-x-3 hover-trigger">
+                        <i class="fa-solid fa-play text-[#C0FE04]"></i>
+                        <span>Watch Showreel</span>
                     </button>
                 </div>
             </div>
 
-            <!-- Right: Visual / Floating UI -->
-            <div class='relative h-[500px] w-full hidden lg:block gs-reveal-right'>
-                <!-- Main central container -->
-                <div class='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[440px] h-[440px] rounded-full bg-gradient-to-tr from-primary/10 to-transparent border border-white/5 flex justify-center items-center backdrop-blur-sm animate-blob z-10'
-                    id='hero-image-container' style='top: 00%; left: 20%;'>
-                    <img alt='Noor Alam Portrait'
-                        class='w-[360px] h-[360px] object-cover rounded-full border border-white/10 shadow-2xl transition duration-500 hover:scale-105'
-                        id='hero-portrait-img' src='https://nooralam.carrd.co/assets/images/image01.png?v=1e1d6b0a'
-                        style='object-position: center 50%;' />
-                </div>
-
-                <!-- Floating Cards -->
-                <div class='absolute top-10 left-0 glass-card p-4 rounded-2xl flex items-center space-x-4 animate-float z-20'
-                    style='animation-delay: 0s;'>
-                    <div
-                        class='w-12 h-12 rounded-full bg-blue-500/20 flex justify-center items-center text-blue-400 text-xl'>
-                        <i class='fa-brands fa-unity' ></i>
-                    </div>
-                    <div>
-                        <p class='text-sm font-bold text-white'>Saas Product Story</p>
-                        <p class='text-xs text-gray-400'>2D Animation</p>
-                    </div>
-                </div>
-
-                <div class='absolute bottom-6 right-0 glass-card p-4 rounded-2xl flex items-center space-x-4 animate-float'
-                    style='animation-delay: 1.5s;'>
-                    <div
-                        class='w-12 h-12 rounded-full bg-purple-500/20 flex justify-center items-center text-purple-400 text-xl'>
-                        <i class='fa-solid fa-wand-magic-sparkles' ></i>
-                    </div>
-                    <div>
-                        <p class='text-sm font-bold text-white'>After Effects Tool</p>
-                        <p class='text-xs text-gray-400'>for Auto Motion</p>
-                    </div>
-                </div>
-
-                <!-- Decorative elements -->
-                <div class='absolute top-12 right-12 w-4 h-4 bg-primary rounded-full blur-[2px] animate-pulse' ></div>
-                <div class='absolute bottom-12 left-12 w-3 h-3 bg-white rounded-full blur-[1px]' ></div>
-            </div>
-        </div>
-
-        <!-- Scroll Indicator -->
-        <div class='absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-50'>
-            <span class='text-xs tracking-widest uppercase mb-2'>Scroll</span>
-            <div class='w-[1px] h-12 bg-gradient-to-b from-white to-transparent' ></div>
-        </div>
-    </section>
-
-    <!-- Cinematic Showreel Section -->
-    <section class='py-24 relative z-10 section-reveal' id='showreel'>
-        <div class='max-w-7xl mx-auto px-6'>
-            <div class='relative w-full aspect-video rounded-[2rem] overflow-hidden group border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.8)] cursor-pointer hover-trigger'
-                onclick='openVideoModal(&apos;https://www.youtube.com/watch?v=pdp05Yl0Bp4&apos;)'>
-                <!-- Cover Image -->
-                <img alt='Showreel Cover'
-                    class='w-full h-full object-cover transition duration-700 group-hover:scale-105 filter group-hover:brightness-75'
-                    src='https://noormotion.carrd.co/assets/videos/video02_thumbnail.jpg?v=86a3e49b' />
-
-                <!-- Play Button Overlay -->
-                <div class='absolute inset-0 flex justify-center items-center'>
-                    <div
-                        class='w-20 h-20 md:w-28 md:h-28 rounded-full bg-primary/80 backdrop-blur-md flex justify-center items-center shadow-[0_0_30px_rgba(58,134,255,0.6)] transition-transform duration-300 group-hover:scale-110'>
-                        <i class='fa-solid fa-play text-3xl md:text-4xl text-white ml-2' ></i>
-                    </div>
-                </div>
-
-                <!-- Overlay Text -->
-                <div class='absolute bottom-8 left-8 md:bottom-12 md:left-12'>
-                    <h3 class='text-2xl md:text-4xl font-bold text-white mb-2'>Motion Design Showreel 2026</h3>
-                    <p class='text-gray-300'>SaaS Product Motion Explainer Showreel</p>
+            <!-- Right: Portrait Badge Container -->
+            <div class="lg:col-span-4 flex justify-center lg:justify-end">
+                <div class="relative w-72 h-72 sm:w-80 sm:h-80 rounded-3xl b44-card p-4 flex justify-center items-center group overflow-hidden">
+                    <img id="hero-portrait-img" 
+                         src="https://nooralam.carrd.co/assets/images/image01.png?v=1e1d6b0a" 
+                         alt="Noor Motion" 
+                         class="w-full h-full object-cover rounded-2xl filter grayscale group-hover:grayscale-0 transition duration-500 transform group-hover:scale-105">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class='py-24 relative section-reveal' id='about'>
-        <div class='max-w-7xl mx-auto px-6'>
-            <div class='grid grid-cols-1 lg:grid-cols-2 gap-16 items-center'>
-
-                <!-- Left: Visual Stats -->
-                <div class='order-2 lg:order-1 relative'>
-                    <div
-                        class='glow-orb bg-blue-600/15 w-[400px] h-[400px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2' ></div>
-                    <div class='grid grid-cols-2 gap-4 relative z-10' id='skills-container'>
-                        <!-- Skills will be injected here via JS -->
-                    </div>
+    <!-- Selected Works / Portfolio Section (base44 Grid Aesthetic) -->
+    <section class="py-24 border-b border-white/5 relative z-10" id="portfolio">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 space-y-4 md:space-y-0">
+                <div>
+                    <span class="font-mono-custom text-xs text-[#C0FE04] uppercase tracking-widest block mb-2">// SELECTED PROJECTS</span>
+                    <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white">Featured Motion Works</h2>
                 </div>
+                <span class="font-mono-custom text-xs text-[#888888] uppercase">8 Completed Projects</span>
+            </div>
 
-                <!-- Right: Text Content -->
-                <div class='order-1 lg:order-2 space-y-6'>
-                    <h2 class='text-sm uppercase tracking-widest text-primary font-bold'>About Me</h2>
-                    <h3 class='text-4xl md:text-5xl font-bold leading-tight text-gradient'>The Perfect Blend of
-                        Creativity &amp; Logic</h3>
-                    <p class='text-gray-400 text-lg leading-relaxed' id='about-desc' ></p>
+            <!-- Grid Matrix -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+                <!-- Dynamically populated via script.js -->
+            </div>
+        </div>
+    </section>
 
-                    <div class='flex space-x-12 pt-6 border-t border-surfaceBorder'>
-                        <div>
-                            <h4 class='text-3xl font-bold text-white mb-1' id='about-exp' ></h4>
-                            <p class='text-sm text-gray-500'>Industry Experience</p>
-                        </div>
-                        <div>
-                            <h4 class='text-3xl font-bold text-white mb-1' id='about-proj' ></h4>
-                            <p class='text-sm text-gray-500'>Successful Deliveries</p>
-                        </div>
-                    </div>
+    <!-- AE Scripts & Digital Products Section -->
+    <section class="py-24 border-b border-white/5 relative z-10 bg-white/[0.01]" id="products">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 space-y-4 md:space-y-0">
+                <div>
+                    <span class="font-mono-custom text-xs text-[#C0FE04] uppercase tracking-widest block mb-2">// WORKFLOW TOOLS</span>
+                    <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white">After Effects Scripts &amp; Presets</h2>
                 </div>
+                <span class="font-mono-custom text-xs text-[#888888] uppercase">Free &amp; Open Tools</span>
+            </div>
 
+            <!-- Product Grid Matrix -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="products-grid">
+                <!-- Dynamically populated via script.js -->
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section class='py-24 bg-[#050505] relative section-reveal' id='services'>
-        <div class='max-w-7xl mx-auto px-6'>
-            <div class='text-center max-w-2xl mx-auto mb-16'>
-                <h2 class='text-sm uppercase tracking-widest text-primary font-bold mb-3'>Expertise</h2>
-                <h3 class='text-4xl font-bold text-gradient'>Services I Provide</h3>
+    <section class="py-24 border-b border-white/5 relative z-10" id="services">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="mb-16">
+                <span class="font-mono-custom text-xs text-[#C0FE04] uppercase tracking-widest block mb-2">// CAPABILITIES</span>
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white">Services &amp; Solutions</h2>
             </div>
 
-            <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6' id='services-grid'>
-                <!-- Services injected via JS -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section class='py-32 relative section-reveal' id='portfolio'>
-        <div class='max-w-7xl mx-auto px-6'>
-            <div class='flex justify-between items-end mb-16'>
-                <div>
-                    <h2 class='text-sm uppercase tracking-widest text-primary font-bold mb-3'>Portfolio</h2>
-                    <h3 class='text-4xl md:text-5xl font-bold text-gradient'>Recent Projects</h3>
-                </div>
-                <a class='hidden md:inline-flex items-center space-x-2 text-gray-400 hover:text-white transition group hover-trigger'
-                    href='https://www.youtube.com/@Motionoor' target='_blank'>
-                    <span>View All Works</span>
-                    <i class='fa-solid fa-arrow-right transform group-hover:translate-x-1 transition' ></i>
-                </a>
-            </div>
-
-            <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8' id='portfolio-grid'>
-                <!-- Portfolio items injected via JS -->
+            <!-- Services Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="services-grid">
+                <!-- Dynamically populated via script.js -->
             </div>
         </div>
     </section>
 
-    <!-- Products / Shop Section -->
-    <section class='py-24 bg-[#050505] relative section-reveal' id='products'>
-        <div class='max-w-7xl mx-auto px-6'>
-            <div class='text-center max-w-2xl mx-auto mb-16'>
-                <h2 class='text-sm uppercase tracking-widest text-primary font-bold mb-3'>Digital Store</h2>
-                <h3 class='text-4xl font-bold text-gradient'>Premium Resources &amp; Templates</h3>
-                <p class='text-gray-400 mt-4'>Exclusive tools and templates I created to make video editing and motion
-                    graphics faster and more professional.</p>
+    <!-- Testimonials Section -->
+    <section class="py-24 border-b border-white/5 relative z-10 bg-white/[0.01]" id="testimonials">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="mb-16">
+                <span class="font-mono-custom text-xs text-[#C0FE04] uppercase tracking-widest block mb-2">// FEEDBACK</span>
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white">Client Recommendations</h2>
             </div>
 
-            <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6' id='products-grid'>
-                <!-- Products injected via JS -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Product Details & Payment Modal -->
-    <div class='fixed inset-0 bg-black/90 z-[100] hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300 p-4 overflow-y-auto'
-        id='product-modal-backdrop'>
-        <div class='bg-[#111] border border-white/10 rounded-2xl max-w-4xl w-full relative transform scale-95 transition-transform duration-300 overflow-hidden my-auto flex flex-col md:flex-row shadow-2xl'
-            id='product-modal-content'>
-            <!-- Close Button -->
-            <button
-                class='absolute top-4 right-4 w-10 h-10 bg-white/10 rounded-full flex justify-center items-center text-white hover:bg-primary transition z-50 hover-trigger'
-                onclick='closeProductModal()'>
-                <i class='fa-solid fa-xmark' ></i>
-            </button>
-
-            <!-- Media Section (Left) -->
-            <div class='w-full md:w-1/2 bg-black relative min-h-[250px] md:min-h-full flex items-center justify-center border-b md:border-b-0 md:border-r border-white/10'
-                id='modal-media-container'>
-                <!-- Video or Image injected here -->
-            </div>
-
-            <!-- Content & Checkout Section (Right) -->
-            <div class='w-full md:w-1/2 p-6 md:p-8 flex flex-col max-h-[80vh] overflow-y-auto'>
-                <span class='text-xs font-bold text-primary uppercase tracking-wider mb-2 block' id='modal-subtitle' ></span>
-                <h3 class='text-2xl md:text-3xl font-bold text-white mb-2' id='modal-title' ></h3>
-                <p class='text-gray-400 text-sm mb-6 leading-relaxed' id='modal-details' ></p>
-
-                <div class='text-3xl font-bold text-gradient-primary mb-6' id='modal-price' ></div>
-
-                <div class='w-full h-[1px] bg-white/10 mb-6' ></div>
-
-                <!-- Gumroad Primary Button -->
-                <div class='mb-6' id='gumroad-button-container'>
-                    <a class='w-full py-4 rounded-xl bg-primary text-white font-bold hover:bg-blue-600 transition duration-300 flex justify-center items-center space-x-2 shadow-[0_0_20px_rgba(58,134,255,0.4)]'
-                        href='' id='gumroad-link' target='_blank'>
-                        <i class='fa-solid fa-download' ></i>
-                        <span>Get Preset on Gumroad (Free)</span>
-                    </a>
-                </div>
-
-                <div class='relative flex py-2 items-center mb-4'>
-                    <div class='flex-grow border-t border-white/10' ></div>
-                    <span class='flex-shrink mx-4 text-gray-500 text-xs uppercase tracking-wider font-semibold'>Or
-                        Support / Donate via</span>
-                    <div class='flex-grow border-t border-white/10' ></div>
-                </div>
-
-                <h4 class='text-white font-semibold mb-4'>Select Mobile Banking:</h4>
-                <div class='flex space-x-4 mb-6'>
-                    <button
-                        class='payment-btn flex-1 py-3 border border-white/10 rounded-xl bg-white/5 hover:border-primary transition flex items-center justify-center space-x-2'
-                        id='btn-bkash' onclick='selectPaymentMethod(&quot;bkash&quot;)'>
-                        <img alt='bKash' class='h-6'
-                            src='https://scripts.sandbox.bka.sh/resources/img/bkash_logo.png' />
-                    </button>
-                    <button
-                        class='payment-btn flex-1 py-3 border border-white/10 rounded-xl bg-white/5 hover:border-primary transition flex items-center justify-center space-x-2'
-                        id='btn-nagad' onclick='selectPaymentMethod(&quot;nagad&quot;)'>
-                        <img alt='Nagad' class='h-6 object-cover'
-                            src='https://download.logo.wine/logo/Nagad/Nagad-Logo.wine.png'
-                            style='filter: brightness(0) invert(1);' />
-                    </button>
-                </div>
-
-                <!-- Payment Details Form -->
-                <div class='hidden space-y-4 bg-white/5 p-4 rounded-xl border border-white/5' id='payment-details-form'>
-                    <p class='text-sm text-gray-400'>Send money (Send Money / Cash-in) to <span
-                            class='font-bold text-white' id='payment-method-name' ></span> below:</p>
-                    <div class='text-xl font-mono text-white bg-black/30 py-2 px-4 rounded border border-white/10 tracking-widest text-center'
-                        id='payment-number'>01867-739749</div>
-
-                    <div>
-                        <label class='block text-xs text-gray-400 mb-1'>Your Number (Sent From)</label>
-                        <input
-                            class='w-full bg-[#111] border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary text-sm'
-                            placeholder='01XXXXXXXXX' type='text' />
-                    </div>
-                    <div>
-                        <label class='block text-xs text-gray-400 mb-1'>Transaction ID (TrxID)</label>
-                        <input
-                            class='w-full bg-[#111] border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-primary text-sm'
-                            placeholder='8X2HD9...' type='text' />
-                    </div>
-                    <button
-                        class='w-full bg-primary text-white font-bold py-3 rounded-lg hover:bg-blue-600 transition duration-300 mt-2 text-sm flex justify-center items-center space-x-2'
-                        id='verify-payment-btn' onclick='verifyPayment()'>
-                        <i class='fa-solid fa-lock' ></i>
-                        <span>Verify Payment</span>
-                    </button>
-
-                    <div class='hidden mt-2 p-3 rounded-lg bg-green-500/20 border border-green-500/50 text-green-400 text-center text-sm'
-                        id='payment-success-msg'>
-                        Payment processing. Verified successfully!
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Testimonials -->
-    <section class='py-24 relative overflow-hidden section-reveal' id='testimonials'>
-        <div
-            class='glow-orb bg-primary/10 w-[800px] h-[800px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2' ></div>
-        <div class='max-w-7xl mx-auto px-6 relative z-10'>
-            <div class='text-center mb-16'>
-                <h2 class='text-4xl font-bold text-gradient'>What Clients Say</h2>
-            </div>
-
-            <div class='grid grid-cols-1 md:grid-cols-3 gap-6' id='testimonial-grid'>
-                <!-- Testimonials injected via JS -->
+            <!-- Testimonials Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="testimonial-grid">
+                <!-- Dynamically populated via script.js -->
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class='py-24 bg-[#050505] relative section-reveal' id='contact'>
-        <div class='max-w-7xl mx-auto px-6'>
-            <div class='glass-card rounded-[2rem] p-8 md:p-14 border border-surfaceBorder relative overflow-hidden'>
-                <div class='absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[80px] rounded-full' ></div>
-
-                <div class='grid grid-cols-1 lg:grid-cols-2 gap-16 relative z-10'>
-                    <!-- Left: Form -->
-                    <div>
-                        <h3 class='text-3xl font-bold mb-6'>Let&#39;s Discuss a New Project?</h3>
-                        <p class='text-gray-400 mb-8'>Share your ideas and requirements. I will respond as soon as
-                            possible.</p>
-
-                        <form class='space-y-6' id='contact-form'>
-                            <div class='grid grid-cols-1 md:grid-cols-2 gap-6'>
-                                <div>
-                                    <label class='block text-sm text-gray-400 mb-2'>Your Name</label>
-                                    <input
-                                        class='w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition'
-                                        required='required' type='text' />
-                                </div>
-                                <div>
-                                    <label class='block text-sm text-gray-400 mb-2'>Email Address</label>
-                                    <input
-                                        class='w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition'
-                                        required='required' type='email' />
-                                </div>
-                            </div>
-                            <div>
-                                <label class='block text-sm text-gray-400 mb-2'>Project Type</label>
-                                <select
-                                    class='w-full bg-[#111] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition appearance-none'>
-                                    <option>SaaS Explainer Video</option>
-                                    <option>Brand Commercial</option>
-                                    <option>After Effects Tool development</option>
-                                    <option>Other Motion Design</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class='block text-sm text-gray-400 mb-2'>Message</label>
-                                <textarea
-                                    class='w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition resize-none'
-                                    required='required' rows='4' ></textarea>
-                            </div>
-                            <button
-                                class='w-full bg-primary text-white font-bold py-4 rounded-xl hover:bg-blue-600 transition duration-300 relative overflow-hidden group hover-trigger'
-                                id='submit-btn' type='submit'>
-                                <span class='relative z-10 flex items-center justify-center space-x-2'>
-                                    <span>Send Message</span>
-                                    <i class='fa-solid fa-paper-plane' ></i>
-                                </span>
-                            </button>
-                        </form>
-                        <!-- Form Success Message -->
-                        <div class='hidden mt-4 p-4 rounded-xl bg-green-500/20 border border-green-500/50 text-green-400 text-center'
-                            id='form-success'>
-                            Message sent successfully!
-                        </div>
-                    </div>
-
-                    <!-- Right: Info & Contact Quick Links -->
-                    <div class='flex flex-col justify-between'>
-                        <div class='space-y-8'>
-                            <div class='flex items-start space-x-4'>
-                                <div
-                                    class='w-12 h-12 rounded-full bg-white/5 flex justify-center items-center text-primary shrink-0'>
-                                    <i class='fa-solid fa-envelope text-xl' ></i>
-                                </div>
-                                <div>
-                                    <h4 class='text-sm text-gray-400'>Email</h4>
-                                    <p class='text-lg text-white font-medium hover:text-primary transition'
-                                        id='contact-email' ></p>
-                                </div>
-                            </div>
-                            <div class='flex items-start space-x-4'>
-                                <div
-                                    class='w-12 h-12 rounded-full bg-white/5 flex justify-center items-center text-primary shrink-0'>
-                                    <i class='fa-solid fa-phone text-xl' ></i>
-                                </div>
-                                <div>
-                                    <h4 class='text-sm text-gray-400'>Phone &amp; Mobile Banking</h4>
-                                    <p class='text-lg text-white font-medium hover:text-primary transition'
-                                        id='contact-phone' ></p>
-                                </div>
-                            </div>
-                            <div class='flex items-start space-x-4'>
-                                <div
-                                    class='w-12 h-12 rounded-full bg-white/5 flex justify-center items-center text-primary shrink-0'>
-                                    <i class='fa-brands fa-whatsapp text-2xl' ></i>
-                                </div>
-                                <div>
-                                    <h4 class='text-sm text-gray-400'>WhatsApp &amp; Telegram</h4>
-                                    <p class='text-lg text-white font-medium hover:text-primary transition'>
-                                        <a class='hover:text-primary transition' href='https://wa.me/+8801867739749'
-                                            target='_blank'>WhatsApp Message</a>
-                                        <span class='text-gray-600 mx-2'>|</span>
-                                        <a class='hover:text-primary transition' href='https://t.me/+8801867739749'
-                                            target='_blank'>Telegram Message</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Map -->
-                        <div
-                            class='mt-8 w-full h-48 rounded-xl overflow-hidden border border-white/10 filter grayscale opacity-70 hover:opacity-100 transition duration-500'>
-                            <iframe allowfullscreen='true' height='100%' loading='lazy'
-                                src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d233667.8223908687!2d90.27923710646989!3d23.780887457084543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8b087026b81%3A0x8fa563bbdd5904c2!2sDhaka%2C%20Bangladesh!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus'
-                                style='border:0' width='100%' ></iframe>
-                        </div>
-                    </div>
+    <!-- Contact & Footer Section (haoqi.design Terminal Footer) -->
+    <footer class="py-24 relative z-10" id="contact">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
+                <div class="lg:col-span-8">
+                    <span class="font-mono-custom text-xs text-[#C0FE04] uppercase tracking-widest block mb-3">// LET'S COLLABORATE</span>
+                    <h2 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white uppercase leading-none">
+                        Let's Create Something <span class="text-[#C0FE04]">Extraordinary</span>
+                    </h2>
+                </div>
+                <div class="lg:col-span-4 flex flex-col space-y-4 font-mono-custom text-sm">
+                    <div id="contact-email" class="text-white"></div>
+                    <div id="contact-phone" class="text-[#888888]"></div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class='py-10 border-t border-white/5 relative z-10 text-center md:text-left'>
-        <div class='max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center'>
-            <div class='mb-4 md:mb-0'>
-                <a class='text-2xl font-bold tracking-wider text-white' href='#' id='footer-logo' ></a>
-                <p class='text-sm text-gray-500 mt-2'>&#169; 2026 Noor Alam. All Rights Reserved.</p>
+            <!-- Social Links -->
+            <div class="flex flex-wrap items-center gap-4 pt-8 border-t border-white/5" id="footer-socials">
+                <!-- Dynamically populated via script.js -->
             </div>
 
-            <div class='flex space-x-6' id='footer-socials'>
-                <!-- Socials injected via JS -->
+            <!-- Live Cursor Coordinates & Copyright Bar -->
+            <div class="mt-16 pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center font-mono-custom text-xs text-[#555555] space-y-4 sm:space-y-0">
+                <span id="footer-logo">NOOR<span class="text-[#C0FE04]">MOTION</span> © 2026</span>
+                <span class="text-[#888888]" id="cursor-coords">0001 X 0001 Y</span>
+                <span>DHAKA, BANGLADESH</span>
             </div>
         </div>
     </footer>
 
-    <!-- Video Modal -->
-    <div class='fixed inset-0 bg-black/95 z-[110] hidden flex flex-col justify-center items-center opacity-0 transition-opacity duration-300 p-4'
-        id='video-modal'>
-        <button
-            class='absolute top-6 right-6 w-12 h-12 bg-white/10 rounded-full flex justify-center items-center text-white hover:bg-primary transition z-[120] hover-trigger animate-pulse'
-            onclick='closeVideoModal()'>
-            <i class='fa-solid fa-xmark text-xl' ></i>
-        </button>
-        <div
-            class='w-full max-w-5xl aspect-video bg-black rounded-3xl overflow-hidden shadow-2xl relative border border-white/10'>
-            <iframe allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-                allowfullscreen='true' class='w-full h-full' frameborder='0' id='video-modal-iframe' src='' ></iframe>
-        </div>
-    </div>
-
-    <!-- Scripts -->
-
-    <!-- Floating Position Controller Button and Panel -->
-    <button
-        class='fixed bottom-6 left-6 w-12 h-12 rounded-full bg-primary/80 backdrop-blur-md border border-white/20 text-white flex justify-center items-center shadow-lg hover:bg-primary transition z-[9999] hover-trigger'
-        id='customizer-toggle' title='Position Controller'>
-        <i class='fa-solid fa-sliders text-lg' ></i>
-    </button>
-
-    <div class='fixed bottom-20 left-6 w-80 glass p-6 rounded-2xl border border-white/10 shadow-2xl z-[9999] hidden flex-col space-y-4 transition-all duration-300 transform scale-95 opacity-0'
-        id='customizer-panel'>
-        <div class='flex items-center justify-between text-white'>
-            <h4 class='font-bold flex items-center space-x-2'>
-                <i class='fa-solid fa-sliders text-primary' ></i>
-                <span>Hero Position Controller</span>
-            </h4>
-            <button class='text-gray-400 hover:text-white transition' onclick='toggleCustomizer()'>
-                <i class='fa-solid fa-xmark' ></i>
+    <!-- Product Modal -->
+    <div id="product-modal-backdrop" class="fixed inset-0 z-50 bg-black/80 flex justify-center items-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div id="product-modal-content" class="bg-[#0D0D0D] border border-white/10 rounded-2xl max-w-2xl w-full p-6 md:p-8 transform scale-95 transition-transform duration-300 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
             </button>
-        </div>
-        <div class='h-[1px] bg-white/10 my-1' ></div>
 
-        <!-- Controller 1: Image Crop Y -->
-        <div class='space-y-1.5'>
-            <div class='flex justify-between text-xs text-gray-300'>
-                <span>Image Crop Y (Within Circle)</span>
-                <span class='font-mono text-primary font-semibold' id='crop-y-val'>50%</span>
-            </div>
-            <input class='w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary'
-                id='crop-y-slider' max='100' min='0' type='range' value='50' />
-        </div>
+            <span id="modal-subtitle" class="font-mono-custom text-xs text-[#C0FE04] uppercase tracking-wider block mb-1"></span>
+            <h3 id="modal-title" class="text-2xl font-bold text-white mb-4"></h3>
 
-        <!-- Controller 2: Container Position Y -->
-        <div class='space-y-1.5'>
-            <div class='flex justify-between text-xs text-gray-300'>
-                <span>Container Position Y (Page height)</span>
-                <span class='font-mono text-primary font-semibold' id='container-y-val'>50%</span>
-            </div>
-            <input class='w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary'
-                id='container-y-slider' max='90' min='10' type='range' value='50' />
-        </div>
+            <div id="modal-media-container" class="aspect-video w-full rounded-xl overflow-hidden mb-6 bg-black relative border border-white/10"></div>
 
-        <!-- Code Copy Output -->
-        <div class='pt-2'>
-            <div class='text-[10px] text-gray-400 font-mono select-all bg-black/40 p-2.5 rounded-lg border border-white/5'
-                id='customizer-css-output'>
-                /* Copy updated styling: */<br />
-                #hero-portrait-img { object-position: center 50%; }<br />
-                #hero-image-container { top: 50%; }
+            <p id="modal-details" class="text-gray-300 text-sm leading-relaxed mb-6"></p>
+
+            <div class="flex justify-between items-center pt-4 border-t border-white/10">
+                <span id="modal-price" class="text-xl font-bold text-[#C0FE04]"></span>
+                
+                <div id="gumroad-button-container">
+                    <a id="gumroad-link" href="#" target="_blank" rel="noopener noreferrer" class="dotted-btn px-6 py-3 bg-[#C0FE04] text-black font-bold text-xs uppercase rounded-lg hover:bg-white transition">
+                        Download / Get Tool <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Video Modal Player -->
+    <div id="video-modal" class="fixed inset-0 z-50 bg-black/90 flex justify-center items-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div class="relative w-full max-w-4xl aspect-video rounded-2xl overflow-hidden border border-white/10 bg-black">
+            <button onclick="closeVideoModal()" class="absolute top-4 right-4 z-20 text-white text-2xl bg-black/60 w-10 h-10 rounded-full flex justify-center items-center hover:bg-red-600 transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <iframe id="video-modal-iframe" class="w-full h-full border-0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- Application Controller Logic Script -->
     <script src="script.js" defer></script>
 </body>
 
