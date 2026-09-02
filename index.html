@@ -42,8 +42,8 @@
         <p class="mt-4 text-xs font-mono-custom text-slate-500 tracking-widest uppercase" id="loader-text">Loading System Visuals...</p>
     </div>
 
-    <!-- System Header Navigation Bar (haoqi.design Terminal Bar - Light Minimal) -->
-    <header class="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-6 py-4 lg:px-12 backdrop-blur-md bg-white/80 border-b border-slate-200 font-mono-custom text-xs uppercase">
+    <!-- System Header Navigation Bar (haoqi.design Terminal Bar - Base44 Warm Stone Blur) -->
+    <header class="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-6 py-4 lg:px-12 backdrop-blur-md bg-[#EEECEB]/80 border-b border-black/10 font-mono-custom text-xs uppercase">
         <!-- Logo -->
         <a href="#" class="dotted-btn p-2 font-bold text-sm text-slate-900 tracking-wider hover-trigger" id="nav-logo">
             NOOR<span class="text-[#2563EB]">MOTION</span>
@@ -60,7 +60,7 @@
 
         <!-- System Controls (Clock, Theme, Sound) -->
         <div class="flex items-center space-x-4">
-            <span class="hidden sm:inline-block text-slate-600 px-2 py-1 bg-slate-100 rounded border border-slate-200" id="live-clock">GMT+6 BD 00:00</span>
+            <span class="hidden sm:inline-block text-slate-600 px-2 py-1 bg-black/5 rounded border border-black/10" id="live-clock">GMT+6 BD 00:00</span>
             
             <!-- Theme Toggle Button -->
             <button id="theme-toggle-desktop" class="dotted-btn p-2 text-slate-900 hover-trigger" title="Toggle Theme">
@@ -80,7 +80,7 @@
     </header>
 
     <!-- Mobile Slide-out Menu -->
-    <div id="mobile-menu" class="fixed inset-0 bg-white z-50 flex flex-col justify-center items-center space-y-8 transform translate-x-full transition-transform duration-500 font-mono-custom text-xl">
+    <div id="mobile-menu" class="fixed inset-0 bg-[#EEECEB] z-50 flex flex-col justify-center items-center space-y-8 transform translate-x-full transition-transform duration-500 font-mono-custom text-xl">
         <button id="mobile-menu-close" class="absolute top-6 right-6 text-2xl text-slate-900">
             <i class="fa-solid fa-xmark"></i>
         </button>
@@ -92,7 +92,7 @@
     </div>
 
     <!-- Hero Section (Kinetic Typography & Showreel Background) -->
-    <section class="relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden border-b border-slate-200 bg-white" id="hero">
+    <section class="relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden border-b border-black/10" id="hero">
         <!-- Background Showreel Ambient Overlay -->
         <div class="absolute inset-0 pointer-events-none opacity-10">
             <div class="video-vignette-vertical"></div>
@@ -105,7 +105,7 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
             <div class="lg:col-span-8 flex flex-col items-start space-y-6">
                 <!-- Badge -->
-                <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full border border-slate-200 bg-slate-100 font-mono-custom text-xs text-slate-600">
+                <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full border border-black/10 bg-black/5 font-mono-custom text-xs text-slate-700">
                     <span class="w-2 h-2 rounded-full bg-[#2563EB] animate-pulse"></span>
                     <span id="hero-badge">Professional Motion Designer & AE Toolmaker</span>
                 </div>
@@ -127,7 +127,7 @@
                         See Selected Works
                     </a>
                     <button onclick="openVideoModal('https://www.youtube.com/watch?v=pdp05Yl0Bp4')" 
-                            class="dotted-btn px-8 py-4 border border-slate-300 bg-slate-100 text-slate-900 font-bold text-sm rounded-lg hover:bg-slate-200 transition-all flex items-center space-x-3 hover-trigger">
+                            class="dotted-btn px-8 py-4 border border-black/15 bg-black/5 text-slate-900 font-bold text-sm rounded-lg hover:bg-black/10 transition-all flex items-center space-x-3 hover-trigger">
                         <i class="fa-solid fa-play text-[#2563EB]"></i>
                         <span>Watch Showreel</span>
                     </button>
@@ -136,7 +136,7 @@
 
             <!-- Right: Portrait Badge Container -->
             <div class="lg:col-span-4 flex justify-center lg:justify-end">
-                <div class="relative w-72 h-72 sm:w-80 sm:h-80 rounded-3xl b44-card p-4 flex justify-center items-center group overflow-hidden bg-white border border-slate-200 shadow-lg">
+                <div class="relative w-72 h-72 sm:w-80 sm:h-80 rounded-3xl b44-card p-4 flex justify-center items-center group overflow-hidden bg-white border border-black/10 shadow-lg">
                     <img id="hero-portrait-img" 
                          src="https://nooralam.carrd.co/assets/images/image01.png?v=1e1d6b0a" 
                          alt="Noor Motion" 
@@ -147,7 +147,7 @@
     </section>
 
     <!-- Selected Works / Portfolio Section (In-Place Expanding Cards) -->
-    <section class="py-24 border-b border-slate-200 relative z-10 bg-slate-50/50" id="portfolio">
+    <section class="py-24 border-b border-black/10 relative z-10" id="portfolio">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 space-y-4 md:space-y-0">
                 <div>
@@ -298,8 +298,8 @@
         </div>
     </section>
 
-    <!-- AE Scripts & Digital Products Section (With Banner Image Thumbnails) -->
-    <section class="py-24 border-b border-slate-200 relative z-10 bg-white" id="products">
+    <!-- AE Scripts & Digital Products Section -->
+    <section class="py-24 border-b border-black/10 relative z-10" id="products">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 space-y-4 md:space-y-0">
                 <div>
@@ -407,7 +407,7 @@
     </section>
 
     <!-- Services Section -->
-    <section class="py-24 border-b border-slate-200 relative z-10 bg-slate-50/50" id="services">
+    <section class="py-24 border-b border-black/10 relative z-10" id="services">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="mb-16">
                 <span class="font-mono-custom text-xs text-[#2563EB] uppercase tracking-widest block mb-2">// CAPABILITIES</span>
@@ -449,7 +449,7 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section class="py-24 border-b border-slate-200 relative z-10 bg-white" id="testimonials">
+    <section class="py-24 border-b border-black/10 relative z-10" id="testimonials">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="mb-16">
                 <span class="font-mono-custom text-xs text-[#2563EB] uppercase tracking-widest block mb-2">// FEEDBACK</span>
@@ -493,7 +493,7 @@
     </section>
 
     <!-- Contact & Footer Section (haoqi.design Terminal Footer) -->
-    <footer class="py-24 relative z-10 bg-slate-50" id="contact">
+    <footer class="py-24 relative z-10" id="contact">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
                 <div class="lg:col-span-8">
@@ -509,7 +509,7 @@
             </div>
 
             <!-- Social Links -->
-            <div class="flex flex-wrap items-center gap-4 pt-8 border-t border-slate-200" id="footer-socials">
+            <div class="flex flex-wrap items-center gap-4 pt-8 border-t border-black/10" id="footer-socials">
                 <a href="https://www.linkedin.com/in/motionoor-alam-/" target="_blank" rel="noopener noreferrer" class="dotted-btn px-4 py-2 bg-white border border-slate-200 rounded-lg text-xs font-mono-custom text-slate-700 hover:text-[#2563EB] transition hover-trigger"><i class="fa-brands fa-linkedin-in mr-2"></i>LinkedIn</a>
                 <a href="https://www.youtube.com/@Motionoor" target="_blank" rel="noopener noreferrer" class="dotted-btn px-4 py-2 bg-white border border-slate-200 rounded-lg text-xs font-mono-custom text-slate-700 hover:text-[#2563EB] transition hover-trigger"><i class="fa-brands fa-youtube mr-2"></i>YouTube</a>
                 <a href="https://www.facebook.com/Nr.Alm96" target="_blank" rel="noopener noreferrer" class="dotted-btn px-4 py-2 bg-white border border-slate-200 rounded-lg text-xs font-mono-custom text-slate-700 hover:text-[#2563EB] transition hover-trigger"><i class="fa-brands fa-facebook-f mr-2"></i>Facebook</a>
@@ -518,7 +518,7 @@
             </div>
 
             <!-- Live Cursor Coordinates & Copyright Bar -->
-            <div class="mt-16 pt-8 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-center font-mono-custom text-xs text-slate-500 space-y-4 sm:space-y-0">
+            <div class="mt-16 pt-8 border-t border-black/10 flex flex-col sm:flex-row justify-between items-center font-mono-custom text-xs text-slate-500 space-y-4 sm:space-y-0">
                 <span id="footer-logo">NOOR<span class="text-[#2563EB]">MOTION</span> © 2026</span>
                 <span class="text-slate-600" id="cursor-coords">0001 X 0001 Y</span>
                 <span>DHAKA, BANGLADESH</span>
