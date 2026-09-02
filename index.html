@@ -177,7 +177,7 @@
                 </div>
 
                 <!-- Card 2 -->
-                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1A7NU3RcdVyAI4CL4w2_hnXHDGuPmpLJX/view?t=4.689')" class="portfolio-item-card b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1A7NU3RcdVyAI4CL4w2_hnXHDGuPmpLJX/view')" class="portfolio-item-card b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
                     <div class="media-box aspect-[4/3] overflow-hidden relative">
                         <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">MOTION PROJECT</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video04_thumbnail.jpg?v=86a3e49b" alt="School Management Software" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
@@ -245,7 +245,7 @@
                 </div>
 
                 <!-- Card 6 -->
-                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/13WzQi1z3SSCRwcKSTVyWQV6fb5FwYucF/view?t=3.924')" class="portfolio-item-card b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/13WzQi1z3SSCRwcKSTVyWQV6fb5FwYucF/view')" class="portfolio-item-card b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
                     <div class="media-box aspect-[4/3] overflow-hidden relative">
                         <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">PROMO VIDEO</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video09_thumbnail.jpg?v=86a3e49b" alt="Cleanly Booking System" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
@@ -279,7 +279,7 @@
                 </div>
 
                 <!-- Card 8 -->
-                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1R0L7_DTxNBJHL_B7PMc1OStOiCMcGAEC/view?t=4.721')" class="portfolio-item-card b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1R0L7_DTxNBJHL_B7PMc1OStOiCMcGAEC/view')" class="portfolio-item-card b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
                     <div class="media-box aspect-[4/3] overflow-hidden relative">
                         <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">PLUGIN PROMO</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video03_thumbnail.jpg?v=86a3e49b" alt="Next3 Offload Optimizer" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
@@ -298,7 +298,7 @@
         </div>
     </section>
 
-    <!-- AE Scripts & Digital Products Section -->
+    <!-- AE Scripts & Digital Products Section (With Banner Image Thumbnails) -->
     <section class="py-24 border-b border-slate-200 relative z-10 bg-white" id="products">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 space-y-4 md:space-y-0">
@@ -309,66 +309,98 @@
                 <span class="font-mono-custom text-xs text-slate-500 uppercase">Free &amp; Open Tools</span>
             </div>
 
-            <!-- Product Grid Matrix -->
+            <!-- Product Grid Matrix with Thumbnails -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="products-grid">
                 <!-- Product 1 -->
-                <div class="b44-card rounded-2xl p-6 md:p-8 flex flex-col justify-between group hover-trigger bg-white border border-slate-200">
+                <div class="b44-card rounded-2xl overflow-hidden group hover-trigger bg-white border border-slate-200 flex flex-col justify-between">
                     <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="font-mono-custom text-xs text-[#2563EB] uppercase tracking-wider px-2 py-0.5 bg-slate-100 border border-slate-200 rounded">AE TOOL</span>
-                            <span class="font-mono-custom text-xs font-bold text-slate-900">Free / Donation</span>
+                        <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200">
+                            <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">AE TOOL</span>
+                            <img src="https://noormotion.carrd.co/assets/images/gallery02/541290cb.jpg?v=86a3e49b" alt="CompSync 2.0" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         </div>
-                        <h4 class="text-2xl font-bold text-slate-900 mb-2">CompSync 2.0</h4>
-                        <p class="text-sm text-slate-600 leading-relaxed mb-6">A powerful After Effects script tool that enables you to save compositions as standalone projects dynamically and build your own motion animation libraries.</p>
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="font-mono-custom text-xs text-[#2563EB] uppercase font-bold">After Effects Script</span>
+                                <span class="font-mono-custom text-xs font-bold text-slate-900">Free / Donation</span>
+                            </div>
+                            <h4 class="text-2xl font-bold text-slate-900 mb-2 group-hover:text-[#2563EB] transition">CompSync 2.0</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">A powerful After Effects script tool that enables you to save compositions as standalone projects dynamically and build your own motion animation libraries.</p>
+                        </div>
                     </div>
-                    <button onclick="openProductModal(1)" class="dotted-btn w-full py-3 bg-slate-100 border border-slate-200 rounded-lg text-slate-900 font-mono-custom text-xs uppercase hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB] transition">
-                        View Details &amp; Download <i class="fa-solid fa-arrow-right ml-2"></i>
-                    </button>
+                    <div class="p-6 pt-0">
+                        <button onclick="openProductModal(1)" class="dotted-btn w-full py-3 bg-slate-100 border border-slate-200 rounded-lg text-slate-900 font-mono-custom text-xs uppercase hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB] transition">
+                            View Details &amp; Download <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Product 2 -->
-                <div class="b44-card rounded-2xl p-6 md:p-8 flex flex-col justify-between group hover-trigger bg-white border border-slate-200">
+                <div class="b44-card rounded-2xl overflow-hidden group hover-trigger bg-white border border-slate-200 flex flex-col justify-between">
                     <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="font-mono-custom text-xs text-[#2563EB] uppercase tracking-wider px-2 py-0.5 bg-slate-100 border border-slate-200 rounded">AE PRESET</span>
-                            <span class="font-mono-custom text-xs font-bold text-slate-900">Free / Donation</span>
+                        <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200">
+                            <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">AE PRESET</span>
+                            <img src="https://noormotion.carrd.co/assets/images/gallery02/d186352f.jpg?v=86a3e49b" alt="AutoCaption 2.0" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         </div>
-                        <h4 class="text-2xl font-bold text-slate-900 mb-2">AutoCaption 2.0</h4>
-                        <p class="text-sm text-slate-600 leading-relaxed mb-6">An automated After Effects caption generator designed to convert SRT subtitle files into dynamic animated captions instantly.</p>
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="font-mono-custom text-xs text-[#2563EB] uppercase font-bold">After Effects Preset</span>
+                                <span class="font-mono-custom text-xs font-bold text-slate-900">Free / Donation</span>
+                            </div>
+                            <h4 class="text-2xl font-bold text-slate-900 mb-2 group-hover:text-[#2563EB] transition">AutoCaption 2.0</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">An automated After Effects caption generator designed to convert SRT subtitle files into dynamic animated captions instantly.</p>
+                        </div>
                     </div>
-                    <button onclick="openProductModal(2)" class="dotted-btn w-full py-3 bg-slate-100 border border-slate-200 rounded-lg text-slate-900 font-mono-custom text-xs uppercase hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB] transition">
-                        View Details &amp; Download <i class="fa-solid fa-arrow-right ml-2"></i>
-                    </button>
+                    <div class="p-6 pt-0">
+                        <button onclick="openProductModal(2)" class="dotted-btn w-full py-3 bg-slate-100 border border-slate-200 rounded-lg text-slate-900 font-mono-custom text-xs uppercase hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB] transition">
+                            View Details &amp; Download <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Product 3 -->
-                <div class="b44-card rounded-2xl p-6 md:p-8 flex flex-col justify-between group hover-trigger bg-white border border-slate-200">
+                <div class="b44-card rounded-2xl overflow-hidden group hover-trigger bg-white border border-slate-200 flex flex-col justify-between">
                     <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="font-mono-custom text-xs text-[#2563EB] uppercase tracking-wider px-2 py-0.5 bg-slate-100 border border-slate-200 rounded">TYPOGRAPHY PRESET</span>
-                            <span class="font-mono-custom text-xs font-bold text-slate-900">Free / Donation</span>
+                        <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200">
+                            <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">TYPOGRAPHY PRESET</span>
+                            <img src="https://noormotion.carrd.co/assets/images/gallery02/b70ecfc2.jpg?v=86a3e49b" alt="textEco Text Animator" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         </div>
-                        <h4 class="text-2xl font-bold text-slate-900 mb-2">textEco Text Animator</h4>
-                        <p class="text-sm text-slate-600 leading-relaxed mb-6">An all-in-one text animator preset that allows creators to build unlimited variations of professional typography animations using a single customizable setup.</p>
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="font-mono-custom text-xs text-[#2563EB] uppercase font-bold">After Effects Text Preset</span>
+                                <span class="font-mono-custom text-xs font-bold text-slate-900">Free / Donation</span>
+                            </div>
+                            <h4 class="text-2xl font-bold text-slate-900 mb-2 group-hover:text-[#2563EB] transition">textEco Text Animator</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">An all-in-one text animator preset that allows creators to build unlimited variations of professional typography animations using a single customizable setup.</p>
+                        </div>
                     </div>
-                    <button onclick="openProductModal(3)" class="dotted-btn w-full py-3 bg-slate-100 border border-slate-200 rounded-lg text-slate-900 font-mono-custom text-xs uppercase hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB] transition">
-                        View Details &amp; Download <i class="fa-solid fa-arrow-right ml-2"></i>
-                    </button>
+                    <div class="p-6 pt-0">
+                        <button onclick="openProductModal(3)" class="dotted-btn w-full py-3 bg-slate-100 border border-slate-200 rounded-lg text-slate-900 font-mono-custom text-xs uppercase hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB] transition">
+                            View Details &amp; Download <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Product 4 -->
-                <div class="b44-card rounded-2xl p-6 md:p-8 flex flex-col justify-between group hover-trigger bg-white border border-slate-200">
+                <div class="b44-card rounded-2xl overflow-hidden group hover-trigger bg-white border border-slate-200 flex flex-col justify-between">
                     <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="font-mono-custom text-xs text-[#2563EB] uppercase tracking-wider px-2 py-0.5 bg-slate-100 border border-slate-200 rounded">MASKING TOOL</span>
-                            <span class="font-mono-custom text-xs font-bold text-slate-900">Free / Donation</span>
+                        <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200">
+                            <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded">MASKING TOOL</span>
+                            <img src="https://noormotion.carrd.co/assets/images/gallery02/a65c20db.jpg?v=86a3e49b" alt="Master Mask" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         </div>
-                        <h4 class="text-2xl font-bold text-slate-900 mb-2">Master Mask</h4>
-                        <p class="text-sm text-slate-600 leading-relaxed mb-6">A corner-radius and mask shape control preset for After Effects that lets you separately handle individual vertex controls, mask dimensions, and rotation angles dynamically.</p>
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="font-mono-custom text-xs text-[#2563EB] uppercase font-bold">After Effects Mask Preset</span>
+                                <span class="font-mono-custom text-xs font-bold text-slate-900">Free / Donation</span>
+                            </div>
+                            <h4 class="text-2xl font-bold text-slate-900 mb-2 group-hover:text-[#2563EB] transition">Master Mask</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">A corner-radius and mask shape control preset for After Effects that lets you separately handle individual vertex controls, mask dimensions, and rotation angles dynamically.</p>
+                        </div>
                     </div>
-                    <button onclick="openProductModal(4)" class="dotted-btn w-full py-3 bg-slate-100 border border-slate-200 rounded-lg text-slate-900 font-mono-custom text-xs uppercase hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB] transition">
-                        View Details &amp; Download <i class="fa-solid fa-arrow-right ml-2"></i>
-                    </button>
+                    <div class="p-6 pt-0">
+                        <button onclick="openProductModal(4)" class="dotted-btn w-full py-3 bg-slate-100 border border-slate-200 rounded-lg text-slate-900 font-mono-custom text-xs uppercase hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB] transition">
+                            View Details &amp; Download <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
