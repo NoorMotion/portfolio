@@ -1,6 +1,5 @@
 /* ==========================================================================
    NOOR MOTION PORTFOLIO - CONTROLLER & LOGIC SCRIPT
-   Inspired by haoqi.design & base44.com
    ========================================================================== */
 
 window.tailwind = window.tailwind || {};
@@ -8,9 +7,8 @@ tailwind.config = {
     theme: {
         extend: {
             colors: {
-                primary: '#C0FE04',
+                primary: '#2563EB',
                 accentBlue: '#3A86FF',
-                darkBg: '#050505',
             }
         }
     }
@@ -166,129 +164,26 @@ const siteData = {
 
 // Audio Synthesis Controller
 let soundEnabled = true;
-const audioCtx = typeof window !== 'undefined' && (window.AudioContext || window.webkitAudioContext) ? new (window.AudioContext || window.webkitAudioContext)() : null;
 
 function playAudioClick() {
-    if (!soundEnabled || !audioCtx) return;
+    if (!soundEnabled) return;
     try {
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
+        const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtxClass) return;
+        const ctx = new AudioCtxClass();
+        if (ctx.state === 'suspended') ctx.resume();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(800, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 0.04);
-        gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
+        osc.frequency.setValueAtTime(800, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.04);
+        gain.gain.setValueAtTime(0.05, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
         osc.connect(gain);
-        gain.connect(audioCtx.destination);
+        gain.connect(ctx.destination);
         osc.start();
-        osc.stop(audioCtx.currentTime + 0.04);
+        osc.stop(ctx.currentTime + 0.04);
     } catch(e) {}
-}
-
-// Render Content Safely
-function initPortfolio() {
-    // Contact Links
-    const emailEl = document.getElementById('contact-email');
-    if (emailEl && siteData.general.email) {
-        emailEl.innerHTML = `<a href="mailto:${siteData.general.email}" class="dotted-btn p-1 hover:text-[#C0FE04] transition">${siteData.general.email}</a>`;
-    }
-    const phoneEl = document.getElementById('contact-phone');
-    if (phoneEl && siteData.general.phone) {
-        phoneEl.innerHTML = `<a href="tel:${siteData.general.phone}" class="dotted-btn p-1 hover:text-[#C0FE04] transition">${siteData.general.phone}</a>`;
-    }
-
-    // Portfolio Grid Matrix
-    const portfolioGrid = document.getElementById('portfolio-grid');
-    if (portfolioGrid) {
-        portfolioGrid.innerHTML = siteData.portfolio.map(item => `
-            <div onclick="openVideoModal('${item.videoUrl}')" class="b44-card rounded-2xl overflow-hidden group cursor-pointer hover-trigger">
-                <div class="aspect-[4/3] overflow-hidden relative">
-                    <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-black/80 backdrop-blur-md border border-white/10 font-mono-custom text-[10px] text-[#C0FE04] uppercase tracking-wider">${item.badge}</span>
-                    <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover transition duration-700 group-hover:scale-105 filter group-hover:brightness-90" />
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
-                        <div class="w-14 h-14 rounded-full bg-[#C0FE04] text-black flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
-                            <i class="fa-solid fa-play ml-1"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <span class="font-mono-custom text-xs text-[#888888] uppercase block mb-1">${item.category}</span>
-                    <h4 class="text-lg font-bold text-white group-hover:text-[#C0FE04] transition">${item.title}</h4>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    // Digital Products Grid Matrix
-    const productsGrid = document.getElementById('products-grid');
-    if (productsGrid) {
-        productsGrid.innerHTML = siteData.products.map(product => `
-            <div class="b44-card rounded-2xl p-6 md:p-8 flex flex-col justify-between group hover-trigger">
-                <div>
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="font-mono-custom text-xs text-[#C0FE04] uppercase tracking-wider px-2 py-0.5 bg-white/5 border border-white/10 rounded">${product.badge}</span>
-                        <span class="font-mono-custom text-xs font-bold text-white">${product.price}</span>
-                    </div>
-                    <h4 class="text-2xl font-bold text-white mb-2">${product.title}</h4>
-                    <p class="text-sm text-[#888888] leading-relaxed mb-6">${product.details}</p>
-                </div>
-                <button onclick="openProductModal(${product.id})" class="dotted-btn w-full py-3 bg-white/5 border border-white/10 rounded-lg text-white font-mono-custom text-xs uppercase hover:bg-[#C0FE04] hover:text-black hover:border-[#C0FE04] transition">
-                    View Details &amp; Download <i class="fa-solid fa-arrow-right ml-2"></i>
-                </button>
-            </div>
-        `).join('');
-    }
-
-    // Services Grid
-    const servicesGrid = document.getElementById('services-grid');
-    if (servicesGrid) {
-        servicesGrid.innerHTML = siteData.services.map(service => `
-            <div class="b44-card p-6 rounded-2xl group hover-trigger">
-                <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex justify-center items-center text-xl text-[#C0FE04] mb-6 group-hover:bg-[#C0FE04] group-hover:text-black transition duration-300">
-                    <i class="fa-solid ${service.icon}"></i>
-                </div>
-                <h4 class="text-lg font-bold text-white mb-2">${service.title}</h4>
-                <p class="text-xs text-[#888888] leading-relaxed">${service.desc}</p>
-            </div>
-        `).join('');
-    }
-
-    // Testimonials Grid
-    const testimonialGrid = document.getElementById('testimonial-grid');
-    if (testimonialGrid) {
-        testimonialGrid.innerHTML = siteData.testimonials.map(test => `
-            <div class="b44-card p-6 md:p-8 rounded-2xl">
-                <p class="text-sm text-gray-300 leading-relaxed mb-6">"${test.review}"</p>
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-full bg-[#C0FE04] text-black font-bold flex justify-center items-center text-sm">
-                        ${test.name.charAt(0)}
-                    </div>
-                    <div>
-                        <h4 class="text-white font-bold text-sm">${test.name}</h4>
-                        <p class="text-xs font-mono-custom text-[#888888]">${test.company}</p>
-                    </div>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    // Footer Socials
-    const footerSocials = document.getElementById('footer-socials');
-    if (footerSocials) {
-        footerSocials.innerHTML = siteData.socials.map(social => `
-            <a href="${social.url}" target="_blank" rel="noopener noreferrer" class="dotted-btn px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-xs font-mono-custom text-gray-300 hover:text-[#C0FE04] transition hover-trigger">
-                <i class="fa-brands ${social.icon} mr-2"></i>${social.name}
-            </a>
-        `).join('');
-    }
-}
-
-// Immediate execution check for DOM readiness
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initPortfolio);
-} else {
-    initPortfolio();
 }
 
 // Live Coordinate Tracker & Cursor Logic
@@ -351,23 +246,23 @@ const soundToggle = document.getElementById('sound-toggle-desktop');
 if (soundToggle) {
     soundToggle.addEventListener('click', () => {
         soundEnabled = !soundEnabled;
-        soundToggle.innerHTML = `SOUND[<span class="text-[#C0FE04]">${soundEnabled ? '|' : 'X'}</span>]`;
+        soundToggle.innerHTML = `SOUND[<span class="text-[#2563EB]">${soundEnabled ? '|' : 'X'}</span>]`;
     });
 }
 
-// Theme Toggle
+// Theme Toggle (Default: White Theme / Light Mode, Toggle to Dark Mode)
 const themeToggle = document.getElementById('theme-toggle-desktop');
 if (themeToggle) {
     themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('light-mode');
-        const isLight = document.body.classList.contains('light-mode');
-        themeToggle.innerHTML = `THEME[<span class="text-[#C0FE04]">${isLight ? 'L' : 'A'}</span>]`;
-        localStorage.setItem('motionTheme', isLight ? 'light' : 'dark');
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        themeToggle.innerHTML = `THEME[<span class="text-[#2563EB]">${isDark ? 'D' : 'L'}</span>]`;
+        localStorage.setItem('motionTheme', isDark ? 'dark' : 'light');
     });
 }
-if (localStorage.getItem('motionTheme') === 'light') {
-    document.body.classList.add('light-mode');
-    if (themeToggle) themeToggle.innerHTML = `THEME[<span class="text-[#C0FE04]">L</span>]`;
+if (localStorage.getItem('motionTheme') === 'dark') {
+    document.body.classList.add('dark-mode');
+    if (themeToggle) themeToggle.innerHTML = `THEME[<span class="text-[#2563EB]">D</span>]`;
 }
 
 // Mobile Menu Navigation
@@ -417,7 +312,7 @@ if (document.readyState === 'complete') {
     hideLoader();
 } else {
     window.addEventListener('load', hideLoader);
-    setTimeout(hideLoader, 2000); // 2s fallback so loader never blocks DOM
+    setTimeout(hideLoader, 1500); // 1.5s fallback
 }
 
 // Modal Handlers
