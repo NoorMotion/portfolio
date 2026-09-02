@@ -396,16 +396,18 @@ if (document.readyState === 'loading') {
 function initGSAPAnimations() {
     if (typeof gsap === 'undefined') return;
 
-    const motionWord = document.getElementById('hero-motion-word');
-    if (motionWord) {
-        // Continuous fluid kinetic float, slight tilt & subtle scale pulse
-        gsap.to(motionWord, {
-            y: -7,
-            rotate: 2.5,
-            scale: 1.06,
-            duration: 2.2,
-            repeat: -1,
-            yoyo: true,
+    const chars = document.querySelectorAll('.hero-motion-char');
+    if (chars.length) {
+        // Individual character rotation wiggle wave + vertical bounce
+        gsap.to(chars, {
+            rotate: (index) => (index % 2 === 0 ? 12 : -12),
+            y: (index) => (index % 2 === 0 ? -6 : 4),
+            duration: 1.1,
+            stagger: {
+                each: 0.12,
+                repeat: -1,
+                yoyo: true
+            },
             ease: "sine.inOut"
         });
     }
