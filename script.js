@@ -193,7 +193,80 @@ function parseVideoEmbed(url) {
     return { embedUrl: url, rawUrl: url };
 }
 
-// In-Place Expand Video Card Logic (Dense Grid Packing + Zero Empty Space)
+// ==========================================
+// 🧩 DYNAMIC MASONRY ENGINE (Zero Gap Packing)
+// ==========================================
+function applyPortfolioMasonry() {
+    const grid = document.getElementById('portfolio-grid');
+    if (!grid) return;
+
+    const cards = Array.from(grid.querySelectorAll('.portfolio-item-card'));
+    if (!cards.length) return;
+
+    const windowWidth = window.innerWidth;
+    
+    // On mobile screens (< 768px), disable absolute positioning and reset grid
+    if (windowWidth < 768) {
+        grid.style.height = 'auto';
+        grid.style.position = 'static';
+        cards.forEach(card => {
+            card.style.position = 'static';
+            card.style.transform = 'none';
+            card.style.width = '100%';
+        });
+        return;
+    }
+
+    const cols = windowWidth >= 1024 ? 3 : 2;
+    const gap = 32; // 32px gap
+    const gridWidth = grid.clientWidth;
+    const colWidth = (gridWidth - (cols - 1) * gap) / cols;
+    const colHeights = new Array(cols).fill(0);
+
+    grid.style.position = 'relative';
+
+    cards.forEach(card => {
+        card.style.position = 'absolute';
+        card.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), width 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease';
+
+        let span = 1;
+        if (card.classList.contains('portfolio-card-expanded') && cols >= 2) {
+            span = 2;
+        }
+
+        // Find the column index range with the lowest height
+        let targetCol = 0;
+        let minH = Infinity;
+
+        for (let i = 0; i <= cols - span; i++) {
+            let maxHInSpan = 0;
+            for (let j = 0; j < span; j++) {
+                maxHInSpan = Math.max(maxHInSpan, colHeights[i + j]);
+            }
+            if (maxHInSpan < minH) {
+                minH = maxHInSpan;
+                targetCol = i;
+            }
+        }
+
+        const posX = targetCol * (colWidth + gap);
+        const posY = minH;
+        const itemWidth = span === 2 ? (colWidth * 2 + gap) : colWidth;
+
+        card.style.width = `${itemWidth}px`;
+        card.style.transform = `translate3d(${posX}px, ${posY}px, 0)`;
+
+        const cardHeight = card.offsetHeight;
+        for (let j = 0; j < span; j++) {
+            colHeights[targetCol + j] = posY + cardHeight + gap;
+        }
+    });
+
+    const maxGridHeight = Math.max(...colHeights);
+    grid.style.height = `${maxGridHeight}px`;
+}
+
+// In-Place Expand Video Card Logic with Masonry Dynamic Packing
 window.expandVideoCard = function(element, rawVideoUrl) {
     if (!element) return;
 
@@ -215,8 +288,8 @@ window.expandVideoCard = function(element, rawVideoUrl) {
 
     const videoData = parseVideoEmbed(rawVideoUrl);
 
-    // 4. Expand card to 2 columns AND 2 rows so neighboring cards pack tightly with zero empty space
-    element.classList.add('portfolio-card-expanded', 'col-span-1', 'md:col-span-2', 'lg:col-span-2', 'row-span-2', 'ring-2', 'ring-[#2563EB]');
+    // 4. Expand card
+    element.classList.add('portfolio-card-expanded', 'ring-2', 'ring-[#2563EB]');
     
     // 5. Replace media box with aspect-video iframe & header controls
     mediaBox.classList.remove('aspect-[4/3]');
@@ -239,7 +312,12 @@ window.expandVideoCard = function(element, rawVideoUrl) {
         </div>
     `;
 
-    // 6. Smooth scroll to expanded card
+    // 6. Recalculate Masonry Layout so neighboring cards move UP to fill empty space
+    applyPortfolioMasonry();
+    setTimeout(applyPortfolioMasonry, 100);
+    setTimeout(applyPortfolioMasonry, 300);
+
+    // 7. Smooth scroll to expanded card
     setTimeout(() => {
         element.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }, 150);
@@ -247,14 +325,28 @@ window.expandVideoCard = function(element, rawVideoUrl) {
 
 window.collapseVideoCard = function(element) {
     if (!element) return;
-    element.classList.remove('portfolio-card-expanded', 'col-span-1', 'md:col-span-2', 'lg:col-span-2', 'row-span-2', 'ring-2', 'ring-[#2563EB]');
+    element.classList.remove('portfolio-card-expanded', 'ring-2', 'ring-[#2563EB]');
     const mediaBox = element.querySelector('.media-box');
     if (mediaBox && element.dataset.originalMedia) {
         mediaBox.classList.remove('aspect-video');
         mediaBox.classList.add('aspect-[4/3]');
         mediaBox.innerHTML = element.dataset.originalMedia;
     }
+    applyPortfolioMasonry();
+    setTimeout(applyPortfolioMasonry, 100);
 };
+
+// Event Listeners for Masonry Engine
+window.addEventListener('resize', applyPortfolioMasonry);
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        applyPortfolioMasonry();
+        setTimeout(applyPortfolioMasonry, 500);
+    });
+} else {
+    applyPortfolioMasonry();
+    setTimeout(applyPortfolioMasonry, 500);
+}
 
 // Audio Synthesis Controller
 let soundEnabled = true;
