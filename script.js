@@ -194,13 +194,12 @@ function parseVideoEmbed(url) {
 }
 
 // Showreel Single Click Video Player Handler
-window.playShowreelVideo = function(container) {
-    if (!container) return;
-    const box = container.querySelector('#showreel-player-box');
+window.playShowreelVideo = function() {
+    const box = document.getElementById('showreel-player-box');
     if (!box) return;
     box.innerHTML = `
         <iframe class="w-full h-full border-0 video-frame-fadein" 
-                src="https://www.youtube.com/embed/pdp05Yl0Bp4?autoplay=1" 
+                src="https://www.youtube.com/embed/pdp05Yl0Bp4?autoplay=1&rel=0" 
                 title="Noor Motion Showreel 2026" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowfullscreen></iframe>
