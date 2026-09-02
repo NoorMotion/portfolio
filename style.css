@@ -157,6 +157,12 @@ body.dark-mode .b44-card:hover {
     box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5);
 }
 
+/* Portfolio Dense Packing Grid (Fills Empty Spaces) */
+#portfolio-grid {
+    grid-auto-flow: dense;
+    align-items: start;
+}
+
 /* Smooth Card Expansion & Morphing Player */
 .portfolio-item-card {
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);

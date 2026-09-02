@@ -193,7 +193,7 @@ function parseVideoEmbed(url) {
     return { embedUrl: url, rawUrl: url };
 }
 
-// In-Place Expand Video Card Logic (40% Size Reduction + Smooth Cubic Bezier Animations)
+// In-Place Expand Video Card Logic (Dense Grid Packing + Zero Empty Space)
 window.expandVideoCard = function(element, rawVideoUrl) {
     if (!element) return;
 
@@ -215,8 +215,8 @@ window.expandVideoCard = function(element, rawVideoUrl) {
 
     const videoData = parseVideoEmbed(rawVideoUrl);
 
-    // 4. Expand card to 2 columns (balanced 40% size reduction) with smooth spring transitions
-    element.classList.add('portfolio-card-expanded', 'col-span-1', 'md:col-span-2', 'lg:col-span-2', 'ring-2', 'ring-[#2563EB]');
+    // 4. Expand card to 2 columns AND 2 rows so neighboring cards pack tightly with zero empty space
+    element.classList.add('portfolio-card-expanded', 'col-span-1', 'md:col-span-2', 'lg:col-span-2', 'row-span-2', 'ring-2', 'ring-[#2563EB]');
     
     // 5. Replace media box with aspect-video iframe & header controls
     mediaBox.classList.remove('aspect-[4/3]');
@@ -247,7 +247,7 @@ window.expandVideoCard = function(element, rawVideoUrl) {
 
 window.collapseVideoCard = function(element) {
     if (!element) return;
-    element.classList.remove('portfolio-card-expanded', 'col-span-1', 'md:col-span-2', 'lg:col-span-2', 'ring-2', 'ring-[#2563EB]');
+    element.classList.remove('portfolio-card-expanded', 'col-span-1', 'md:col-span-2', 'lg:col-span-2', 'row-span-2', 'ring-2', 'ring-[#2563EB]');
     const mediaBox = element.querySelector('.media-box');
     if (mediaBox && element.dataset.originalMedia) {
         mediaBox.classList.remove('aspect-video');
