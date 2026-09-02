@@ -193,13 +193,20 @@ function parseVideoEmbed(url) {
     return { embedUrl: url, rawUrl: url };
 }
 
-// Showreel Single Click Video Player Handler (5px corner radius)
+// Showreel Single Click Video Player Handler (Pure Native YouTube Controls on Hover)
 window.playShowreelVideo = function() {
+    const card = document.getElementById('showreel-card');
     const box = document.getElementById('showreel-player-box');
     if (!box) return;
+
+    if (card) {
+        card.removeAttribute('onclick');
+        card.classList.remove('cursor-pointer');
+    }
+
     box.innerHTML = `
         <iframe class="w-full h-full border-0 rounded-[5px] video-frame-fadein" 
-                src="https://www.youtube.com/embed/pdp05Yl0Bp4?autoplay=1&rel=0" 
+                src="https://www.youtube.com/embed/pdp05Yl0Bp4?autoplay=1&controls=1&modestbranding=1&rel=0" 
                 title="Noor Motion Showreel 2026" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowfullscreen></iframe>
@@ -279,7 +286,7 @@ function applyPortfolioMasonry() {
     grid.style.height = `${maxGridHeight}px`;
 }
 
-// In-Place Expand Video Card Logic (Crops Native Google Drive Pop-out Icon)
+// In-Place Expand Video Card Logic with Hover-Only Overlay & 5px Masking
 window.expandVideoCard = function(element, rawVideoUrl) {
     if (!element) return;
 
@@ -311,27 +318,30 @@ window.expandVideoCard = function(element, rawVideoUrl) {
         infoBox.classList.add('hidden');
     }
     
-    // 6. Replace media box with cropped iframe (Hides Google Drive Native Pop-out Icon)
+    // 6. Replace media box with aspect-video iframe & hover-only top controls (Strict 5px Corner Mask)
     mediaBox.classList.remove('aspect-[4/3]');
     mediaBox.classList.add('aspect-video', 'rounded-[5px]');
     mediaBox.innerHTML = `
         <div class="relative w-full h-full bg-black overflow-hidden rounded-[5px] group video-frame-fadein">
-            <!-- Top Overlay Bar (Title top-left, Close top-right - HOVER ONLY) -->
+            <!-- Top Overlay Bar (Title top-left, Close/Drive top-right - HOVER ONLY) -->
             <div class="absolute top-0 inset-x-0 p-3 z-30 flex justify-between items-center bg-gradient-to-b from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none group-hover:pointer-events-auto">
-                <span class="text-white font-bold text-xs sm:text-sm font-mono-custom tracking-wide truncate max-w-[70%] px-2.5 py-1 bg-black/60 backdrop-blur-md rounded-[3px] border border-white/10 shadow-lg">
+                <span class="text-white font-bold text-xs sm:text-sm font-mono-custom tracking-wide truncate max-w-[55%] px-2.5 py-1 bg-black/60 backdrop-blur-md rounded-[3px] border border-white/10 shadow-lg">
                     ${titleText}
                 </span>
-                <button onclick="event.stopPropagation(); collapseVideoCard(this.closest('.portfolio-card-expanded'))" 
-                        class="px-3 py-1 bg-black/80 backdrop-blur-md text-white font-mono-custom text-xs uppercase rounded-[3px] border border-white/20 hover:bg-red-600 hover:border-red-600 transition flex items-center space-x-1 shadow-lg">
-                    <span>Close [X]</span>
-                </button>
+                <div class="flex items-center space-x-2">
+                    <a href="${videoData.rawUrl}" target="_blank" rel="noopener noreferrer" 
+                       onclick="event.stopPropagation()"
+                       class="px-2.5 py-1 bg-black/80 backdrop-blur-md text-white font-mono-custom text-xs uppercase rounded-[3px] border border-white/20 hover:bg-[#2563EB] hover:border-[#2563EB] transition flex items-center space-x-1 shadow-lg">
+                        <span>Drive HD</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i>
+                    </a>
+                    <button onclick="event.stopPropagation(); collapseVideoCard(this.closest('.portfolio-card-expanded'))" 
+                            class="px-2.5 py-1 bg-black/80 backdrop-blur-md text-white font-mono-custom text-xs uppercase rounded-[3px] border border-white/20 hover:bg-red-600 hover:border-red-600 transition flex items-center space-x-1 shadow-lg">
+                        <span>Close [X]</span>
+                    </button>
+                </div>
             </div>
-
-            <!-- Google Drive Native Pop-out Icon Blocker Overlay (Top Right Mask) -->
-            <div class="absolute top-0 right-0 w-20 h-16 z-20 bg-transparent" onclick="event.stopPropagation()"></div>
-
-            <!-- Cropped Iframe (Shifts Google Drive top bar off-screen) -->
-            <iframe class="w-full h-[112%] -mt-[4%] border-0 rounded-[5px]" src="${videoData.embedUrl}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+            <iframe class="w-full h-full border-0 rounded-[5px]" src="${videoData.embedUrl}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
         </div>
     `;
 
