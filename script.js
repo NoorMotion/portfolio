@@ -391,24 +391,24 @@ if (document.readyState === 'loading') {
 }
 
 // ==========================================
-// 🚀 GSAP KINETIC ANIMATIONS ENGINE (2 FPS AE Wiggle)
+// 🚀 GSAP KINETIC ANIMATIONS ENGINE (2 FPS Dynamic Random AE Wiggle)
 // ==========================================
 function initGSAPAnimations() {
     if (typeof gsap === 'undefined') return;
 
     const chars = document.querySelectorAll('.hero-motion-char');
     if (chars.length) {
-        // Iconic After Effects 2 FPS Wiggle(2, 5) - 5deg to -5deg Stepped Frame Wiggle
+        // True After Effects Wiggle: Random rotation degree per letter (-8deg to +8deg) recalculated dynamically on every 2 FPS tick!
         gsap.to(chars, {
-            rotate: (index) => (index % 2 === 0 ? 5 : -5),
-            y: (index) => (index % 2 === 0 ? -3 : 2),
-            duration: 0.5, // 1/2 sec = 2 FPS
+            rotate: () => gsap.utils.random(-8, 8, 1),
+            y: () => gsap.utils.random(-4, 4, 1),
+            duration: 0.5,          // 2 Frames Per Second
             stagger: {
-                each: 0.25,
+                each: 0.08,
                 repeat: -1,
-                yoyo: true
+                repeatRefresh: true // Generates NEW random numbers on every repeat loop!
             },
-            ease: "steps(1)" // Stepped frame-by-frame snappy wiggle
+            ease: "steps(1)"        // 2 FPS Stepped Snappy Wiggle
         });
     }
 }
