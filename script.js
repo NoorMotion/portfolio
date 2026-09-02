@@ -57,7 +57,7 @@ const siteData = {
             category: "Product Promo",
             badge: "MOTION PROJECT",
             image: "https://noormotion.carrd.co/assets/videos/video04_thumbnail.jpg?v=86a3e49b",
-            videoUrl: "https://drive.google.com/file/d/1A7NU3RcdVyAI4CL4w2_hnXHDGuPmpLJX/view?t=4.689"
+            videoUrl: "https://drive.google.com/file/d/1A7NU3RcdVyAI4CL4w2_hnXHDGuPmpLJX/view"
         },
         {
             title: "Next Video Review",
@@ -85,7 +85,7 @@ const siteData = {
             category: "Promo Video",
             badge: "PROMO VIDEO",
             image: "https://noormotion.carrd.co/assets/videos/video09_thumbnail.jpg?v=86a3e49b",
-            videoUrl: "https://drive.google.com/file/d/13WzQi1z3SSCRwcKSTVyWQV6fb5FwYucF/view?t=3.924"
+            videoUrl: "https://drive.google.com/file/d/13WzQi1z3SSCRwcKSTVyWQV6fb5FwYucF/view"
         },
         {
             title: "NextCRM Marketing Automation",
@@ -99,7 +99,7 @@ const siteData = {
             category: "Plugin Promo",
             badge: "PLUGIN PROMO",
             image: "https://noormotion.carrd.co/assets/videos/video03_thumbnail.jpg?v=86a3e49b",
-            videoUrl: "https://drive.google.com/file/d/1R0L7_DTxNBJHL_B7PMc1OStOiCMcGAEC/view?t=4.721"
+            videoUrl: "https://drive.google.com/file/d/1R0L7_DTxNBJHL_B7PMc1OStOiCMcGAEC/view"
         }
     ],
     products: [
@@ -162,8 +162,39 @@ const siteData = {
     ]
 };
 
+// Robust Video URL Parsing Function
+function parseVideoEmbed(url) {
+    if (!url) return { embedUrl: '', rawUrl: '#' };
+
+    if (url.includes('drive.google.com')) {
+        const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+        if (match && match[1]) {
+            const fileId = match[1];
+            return {
+                embedUrl: `https://drive.google.com/file/d/${fileId}/preview`,
+                rawUrl: `https://drive.google.com/file/d/${fileId}/view?usp=sharing`
+            };
+        }
+    } else if (url.includes('youtube.com') || url.includes('youtu.be')) {
+        let videoId = '';
+        if (url.includes('youtube.com/watch')) {
+            videoId = new URLSearchParams(new URL(url).search).get('v');
+        } else if (url.includes('youtu.be/')) {
+            videoId = url.split('youtu.be/')[1].split('?')[0];
+        }
+        if (videoId) {
+            return {
+                embedUrl: `https://www.youtube.com/embed/${videoId}?autoplay=1`,
+                rawUrl: url
+            };
+        }
+    }
+
+    return { embedUrl: url, rawUrl: url };
+}
+
 // In-Place Expand Video Card Logic
-window.expandVideoCard = function(element, videoUrl) {
+window.expandVideoCard = function(element, rawVideoUrl) {
     if (!element) return;
 
     // 1. If clicking on already expanded card, do nothing
@@ -182,28 +213,29 @@ window.expandVideoCard = function(element, videoUrl) {
         element.dataset.originalMedia = mediaBox.innerHTML;
     }
 
-    // Convert Drive / Youtube URL to Embed
-    let embedUrl = videoUrl;
-    if (videoUrl.includes('drive.google.com')) {
-        embedUrl = videoUrl.replace('/view', '/preview').replace('?t=', '#t=');
-    } else if (videoUrl.includes('youtube.com/watch')) {
-        const videoId = new URLSearchParams(new URL(videoUrl).search).get('v');
-        embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-    }
+    const videoData = parseVideoEmbed(rawVideoUrl);
 
     // 4. Expand card across grid columns
     element.classList.add('portfolio-card-expanded', 'col-span-1', 'md:col-span-2', 'lg:col-span-3', 'ring-2', 'ring-[#2563EB]', 'shadow-2xl');
     
-    // 5. Replace media box with full aspect-video iframe & close button
+    // 5. Replace media box with full aspect-video iframe & header controls
     mediaBox.classList.remove('aspect-[4/3]');
     mediaBox.classList.add('aspect-video');
     mediaBox.innerHTML = `
-        <div class="relative w-full h-full bg-black overflow-hidden rounded-t-2xl">
-            <button onclick="event.stopPropagation(); collapseVideoCard(this.closest('.portfolio-card-expanded'))" 
-                    class="absolute top-4 right-4 z-30 px-3 py-1.5 bg-black/80 backdrop-blur-md text-white font-mono-custom text-xs uppercase rounded-lg border border-white/20 hover:bg-red-600 hover:border-red-600 transition flex items-center space-x-2 shadow-lg">
-                <span>Close [X]</span>
-            </button>
-            <iframe class="w-full h-full border-0" src="${embedUrl}" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div class="relative w-full h-full bg-black overflow-hidden rounded-t-2xl group">
+            <div class="absolute top-4 right-4 z-30 flex items-center space-x-2">
+                <a href="${videoData.rawUrl}" target="_blank" rel="noopener noreferrer" 
+                   onclick="event.stopPropagation()"
+                   class="px-3 py-1.5 bg-black/80 backdrop-blur-md text-white font-mono-custom text-xs uppercase rounded-lg border border-white/20 hover:bg-[#2563EB] hover:border-[#2563EB] transition flex items-center space-x-1 shadow-lg">
+                    <span>Open Drive HD</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i>
+                </a>
+                <button onclick="event.stopPropagation(); collapseVideoCard(this.closest('.portfolio-card-expanded'))" 
+                        class="px-3 py-1.5 bg-black/80 backdrop-blur-md text-white font-mono-custom text-xs uppercase rounded-lg border border-white/20 hover:bg-red-600 hover:border-red-600 transition flex items-center space-x-1 shadow-lg">
+                    <span>Close [X]</span>
+                </button>
+            </div>
+            <iframe class="w-full h-full border-0" src="${videoData.embedUrl}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
         </div>
     `;
 
@@ -435,16 +467,9 @@ const videoModal = document.getElementById('video-modal');
 const videoIframe = document.getElementById('video-modal-iframe');
 
 window.openVideoModal = function (videoUrl) {
-    let embedUrl = videoUrl;
-    if (videoUrl.includes('drive.google.com')) {
-        embedUrl = videoUrl.replace('/view', '/preview').replace('?t=', '#t=');
-    } else if (videoUrl.includes('youtube.com/watch')) {
-        const videoId = new URLSearchParams(new URL(videoUrl).search).get('v');
-        embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-    }
-
+    const videoData = parseVideoEmbed(videoUrl);
     if (videoIframe && videoModal) {
-        videoIframe.src = embedUrl;
+        videoIframe.src = videoData.embedUrl;
         videoModal.classList.remove('hidden');
         setTimeout(() => videoModal.classList.remove('opacity-0'), 10);
         document.body.style.overflow = 'hidden';
