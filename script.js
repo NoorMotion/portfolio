@@ -382,10 +382,33 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         applyPortfolioMasonry();
         setTimeout(applyPortfolioMasonry, 500);
+        initGSAPAnimations();
     });
 } else {
     applyPortfolioMasonry();
     setTimeout(applyPortfolioMasonry, 500);
+    initGSAPAnimations();
+}
+
+// ==========================================
+// 🚀 GSAP KINETIC ANIMATIONS ENGINE
+// ==========================================
+function initGSAPAnimations() {
+    if (typeof gsap === 'undefined') return;
+
+    const motionWord = document.getElementById('hero-motion-word');
+    if (motionWord) {
+        // Continuous fluid kinetic float, slight tilt & subtle scale pulse
+        gsap.to(motionWord, {
+            y: -7,
+            rotate: 2.5,
+            scale: 1.06,
+            duration: 2.2,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut"
+        });
+    }
 }
 
 // Audio Synthesis Controller
