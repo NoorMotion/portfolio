@@ -193,7 +193,7 @@ function parseVideoEmbed(url) {
     return { embedUrl: url, rawUrl: url };
 }
 
-// In-Place Expand Video Card Logic
+// In-Place Expand Video Card Logic (40% Size Reduction + Smooth Cubic Bezier Animations)
 window.expandVideoCard = function(element, rawVideoUrl) {
     if (!element) return;
 
@@ -215,14 +215,14 @@ window.expandVideoCard = function(element, rawVideoUrl) {
 
     const videoData = parseVideoEmbed(rawVideoUrl);
 
-    // 4. Expand card across grid columns
-    element.classList.add('portfolio-card-expanded', 'col-span-1', 'md:col-span-2', 'lg:col-span-3', 'ring-2', 'ring-[#2563EB]', 'shadow-2xl');
+    // 4. Expand card to 2 columns (balanced 40% size reduction) with smooth spring transitions
+    element.classList.add('portfolio-card-expanded', 'col-span-1', 'md:col-span-2', 'lg:col-span-2', 'ring-2', 'ring-[#2563EB]');
     
-    // 5. Replace media box with full aspect-video iframe & header controls
+    // 5. Replace media box with aspect-video iframe & header controls
     mediaBox.classList.remove('aspect-[4/3]');
     mediaBox.classList.add('aspect-video');
     mediaBox.innerHTML = `
-        <div class="relative w-full h-full bg-black overflow-hidden rounded-t-2xl group">
+        <div class="relative w-full h-full bg-black overflow-hidden rounded-t-2xl group video-frame-fadein">
             <div class="absolute top-4 right-4 z-30 flex items-center space-x-2">
                 <a href="${videoData.rawUrl}" target="_blank" rel="noopener noreferrer" 
                    onclick="event.stopPropagation()"
@@ -242,12 +242,12 @@ window.expandVideoCard = function(element, rawVideoUrl) {
     // 6. Smooth scroll to expanded card
     setTimeout(() => {
         element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 100);
+    }, 150);
 };
 
 window.collapseVideoCard = function(element) {
     if (!element) return;
-    element.classList.remove('portfolio-card-expanded', 'col-span-1', 'md:col-span-2', 'lg:col-span-3', 'ring-2', 'ring-[#2563EB]', 'shadow-2xl');
+    element.classList.remove('portfolio-card-expanded', 'col-span-1', 'md:col-span-2', 'lg:col-span-2', 'ring-2', 'ring-[#2563EB]');
     const mediaBox = element.querySelector('.media-box');
     if (mediaBox && element.dataset.originalMedia) {
         mediaBox.classList.remove('aspect-video');
