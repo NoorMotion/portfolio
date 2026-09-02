@@ -279,7 +279,7 @@ function applyPortfolioMasonry() {
     grid.style.height = `${maxGridHeight}px`;
 }
 
-// In-Place Expand Video Card Logic with Masonry Dynamic Packing
+// In-Place Expand Video Card Logic with Hover-Only Overlay & 5px Masking
 window.expandVideoCard = function(element, rawVideoUrl) {
     if (!element) return;
 
@@ -292,8 +292,9 @@ window.expandVideoCard = function(element, rawVideoUrl) {
         collapseVideoCard(currentExpanded);
     }
 
-    // 3. Save original HTML of media box
+    // 3. Save original HTML of media box and grab project title
     const mediaBox = element.querySelector('.media-box');
+    const titleText = element.querySelector('h4')?.innerText || '';
     if (!mediaBox) return;
     if (!element.dataset.originalMedia) {
         element.dataset.originalMedia = mediaBox.innerHTML;
@@ -303,34 +304,46 @@ window.expandVideoCard = function(element, rawVideoUrl) {
 
     // 4. Expand card
     element.classList.add('portfolio-card-expanded', 'ring-2', 'ring-[#2563EB]');
+
+    // 5. Hide bottom text info box while video is playing
+    const infoBox = element.querySelector('.p-6');
+    if (infoBox) {
+        infoBox.classList.add('hidden');
+    }
     
-    // 5. Replace media box with aspect-video iframe & header controls
+    // 6. Replace media box with aspect-video iframe & hover-only top controls (Strict 5px Corner Mask)
     mediaBox.classList.remove('aspect-[4/3]');
-    mediaBox.classList.add('aspect-video');
+    mediaBox.classList.add('aspect-video', 'rounded-[5px]');
     mediaBox.innerHTML = `
-        <div class="relative w-full h-full bg-black overflow-hidden rounded-t-[5px] group video-frame-fadein">
-            <div class="absolute top-4 right-4 z-30 flex items-center space-x-2">
-                <a href="${videoData.rawUrl}" target="_blank" rel="noopener noreferrer" 
-                   onclick="event.stopPropagation()"
-                   class="px-3 py-1.5 bg-black/80 backdrop-blur-md text-white font-mono-custom text-xs uppercase rounded-[5px] border border-white/20 hover:bg-[#2563EB] hover:border-[#2563EB] transition flex items-center space-x-1 shadow-lg">
-                    <span>Open Drive HD</span>
-                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i>
-                </a>
-                <button onclick="event.stopPropagation(); collapseVideoCard(this.closest('.portfolio-card-expanded'))" 
-                        class="px-3 py-1.5 bg-black/80 backdrop-blur-md text-white font-mono-custom text-xs uppercase rounded-[5px] border border-white/20 hover:bg-red-600 hover:border-red-600 transition flex items-center space-x-1 shadow-lg">
-                    <span>Close [X]</span>
-                </button>
+        <div class="relative w-full h-full bg-black overflow-hidden rounded-[5px] group video-frame-fadein">
+            <!-- Top Overlay Bar (Title top-left, Close/Drive top-right - HOVER ONLY) -->
+            <div class="absolute top-0 inset-x-0 p-3 z-30 flex justify-between items-center bg-gradient-to-b from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none group-hover:pointer-events-auto">
+                <span class="text-white font-bold text-xs sm:text-sm font-mono-custom tracking-wide truncate max-w-[55%] px-2.5 py-1 bg-black/60 backdrop-blur-md rounded-[3px] border border-white/10 shadow-lg">
+                    ${titleText}
+                </span>
+                <div class="flex items-center space-x-2">
+                    <a href="${videoData.rawUrl}" target="_blank" rel="noopener noreferrer" 
+                       onclick="event.stopPropagation()"
+                       class="px-2.5 py-1 bg-black/80 backdrop-blur-md text-white font-mono-custom text-xs uppercase rounded-[3px] border border-white/20 hover:bg-[#2563EB] hover:border-[#2563EB] transition flex items-center space-x-1 shadow-lg">
+                        <span>Drive HD</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i>
+                    </a>
+                    <button onclick="event.stopPropagation(); collapseVideoCard(this.closest('.portfolio-card-expanded'))" 
+                            class="px-2.5 py-1 bg-black/80 backdrop-blur-md text-white font-mono-custom text-xs uppercase rounded-[3px] border border-white/20 hover:bg-red-600 hover:border-red-600 transition flex items-center space-x-1 shadow-lg">
+                        <span>Close [X]</span>
+                    </button>
+                </div>
             </div>
-            <iframe class="w-full h-full border-0" src="${videoData.embedUrl}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+            <iframe class="w-full h-full border-0 rounded-[5px]" src="${videoData.embedUrl}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
         </div>
     `;
 
-    // 6. Recalculate Masonry Layout so neighboring cards move UP to fill empty space
+    // 7. Recalculate Masonry Layout so neighboring cards move UP cleanly
     applyPortfolioMasonry();
     setTimeout(applyPortfolioMasonry, 100);
     setTimeout(applyPortfolioMasonry, 300);
 
-    // 7. Smooth scroll to expanded card
+    // 8. Smooth scroll to expanded card
     setTimeout(() => {
         element.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }, 150);
@@ -339,6 +352,13 @@ window.expandVideoCard = function(element, rawVideoUrl) {
 window.collapseVideoCard = function(element) {
     if (!element) return;
     element.classList.remove('portfolio-card-expanded', 'ring-2', 'ring-[#2563EB]');
+
+    // Show bottom text info box again when collapsed
+    const infoBox = element.querySelector('.p-6');
+    if (infoBox) {
+        infoBox.classList.remove('hidden');
+    }
+
     const mediaBox = element.querySelector('.media-box');
     if (mediaBox && element.dataset.originalMedia) {
         mediaBox.classList.remove('aspect-video');

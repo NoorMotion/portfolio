@@ -169,17 +169,18 @@ body.dark-mode .b44-card:hover {
     align-items: start;
 }
 
-/* Smooth Card Expansion & Morphing Player */
+/* Smooth Card Expansion & Morphing Player (Strict 5px Corner Radius Mask) */
 .portfolio-item-card {
     border-radius: 5px !important;
+    overflow: hidden !important;
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, width, height;
 }
 
-.portfolio-item-card .media-box {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+.portfolio-item-card .media-box,
+.portfolio-item-card iframe {
+    border-radius: 5px !important;
+    overflow: hidden !important;
 }
 
 .portfolio-card-expanded {
