@@ -6,16 +6,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@1,6..96,400..800&family=Hind+Siliguri:wght@300;400;500;600;700&family=Instrument+Serif:ital@1&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@1,400;1,600;1,700;1,900&display=swap');
 
 :root {
-    /* BASE44.COM SIGNATURE COLOR PALETTE */
+    /* BASE44.COM SIGNATURE COLOR PALETTE WITH BRAND RED */
     --bg-dark: #EEECEB;
     --bg-dark-rgb: 238, 236, 235;
     --bg-card: #FFFFFF;
     --bg-card-hover: #FFFFFF;
     --border-subtle: #DCD9D7;
-    --border-hover: #2563EB;
+    --border-hover: #E11D48;
     
-    --accent-lime: #2563EB;
-    --accent-blue: #3A86FF;
+    --accent-lime: #E11D48;
+    --accent-blue: #F43F5E;
     --text-primary: #121212;
     --text-muted: #555555;
     --text-dim: #888888;
@@ -25,17 +25,17 @@
     --font-serif: 'Instrument Serif', 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
 }
 
-/* DARK THEME OVERRIDES (Comprehensive Color Palette Engine) */
+/* DARK THEME OVERRIDES (Comprehensive Brand Red Palette Engine) */
 body.dark-mode {
     --bg-dark: #050505;
     --bg-dark-rgb: 5, 5, 5;
     --bg-card: #111111;
     --bg-card-hover: #181818;
     --border-subtle: rgba(255, 255, 255, 0.1);
-    --border-hover: #C0FE04;
+    --border-hover: #FF334B;
     
-    --accent-lime: #C0FE04;
-    --accent-blue: #38BDF8;
+    --accent-lime: #FF334B;
+    --accent-blue: #FF5268;
     --text-primary: #F8FAFC;
     --text-muted: #94A3B8;
     --text-dim: #64748B;
@@ -63,26 +63,31 @@ body.dark-mode .text-slate-500 {
     color: #94A3B8 !important;
 }
 
-/* Accent Color Overrides in Dark Mode */
-body.dark-mode .text-\[\#2563EB\] {
-    color: #C0FE04 !important;
+/* Brand Red Accent Color Overrides in Dark Mode */
+body.dark-mode .text-\[\#2563EB\],
+body.dark-mode .text-\[\#E11D48\] {
+    color: #FF334B !important;
 }
 
-body.dark-mode .bg-\[\#2563EB\] {
-    background-color: #C0FE04 !important;
-    color: #000000 !important;
+body.dark-mode .bg-\[\#2563EB\],
+body.dark-mode .bg-\[\#E11D48\] {
+    background-color: #FF334B !important;
+    color: #FFFFFF !important;
 }
 
-body.dark-mode .bg-\[\#2563EB\]\/10 {
-    background-color: rgba(192, 254, 4, 0.15) !important;
+body.dark-mode .bg-\[\#2563EB\]\/10,
+body.dark-mode .bg-\[\#E11D48\]\/10 {
+    background-color: rgba(255, 51, 75, 0.18) !important;
 }
 
-body.dark-mode .border-\[\#2563EB\] {
-    border-color: #C0FE04 !important;
+body.dark-mode .border-\[\#2563EB\],
+body.dark-mode .border-\[\#E11D48\] {
+    border-color: #FF334B !important;
 }
 
-body.dark-mode .border-\[\#2563EB\]\/20 {
-    border-color: rgba(192, 254, 4, 0.3) !important;
+body.dark-mode .border-\[\#2563EB\]\/20,
+body.dark-mode .border-\[\#E11D48\]\/20 {
+    border-color: rgba(255, 51, 75, 0.35) !important;
 }
 
 /* Background & Card Overrides in Dark Mode */
@@ -95,7 +100,7 @@ body.dark-mode .bg-white {
 
 body.dark-mode .b44-card:hover {
     background-color: #181818 !important;
-    border-color: #C0FE04 !important;
+    border-color: #FF334B !important;
 }
 
 body.dark-mode .bg-slate-100 {

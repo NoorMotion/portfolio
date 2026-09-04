@@ -8,8 +8,8 @@ tailwind.config = {
     theme: {
         extend: {
             colors: {
-                primary: '#2563EB',
-                accentBlue: '#3A86FF',
+                primary: '#E11D48',
+                accentRed: '#FF334B',
             }
         }
     }
@@ -311,7 +311,7 @@ window.expandVideoCard = function(element, rawVideoUrl) {
     const videoData = parseVideoEmbed(rawVideoUrl);
 
     // 4. Expand card
-    element.classList.add('portfolio-card-expanded', 'ring-2', 'ring-[#2563EB]');
+    element.classList.add('portfolio-card-expanded', 'ring-2', 'ring-[#E11D48]');
 
     // 5. Hide bottom text info box while video is playing
     const infoBox = element.querySelector('.p-6');
@@ -332,7 +332,7 @@ window.expandVideoCard = function(element, rawVideoUrl) {
                 <div class="flex items-center space-x-1 sm:space-x-2">
                     <a href="${videoData.rawUrl}" target="_blank" rel="noopener noreferrer" 
                        onclick="event.stopPropagation()"
-                       class="px-2 py-0.5 sm:px-2.5 sm:py-1 bg-black/80 backdrop-blur-md text-white font-mono-custom text-[10px] sm:text-xs uppercase rounded-[3px] border border-white/20 hover:bg-[#2563EB] hover:border-[#2563EB] transition flex items-center space-x-1 shadow-lg">
+                       class="px-2 py-0.5 sm:px-2.5 sm:py-1 bg-black/80 backdrop-blur-md text-white font-mono-custom text-[10px] sm:text-xs uppercase rounded-[3px] border border-white/20 hover:bg-[#E11D48] hover:border-[#E11D48] transition flex items-center space-x-1 shadow-lg">
                         <span>Drive HD</span>
                         <i class="fa-solid fa-arrow-up-right-from-square text-[9px] sm:text-[10px] ml-1"></i>
                     </a>
@@ -359,7 +359,7 @@ window.expandVideoCard = function(element, rawVideoUrl) {
 
 window.collapseVideoCard = function(element) {
     if (!element) return;
-    element.classList.remove('portfolio-card-expanded', 'ring-2', 'ring-[#2563EB]');
+    element.classList.remove('portfolio-card-expanded', 'ring-2', 'ring-[#E11D48]', 'ring-[#2563EB]');
 
     // Show bottom text info box again when collapsed
     const infoBox = element.querySelector('.p-6');
@@ -475,7 +475,7 @@ function updateThemeUI() {
     const isDark = document.body.classList.contains('dark-mode');
     const themeToggle = document.getElementById('theme-toggle-desktop');
     const themeMobileIndicator = document.getElementById('theme-mobile-indicator');
-    if (themeToggle) themeToggle.innerHTML = `THEME[<span class="text-[#2563EB]">${isDark ? 'D' : 'L'}</span>]`;
+    if (themeToggle) themeToggle.innerHTML = `THEME[<span class="text-[#E11D48]">${isDark ? 'D' : 'L'}</span>]`;
     if (themeMobileIndicator) themeMobileIndicator.innerText = isDark ? 'D' : 'L';
 }
 
