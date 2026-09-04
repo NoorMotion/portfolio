@@ -310,8 +310,48 @@ window.expandVideoCard = function(element, rawVideoUrl) {
 
     const videoData = parseVideoEmbed(rawVideoUrl);
 
+// ==========================================
+// 📊 REAL-TIME ANALYTICS TRACKER (Noor Motion)
+// ==========================================
+window.trackAnalyticsEvent = function(eventType, eventName, metadata = {}) {
+    try {
+        const events = JSON.parse(localStorage.getItem('noormotion_cms_analytics') || '[]');
+        events.push({
+            type: eventType,
+            name: eventName,
+            metadata: metadata,
+            timestamp: new Date().toISOString()
+        });
+        if (events.length > 500) events.shift();
+        localStorage.setItem('noormotion_cms_analytics', JSON.stringify(events));
+
+        const supabaseUrl = localStorage.getItem('noormotion_supabase_url');
+        const supabaseKey = localStorage.getItem('noormotion_supabase_key');
+        if (supabaseUrl && supabaseKey && window.supabase) {
+            const client = window.supabase.createClient(supabaseUrl, supabaseKey);
+            client.from('analytics_events').insert([{
+                event_type: eventType,
+                event_name: eventName,
+                metadata: metadata
+            }]).then(() => {}).catch(() => {});
+        }
+    } catch (err) {
+        console.warn('Analytics tracking error:', err);
+    }
+};
+
+// Track initial page view
+if (typeof window !== 'undefined') {
+    window.addEventListener('DOMContentLoaded', () => {
+        window.trackAnalyticsEvent('page_view', 'Home Portfolio Visited', { path: window.location.pathname });
+    });
+}
+
     // 4. Expand card
     element.classList.add('portfolio-card-expanded', 'ring-2', 'ring-[#E11D48]');
+    if (window.trackAnalyticsEvent) {
+        window.trackAnalyticsEvent('video_play', `Played Video: ${titleText || 'Portfolio Video'}`);
+    }
 
     // 5. Hide bottom text info box while video is playing
     const infoBox = element.querySelector('.p-6');

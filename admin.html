@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | NoorMotion CMS & Analytics</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#E11D48',
+                        accentRed: '#FF334B',
+                        darkBg: '#09090B',
+                        darkCard: '#121215',
+                        darkBorder: '#27272A'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        serif: ['Instrument Serif', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js & Supabase JS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-mono-custom { font-family: 'JetBrains Mono', monospace; }
+        .font-serif-custom { font-family: 'Instrument Serif', serif; }
+        
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #09090B; }
+        ::-webkit-scrollbar-thumb { background: #27272A; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #E11D48; }
+    </style>
+</head>
+<body class="bg-[#09090B] text-slate-100 min-h-screen flex flex-col antialiased selection:bg-[#E11D48] selection:text-white">
+
+    <!-- LOGIN OVERLAY -->
+    <div id="login-overlay" class="fixed inset-0 z-[200] bg-[#09090B]/95 backdrop-blur-xl flex items-center justify-center p-4">
+        <div class="w-full max-w-md bg-[#121215] border border-[#27272A] rounded-xl p-8 shadow-2xl relative overflow-hidden">
+            <div class="absolute -top-24 -right-24 w-48 h-48 bg-[#E11D48]/20 rounded-full blur-3xl"></div>
+            
+            <div class="text-center mb-6 relative z-10">
+                <div class="w-12 h-12 rounded-xl bg-[#E11D48]/10 border border-[#E11D48]/30 flex items-center justify-center mx-auto mb-3 text-[#FF334B]">
+                    <i class="fa-solid fa-[#lock] text-xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-white tracking-tight">Admin Authentication</h2>
+                <p class="text-xs text-slate-400 mt-1 font-mono-custom">Enter your passcode to manage NoorMotion CMS</p>
+            </div>
+
+            <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4 relative z-10">
+                <div>
+                    <label class="block text-xs font-mono-custom text-slate-400 uppercase mb-1">Passcode / Key</label>
+                    <input type="password" id="login-passcode" required placeholder="Default: admin123" 
+                           class="w-full px-4 py-3 bg-[#18181C] border border-[#27272A] rounded-lg text-white placeholder-slate-600 focus:outline-none focus:border-[#E11D48] text-sm transition">
+                </div>
+                <p id="login-error" class="text-xs text-red-500 hidden text-center font-mono-custom"><i class="fa-solid fa-circle-exclamation mr-1"></i> Invalid Passcode!</p>
+                <button type="submit" class="w-full py-3 bg-[#E11D48] hover:bg-[#BE123C] text-white font-bold text-xs uppercase tracking-wider rounded-lg transition duration-200 shadow-lg shadow-[#E11D48]/20">
+                    Unlock Dashboard <i class="fa-solid fa-arrow-right ml-1"></i>
+                </button>
+            </form>
+            <div class="mt-4 text-center">
+                <a href="index.html" class="text-xs text-slate-500 hover:text-slate-300 transition font-mono-custom"><i class="fa-solid fa-arrow-left mr-1"></i> Back to Main Site</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <div id="dashboard-content" class="hidden min-h-screen flex flex-col">
+        <!-- TOP HEADER -->
+        <header class="sticky top-0 z-50 bg-[#09090B]/90 backdrop-blur-md border-b border-[#27272A] px-4 lg:px-8 py-3.5 flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <a href="index.html" class="flex items-center space-x-2 text-white font-bold text-base tracking-tight hover:text-[#FF334B] transition">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#E11D48] animate-pulse"></span>
+                    <span>NOOR<span class="font-serif-custom italic text-[#FF334B] text-lg font-normal ml-0.5">Motion</span></span>
+                    <span class="px-2 py-0.5 text-[10px] font-mono-custom bg-[#E11D48]/10 text-[#FF334B] border border-[#E11D48]/30 rounded uppercase font-semibold">CMS v2.0</span>
+                </a>
+            </div>
+
+            <!-- Header Controls -->
+            <div class="flex items-center space-x-4">
+                <div class="hidden sm:flex items-center space-x-2 font-mono-custom text-xs text-slate-400 bg-[#121215] px-3 py-1.5 rounded-md border border-[#27272A]">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span id="live-clock">DHAKA 00:00:00 AM</span>
+                </div>
+
+                <a href="index.html" target="_blank" class="px-3 py-1.5 text-xs font-mono-custom text-slate-300 hover:text-white bg-[#18181C] hover:bg-[#27272A] border border-[#27272A] rounded-md transition flex items-center">
+                    <i class="fa-solid fa-globe mr-1.5 text-[#FF334B]"></i> Live Site
+                </a>
+
+                <button onclick="logout()" class="px-3 py-1.5 text-xs font-mono-custom text-red-400 hover:text-red-300 bg-red-950/30 hover:bg-red-900/40 border border-red-800/40 rounded-md transition flex items-center">
+                    <i class="fa-solid fa-right-from-bracket mr-1.5"></i> Logout
+                </button>
+            </div>
+        </header>
+
+        <!-- DASHBOARD CONTAINER -->
+        <div class="flex-1 flex flex-col md:flex-row">
+            <!-- SIDEBAR NAV -->
+            <aside class="w-full md:w-64 bg-[#121215] border-r border-[#27272A] p-4 flex md:flex-col justify-between space-y-1">
+                <nav class="space-y-1 w-full flex md:flex-col overflow-x-auto md:overflow-visible">
+                    <button onclick="switchTab('analytics')" id="nav-analytics" class="tab-btn w-full flex items-center space-x-3 px-4 py-3 text-xs font-mono-custom font-semibold rounded-lg text-white bg-[#E11D48] transition">
+                        <i class="fa-solid fa-chart-line text-sm"></i>
+                        <span>Analytics & Live</span>
+                    </button>
+
+                    <button onclick="switchTab('videos')" id="nav-videos" class="tab-btn w-full flex items-center space-x-3 px-4 py-3 text-xs font-mono-custom font-semibold rounded-lg text-slate-400 hover:text-white hover:bg-[#18181C] transition">
+                        <i class="fa-solid fa-video text-sm"></i>
+                        <span>Portfolio Videos</span>
+                    </button>
+
+                    <button onclick="switchTab('tools')" id="nav-tools" class="tab-btn w-full flex items-center space-x-3 px-4 py-3 text-xs font-mono-custom font-semibold rounded-lg text-slate-400 hover:text-white hover:bg-[#18181C] transition">
+                        <i class="fa-solid fa-screwdrivers-all text-sm"></i>
+                        <span>AE Tools</span>
+                    </button>
+
+                    <button onclick="switchTab('blogs')" id="nav-blogs" class="tab-btn w-full flex items-center space-x-3 px-4 py-3 text-xs font-mono-custom font-semibold rounded-lg text-slate-400 hover:text-white hover:bg-[#18181C] transition">
+                        <i class="fa-solid fa-newspaper text-sm"></i>
+                        <span>Blog Posts</span>
+                    </button>
+
+                    <button onclick="switchTab('settings')" id="nav-settings" class="tab-btn w-full flex items-center space-x-3 px-4 py-3 text-xs font-mono-custom font-semibold rounded-lg text-slate-400 hover:text-white hover:bg-[#18181C] transition">
+                        <i class="fa-solid fa-database text-sm"></i>
+                        <span>Supabase & Config</span>
+                    </button>
+                </nav>
+
+                <div class="hidden md:block pt-4 border-t border-[#27272A] text-[11px] text-slate-500 font-mono-custom space-y-1">
+                    <p>Status: <span class="text-emerald-400 font-semibold" id="db-status-badge">Local Sync Active</span></p>
+                    <p>Analytics Engine: <span class="text-slate-300">Live Tracker</span></p>
+                </div>
+            </aside>
+
+            <!-- MAIN CONTENT AREA -->
+            <main class="flex-1 p-4 lg:p-8 overflow-y-auto">
+
+                <!-- TAB 1: ANALYTICS -->
+                <section id="tab-analytics" class="tab-content space-y-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <h1 class="text-2xl font-bold text-white tracking-tight">Visitor & Event Analytics</h1>
+                            <p class="text-xs text-slate-400 font-mono-custom mt-1">Real-time tracking of visitor traffic, video plays, and tool downloads.</p>
+                        </div>
+                        <button onclick="clearAnalytics()" class="px-3 py-2 text-xs font-mono-custom text-red-400 hover:text-red-300 bg-red-950/20 hover:bg-red-900/30 border border-red-800/30 rounded-lg transition">
+                            <i class="fa-solid fa-trash-can mr-1.5"></i> Clear Logs
+                        </button>
+                    </div>
+
+                    <!-- STAT CARDS GRID -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="bg-[#121215] border border-[#27272A] p-5 rounded-xl">
+                            <div class="flex justify-between items-center text-slate-400 mb-2">
+                                <span class="text-xs font-mono-custom uppercase">Total Visitors</span>
+                                <i class="fa-solid fa-users text-[#FF334B]"></i>
+                            </div>
+                            <h3 id="stat-visitors" class="text-3xl font-extrabold text-white">0</h3>
+                            <p class="text-[11px] text-emerald-400 mt-1 font-mono-custom"><i class="fa-solid fa-arrow-trend-up mr-1"></i> Live Pageviews</p>
+                        </div>
+
+                        <div class="bg-[#121215] border border-[#27272A] p-5 rounded-xl">
+                            <div class="flex justify-between items-center text-slate-400 mb-2">
+                                <span class="text-xs font-mono-custom uppercase">Video Plays</span>
+                                <i class="fa-solid fa-play text-[#FF334B]"></i>
+                            </div>
+                            <h3 id="stat-video-plays" class="text-3xl font-extrabold text-white">0</h3>
+                            <p class="text-[11px] text-slate-400 mt-1 font-mono-custom">Showreel & Card Plays</p>
+                        </div>
+
+                        <div class="bg-[#121215] border border-[#27272A] p-5 rounded-xl">
+                            <div class="flex justify-between items-center text-slate-400 mb-2">
+                                <span class="text-xs font-mono-custom uppercase">Tool Clicks</span>
+                                <i class="fa-solid fa-download text-[#FF334B]"></i>
+                            </div>
+                            <h3 id="stat-tool-clicks" class="text-3xl font-extrabold text-white">0</h3>
+                            <p class="text-[11px] text-slate-400 mt-1 font-mono-custom">Gumroad Downloads</p>
+                        </div>
+
+                        <div class="bg-[#121215] border border-[#27272A] p-5 rounded-xl">
+                            <div class="flex justify-between items-center text-slate-400 mb-2">
+                                <span class="text-xs font-mono-custom uppercase">Active Blogs</span>
+                                <i class="fa-solid fa-newspaper text-[#FF334B]"></i>
+                            </div>
+                            <h3 id="stat-blogs-count" class="text-3xl font-extrabold text-white">0</h3>
+                            <p class="text-[11px] text-slate-400 mt-1 font-mono-custom">Published Articles</p>
+                        </div>
+                    </div>
+
+                    <!-- CHART & ACTIVITY FEED GRID -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                        <!-- Chart Box -->
+                        <div class="lg:col-span-7 bg-[#121215] border border-[#27272A] p-5 rounded-xl">
+                            <h3 class="text-sm font-bold text-white mb-4 flex items-center font-mono-custom">
+                                <i class="fa-solid fa-chart-area mr-2 text-[#FF334B]"></i> Engagement Activity Breakdown
+                            </h3>
+                            <div class="h-64 relative">
+                                <canvas id="analyticsChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Real-time Activity Feed -->
+                        <div class="lg:col-span-5 bg-[#121215] border border-[#27272A] p-5 rounded-xl flex flex-col">
+                            <h3 class="text-sm font-bold text-white mb-3 flex items-center font-mono-custom justify-between">
+                                <span><i class="fa-solid fa-list-check mr-2 text-[#FF334B]"></i> Live Event Feed</span>
+                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                            </h3>
+                            <div id="activity-feed" class="flex-1 space-y-2.5 overflow-y-auto max-h-64 pr-1 text-xs font-mono-custom">
+                                <div class="p-3 bg-[#18181C] border border-[#27272A] rounded-lg text-slate-400">
+                                    No events recorded yet. Visit the portfolio site to generate tracking events!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 2: PORTFOLIO VIDEOS -->
+                <section id="tab-videos" class="tab-content space-y-6 hidden">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h1 class="text-2xl font-bold text-white tracking-tight">Manage Portfolio Videos</h1>
+                            <p class="text-xs text-slate-400 font-mono-custom mt-1">Add, edit or remove Motion Graphic & SaaS video cards.</p>
+                        </div>
+                        <button onclick="toggleVideoForm()" class="px-4 py-2 bg-[#E11D48] hover:bg-[#BE123C] text-white font-bold text-xs uppercase tracking-wider rounded-lg transition">
+                            <i class="fa-solid fa-plus mr-1"></i> Add New Video
+                        </button>
+                    </div>
+
+                    <!-- ADD/EDIT VIDEO FORM -->
+                    <div id="video-form-card" class="bg-[#121215] border border-[#27272A] p-6 rounded-xl hidden space-y-4">
+                        <h3 id="video-form-title" class="text-base font-bold text-white border-b border-[#27272A] pb-3">Add New Video</h3>
+                        <form onsubmit="saveVideo(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <input type="hidden" id="video-id">
+                            <div>
+                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">Video Title</label>
+                                <input type="text" id="video-title" required placeholder="e.g. SaaS Explainer Motion Graphics" class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">Client Name</label>
+                                <input type="text" id="video-client" required placeholder="e.g. Acme Corp / SaaS Tool" class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">Category Badge</label>
+                                <input type="text" id="video-category" required placeholder="e.g. MOTION DESIGN & UI" class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">Video Stream / Drive URL</label>
+                                <input type="url" id="video-url" required placeholder="https://drive.google.com/file/d/.../preview" class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none">
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">Thumbnail Image URL</label>
+                                <input type="url" id="video-thumb" required placeholder="https://images.unsplash.com/photo-..." class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none">
+                            </div>
+                            <div class="sm:col-span-2 flex justify-end space-x-2 pt-2">
+                                <button type="button" onclick="toggleVideoForm()" class="px-4 py-2 bg-[#18181C] text-slate-400 hover:text-white rounded text-xs font-mono-custom">Cancel</button>
+                                <button type="submit" class="px-4 py-2 bg-[#E11D48] text-white font-bold rounded text-xs font-mono-custom">Save Video</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- VIDEOS LIST TABLE -->
+                    <div class="bg-[#121215] border border-[#27272A] rounded-xl overflow-hidden">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-[#27272A] bg-[#18181C] text-xs font-mono-custom text-slate-400 uppercase">
+                                    <th class="p-4">Thumbnail</th>
+                                    <th class="p-4">Title & Client</th>
+                                    <th class="p-4">Category</th>
+                                    <th class="p-4 text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="videos-table-body" class="divide-y divide-[#27272A] text-sm">
+                                <!-- Rendered dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- TAB 3: AE TOOLS & PRODUCTS -->
+                <section id="tab-tools" class="tab-content space-y-6 hidden">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h1 class="text-2xl font-bold text-white tracking-tight">Manage AE Tools & Scripts</h1>
+                            <p class="text-xs text-slate-400 font-mono-custom mt-1">Update After Effects workflow plugins and Gumroad links.</p>
+                        </div>
+                        <button onclick="toggleToolForm()" class="px-4 py-2 bg-[#E11D48] hover:bg-[#BE123C] text-white font-bold text-xs uppercase tracking-wider rounded-lg transition">
+                            <i class="fa-solid fa-plus mr-1"></i> Add New Tool
+                        </button>
+                    </div>
+
+                    <!-- ADD/EDIT TOOL FORM -->
+                    <div id="tool-form-card" class="bg-[#121215] border border-[#27272A] p-6 rounded-xl hidden space-y-4">
+                        <h3 id="tool-form-title" class="text-base font-bold text-white border-b border-[#27272A] pb-3">Add New Tool</h3>
+                        <form onsubmit="saveTool(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <input type="hidden" id="tool-id">
+                            <div>
+                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">Tool Title</label>
+                                <input type="text" id="tool-title" required placeholder="e.g. BoundingBox Pro AE Script" class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">Subtitle / Short Desc</label>
+                                <input type="text" id="tool-subtitle" required placeholder="e.g. Automatic Shape Padding Utility" class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">Badge Tag</label>
+                                <input type="text" id="tool-badge" required placeholder="e.g. AE SCRIPT v1.2" class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">Price Tag</label>
+                                <input type="text" id="tool-price" required placeholder="e.g. $29.00 or FREE" class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">Gumroad / Purchase Link</label>
+                                <input type="url" id="tool-url" required placeholder="https://gumroad.com/l/..." class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">Image URL</label>
+                                <input type="url" id="tool-image" required placeholder="https://images.unsplash.com/photo-..." class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none">
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">Full Description</label>
+                                <textarea id="tool-desc" rows="3" required placeholder="Detailed explanation of what the After Effects script does..." class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none"></textarea>
+                            </div>
+                            <div class="sm:col-span-2 flex justify-end space-x-2 pt-2">
+                                <button type="button" onclick="toggleToolForm()" class="px-4 py-2 bg-[#18181C] text-slate-400 hover:text-white rounded text-xs font-mono-custom">Cancel</button>
+                                <button type="submit" class="px-4 py-2 bg-[#E11D48] text-white font-bold rounded text-xs font-mono-custom">Save Tool</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- TOOLS LIST TABLE -->
+                    <div class="bg-[#121215] border border-[#27272A] rounded-xl overflow-hidden">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-[#27272A] bg-[#18181C] text-xs font-mono-custom text-slate-400 uppercase">
+                                    <th class="p-4">Image</th>
+                                    <th class="p-4">Tool Name & Price</th>
+                                    <th class="p-4">Gumroad Link</th>
+                                    <th class="p-4 text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tools-table-body" class="divide-y divide-[#27272A] text-sm">
+                                <!-- Rendered dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- TAB 4: BLOG POSTS -->
+                <section id="tab-blogs" class="tab-content space-y-6 hidden">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h1 class="text-2xl font-bold text-white tracking-tight">Manage Blog Articles</h1>
+                            <p class="text-xs text-slate-400 font-mono-custom mt-1">Write, edit, and publish blog posts and motion design tutorials.</p>
+                        </div>
+                        <button onclick="toggleBlogForm()" class="px-4 py-2 bg-[#E11D48] hover:bg-[#BE123C] text-white font-bold text-xs uppercase tracking-wider rounded-lg transition">
+                            <i class="fa-solid fa-pen-nib mr-1"></i> Write New Post
+                        </button>
+                    </div>
+
+                    <!-- ADD/EDIT BLOG FORM -->
+                    <div id="blog-form-card" class="bg-[#121215] border border-[#27272A] p-6 rounded-xl hidden space-y-4">
+                        <h3 id="blog-form-title" class="text-base font-bold text-white border-b border-[#27272A] pb-3">Write New Article</h3>
+                        <form onsubmit="saveBlog(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <input type="hidden" id="blog-id">
+                            <div>
+                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">Article Title</label>
+                                <input type="text" id="blog-title" required placeholder="e.g. How to Automate After Effects Workflows" class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">URL Slug</label>
+                                <input type="text" id="blog-slug" required placeholder="e.g. automate-after-effects-workflows" class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">Tags / Category</label>
+                                <input type="text" id="blog-tags" required placeholder="e.g. AE SCRIPTING, TUTORIAL" class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">Cover Image URL</label>
+                                <input type="url" id="blog-cover" required placeholder="https://images.unsplash.com/photo-..." class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none">
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">Short Excerpt</label>
+                                <input type="text" id="blog-excerpt" required placeholder="Brief 1-2 line summary of the post..." class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none">
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">Full Article Content (HTML / Text)</label>
+                                <textarea id="blog-content" rows="8" required placeholder="Write your blog post content here... Supports standard HTML formatting (<p>, <h3>, <code>, <ul>)." class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none font-mono-custom"></textarea>
+                            </div>
+                            <div class="sm:col-span-2 flex justify-end space-x-2 pt-2">
+                                <button type="button" onclick="toggleBlogForm()" class="px-4 py-2 bg-[#18181C] text-slate-400 hover:text-white rounded text-xs font-mono-custom">Cancel</button>
+                                <button type="submit" class="px-4 py-2 bg-[#E11D48] text-white font-bold rounded text-xs font-mono-custom">Publish Article</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- BLOGS LIST TABLE -->
+                    <div class="bg-[#121215] border border-[#27272A] rounded-xl overflow-hidden">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-[#27272A] bg-[#18181C] text-xs font-mono-custom text-slate-400 uppercase">
+                                    <th class="p-4">Cover</th>
+                                    <th class="p-4">Title & Slug</th>
+                                    <th class="p-4">Date</th>
+                                    <th class="p-4 text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="blogs-table-body" class="divide-y divide-[#27272A] text-sm">
+                                <!-- Rendered dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- TAB 5: SETTINGS & SUPABASE CONFIG -->
+                <section id="tab-settings" class="tab-content space-y-6 hidden">
+                    <div>
+                        <h1 class="text-2xl font-bold text-white tracking-tight">Database & Supabase Configuration</h1>
+                        <p class="text-xs text-slate-400 font-mono-custom mt-1">Connect your Supabase project or export/import database SQL schemas.</p>
+                    </div>
+
+                    <!-- SUPABASE CONNECTION FORM -->
+                    <div class="bg-[#121215] border border-[#27272A] p-6 rounded-xl space-y-4">
+                        <h3 class="text-base font-bold text-white border-b border-[#27272A] pb-3 flex items-center">
+                            <i class="fa-solid fa-plug mr-2 text-[#FF334B]"></i> Supabase Project Credentials
+                        </h3>
+                        <div class="grid grid-cols-1 gap-4">
+                            <div>
+                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">SUPABASE URL</label>
+                                <input type="text" id="cfg-supabase-url" placeholder="https://your-project-id.supabase.co" class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none font-mono-custom">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">SUPABASE ANON KEY</label>
+                                <input type="password" id="cfg-supabase-key" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6..." class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none font-mono-custom">
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center pt-2">
+                            <span id="config-save-msg" class="text-xs text-emerald-400 hidden font-mono-custom"><i class="fa-solid fa-check mr-1"></i> Credentials Saved!</span>
+                            <button onclick="saveSupabaseConfig()" class="px-4 py-2 bg-[#E11D48] text-white font-bold text-xs font-mono-custom rounded hover:bg-[#BE123C] transition">
+                                Save Supabase Credentials
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- SQL SCHEMA GENERATOR BOX -->
+                    <div class="bg-[#121215] border border-[#27272A] p-6 rounded-xl space-y-4">
+                        <div class="flex justify-between items-center border-b border-[#27272A] pb-3">
+                            <h3 class="text-base font-bold text-white flex items-center">
+                                <i class="fa-solid fa-code mr-2 text-[#FF334B]"></i> Supabase SQL Setup Script
+                            </h3>
+                            <button onclick="copySQLSchema()" class="px-3 py-1.5 bg-[#18181C] hover:bg-[#27272A] text-slate-300 text-xs font-mono-custom border border-[#27272A] rounded transition">
+                                <i class="fa-solid fa-copy mr-1"></i> Copy SQL
+                            </button>
+                        </div>
+                        <p class="text-xs text-slate-400 font-mono-custom">Copy and run this SQL inside your Supabase project's SQL Editor to automatically create all required tables (`tools`, `videos`, `blogs`, `analytics`):</p>
+                        <pre class="bg-[#09090B] p-4 rounded-lg text-xs font-mono-custom text-emerald-400 overflow-x-auto border border-[#27272A] leading-relaxed select-all">
+-- 1. Create Tools Table
+CREATE TABLE IF NOT EXISTS tools (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    title TEXT NOT NULL,
+    subtitle TEXT NOT NULL,
+    badge TEXT NOT NULL,
+    price TEXT NOT NULL,
+    gumroad_url TEXT NOT NULL,
+    image_url TEXT NOT NULL,
+    description TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- 2. Create Videos Table
+CREATE TABLE IF NOT EXISTS videos (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    title TEXT NOT NULL,
+    client TEXT NOT NULL,
+    category TEXT NOT NULL,
+    video_url TEXT NOT NULL,
+    thumbnail_url TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- 3. Create Blogs Table
+CREATE TABLE IF NOT EXISTS blogs (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    title TEXT NOT NULL,
+    slug TEXT UNIQUE NOT NULL,
+    excerpt TEXT NOT NULL,
+    content TEXT NOT NULL,
+    cover_image TEXT NOT NULL,
+    tags TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- 4. Create Analytics Table
+CREATE TABLE IF NOT EXISTS analytics_events (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    event_type TEXT NOT NULL,
+    event_name TEXT NOT NULL,
+    metadata JSONB DEFAULT '{}'::jsonb,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Enable Public Read Access Policies (RLS)
+ALTER TABLE tools ENABLE ROW LEVEL SECURITY;
+ALTER TABLE videos ENABLE ROW LEVEL SECURITY;
+ALTER TABLE blogs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE analytics_events ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Allow public select tools" ON tools FOR SELECT USING (true);
+CREATE POLICY "Allow public select videos" ON videos FOR SELECT USING (true);
+CREATE POLICY "Allow public select blogs" ON blogs FOR SELECT USING (true);
+CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WITH CHECK (true);
+</pre>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- DASHBOARD LOGIC SCRIPT -->
+    <script>
+        // Storage keys
+        const AUTH_KEY = 'noormotion_admin_auth';
+        const STORAGE_TOOLS = 'noormotion_cms_tools';
+        const STORAGE_VIDEOS = 'noormotion_cms_videos';
+        const STORAGE_BLOGS = 'noormotion_cms_blogs';
+        const STORAGE_ANALYTICS = 'noormotion_cms_analytics';
+
+        let chartInstance = null;
+
+        // Default Datasets if empty
+        const defaultVideos = [
+            { id: 'v1', title: 'SaaS Explainer Motion Graphics', client: 'Acme Corp', category: 'MOTION DESIGN & UI', video_url: 'https://drive.google.com/file/d/1v0J_y6j8K_sample/preview', thumbnail_url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80' },
+            { id: 'v2', title: 'Adobe After Effects Workflow Automation', client: 'Internal Tool', category: 'TOOL DEMO', video_url: 'https://drive.google.com/file/d/1v0J_y6j8K_sample2/preview', thumbnail_url: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80' }
+        ];
+
+        const defaultTools = [
+            { id: 't1', title: 'BoundingBox Pro AE Script', subtitle: 'Automatic Shape Padding Utility', badge: 'AE SCRIPT v1.2', price: '$29.00', gumroad_url: 'https://gumroad.com', image_url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80', description: 'Zero-gap shape bounding box generator for Adobe After Effects layers.' },
+            { id: 't2', title: 'Keyframe Stagger Pro', subtitle: 'Layer Timing Automation', badge: 'POPULAR', price: 'FREE', gumroad_url: 'https://gumroad.com', image_url: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80', description: 'One-click keyframe staggering and animation offset tool for motion designers.' }
+        ];
+
+        const defaultBlogs = [
+            { id: 'b1', title: 'How to Automate Adobe After Effects Keyframes with ExtendScript', slug: 'automate-after-effects-keyframes', tags: 'AE SCRIPTING, TUTORIAL', excerpt: 'Learn how custom JSX scripts can speed up your motion design workflow by 10x.', content: '<p>After Effects scripting enables motion designers to automate repetitive tasks...</p>', cover_image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80', created_at: new Date().toISOString() }
+        ];
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            startClock();
+            checkAuth();
+            loadStoredConfig();
+        });
+
+        // Clock
+        function startClock() {
+            setInterval(() => {
+                const now = new Date();
+                const timeStr = now.toLocaleTimeString('en-US', { timeZone: 'Asia/Dhaka', hour12: true });
+                document.getElementById('live-clock').innerText = `DHAKA ${timeStr}`;
+            }, 1000);
+        }
+
+        // Auth Handling
+        function checkAuth() {
+            if (localStorage.getItem(AUTH_KEY) === 'true') {
+                document.getElementById('login-overlay').classList.add('hidden');
+                document.getElementById('dashboard-content').classList.remove('hidden');
+                initDashboardData();
+            } else {
+                document.getElementById('login-overlay').classList.remove('hidden');
+                document.getElementById('dashboard-content').classList.add('hidden');
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const inputPass = document.getElementById('login-passcode').value.trim();
+            if (inputPass === 'admin123' || inputPass === 'noormotion') {
+                localStorage.setItem(AUTH_KEY, 'true');
+                checkAuth();
+            } else {
+                document.getElementById('login-error').classList.remove('hidden');
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem(AUTH_KEY);
+            checkAuth();
+        }
+
+        // Tab Navigation
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-[#E11D48]', 'text-white');
+                btn.classList.add('text-slate-400', 'hover:bg-[#18181C]');
+            });
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+
+            document.getElementById(`nav-${tabId}`).classList.add('bg-[#E11D48]', 'text-white');
+            document.getElementById(`nav-${tabId}`).classList.remove('text-slate-400', 'hover:bg-[#18181C]');
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+        }
+
+        // Init Data & Render
+        function initDashboardData() {
+            if (!localStorage.getItem(STORAGE_VIDEOS)) localStorage.setItem(STORAGE_VIDEOS, JSON.stringify(defaultVideos));
+            if (!localStorage.getItem(STORAGE_TOOLS)) localStorage.setItem(STORAGE_TOOLS, JSON.stringify(defaultTools));
+            if (!localStorage.getItem(STORAGE_BLOGS)) localStorage.setItem(STORAGE_BLOGS, JSON.stringify(defaultBlogs));
+
+            renderAnalytics();
+            renderVideosTable();
+            renderToolsTable();
+            renderBlogsTable();
+        }
+
+        // ANALYTICS & CHARTS
+        function renderAnalytics() {
+            const events = JSON.parse(localStorage.getItem(STORAGE_ANALYTICS) || '[]');
+            const pageViews = events.filter(e => e.type === 'page_view').length;
+            const videoPlays = events.filter(e => e.type === 'video_play').length;
+            const toolClicks = events.filter(e => e.type === 'tool_click').length;
+            const blogsCount = JSON.parse(localStorage.getItem(STORAGE_BLOGS) || '[]').length;
+
+            document.getElementById('stat-visitors').innerText = pageViews;
+            document.getElementById('stat-video-plays').innerText = videoPlays;
+            document.getElementById('stat-tool-clicks').innerText = toolClicks;
+            document.getElementById('stat-blogs-count').innerText = blogsCount;
+
+            // Render Feed
+            const feedContainer = document.getElementById('activity-feed');
+            if (events.length === 0) {
+                feedContainer.innerHTML = `<div class="p-3 bg-[#18181C] border border-[#27272A] rounded-lg text-slate-400">No events recorded yet. Visit index.html to generate live analytics!</div>`;
+            } else {
+                feedContainer.innerHTML = events.slice(-15).reverse().map(ev => `
+                    <div class="p-2.5 bg-[#18181C] border border-[#27272A] rounded-lg flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <span class="w-2 h-2 rounded-full ${ev.type === 'page_view' ? 'bg-blue-500' : ev.type === 'video_play' ? 'bg-[#FF334B]' : 'bg-emerald-500'}"></span>
+                            <span class="text-white font-semibold">${ev.name}</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500">${new Date(ev.timestamp).toLocaleTimeString()}</span>
+                    </div>
+                `).join('');
+            }
+
+            // Render Chart
+            renderChart(pageViews, videoPlays, toolClicks);
+        }
+
+        function renderChart(views, plays, clicks) {
+            const ctx = document.getElementById('analyticsChart').getContext('2d');
+            if (chartInstance) chartInstance.destroy();
+
+            chartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Page Views', 'Video Plays', 'Tool Downloads'],
+                    datasets: [{
+                        label: 'Interactions',
+                        data: [views, plays, clicks],
+                        backgroundColor: ['rgba(59, 130, 246, 0.7)', 'rgba(225, 29, 72, 0.8)', 'rgba(16, 185, 129, 0.8)'],
+                        borderColor: ['#3b82f6', '#E11D48', '#10b981'],
+                        borderWidth: 1.5,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255, 255, 255, 0.05)' } },
+                        x: { ticks: { color: '#94a3b8' }, grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        function clearAnalytics() {
+            if (confirm('Clear all analytics events?')) {
+                localStorage.removeItem(STORAGE_ANALYTICS);
+                renderAnalytics();
+            }
+        }
+
+        // VIDEOS CRUD
+        function renderVideosTable() {
+            const videos = JSON.parse(localStorage.getItem(STORAGE_VIDEOS) || '[]');
+            const tbody = document.getElementById('videos-table-body');
+            tbody.innerHTML = videos.map(v => `
+                <tr class="hover:bg-[#18181C]/50 transition">
+                    <td class="p-4">
+                        <img src="${v.thumbnail_url}" class="w-16 h-10 object-cover rounded border border-[#27272A]">
+                    </td>
+                    <td class="p-4 font-semibold text-white">
+                        ${v.title}
+                        <div class="text-xs text-slate-400 font-mono-custom font-normal">${v.client}</div>
+                    </td>
+                    <td class="p-4"><span class="px-2 py-0.5 bg-[#E11D48]/10 text-[#FF334B] text-[10px] font-mono-custom font-bold rounded">${v.category}</span></td>
+                    <td class="p-4 text-right space-x-2">
+                        <button onclick="deleteVideo('${v.id}')" class="text-red-400 hover:text-red-300 font-mono-custom text-xs"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function toggleVideoForm() {
+            document.getElementById('video-form-card').classList.toggle('hidden');
+        }
+
+        function saveVideo(e) {
+            e.preventDefault();
+            const videos = JSON.parse(localStorage.getItem(STORAGE_VIDEOS) || '[]');
+            const newVideo = {
+                id: 'v_' + Date.now(),
+                title: document.getElementById('video-title').value,
+                client: document.getElementById('video-client').value,
+                category: document.getElementById('video-category').value,
+                video_url: document.getElementById('video-url').value,
+                thumbnail_url: document.getElementById('video-thumb').value
+            };
+            videos.push(newVideo);
+            localStorage.setItem(STORAGE_VIDEOS, JSON.stringify(videos));
+            toggleVideoForm();
+            renderVideosTable();
+        }
+
+        function deleteVideo(id) {
+            let videos = JSON.parse(localStorage.getItem(STORAGE_VIDEOS) || '[]');
+            videos = videos.filter(v => v.id !== id);
+            localStorage.setItem(STORAGE_VIDEOS, JSON.stringify(videos));
+            renderVideosTable();
+        }
+
+        // TOOLS CRUD
+        function renderToolsTable() {
+            const tools = JSON.parse(localStorage.getItem(STORAGE_TOOLS) || '[]');
+            const tbody = document.getElementById('tools-table-body');
+            tbody.innerHTML = tools.map(t => `
+                <tr class="hover:bg-[#18181C]/50 transition">
+                    <td class="p-4">
+                        <img src="${t.image_url}" class="w-12 h-12 object-cover rounded border border-[#27272A]">
+                    </td>
+                    <td class="p-4 font-semibold text-white">
+                        ${t.title}
+                        <div class="text-xs text-slate-400 font-mono-custom font-normal">${t.subtitle}</div>
+                    </td>
+                    <td class="p-4"><span class="text-xs text-[#FF334B] font-mono-custom font-bold">${t.price}</span></td>
+                    <td class="p-4 text-right space-x-2">
+                        <button onclick="deleteTool('${t.id}')" class="text-red-400 hover:text-red-300 font-mono-custom text-xs"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function toggleToolForm() {
+            document.getElementById('tool-form-card').classList.toggle('hidden');
+        }
+
+        function saveTool(e) {
+            e.preventDefault();
+            const tools = JSON.parse(localStorage.getItem(STORAGE_TOOLS) || '[]');
+            const newTool = {
+                id: 't_' + Date.now(),
+                title: document.getElementById('tool-title').value,
+                subtitle: document.getElementById('tool-subtitle').value,
+                badge: document.getElementById('tool-badge').value,
+                price: document.getElementById('tool-price').value,
+                gumroad_url: document.getElementById('tool-url').value,
+                image_url: document.getElementById('tool-image').value,
+                description: document.getElementById('tool-desc').value
+            };
+            tools.push(newTool);
+            localStorage.setItem(STORAGE_TOOLS, JSON.stringify(tools));
+            toggleToolForm();
+            renderToolsTable();
+        }
+
+        function deleteTool(id) {
+            let tools = JSON.parse(localStorage.getItem(STORAGE_TOOLS) || '[]');
+            tools = tools.filter(t => t.id !== id);
+            localStorage.setItem(STORAGE_TOOLS, JSON.stringify(tools));
+            renderToolsTable();
+        }
+
+        // BLOGS CRUD
+        function renderBlogsTable() {
+            const blogs = JSON.parse(localStorage.getItem(STORAGE_BLOGS) || '[]');
+            const tbody = document.getElementById('blogs-table-body');
+            tbody.innerHTML = blogs.map(b => `
+                <tr class="hover:bg-[#18181C]/50 transition">
+                    <td class="p-4">
+                        <img src="${b.cover_image}" class="w-16 h-10 object-cover rounded border border-[#27272A]">
+                    </td>
+                    <td class="p-4 font-semibold text-white">
+                        ${b.title}
+                        <div class="text-xs text-slate-400 font-mono-custom font-normal">/blog.html?slug=${b.slug}</div>
+                    </td>
+                    <td class="p-4 text-xs text-slate-400 font-mono-custom">${new Date(b.created_at || Date.now()).toLocaleDateString()}</td>
+                    <td class="p-4 text-right space-x-2">
+                        <a href="blog.html?slug=${b.slug}" target="_blank" class="text-slate-400 hover:text-white font-mono-custom text-xs mr-2"><i class="fa-solid fa-eye"></i></a>
+                        <button onclick="deleteBlog('${b.id}')" class="text-red-400 hover:text-red-300 font-mono-custom text-xs"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function toggleBlogForm() {
+            document.getElementById('blog-form-card').classList.toggle('hidden');
+        }
+
+        function saveBlog(e) {
+            e.preventDefault();
+            const blogs = JSON.parse(localStorage.getItem(STORAGE_BLOGS) || '[]');
+            const newBlog = {
+                id: 'b_' + Date.now(),
+                title: document.getElementById('blog-title').value,
+                slug: document.getElementById('blog-slug').value.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+                tags: document.getElementById('blog-tags').value,
+                cover_image: document.getElementById('blog-cover').value,
+                excerpt: document.getElementById('blog-excerpt').value,
+                content: document.getElementById('blog-content').value,
+                created_at: new Date().toISOString()
+            };
+            blogs.push(newBlog);
+            localStorage.setItem(STORAGE_BLOGS, JSON.stringify(blogs));
+            toggleBlogForm();
+            renderBlogsTable();
+            renderAnalytics();
+        }
+
+        function deleteBlog(id) {
+            let blogs = JSON.parse(localStorage.getItem(STORAGE_BLOGS) || '[]');
+            blogs = blogs.filter(b => b.id !== id);
+            localStorage.setItem(STORAGE_BLOGS, JSON.stringify(blogs));
+            renderBlogsTable();
+            renderAnalytics();
+        }
+
+        // SUPABASE SETTINGS
+        function saveSupabaseConfig() {
+            const url = document.getElementById('cfg-supabase-url').value.trim();
+            const key = document.getElementById('cfg-supabase-key').value.trim();
+            localStorage.setItem('noormotion_supabase_url', url);
+            localStorage.setItem('noormotion_supabase_key', key);
+            
+            const msg = document.getElementById('config-save-msg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 3000);
+        }
+
+        function loadStoredConfig() {
+            document.getElementById('cfg-supabase-url').value = localStorage.getItem('noormotion_supabase_url') || '';
+            document.getElementById('cfg-supabase-key').value = localStorage.getItem('noormotion_supabase_key') || '';
+        }
+
+        function copySQLSchema() {
+            const sql = document.querySelector('pre').innerText;
+            navigator.clipboard.writeText(sql);
+            alert('Supabase SQL Schema copied to clipboard!');
+        }
+    </script>
+</body>
+</html>

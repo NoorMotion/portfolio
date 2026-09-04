@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog & Insights | NoorMotion</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#E11D48',
+                        accentRed: '#FF334B'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        serif: ['Instrument Serif', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#EEECEB] dark:bg-[#050505] text-slate-900 dark:text-slate-100 min-h-screen flex flex-col font-sans transition-colors duration-300">
+
+    <!-- HEADER NAVIGATION -->
+    <header class="w-full border-b border-black/10 dark:border-white/10 py-4 px-4 sm:px-8 bg-white/80 dark:bg-[#111111]/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-2 text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#E11D48] animate-pulse"></span>
+                <span>NOOR<span class="font-serif-italic font-normal italic text-[#E11D48] dark:text-[#FF334B] ml-0.5">Motion</span></span>
+            </a>
+
+            <div class="flex items-center space-x-4">
+                <a href="index.html#portfolio" class="text-xs font-mono-custom font-semibold text-slate-600 dark:text-slate-400 hover:text-[#E11D48] transition">Works</a>
+                <a href="index.html#tools" class="text-xs font-mono-custom font-semibold text-slate-600 dark:text-slate-400 hover:text-[#E11D48] transition">AE Tools</a>
+                <a href="blog.html" class="text-xs font-mono-custom font-semibold text-[#E11D48] dark:text-[#FF334B]">Blog</a>
+                <a href="admin.html" target="_blank" class="px-3 py-1.5 bg-[#E11D48] text-white text-xs font-mono-custom font-bold rounded hover:bg-slate-900 transition">Admin Portal</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-1 max-w-4xl mx-auto w-full px-4 sm:px-6 py-12">
+        
+        <!-- SINGLE BLOG VIEW -->
+        <article id="single-blog-container" class="hidden space-y-8">
+            <a href="blog.html" class="inline-flex items-center text-xs font-mono-custom text-[#E11D48] dark:text-[#FF334B] font-bold hover:underline mb-4">
+                <i class="fa-solid fa-arrow-left mr-2"></i> Back to all articles
+            </a>
+
+            <div>
+                <div class="flex items-center space-x-3 mb-3">
+                    <span id="blog-badge" class="px-3 py-1 bg-[#E11D48]/10 text-[#E11D48] dark:text-[#FF334B] text-xs font-mono-custom font-bold uppercase rounded-full"></span>
+                    <span id="blog-date" class="text-xs font-mono-custom text-slate-500"></span>
+                </div>
+                <h1 id="blog-title" class="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight mb-4"></h1>
+                <p id="blog-excerpt" class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed font-normal"></p>
+            </div>
+
+            <div class="aspect-video w-full rounded-2xl overflow-hidden bg-slate-900 border border-slate-200 dark:border-white/10 shadow-xl">
+                <img id="blog-cover" src="" class="w-full h-full object-cover">
+            </div>
+
+            <div id="blog-body-content" class="prose dark:prose-invert max-w-none text-slate-800 dark:text-slate-300 leading-relaxed space-y-6 text-base sm:text-lg">
+                <!-- Content injected here -->
+            </div>
+        </article>
+
+        <!-- BLOG LISTING VIEW -->
+        <section id="blog-list-container" class="space-y-8">
+            <div class="border-b border-slate-200 dark:border-white/10 pb-6">
+                <span class="px-3 py-1 bg-[#E11D48]/10 text-[#E11D48] dark:text-[#FF334B] text-xs font-mono-custom font-bold uppercase rounded-full">ARTICLES & TUTORIALS</span>
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-3">
+                    Motion Design <span class="font-serif-italic font-normal italic text-[#E11D48] dark:text-[#FF334B]">&</span> AE Insights
+                </h1>
+                <p class="text-slate-600 dark:text-slate-400 mt-2 font-normal">Workflow automation guides, After Effects ExtendScript tips, and SaaS video breakdown.</p>
+            </div>
+
+            <div id="articles-grid" class="grid grid-cols-1 gap-8">
+                <!-- Articles rendered dynamically -->
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-black/10 dark:border-white/10 py-8 px-4 text-center text-xs font-mono-custom text-slate-500">
+        <p>&copy; <span id="year">2026</span> NoorMotion. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const STORAGE_BLOGS = 'noormotion_cms_blogs';
+
+        const defaultBlogs = [
+            {
+                id: 'b1',
+                title: 'How to Automate After Effects Keyframes & Shape Layers with ExtendScript',
+                slug: 'automate-after-effects-keyframes',
+                tags: 'AE SCRIPTING, TUTORIAL',
+                excerpt: 'Discover how writing custom JSX scripts can speed up your motion graphics workflow by eliminating repetitive layer alignments and keyframe staggering.',
+                content: `
+                    <p>As motion designers, we spend hours manually adjusting shape layer bounding boxes, centering anchor points, and staggering keyframes across dozens of compositions. What if you could execute all of that with a single click?</p>
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-6">Why ExtendScript is a Superpower for Motion Designers</h3>
+                    <p>Adobe After Effects exposes a powerful JavaScript runtime engine (ExtendScript). By tapping into AE's DOM model, you can read layer bounds, automate keyframe interpolation curves, and dynamically build UI dialogs.</p>
+                    <blockquote class="p-4 border-l-4 border-[#E11D48] bg-slate-100 dark:bg-[#111111] italic text-slate-700 dark:text-slate-300 my-4">
+                        "Automation doesn't take away creativity; it frees your mind to focus purely on storytelling."
+                    </blockquote>
+                    <p>Check out our custom After Effects tools in the portfolio to see live scripts in action!</p>
+                `,
+                cover_image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80',
+                created_at: new Date().toISOString()
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const blogs = JSON.parse(localStorage.getItem(STORAGE_BLOGS) || JSON.stringify(defaultBlogs));
+            const urlParams = new URLSearchParams(window.location.search);
+            const slug = urlParams.get('slug');
+
+            if (slug) {
+                const article = blogs.find(b => b.slug === slug) || blogs[0];
+                renderSingleArticle(article);
+            } else {
+                renderArticlesList(blogs);
+            }
+        });
+
+        function renderSingleArticle(article) {
+            document.getElementById('blog-list-container').classList.add('hidden');
+            document.getElementById('single-blog-container').classList.remove('hidden');
+
+            document.title = `${article.title} | NoorMotion Blog`;
+            document.getElementById('blog-badge').innerText = article.tags || 'ARTICLE';
+            document.getElementById('blog-date').innerText = new Date(article.created_at || Date.now()).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            document.getElementById('blog-title').innerText = article.title;
+            document.getElementById('blog-excerpt').innerText = article.excerpt || '';
+            document.getElementById('blog-cover').src = article.cover_image;
+            document.getElementById('blog-body-content').innerHTML = article.content;
+        }
+
+        function renderArticlesList(blogs) {
+            const grid = document.getElementById('articles-grid');
+            if (!blogs || blogs.length === 0) {
+                grid.innerHTML = `<p class="text-slate-500 font-mono-custom">No articles published yet. Check back soon!</p>`;
+                return;
+            }
+
+            grid.innerHTML = blogs.map(b => `
+                <article class="bg-white dark:bg-[#111111] border border-black/10 dark:border-white/10 rounded-2xl overflow-hidden p-6 sm:p-8 flex flex-col md:flex-row gap-6 items-center hover:border-[#E11D48] transition duration-300 shadow-sm">
+                    <img src="${b.cover_image}" class="w-full md:w-64 h-44 object-cover rounded-xl border border-black/10 dark:border-white/10">
+                    <div class="flex-1 space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <span class="px-2.5 py-0.5 bg-[#E11D48]/10 text-[#E11D48] dark:text-[#FF334B] text-[11px] font-mono-custom font-bold uppercase rounded font-semibold">${b.tags}</span>
+                            <span class="text-xs font-mono-custom text-slate-400">${new Date(b.created_at || Date.now()).toLocaleDateString()}</span>
+                        </div>
+                        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white leading-snug hover:text-[#E11D48] transition">
+                            <a href="blog.html?slug=${b.slug}">${b.title}</a>
+                        </h2>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">${b.excerpt}</p>
+                        <div>
+                            <a href="blog.html?slug=${b.slug}" class="inline-flex items-center text-xs font-mono-custom font-bold text-[#E11D48] dark:text-[#FF334B] uppercase tracking-wider hover:underline">
+                                Read Full Article <i class="fa-solid fa-arrow-right ml-1 text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+    </script>
+</body>
+</html>
