@@ -413,30 +413,6 @@ function initGSAPAnimations() {
     }
 }
 
-// Audio Synthesis Controller
-let soundEnabled = true;
-
-function playAudioClick() {
-    if (!soundEnabled) return;
-    try {
-        const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
-        if (!AudioCtxClass) return;
-        const ctx = new AudioCtxClass();
-        if (ctx.state === 'suspended') ctx.resume();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(800, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.04);
-        gain.gain.setValueAtTime(0.05, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.04);
-    } catch(e) {}
-}
-
 // Live Coordinate Tracker & Cursor Logic
 const cursorDot = document.querySelector('.cursor-dot');
 const cursorOutline = document.querySelector('.cursor-outline');
@@ -469,7 +445,6 @@ window.addEventListener('mousemove', (e) => {
 document.addEventListener('mouseover', (e) => {
     if (e.target.closest('.hover-trigger') || e.target.closest('a') || e.target.closest('button')) {
         document.body.classList.add('hover-active');
-        playAudioClick();
     }
 });
 
@@ -493,25 +468,6 @@ function updateClock() {
 }
 setInterval(updateClock, 1000);
 updateClock();
-
-// Sound Toggle Controller
-function updateSoundUI() {
-    const soundToggle = document.getElementById('sound-toggle-desktop');
-    const soundMobileIndicator = document.getElementById('sound-mobile-indicator');
-    if (soundToggle) soundToggle.innerHTML = `SOUND[<span class="text-[#2563EB]">${soundEnabled ? '|' : 'X'}</span>]`;
-    if (soundMobileIndicator) soundMobileIndicator.innerText = soundEnabled ? '|' : 'X';
-}
-
-const soundToggle = document.getElementById('sound-toggle-desktop');
-const soundToggleMobile = document.getElementById('sound-toggle-mobile');
-
-function toggleSoundState() {
-    soundEnabled = !soundEnabled;
-    updateSoundUI();
-}
-
-if (soundToggle) soundToggle.addEventListener('click', toggleSoundState);
-if (soundToggleMobile) soundToggleMobile.addEventListener('click', toggleSoundState);
 
 // Theme Toggle Controller
 function updateThemeUI() {
