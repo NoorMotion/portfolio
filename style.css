@@ -25,20 +25,138 @@
     --font-serif: 'Instrument Serif', 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
 }
 
-/* DARK THEME OVERRIDE */
+/* DARK THEME OVERRIDES (Comprehensive Color Palette Engine) */
 body.dark-mode {
     --bg-dark: #050505;
     --bg-dark-rgb: 5, 5, 5;
-    --bg-card: rgba(255, 255, 255, 0.03);
-    --bg-card-hover: rgba(255, 255, 255, 0.06);
-    --border-subtle: rgba(255, 255, 255, 0.08);
+    --bg-card: #111111;
+    --bg-card-hover: #181818;
+    --border-subtle: rgba(255, 255, 255, 0.1);
     --border-hover: #C0FE04;
     
     --accent-lime: #C0FE04;
-    --accent-blue: #3A86FF;
-    --text-primary: #F5F5F7;
-    --text-muted: #888888;
-    --text-dim: #555555;
+    --accent-blue: #38BDF8;
+    --text-primary: #F8FAFC;
+    --text-muted: #94A3B8;
+    --text-dim: #64748B;
+}
+
+/* Global Text Colors in Dark Mode */
+body.dark-mode,
+body.dark-mode .text-slate-900 {
+    color: #F8FAFC !important;
+}
+
+body.dark-mode .text-slate-800 {
+    color: #F1F5F9 !important;
+}
+
+body.dark-mode .text-slate-700 {
+    color: #E2E8F0 !important;
+}
+
+body.dark-mode .text-slate-600 {
+    color: #CBD5E1 !important;
+}
+
+body.dark-mode .text-slate-500 {
+    color: #94A3B8 !important;
+}
+
+/* Accent Color Overrides in Dark Mode */
+body.dark-mode .text-\[\#2563EB\] {
+    color: #C0FE04 !important;
+}
+
+body.dark-mode .bg-\[\#2563EB\] {
+    background-color: #C0FE04 !important;
+    color: #000000 !important;
+}
+
+body.dark-mode .bg-\[\#2563EB\]\/10 {
+    background-color: rgba(192, 254, 4, 0.15) !important;
+}
+
+body.dark-mode .border-\[\#2563EB\] {
+    border-color: #C0FE04 !important;
+}
+
+body.dark-mode .border-\[\#2563EB\]\/20 {
+    border-color: rgba(192, 254, 4, 0.3) !important;
+}
+
+/* Background & Card Overrides in Dark Mode */
+body.dark-mode .b44-card,
+body.dark-mode .bg-white {
+    background-color: #111111 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: #F8FAFC !important;
+}
+
+body.dark-mode .b44-card:hover {
+    background-color: #181818 !important;
+    border-color: #C0FE04 !important;
+}
+
+body.dark-mode .bg-slate-100 {
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    color: #F8FAFC !important;
+}
+
+body.dark-mode .bg-black\/5 {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+body.dark-mode .bg-black\/10 {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Borders in Dark Mode */
+body.dark-mode .border-slate-200,
+body.dark-mode .border-black\/10,
+body.dark-mode .border-black\/15,
+body.dark-mode .border-black\/20 {
+    border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Header & Mobile Menu in Dark Mode */
+body.dark-mode header,
+body.dark-mode #main-header {
+    background-color: rgba(10, 10, 10, 0.85) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+body.dark-mode #mobile-menu {
+    background-color: #0A0A0A !important;
+    color: #F8FAFC !important;
+}
+
+/* Product Modal & Video Modal in Dark Mode */
+body.dark-mode #product-modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.85) !important;
+}
+
+body.dark-mode #product-modal-content {
+    background-color: #121212 !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    color: #F8FAFC !important;
+}
+
+body.dark-mode #product-modal-content #modal-title {
+    color: #FFFFFF !important;
+}
+
+body.dark-mode #product-modal-content #modal-details {
+    color: #CBD5E1 !important;
+}
+
+/* Page Loader in Dark Mode */
+body.dark-mode #loader {
+    background-color: #050505 !important;
+}
+
+body.dark-mode #loader-logo {
+    color: #FFFFFF !important;
 }
 
 /* Base Body Setup with Base44 Dot Grid Matrix */
