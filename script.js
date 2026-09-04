@@ -28,7 +28,7 @@ const siteData = {
         badge: "Professional Motion Designer & AE Toolmaker",
         titleLine1: "Your digital product",
         titleLine2: "Moves in motion",
-        description: "I craft SaaS product explainer videos, 3D visual graphics, and custom Adobe After Effects workflow automation tools that elevate brand stories.",
+        description: "I craft SaaS product explainer videos, motion graphic visuals, and custom Adobe After Effects workflow automation tools that elevate brand stories.",
         primaryBtn: "See Selected Works",
         secondaryBtn: "Watch Showreel"
     },
@@ -41,7 +41,7 @@ const siteData = {
     services: [
         { icon: "fa-video", title: "SaaS Explainer Videos", desc: "High-end product explainer and SaaS promo animations." },
         { icon: "fa-film", title: "Brand Commercials", desc: "Cinematic promotional and commercial videos for products." },
-        { icon: "fa-cubes", title: "3D Motion Graphics", desc: "Premium 3D designs, abstract visual elements, and renders." },
+        { icon: "fa-layer-group", title: "Motion Design & UI", desc: "Dynamic motion graphics, UI animations, and visual storytelling." },
         { icon: "fa-code", title: "AE Scripts & Tools", desc: "Custom workflow automation scripts to speed up After Effects tasks." }
     ],
     portfolio: [
@@ -150,7 +150,7 @@ const siteData = {
     ],
     testimonials: [
         { name: "Arif Hossain", company: "Tech BD", review: "Outstanding work quality! Our product launch explainer video became this successful because of his motion design." },
-        { name: "Sanjida Rahman", company: "Creative Agency", review: "Never got such beautiful 3D work while strictly maintaining the timeline before. Highly recommended!" },
+        { name: "Sanjida Rahman", company: "Creative Agency", review: "Never got such beautiful motion design work while strictly maintaining the timeline before. Highly recommended!" },
         { name: "Rafsan Jani", company: "StartUp Inc.", review: "His sense of animation is very modern. He gave our brand identity a whole new look." }
     ],
     socials: [
