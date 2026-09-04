@@ -520,6 +520,21 @@ if (mobileBtn) mobileBtn.addEventListener('click', openMenu);
 if (mobileClose) mobileClose.addEventListener('click', closeMenu);
 mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
 
+// Header Morphing Floating Bar Scroll Controller
+function handleHeaderMorph() {
+    const header = document.getElementById('main-header');
+    if (!header) return;
+    if (window.scrollY > 30) {
+        header.classList.add('header-scrolled');
+    } else {
+        header.classList.remove('header-scrolled');
+    }
+}
+
+window.addEventListener('scroll', handleHeaderMorph, { passive: true });
+document.addEventListener('DOMContentLoaded', handleHeaderMorph);
+handleHeaderMorph();
+
 // Lenis Smooth Scroll Engine
 if (typeof Lenis !== 'undefined') {
     const lenis = new Lenis({
@@ -529,6 +544,8 @@ if (typeof Lenis !== 'undefined') {
         gestureDirection: 'vertical',
         smooth: true,
     });
+
+    lenis.on('scroll', handleHeaderMorph);
 
     function raf(time) {
         lenis.raf(time);
