@@ -324,19 +324,19 @@ window.expandVideoCard = function(element, rawVideoUrl) {
     mediaBox.innerHTML = `
         <div class="relative w-full h-full bg-black overflow-hidden rounded-[5px] group video-frame-fadein flex justify-center items-center">
             <!-- Top Overlay Bar (Title top-left, Close/Drive top-right - HOVER ONLY) -->
-            <div class="absolute top-0 inset-x-0 p-3 z-30 flex justify-between items-center bg-gradient-to-b from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none group-hover:pointer-events-auto">
-                <span class="text-white font-bold text-xs sm:text-sm font-mono-custom tracking-wide truncate max-w-[55%] px-2.5 py-1 bg-black/60 backdrop-blur-md rounded-[3px] border border-white/10 shadow-lg">
+            <div class="absolute top-0 inset-x-0 p-2 sm:p-3 z-30 flex justify-between items-center bg-gradient-to-b from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none group-hover:pointer-events-auto">
+                <span class="text-white font-bold text-[10px] sm:text-xs font-mono-custom tracking-wide truncate max-w-[40%] sm:max-w-[55%] px-2 py-0.5 sm:px-2.5 sm:py-1 bg-black/60 backdrop-blur-md rounded-[3px] border border-white/10 shadow-lg">
                     ${titleText}
                 </span>
-                <div class="flex items-center space-x-2">
+                <div class="flex items-center space-x-1 sm:space-x-2">
                     <a href="${videoData.rawUrl}" target="_blank" rel="noopener noreferrer" 
                        onclick="event.stopPropagation()"
-                       class="px-2.5 py-1 bg-black/80 backdrop-blur-md text-white font-mono-custom text-xs uppercase rounded-[3px] border border-white/20 hover:bg-[#2563EB] hover:border-[#2563EB] transition flex items-center space-x-1 shadow-lg">
+                       class="px-2 py-0.5 sm:px-2.5 sm:py-1 bg-black/80 backdrop-blur-md text-white font-mono-custom text-[10px] sm:text-xs uppercase rounded-[3px] border border-white/20 hover:bg-[#2563EB] hover:border-[#2563EB] transition flex items-center space-x-1 shadow-lg">
                         <span>Drive HD</span>
-                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[9px] sm:text-[10px] ml-1"></i>
                     </a>
                     <button onclick="event.stopPropagation(); collapseVideoCard(this.closest('.portfolio-card-expanded'))" 
-                            class="px-2.5 py-1 bg-black/80 backdrop-blur-md text-white font-mono-custom text-xs uppercase rounded-[3px] border border-white/20 hover:bg-red-600 hover:border-red-600 transition flex items-center space-x-1 shadow-lg">
+                            class="px-2 py-0.5 sm:px-2.5 sm:py-1 bg-black/80 backdrop-blur-md text-white font-mono-custom text-[10px] sm:text-xs uppercase rounded-[3px] border border-white/20 hover:bg-red-600 hover:border-red-600 transition flex items-center space-x-1 shadow-lg">
                         <span>Close [X]</span>
                     </button>
                 </div>
@@ -482,48 +482,83 @@ document.addEventListener('mouseout', (e) => {
 // Live Clock (GMT+6 Bangladesh)
 function updateClock() {
     const clockEl = document.getElementById('live-clock');
-    if (!clockEl) return;
+    const clockMobileEl = document.getElementById('live-clock-mobile');
     const now = new Date();
     const utcHours = now.getUTCHours() + 6;
     const hours = String((utcHours % 24)).padStart(2, '0');
     const minutes = String(now.getUTCMinutes()).padStart(2, '0');
-    clockEl.innerText = `GMT+6 BD ${hours}:${minutes}`;
+    const timeStr = `GMT+6 BD ${hours}:${minutes}`;
+    if (clockEl) clockEl.innerText = timeStr;
+    if (clockMobileEl) clockMobileEl.innerText = timeStr;
 }
 setInterval(updateClock, 1000);
 updateClock();
 
-// Sound Toggle
-const soundToggle = document.getElementById('sound-toggle-desktop');
-if (soundToggle) {
-    soundToggle.addEventListener('click', () => {
-        soundEnabled = !soundEnabled;
-        soundToggle.innerHTML = `SOUND[<span class="text-[#2563EB]">${soundEnabled ? '|' : 'X'}</span>]`;
-    });
+// Sound Toggle Controller
+function updateSoundUI() {
+    const soundToggle = document.getElementById('sound-toggle-desktop');
+    const soundMobileIndicator = document.getElementById('sound-mobile-indicator');
+    if (soundToggle) soundToggle.innerHTML = `SOUND[<span class="text-[#2563EB]">${soundEnabled ? '|' : 'X'}</span>]`;
+    if (soundMobileIndicator) soundMobileIndicator.innerText = soundEnabled ? '|' : 'X';
 }
 
-// Theme Toggle (Default: White Theme / Light Mode, Toggle to Dark Mode)
-const themeToggle = document.getElementById('theme-toggle-desktop');
-if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        const isDark = document.body.classList.contains('dark-mode');
-        themeToggle.innerHTML = `THEME[<span class="text-[#2563EB]">${isDark ? 'D' : 'L'}</span>]`;
-        localStorage.setItem('motionTheme', isDark ? 'dark' : 'light');
-    });
+const soundToggle = document.getElementById('sound-toggle-desktop');
+const soundToggleMobile = document.getElementById('sound-toggle-mobile');
+
+function toggleSoundState() {
+    soundEnabled = !soundEnabled;
+    updateSoundUI();
 }
+
+if (soundToggle) soundToggle.addEventListener('click', toggleSoundState);
+if (soundToggleMobile) soundToggleMobile.addEventListener('click', toggleSoundState);
+
+// Theme Toggle Controller
+function updateThemeUI() {
+    const isDark = document.body.classList.contains('dark-mode');
+    const themeToggle = document.getElementById('theme-toggle-desktop');
+    const themeMobileIndicator = document.getElementById('theme-mobile-indicator');
+    if (themeToggle) themeToggle.innerHTML = `THEME[<span class="text-[#2563EB]">${isDark ? 'D' : 'L'}</span>]`;
+    if (themeMobileIndicator) themeMobileIndicator.innerText = isDark ? 'D' : 'L';
+}
+
+function toggleThemeState() {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    localStorage.setItem('motionTheme', isDark ? 'dark' : 'light');
+    updateThemeUI();
+}
+
+const themeToggle = document.getElementById('theme-toggle-desktop');
+const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+
+if (themeToggle) themeToggle.addEventListener('click', toggleThemeState);
+if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleThemeState);
+
 if (localStorage.getItem('motionTheme') === 'dark') {
     document.body.classList.add('dark-mode');
-    if (themeToggle) themeToggle.innerHTML = `THEME[<span class="text-[#2563EB]">D</span>]`;
+    updateThemeUI();
 }
 
-// Mobile Menu Navigation
+// Mobile Menu Navigation Controller (with Body Scroll Locking)
 const mobileBtn = document.getElementById('mobile-menu-btn');
 const mobileClose = document.getElementById('mobile-menu-close');
 const mobileMenu = document.getElementById('mobile-menu');
 const mobileLinks = document.querySelectorAll('.mobile-link');
 
-function openMenu() { if (mobileMenu) mobileMenu.classList.remove('translate-x-full'); }
-function closeMenu() { if (mobileMenu) mobileMenu.classList.add('translate-x-full'); }
+function openMenu() {
+    if (mobileMenu) {
+        mobileMenu.classList.remove('translate-x-full');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeMenu() {
+    if (mobileMenu) {
+        mobileMenu.classList.add('translate-x-full');
+        document.body.style.overflow = '';
+    }
+}
 
 if (mobileBtn) mobileBtn.addEventListener('click', openMenu);
 if (mobileClose) mobileClose.addEventListener('click', closeMenu);

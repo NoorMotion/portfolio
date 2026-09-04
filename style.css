@@ -65,15 +65,36 @@ html.lenis {
     overflow: hidden;
 }
 
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+}
+
 body {
     background-color: var(--bg-dark);
     background-image: radial-gradient(rgba(0, 0, 0, 0.12) 1px, transparent 1px);
     background-size: 24px 24px;
     background-position: 0 0;
     color: var(--text-primary);
-    overflow-x: hidden;
-    cursor: none;
     transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    body {
+        cursor: none;
+    }
+}
+
+@media (max-width: 767px) {
+    body {
+        cursor: auto !important;
+    }
+}
+
+h1, h2, h3, h4, h5, h6, p, span, a {
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 body.dark-mode {
@@ -305,4 +326,21 @@ body.dark-mode .loader-bar {
 #product-modal-backdrop, #video-modal {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
+}
+
+/* Mobile Responsiveness Fine-tuning */
+@media (max-width: 639px) {
+    .b44-card {
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.03);
+    }
+    
+    #product-modal-content {
+        max-height: 92vh;
+        margin: 1rem;
+    }
+    
+    /* Ensure minimum touch target sizes */
+    .dotted-btn, button, a.mobile-link {
+        min-height: 44px;
+    }
 }
