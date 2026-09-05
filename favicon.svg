@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
   <defs>
-    <!-- Brand Red Color -->
-    <linearGradient id="brand-red" x1="0%" y1="0%" x2="100%" y2="100%">
+    <!-- Pure Vibrant Brand Red Gradient -->
+    <linearGradient id="vibrant-red" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#FF334B" />
       <stop offset="100%" stop-color="#E11D48" />
     </linearGradient>
@@ -10,31 +10,37 @@
   <!-- Pitch Black Background Badge -->
   <rect width="512" height="512" rx="96" fill="#000000" />
 
-  <!-- Exact Red Kufic ALAM Monogram (Original 1:1 Geometry) -->
+  <!-- Exact Red Kufic ALAM Monogram (Pixel-Perfect Match of Original Image) -->
   <g>
-    <!-- Base Red Bounding Box -->
-    <rect x="48" y="112" width="416" height="288" fill="url(#brand-red)" rx="2" />
+    <!-- Base Red Bounding Container -->
+    <rect x="48" y="112" width="416" height="288" fill="url(#vibrant-red)" rx="2" />
 
-    <!-- EXACT BLACK CUTOUTS (No middle lines) -->
-    <!-- 1. Square hole in 1st letter -->
+    <!-- EXACT BLACK CUTOUTS MATCHING ORIGINAL IMAGE -->
+    <!-- 1. Hole 1 in 1st letter A -->
     <rect x="80" y="144" width="32" height="32" fill="#000000" />
 
-    <!-- 2. Top Dip between 1st and 2nd letter -->
-    <rect x="144" y="112" width="32" height="160" fill="#000000" />
+    <!-- 2. Space under 1st A crossbar -->
+    <rect x="80" y="208" width="32" height="48" fill="#000000" />
 
-    <!-- 3. Square hole in 2nd letter -->
+    <!-- 3. Top Dip Gap between 1st A and 2nd A -->
+    <rect x="144" y="112" width="32" height="144" fill="#000000" />
+
+    <!-- 4. Hole 2 in 2nd letter A -->
     <rect x="208" y="144" width="32" height="32" fill="#000000" />
 
-    <!-- 4. Vertical Slot 1 in M -->
-    <rect x="272" y="144" width="32" height="160" fill="#000000" />
+    <!-- 5. Space under 2nd A crossbar -->
+    <rect x="208" y="208" width="32" height="48" fill="#000000" />
 
-    <!-- 5. Vertical Slot 2 in M -->
-    <rect x="336" y="144" width="32" height="160" fill="#000000" />
+    <!-- 6. Slot 1 in M -->
+    <rect x="272" y="144" width="32" height="144" fill="#000000" />
 
-    <!-- 6. Vertical Slot 3 in M -->
-    <rect x="400" y="144" width="32" height="160" fill="#000000" />
+    <!-- 7. Slot 2 in M -->
+    <rect x="336" y="144" width="32" height="144" fill="#000000" />
 
-    <!-- 7. Bottom Horizontal Black Channel -->
-    <rect x="80" y="336" width="352" height="32" fill="#000000" />
+    <!-- 8. Slot 3 in M -->
+    <rect x="400" y="144" width="32" height="144" fill="#000000" />
+
+    <!-- 9. Horizontal Black Channel near bottom -->
+    <rect x="80" y="304" width="352" height="48" fill="#000000" />
   </g>
 </svg>
