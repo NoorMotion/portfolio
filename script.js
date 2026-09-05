@@ -309,7 +309,7 @@ const siteData = {
 
 // Robust Video URL Parsing Function
 function parseVideoEmbed(url) {
-    if (!url) return { embedUrl: '', rawUrl: '#' };
+    if (!url) return { embedUrl: '', rawUrl: '#', isDrive: false };
 
     if (url.includes('drive.google.com')) {
         const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
@@ -317,7 +317,8 @@ function parseVideoEmbed(url) {
             const fileId = match[1];
             return {
                 embedUrl: `https://drive.google.com/file/d/${fileId}/preview`,
-                rawUrl: `https://drive.google.com/file/d/${fileId}/view?usp=sharing`
+                rawUrl: `https://drive.google.com/file/d/${fileId}/view?usp=sharing`,
+                isDrive: true
             };
         }
     } else if (url.includes('youtube.com') || url.includes('youtu.be')) {
@@ -330,12 +331,13 @@ function parseVideoEmbed(url) {
         if (videoId) {
             return {
                 embedUrl: `https://www.youtube.com/embed/${videoId}?autoplay=1`,
-                rawUrl: url
+                rawUrl: url,
+                isDrive: false
             };
         }
     }
 
-    return { embedUrl: url, rawUrl: url };
+    return { embedUrl: url, rawUrl: url, isDrive: url.includes('drive.google.com') };
 }
 
 // Showreel Single Click Video Player Handler (Pure Native YouTube Controls on Hover)
@@ -467,8 +469,12 @@ window.expandVideoCard = function(element, rawVideoUrl) {
     }
     
     // 6. Replace media box with aspect-video iframe & touch-friendly controls (Perfect 16:9 ratio, zero clipping)
+    const iframeClass = videoData.isDrive 
+        ? "w-full border-0 rounded-[5px] absolute left-0 top-[-48px] h-[calc(100%+52px)] z-10"
+        : "w-full h-full border-0 rounded-[5px] absolute inset-0 z-10";
+
     mediaBox.classList.remove('aspect-[4/3]');
-    mediaBox.classList.add('aspect-video', 'rounded-[5px]');
+    mediaBox.classList.add('aspect-video', 'rounded-[5px]', 'relative', 'overflow-hidden');
     mediaBox.innerHTML = `
         <div class="relative w-full h-full bg-black overflow-hidden rounded-[5px] group video-frame-fadein flex justify-center items-center">
             <!-- Top Controls Bar (Always visible on mobile touch, hover on desktop) -->
@@ -489,7 +495,7 @@ window.expandVideoCard = function(element, rawVideoUrl) {
                     </button>
                 </div>
             </div>
-            <iframe class="w-full h-full border-0 rounded-[5px]" src="${videoData.embedUrl}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+            <iframe class="${iframeClass}" src="${videoData.embedUrl}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
         </div>
     `;
 

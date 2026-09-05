@@ -346,10 +346,9 @@ body.dark-mode .b44-card:hover {
     .portfolio-card-expanded {
         transform: none !important;
     }
-    .portfolio-item-card iframe {
-        width: 100% !important;
-        height: 100% !important;
-        border: 0 !important;
+    .portfolio-item-card .media-box {
+        position: relative !important;
+        overflow: hidden !important;
     }
 }
 
