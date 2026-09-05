@@ -39,7 +39,10 @@
 
     <!-- Page Loader -->
     <div id="loader">
-        <h1 class="text-3xl font-bold tracking-widest font-mono-custom text-slate-900" id="loader-logo">NOOR<span class="text-[#E11D48]">MOTION</span></h1>
+        <div class="flex items-center space-x-3 mb-2">
+            <img src="favicon.svg" class="w-10 h-10 rounded-md object-contain" alt="NoorMotion Logo">
+            <h1 class="text-3xl font-bold tracking-widest font-mono-custom text-slate-900" id="loader-logo">NOOR<span class="text-[#E11D48]">MOTION</span></h1>
+        </div>
         <div class="loader-bar">
             <div class="loader-progress" id="loader-progress"></div>
         </div>
@@ -49,8 +52,9 @@
     <!-- System Header Navigation Bar (haoqi.design Terminal Bar - Base44 Warm Stone Blur) -->
     <header id="main-header" class="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-4 py-3 sm:px-6 lg:px-12 backdrop-blur-md bg-[#EEECEB]/80 border-b border-black/10 font-mono-custom text-xs uppercase">
         <!-- Logo -->
-        <a href="#" class="dotted-btn p-2 font-bold text-sm text-slate-900 tracking-wider hover-trigger" id="nav-logo">
-            NOOR<span class="text-[#E11D48]">MOTION</span>
+        <a href="#" class="dotted-btn p-1.5 font-bold text-sm text-slate-900 tracking-wider hover-trigger flex items-center space-x-2" id="nav-logo">
+            <img src="favicon.svg" class="w-6 h-6 rounded-md object-contain" alt="NoorMotion Logo">
+            <span>NOOR<span class="text-[#E11D48]">MOTION</span></span>
         </a>
 
         <!-- Desktop Menu Nav -->
@@ -84,7 +88,10 @@
     <div id="mobile-menu" class="fixed inset-0 bg-[#EEECEB] z-[100] flex flex-col justify-between items-center p-6 sm:p-8 transform translate-x-full transition-transform duration-500 font-mono-custom">
         <!-- Top bar inside mobile menu -->
         <div class="w-full flex justify-between items-center pt-2">
-            <span class="font-bold text-sm text-slate-900 tracking-wider">NOOR<span class="text-[#E11D48]">MOTION</span></span>
+            <div class="flex items-center space-x-2">
+                <img src="favicon.svg" class="w-6 h-6 rounded-md object-contain" alt="NoorMotion Logo">
+                <span class="font-bold text-sm text-slate-900 tracking-wider">NOOR<span class="text-[#E11D48]">MOTION</span></span>
+            </div>
             <button id="mobile-menu-close" class="text-2xl text-slate-900 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center" title="Close Menu">
                 <i class="fa-solid fa-xmark"></i>
             </button>

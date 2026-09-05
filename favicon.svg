@@ -1,59 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
-  <defs>
-    <!-- Background Gradient -->
-    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#09090B" />
-      <stop offset="100%" stop-color="#000000" />
-    </linearGradient>
-
-    <!-- Brand Red Gradient -->
-    <linearGradient id="red-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FF334B" />
-      <stop offset="50%" stop-color="#E11D48" />
-      <stop offset="100%" stop-color="#BE123C" />
-    </linearGradient>
-
-    <!-- Subtle Red Glow -->
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="8" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-    </filter>
-  </defs>
-
-  <!-- Dark Background Badge -->
-  <rect width="512" height="512" rx="96" fill="url(#bg-grad)" stroke="#27272A" stroke-width="8" />
-
-  <!-- Stylized Red Kufic ALAM Monogram -->
-  <g filter="url(#glow)">
-    <!-- Base Bounding Box for Monogram (x: 48 to 464, y: 112 to 400) -->
-    <rect x="48" y="112" width="416" height="288" fill="url(#red-grad)" rx="4" />
-
-    <!-- BLACK CUTOUTS -->
-    <!-- 1. Hole in 1st A -->
-    <rect x="80" y="144" width="32" height="32" fill="#000000" />
-
-    <!-- 2. Hollow space under 1st A crossbar -->
-    <rect x="80" y="208" width="32" height="96" fill="#000000" />
-
-    <!-- 3. Top Dip between 1st A and 2nd A -->
-    <rect x="144" y="112" width="32" height="160" fill="#000000" />
-
-    <!-- 4. Hole in 2nd A -->
-    <rect x="208" y="144" width="32" height="32" fill="#000000" />
-
-    <!-- 5. Hollow space under 2nd A crossbar -->
-    <rect x="208" y="208" width="32" height="96" fill="#000000" />
-
-    <!-- 6. Vertical Slot 1 in M -->
-    <rect x="272" y="144" width="32" height="160" fill="#000000" />
-
-    <!-- 7. Vertical Slot 2 in M -->
-    <rect x="336" y="144" width="32" height="160" fill="#000000" />
-
-    <!-- 8. Vertical Slot 3 in M -->
-    <rect x="400" y="144" width="32" height="160" fill="#000000" />
-
-    <!-- 9. Horizontal Black Channel above bottom border -->
-    <rect x="80" y="336" width="352" height="32" fill="#000000" />
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1280">
+  <title>Exact vector recreation of supplied logo</title>
+  <rect width="1280" height="1280" fill="#000"/>
+  <!-- Outer yellow silhouette, traced from supplied image -->
+  <path fill="#FFEB3C" d="M162 333 L162 950 L1116 950 L1116 332 L513 332 L512 677 L510 679 L423 679 L421 677 L420 332 Z"/>
+  <!-- Internal negative-space motif -->
+  <path fill="#000" d="M1034 418 L1035 858 L1033 861 L245 860 L245 592 L248 589 L333 589 L336 592 L336 762 L595 762 L596 591 L598 589 L683 589 L686 592 L686 762 L770 762 L771 418 L773 416 L859 416 L861 419 L861 762 L944 762 L944 418 L946 416 L1032 416 Z"/>
+  <!-- Square cutouts -->
+  <path fill="#000" d="M598 416 L685 417 L686 503 L684 505 L599 506 L596 504 L596 418 Z"/>
+  <path fill="#000" d="M248 416 L335 417 L336 502 L334 505 L249 506 L246 504 L245 420 Z"/>
 </svg>
