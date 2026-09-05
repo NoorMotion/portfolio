@@ -31,9 +31,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="shortcut icon" href="favicon.svg">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-[#EEECEB] dark:bg-[#050505] text-slate-900 dark:text-slate-100 min-h-screen flex flex-col font-sans transition-colors duration-300">
+
+    <!-- Custom Interactive Cursor -->
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
 
     <!-- HEADER NAVIGATION -->
     <header class="w-full border-b border-black/10 dark:border-white/10 py-4 px-4 sm:px-8 bg-white/80 dark:bg-[#111111]/80 backdrop-blur-md sticky top-0 z-50">
@@ -178,5 +186,6 @@
             `).join('');
         }
     </script>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -207,6 +207,9 @@ body {
     body {
         cursor: none;
     }
+    body:not(:has(.cursor-dot)) {
+        cursor: auto !important;
+    }
 }
 
 @media (max-width: 767px) {
