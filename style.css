@@ -342,6 +342,17 @@ body.dark-mode .b44-card:hover {
     box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.15) !important;
 }
 
+@media (max-width: 767px) {
+    .portfolio-card-expanded {
+        transform: none !important;
+    }
+    .portfolio-item-card iframe {
+        width: 100% !important;
+        height: 100% !important;
+        border: 0 !important;
+    }
+}
+
 .video-frame-fadein {
     animation: fadeInVideo 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

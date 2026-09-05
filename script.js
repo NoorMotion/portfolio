@@ -466,17 +466,17 @@ window.expandVideoCard = function(element, rawVideoUrl) {
         infoBox.classList.add('hidden');
     }
     
-    // 6. Replace media box with aspect-video iframe & hover-only top controls (Strict 5px Mask & Zero Letterbox Scale)
+    // 6. Replace media box with aspect-video iframe & touch-friendly controls (Perfect 16:9 ratio, zero clipping)
     mediaBox.classList.remove('aspect-[4/3]');
     mediaBox.classList.add('aspect-video', 'rounded-[5px]');
     mediaBox.innerHTML = `
         <div class="relative w-full h-full bg-black overflow-hidden rounded-[5px] group video-frame-fadein flex justify-center items-center">
-            <!-- Top Overlay Bar (Title top-left, Close/Drive top-right - HOVER ONLY) -->
-            <div class="absolute top-0 inset-x-0 p-2 sm:p-3 z-30 flex justify-between items-center bg-gradient-to-b from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none group-hover:pointer-events-auto">
-                <span class="text-white font-bold text-[10px] sm:text-xs font-mono-custom tracking-wide truncate max-w-[40%] sm:max-w-[55%] px-2 py-0.5 sm:px-2.5 sm:py-1 bg-black/60 backdrop-blur-md rounded-[3px] border border-white/10 shadow-lg">
+            <!-- Top Controls Bar (Always visible on mobile touch, hover on desktop) -->
+            <div class="absolute top-0 inset-x-0 p-2 sm:p-3 z-30 flex justify-between items-center bg-gradient-to-b from-black/90 via-black/50 to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition duration-300 pointer-events-none">
+                <span class="text-white font-bold text-[10px] sm:text-xs font-mono-custom tracking-wide truncate max-w-[40%] sm:max-w-[55%] px-2 py-0.5 sm:px-2.5 sm:py-1 bg-black/70 backdrop-blur-md rounded-[3px] border border-white/10 shadow-lg pointer-events-auto">
                     ${titleText}
                 </span>
-                <div class="flex items-center space-x-1 sm:space-x-2">
+                <div class="flex items-center space-x-1 sm:space-x-2 pointer-events-auto">
                     <a href="${videoData.rawUrl}" target="_blank" rel="noopener noreferrer" 
                        onclick="event.stopPropagation()"
                        class="px-2 py-0.5 sm:px-2.5 sm:py-1 bg-black/80 backdrop-blur-md text-white font-mono-custom text-[10px] sm:text-xs uppercase rounded-[3px] border border-white/20 hover:bg-[#E11D48] hover:border-[#E11D48] transition flex items-center space-x-1 shadow-lg">
@@ -489,7 +489,7 @@ window.expandVideoCard = function(element, rawVideoUrl) {
                     </button>
                 </div>
             </div>
-            <iframe class="w-full h-full border-0 rounded-[5px] scale-[1.025]" src="${videoData.embedUrl}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+            <iframe class="w-full h-full border-0 rounded-[5px]" src="${videoData.embedUrl}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
         </div>
     `;
 
