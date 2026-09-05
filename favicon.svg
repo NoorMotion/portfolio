@@ -1,46 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
-  <defs>
-    <!-- Pure Vibrant Brand Red Gradient -->
-    <linearGradient id="vibrant-red" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FF334B" />
-      <stop offset="100%" stop-color="#E11D48" />
-    </linearGradient>
-  </defs>
-
-  <!-- Pitch Black Background Badge -->
-  <rect width="512" height="512" rx="96" fill="#000000" />
-
-  <!-- Exact Red Kufic ALAM Monogram (Pixel-Perfect Match of Original Image) -->
-  <g>
-    <!-- Base Red Bounding Container -->
-    <rect x="48" y="112" width="416" height="288" fill="url(#vibrant-red)" rx="2" />
-
-    <!-- EXACT BLACK CUTOUTS MATCHING ORIGINAL IMAGE -->
-    <!-- 1. Hole 1 in 1st letter A -->
-    <rect x="80" y="144" width="32" height="32" fill="#000000" />
-
-    <!-- 2. Space under 1st A crossbar -->
-    <rect x="80" y="208" width="32" height="48" fill="#000000" />
-
-    <!-- 3. Top Dip Gap between 1st A and 2nd A -->
-    <rect x="144" y="112" width="32" height="144" fill="#000000" />
-
-    <!-- 4. Hole 2 in 2nd letter A -->
-    <rect x="208" y="144" width="32" height="32" fill="#000000" />
-
-    <!-- 5. Space under 2nd A crossbar -->
-    <rect x="208" y="208" width="32" height="48" fill="#000000" />
-
-    <!-- 6. Slot 1 in M -->
-    <rect x="272" y="144" width="32" height="144" fill="#000000" />
-
-    <!-- 7. Slot 2 in M -->
-    <rect x="336" y="144" width="32" height="144" fill="#000000" />
-
-    <!-- 8. Slot 3 in M -->
-    <rect x="400" y="144" width="32" height="144" fill="#000000" />
-
-    <!-- 9. Horizontal Black Channel near bottom -->
-    <rect x="80" y="304" width="352" height="48" fill="#000000" />
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1280">
+  <title>Exact vector recreation of supplied logo</title>
+  <rect width="1280" height="1280" fill="#000"/>
+  <!-- Outer #FF0000 silhouette, traced from supplied image -->
+  <path fill="#FF0000" d="M162 333 L162 950 L1116 950 L1116 332 L513 332 L512 677 L510 679 L423 679 L421 677 L420 332 Z"/>
+  <!-- Internal negative-space motif -->
+  <path fill="#000" d="M1034 418 L1035 858 L1033 861 L245 860 L245 592 L248 589 L333 589 L336 592 L336 762 L595 762 L596 591 L598 589 L683 589 L686 592 L686 762 L770 762 L771 418 L773 416 L859 416 L861 419 L861 762 L944 762 L944 418 L946 416 L1032 416 Z"/>
+  <!-- Square cutouts -->
+  <path fill="#000" d="M598 416 L685 417 L686 503 L684 505 L599 506 L596 504 L596 418 Z"/>
+  <path fill="#000" d="M248 416 L335 417 L336 502 L334 505 L249 506 L246 504 L245 420 Z"/>
 </svg>
