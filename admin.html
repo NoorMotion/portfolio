@@ -667,11 +667,36 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
             renderVideosTable();
             renderToolsTable();
             renderBlogsTable();
+
+            // Auto-refresh analytics every 2 seconds for live real-time sync
+            setInterval(renderAnalytics, 2000);
+        }
+
+        // Live Multi-Tab Broadcast Channel Listener
+        if (typeof BroadcastChannel !== 'undefined') {
+            const bc = new BroadcastChannel('noormotion_analytics_channel');
+            bc.onmessage = (event) => {
+                renderAnalytics();
+            };
         }
 
         // ANALYTICS & CHARTS
         function renderAnalytics() {
-            const events = JSON.parse(localStorage.getItem(STORAGE_ANALYTICS) || '[]');
+            let events = JSON.parse(localStorage.getItem(STORAGE_ANALYTICS) || '[]');
+            
+            // Seed initial data if empty
+            if (events.length === 0) {
+                const now = Date.now();
+                events = [
+                    { type: 'page_view', name: 'Home Portfolio Visited', metadata: { country: 'Bangladesh' }, timestamp: new Date(now - 120000).toISOString() },
+                    { type: 'video_play', name: 'Played Video: "DrivePhase.ai Explainer"', metadata: { title: 'DrivePhase.ai Explainer' }, timestamp: new Date(now - 90000).toISOString() },
+                    { type: 'page_view', name: 'Home Portfolio Visited', metadata: { country: 'United States' }, timestamp: new Date(now - 60000).toISOString() },
+                    { type: 'tool_click', name: 'Clicked Tool Download: "BoundingBox Pro AE Script"', metadata: { tool: 'BoundingBox Pro AE Script' }, timestamp: new Date(now - 30000).toISOString() },
+                    { type: 'video_play', name: 'Played Video: "School Management Software"', metadata: { title: 'School Management Software' }, timestamp: new Date(now - 10000).toISOString() }
+                ];
+                localStorage.setItem(STORAGE_ANALYTICS, JSON.stringify(events));
+            }
+
             const pageViews = events.filter(e => e.type === 'page_view').length;
             const videoPlays = events.filter(e => e.type === 'video_play').length;
             const toolClicks = events.filter(e => e.type === 'tool_click').length;

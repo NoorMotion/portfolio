@@ -313,18 +313,45 @@ window.expandVideoCard = function(element, rawVideoUrl) {
 // ==========================================
 // 📊 REAL-TIME UNIVERSAL ANALYTICS TRACKER (Noor Motion)
 // ==========================================
+const ANALYTICS_KEY = 'noormotion_cms_analytics';
+
+// Initial Demo Seed if empty
+function initDefaultAnalytics() {
+    if (!localStorage.getItem(ANALYTICS_KEY)) {
+        const now = Date.now();
+        const initialEvents = [
+            { type: 'page_view', name: 'Home Portfolio Visited', metadata: { country: 'Bangladesh' }, timestamp: new Date(now - 120000).toISOString() },
+            { type: 'video_play', name: 'Played Video: "DrivePhase.ai Explainer"', metadata: { title: 'DrivePhase.ai Explainer' }, timestamp: new Date(now - 90000).toISOString() },
+            { type: 'page_view', name: 'Home Portfolio Visited', metadata: { country: 'United States' }, timestamp: new Date(now - 60000).toISOString() },
+            { type: 'tool_click', name: 'Clicked Tool Download: "BoundingBox Pro AE Script"', metadata: { tool: 'BoundingBox Pro AE Script' }, timestamp: new Date(now - 30000).toISOString() },
+            { type: 'video_play', name: 'Played Video: "School Management Software"', metadata: { title: 'School Management Software' }, timestamp: new Date(now - 10000).toISOString() }
+        ];
+        localStorage.setItem(ANALYTICS_KEY, JSON.stringify(initialEvents));
+    }
+}
+initDefaultAnalytics();
+
 window.trackAnalyticsEvent = function(eventType, eventName, metadata = {}) {
     try {
-        const events = JSON.parse(localStorage.getItem('noormotion_cms_analytics') || '[]');
-        events.push({
+        const events = JSON.parse(localStorage.getItem(ANALYTICS_KEY) || '[]');
+        const newEvent = {
             type: eventType,
             name: eventName,
             metadata: metadata,
             timestamp: new Date().toISOString()
-        });
+        };
+        events.push(newEvent);
         if (events.length > 500) events.shift();
-        localStorage.setItem('noormotion_cms_analytics', JSON.stringify(events));
+        localStorage.setItem(ANALYTICS_KEY, JSON.stringify(events));
 
+        // 1. Broadcast via BroadcastChannel for instant multi-tab sync
+        if (typeof BroadcastChannel !== 'undefined') {
+            const bc = new BroadcastChannel('noormotion_analytics_channel');
+            bc.postMessage(newEvent);
+            bc.close();
+        }
+
+        // 2. Supabase Cloud Sync if configured
         const supabaseUrl = localStorage.getItem('noormotion_supabase_url');
         const supabaseKey = localStorage.getItem('noormotion_supabase_key');
         if (supabaseUrl && supabaseKey && window.supabase) {
