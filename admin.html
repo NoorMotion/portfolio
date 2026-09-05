@@ -461,9 +461,14 @@
 
                     <!-- SUPABASE CONNECTION FORM -->
                     <div class="bg-[#121215] border border-[#27272A] p-6 rounded-xl space-y-4">
-                        <h3 class="text-base font-bold text-white border-b border-[#27272A] pb-3 flex items-center">
-                            <i class="fa-solid fa-plug mr-2 text-[#FF334B]"></i> Supabase Project Credentials
-                        </h3>
+                        <div class="flex justify-between items-center border-b border-[#27272A] pb-3">
+                            <h3 class="text-base font-bold text-white flex items-center">
+                                <i class="fa-solid fa-plug mr-2 text-[#FF334B]"></i> Supabase Project Credentials
+                            </h3>
+                            <span id="connection-status-pill" class="px-2.5 py-1 text-xs font-mono-custom font-semibold rounded bg-amber-500/10 text-amber-400 border border-amber-500/30 flex items-center">
+                                <span class="w-2 h-2 rounded-full bg-amber-400 mr-1.5 animate-pulse"></span> Testing Connection...
+                            </span>
+                        </div>
                         <div class="grid grid-cols-1 gap-4">
                             <div>
                                 <label class="block text-xs font-mono-custom text-slate-400 mb-1">SUPABASE URL</label>
@@ -474,11 +479,17 @@
                                 <input type="password" id="cfg-supabase-key" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6..." class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none font-mono-custom">
                             </div>
                         </div>
-                        <div class="flex justify-between items-center pt-2">
+                        <div id="conn-test-banner" class="hidden p-3 rounded-lg text-xs font-mono-custom border"></div>
+                        <div class="flex flex-wrap gap-2 justify-between items-center pt-2">
                             <span id="config-save-msg" class="text-xs text-emerald-400 hidden font-mono-custom"><i class="fa-solid fa-check mr-1"></i> Credentials Saved!</span>
-                            <button onclick="saveSupabaseConfig()" class="px-4 py-2 bg-[#E11D48] text-white font-bold text-xs font-mono-custom rounded hover:bg-[#BE123C] transition">
-                                Save Supabase Credentials
-                            </button>
+                            <div class="flex space-x-2">
+                                <button onclick="testSupabaseConnection(true)" class="px-4 py-2 bg-[#18181C] hover:bg-[#27272A] text-slate-200 border border-[#27272A] font-bold text-xs font-mono-custom rounded transition">
+                                    <i class="fa-solid fa-[#network-wired] mr-1"></i> Test Connection
+                                </button>
+                                <button onclick="saveSupabaseConfig()" class="px-4 py-2 bg-[#E11D48] text-white font-bold text-xs font-mono-custom rounded hover:bg-[#BE123C] transition">
+                                    Save Supabase Credentials
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -953,8 +964,60 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
             setTimeout(() => msg.classList.add('hidden'), 3000);
         }
 
-        // SUPABASE SETTINGS
-        function saveSupabaseConfig() {
+        // SUPABASE SETTINGS & LIVE CONNECTION TEST
+        async function testSupabaseConnection(userInitiated = false) {
+            const url = document.getElementById('cfg-supabase-url')?.value.trim() || localStorage.getItem('noormotion_supabase_url');
+            const key = document.getElementById('cfg-supabase-key')?.value.trim() || localStorage.getItem('noormotion_supabase_key');
+            
+            const badge = document.getElementById('db-status-badge');
+            const pill = document.getElementById('connection-status-pill');
+            const banner = document.getElementById('conn-test-banner');
+
+            if (!url || !key) {
+                if (badge) badge.innerHTML = `<span class="text-amber-400 font-semibold">🟡 Offline / Local Sync</span>`;
+                if (pill) pill.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-400 mr-1.5"></span> Not Connected (Local Mode)`;
+                if (pill) pill.className = 'px-2.5 py-1 text-xs font-mono-custom font-semibold rounded bg-amber-500/10 text-amber-400 border border-amber-500/30 flex items-center';
+                if (banner && userInitiated) {
+                    banner.className = 'p-3 rounded-lg text-xs font-mono-custom border bg-amber-950/30 text-amber-300 border-amber-800/40 block';
+                    banner.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-1"></i> Please enter your Supabase Project URL & Anon Key below.`;
+                }
+                return false;
+            }
+
+            try {
+                if (pill) pill.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-400 mr-1.5 animate-pulse"></span> Testing...`;
+                const client = window.supabase.createClient(url, key);
+                const { data, error } = await client.from('analytics_events').select('id').limit(1);
+
+                if (error && error.code !== 'PGRST116') {
+                    throw error;
+                }
+
+                if (badge) badge.innerHTML = `<span class="text-emerald-400 font-semibold">🟢 Supabase Live Cloud</span>`;
+                if (pill) {
+                    pill.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span> 🟢 Connected & Live`;
+                    pill.className = 'px-2.5 py-1 text-xs font-mono-custom font-semibold rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center';
+                }
+                if (banner && userInitiated) {
+                    banner.className = 'p-3 rounded-lg text-xs font-mono-custom border bg-emerald-950/30 text-emerald-300 border-emerald-800/40 block';
+                    banner.innerHTML = `<i class="fa-solid fa-circle-check mr-1"></i> ✅ SUCCESS! Supabase Cloud Database Connected Successfully!`;
+                }
+                return true;
+            } catch (err) {
+                if (badge) badge.innerHTML = `<span class="text-red-400 font-semibold">🔴 Connection Error</span>`;
+                if (pill) {
+                    pill.innerHTML = `<span class="w-2 h-2 rounded-full bg-red-400 mr-1.5"></span> 🔴 Connection Failed`;
+                    pill.className = 'px-2.5 py-1 text-xs font-mono-custom font-semibold rounded bg-red-500/10 text-red-400 border border-red-500/30 flex items-center';
+                }
+                if (banner && userInitiated) {
+                    banner.className = 'p-3 rounded-lg text-xs font-mono-custom border bg-red-950/30 text-red-300 border-red-800/40 block';
+                    banner.innerHTML = `<i class="fa-solid fa-circle-xmark mr-1"></i> ERROR: ${err.message || 'Could not connect to Supabase. Make sure you ran the SQL Setup Script in Supabase Editor!'}`;
+                }
+                return false;
+            }
+        }
+
+        async function saveSupabaseConfig() {
             const url = document.getElementById('cfg-supabase-url').value.trim();
             const key = document.getElementById('cfg-supabase-key').value.trim();
             localStorage.setItem('noormotion_supabase_url', url);
@@ -963,11 +1026,14 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
             const msg = document.getElementById('config-save-msg');
             msg.classList.remove('hidden');
             setTimeout(() => msg.classList.add('hidden'), 3000);
+
+            await testSupabaseConnection(true);
         }
 
         function loadStoredConfig() {
             document.getElementById('cfg-supabase-url').value = localStorage.getItem('noormotion_supabase_url') || '';
             document.getElementById('cfg-supabase-key').value = localStorage.getItem('noormotion_supabase_key') || '';
+            testSupabaseConnection(false);
         }
 
         function copySQLSchema() {
