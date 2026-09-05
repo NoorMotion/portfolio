@@ -584,15 +584,23 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
 
         let chartInstance = null;
 
-        // Default Datasets if empty
+        // Default Datasets (User's Real Portfolio Videos & AE Tools)
         const defaultVideos = [
-            { id: 'v1', title: 'SaaS Explainer Motion Graphics', client: 'Acme Corp', category: 'MOTION DESIGN & UI', video_url: 'https://drive.google.com/file/d/1v0J_y6j8K_sample/preview', thumbnail_url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80' },
-            { id: 'v2', title: 'Adobe After Effects Workflow Automation', client: 'Internal Tool', category: 'TOOL DEMO', video_url: 'https://drive.google.com/file/d/1v0J_y6j8K_sample2/preview', thumbnail_url: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80' }
+            { id: 'v1', title: 'DrivePhase.ai Explainer', client: 'DrivePhase.ai', category: 'SaaS Explainer', video_url: 'https://drive.google.com/file/d/1p22ilqvf2cyatv4v5cVLOdEq7K0-tfoT/view', thumbnail_url: 'https://noormotion.carrd.co/assets/videos/video11_thumbnail.jpg?v=86a3e49b' },
+            { id: 'v2', title: 'School Management Software', client: 'EduTech Client', category: 'Product Promo', video_url: 'https://drive.google.com/file/d/1A7NU3RcdVyAI4CL4w2_hnXHDGuPmpLJX/view', thumbnail_url: 'https://noormotion.carrd.co/assets/videos/video04_thumbnail.jpg?v=86a3e49b' },
+            { id: 'v3', title: 'Next Video Review', client: 'WP Plugin Client', category: 'WordPress Plugin Promo', video_url: 'https://drive.google.com/file/d/1h89xJaYIL_Crq97M6JXh0eWEN1u3d4Xr/view', thumbnail_url: 'https://noormotion.carrd.co/assets/videos/video05_thumbnail.jpg?v=86a3e49b' },
+            { id: 'v4', title: 'Washer Service Booking', client: 'Booking System', category: 'Plugin Explainer', video_url: 'https://drive.google.com/file/d/1lIxJSS9FBU143EQFGamtFwmglblQvbgW/view', thumbnail_url: 'https://noormotion.carrd.co/assets/videos/video08_thumbnail.jpg?v=86a3e49b' },
+            { id: 'v5', title: 'Salonly Salon Booking', client: 'Salonly App', category: 'WordPress Plugin Promo', video_url: 'https://drive.google.com/file/d/1hc2joGAoRFD3e0jqdivD9inTIYIXckZJ/view', thumbnail_url: 'https://noormotion.carrd.co/assets/videos/video06_thumbnail.jpg?v=86a3e49b' },
+            { id: 'v6', title: 'Cleanly Booking System', client: 'Cleanly SaaS', category: 'Promo Video', video_url: 'https://drive.google.com/file/d/13WzQi1z3SSCRwcKSTVyWQV6fb5FwYucF/view', thumbnail_url: 'https://noormotion.carrd.co/assets/videos/video09_thumbnail.jpg?v=86a3e49b' },
+            { id: 'v7', title: 'NextCRM Marketing Automation', client: 'NextCRM SaaS', category: 'SaaS Explainer', video_url: 'https://drive.google.com/file/d/1a_OsNZAlauYXjLN6Meoh6ryZhqQE0Y9r/view', thumbnail_url: 'https://noormotion.carrd.co/assets/videos/video01_thumbnail.jpg?v=86a3e49b' },
+            { id: 'v8', title: 'Next3 Offload Optimizer', client: 'WP Plugin Client', category: 'Plugin Promo', video_url: 'https://drive.google.com/file/d/1R0L7_DTxNBJHL_B7PMc1OStOiCMcGAEC/view', thumbnail_url: 'https://noormotion.carrd.co/assets/videos/video03_thumbnail.jpg?v=86a3e49b' }
         ];
 
         const defaultTools = [
-            { id: 't1', title: 'BoundingBox Pro AE Script', subtitle: 'Automatic Shape Padding Utility', badge: 'AE SCRIPT v1.2', price: '$29.00', gumroad_url: 'https://gumroad.com', image_url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80', description: 'Zero-gap shape bounding box generator for Adobe After Effects layers.' },
-            { id: 't2', title: 'Keyframe Stagger Pro', subtitle: 'Layer Timing Automation', badge: 'POPULAR', price: 'FREE', gumroad_url: 'https://gumroad.com', image_url: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80', description: 'One-click keyframe staggering and animation offset tool for motion designers.' }
+            { id: 't1', title: 'CompSync 2.0', subtitle: 'After Effects Script', badge: 'AE TOOL', price: 'Free / Donation', gumroad_url: 'https://nralam.gumroad.com/l/CompSync?layout=profile', image_url: 'https://noormotion.carrd.co/assets/images/gallery02/541290cb.jpg?v=86a3e49b', description: 'A powerful After Effects script tool that enables you to save compositions as standalone projects dynamically and build your own motion animation libraries.' },
+            { id: 't2', title: 'AutoCaption 2.0', subtitle: 'After Effects Preset', badge: 'AE PRESET', price: 'Free / Donation', gumroad_url: 'https://nralam.gumroad.com/l/nrautocap?layout=profile', image_url: 'https://noormotion.carrd.co/assets/images/gallery02/d186352f.jpg?v=86a3e49b', description: 'An automated After Effects caption generator designed to convert SRT subtitle files into dynamic animated captions instantly.' },
+            { id: 't3', title: 'textEco Text Animator', subtitle: 'After Effects Text Preset', badge: 'TYPOGRAPHY PRESET', price: 'Free / Donation', gumroad_url: 'https://nralam.gumroad.com/l/textEco?layout=profile', image_url: 'https://noormotion.carrd.co/assets/images/gallery02/b70ecfc2.jpg?v=86a3e49b', description: 'An all-in-one text animator preset that allows creators to build unlimited variations of professional typography animations using a single customizable setup.' },
+            { id: 't4', title: 'Master Mask', subtitle: 'After Effects Mask Preset', badge: 'MASKING TOOL', price: 'Free / Donation', gumroad_url: 'https://nralam.gumroad.com/l/mastermask?layout=profile', image_url: 'https://noormotion.carrd.co/assets/images/gallery02/a65c20db.jpg?v=86a3e49b', description: 'A corner-radius and mask shape control preset for After Effects that lets you separately handle individual vertex controls, mask dimensions, and rotation angles dynamically.' }
         ];
 
         const defaultBlogs = [
@@ -676,8 +684,14 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
 
         // Init Data & Render
         function initDashboardData() {
-            if (!localStorage.getItem(STORAGE_VIDEOS)) localStorage.setItem(STORAGE_VIDEOS, JSON.stringify(defaultVideos));
-            if (!localStorage.getItem(STORAGE_TOOLS)) localStorage.setItem(STORAGE_TOOLS, JSON.stringify(defaultTools));
+            const storedVideos = JSON.parse(localStorage.getItem(STORAGE_VIDEOS) || '[]');
+            if (storedVideos.length === 0 || storedVideos.some(v => v.client === 'Acme Corp')) {
+                localStorage.setItem(STORAGE_VIDEOS, JSON.stringify(defaultVideos));
+            }
+            const storedTools = JSON.parse(localStorage.getItem(STORAGE_TOOLS) || '[]');
+            if (storedTools.length === 0 || storedTools.some(t => t.title.includes('BoundingBox Pro'))) {
+                localStorage.setItem(STORAGE_TOOLS, JSON.stringify(defaultTools));
+            }
             if (!localStorage.getItem(STORAGE_BLOGS)) localStorage.setItem(STORAGE_BLOGS, JSON.stringify(defaultBlogs));
 
             renderAnalytics();
