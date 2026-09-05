@@ -16,6 +16,135 @@ tailwind.config = {
 };
 
 // ==========================================
+// 📊 REAL-TIME UNIVERSAL ANALYTICS TRACKER (Noor Motion)
+// ==========================================
+const ANALYTICS_KEY = 'noormotion_cms_analytics';
+
+function initDefaultAnalytics() {
+    if (!localStorage.getItem(ANALYTICS_KEY)) {
+        const now = Date.now();
+        const initialEvents = [
+            { type: 'page_view', name: 'Home Portfolio Visited', metadata: { country: 'Bangladesh' }, timestamp: new Date(now - 120000).toISOString() },
+            { type: 'video_play', name: 'Played Video: "DrivePhase.ai Explainer"', metadata: { title: 'DrivePhase.ai Explainer' }, timestamp: new Date(now - 90000).toISOString() },
+            { type: 'page_view', name: 'Home Portfolio Visited', metadata: { country: 'United States' }, timestamp: new Date(now - 60000).toISOString() },
+            { type: 'tool_click', name: 'Clicked Tool Download: "BoundingBox Pro AE Script"', metadata: { tool: 'BoundingBox Pro AE Script' }, timestamp: new Date(now - 30000).toISOString() },
+            { type: 'video_play', name: 'Played Video: "School Management Software"', metadata: { title: 'School Management Software' }, timestamp: new Date(now - 10000).toISOString() }
+        ];
+        localStorage.setItem(ANALYTICS_KEY, JSON.stringify(initialEvents));
+    }
+}
+initDefaultAnalytics();
+
+window.trackAnalyticsEvent = function(eventType, eventName, metadata = {}) {
+    try {
+        const events = JSON.parse(localStorage.getItem(ANALYTICS_KEY) || '[]');
+        const newEvent = {
+            type: eventType,
+            name: eventName,
+            metadata: metadata,
+            timestamp: new Date().toISOString()
+        };
+        events.push(newEvent);
+        if (events.length > 500) events.shift();
+        localStorage.setItem(ANALYTICS_KEY, JSON.stringify(events));
+
+        // 1. Broadcast via BroadcastChannel for instant multi-tab sync
+        if (typeof BroadcastChannel !== 'undefined') {
+            const bc = new BroadcastChannel('noormotion_analytics_channel');
+            bc.postMessage(newEvent);
+            bc.close();
+        }
+
+        // 2. Supabase Cloud Sync if configured
+        const supabaseUrl = localStorage.getItem('noormotion_supabase_url');
+        const supabaseKey = localStorage.getItem('noormotion_supabase_key');
+        if (supabaseUrl && supabaseKey && window.supabase) {
+            const client = window.supabase.createClient(supabaseUrl, supabaseKey);
+            client.from('analytics_events').insert([{
+                event_type: eventType,
+                event_name: eventName,
+                metadata: metadata
+            }]).then(() => {}).catch(() => {});
+        }
+    } catch (err) {
+        console.warn('Analytics tracking error:', err);
+    }
+};
+
+// Global Click & Video Event Listener
+if (typeof window !== 'undefined') {
+    window.addEventListener('DOMContentLoaded', () => {
+        window.trackAnalyticsEvent('page_view', 'Home Portfolio Visited', { path: window.location.pathname });
+
+        // Global Click Tracking
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('a, button, .portfolio-card, [id^="hero-"], .dotted-btn, .hover-trigger');
+            if (!target) return;
+
+            let eventType = 'button_click';
+            let eventName = '';
+            let metadata = {};
+
+            // 1. Video Cards
+            if (target.classList.contains('portfolio-card')) {
+                const title = target.querySelector('h4')?.innerText || 'Portfolio Video';
+                eventType = 'video_play';
+                eventName = `Played Video: "${title}"`;
+                metadata = { title };
+            }
+            // 2. Drive HD Link
+            else if (target.innerText && target.innerText.includes('Drive HD')) {
+                eventType = 'video_action';
+                eventName = `Clicked Drive HD Link`;
+                metadata = { href: target.getAttribute('href') };
+            }
+            // 3. Tool Purchase / Gumroad Buttons
+            else if (target.id === 'gumroad-link' || (target.innerText && (target.innerText.includes('Download') || target.innerText.includes('Get Tool')))) {
+                eventType = 'tool_click';
+                const toolName = document.getElementById('modal-title')?.innerText || 'AE Tool';
+                eventName = `Clicked Tool Download: "${toolName}"`;
+                metadata = { tool: toolName, href: target.getAttribute('href') };
+            }
+            // 4. Hero Action CTAs
+            else if (target.innerText && target.innerText.includes('See Selected Works')) {
+                eventType = 'cta_click';
+                eventName = `Clicked CTA: "See Selected Works"`;
+            }
+            else if (target.innerText && target.innerText.includes('Watch Showreel')) {
+                eventType = 'video_play';
+                eventName = `Clicked CTA: "Watch Showreel"`;
+            }
+            // 5. Social Links
+            else if (target.href && (target.href.includes('linkedin.com') || target.href.includes('youtube.com') || target.href.includes('facebook.com') || target.href.includes('wa.me') || target.href.includes('t.me'))) {
+                eventType = 'social_click';
+                const platform = target.innerText.trim() || target.href;
+                eventName = `Clicked Social Link: ${platform}`;
+                metadata = { platform, url: target.href };
+            }
+            // 6. Theme Toggle
+            else if (target.id === 'theme-toggle-desktop' || target.id === 'theme-toggle-mobile') {
+                eventType = 'setting_toggle';
+                const currentTheme = document.body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+                eventName = `Toggled Theme to ${currentTheme}`;
+            }
+            // 7. General Navigation & Buttons
+            else {
+                const btnText = target.innerText.trim().replace(/\n/g, ' ') || target.getAttribute('title') || target.id || 'Button';
+                if (btnText && btnText.length < 50) {
+                    eventType = 'button_click';
+                    eventName = `Clicked: "${btnText}"`;
+                    metadata = { element: target.tagName, id: target.id, href: target.getAttribute('href') };
+                }
+            }
+
+            if (eventName) {
+                window.trackAnalyticsEvent(eventType, eventName, metadata);
+            }
+        });
+    });
+}
+
+// ==========================================
 // ⚙️ DYNAMIC DATA MANAGEMENT (Noor Motion)
 // ==========================================
 const siteData = {
@@ -310,138 +439,11 @@ window.expandVideoCard = function(element, rawVideoUrl) {
 
     const videoData = parseVideoEmbed(rawVideoUrl);
 
-// ==========================================
-// 📊 REAL-TIME UNIVERSAL ANALYTICS TRACKER (Noor Motion)
-// ==========================================
-const ANALYTICS_KEY = 'noormotion_cms_analytics';
-
-// Initial Demo Seed if empty
-function initDefaultAnalytics() {
-    if (!localStorage.getItem(ANALYTICS_KEY)) {
-        const now = Date.now();
-        const initialEvents = [
-            { type: 'page_view', name: 'Home Portfolio Visited', metadata: { country: 'Bangladesh' }, timestamp: new Date(now - 120000).toISOString() },
-            { type: 'video_play', name: 'Played Video: "DrivePhase.ai Explainer"', metadata: { title: 'DrivePhase.ai Explainer' }, timestamp: new Date(now - 90000).toISOString() },
-            { type: 'page_view', name: 'Home Portfolio Visited', metadata: { country: 'United States' }, timestamp: new Date(now - 60000).toISOString() },
-            { type: 'tool_click', name: 'Clicked Tool Download: "BoundingBox Pro AE Script"', metadata: { tool: 'BoundingBox Pro AE Script' }, timestamp: new Date(now - 30000).toISOString() },
-            { type: 'video_play', name: 'Played Video: "School Management Software"', metadata: { title: 'School Management Software' }, timestamp: new Date(now - 10000).toISOString() }
-        ];
-        localStorage.setItem(ANALYTICS_KEY, JSON.stringify(initialEvents));
-    }
-}
-initDefaultAnalytics();
-
-window.trackAnalyticsEvent = function(eventType, eventName, metadata = {}) {
-    try {
-        const events = JSON.parse(localStorage.getItem(ANALYTICS_KEY) || '[]');
-        const newEvent = {
-            type: eventType,
-            name: eventName,
-            metadata: metadata,
-            timestamp: new Date().toISOString()
-        };
-        events.push(newEvent);
-        if (events.length > 500) events.shift();
-        localStorage.setItem(ANALYTICS_KEY, JSON.stringify(events));
-
-        // 1. Broadcast via BroadcastChannel for instant multi-tab sync
-        if (typeof BroadcastChannel !== 'undefined') {
-            const bc = new BroadcastChannel('noormotion_analytics_channel');
-            bc.postMessage(newEvent);
-            bc.close();
-        }
-
-        // 2. Supabase Cloud Sync if configured
-        const supabaseUrl = localStorage.getItem('noormotion_supabase_url');
-        const supabaseKey = localStorage.getItem('noormotion_supabase_key');
-        if (supabaseUrl && supabaseKey && window.supabase) {
-            const client = window.supabase.createClient(supabaseUrl, supabaseKey);
-            client.from('analytics_events').insert([{
-                event_type: eventType,
-                event_name: eventName,
-                metadata: metadata
-            }]).then(() => {}).catch(() => {});
-        }
-    } catch (err) {
-        console.warn('Analytics tracking error:', err);
-    }
-};
-
-// Global Click & Video Event Listener
-if (typeof window !== 'undefined') {
-    window.addEventListener('DOMContentLoaded', () => {
-        window.trackAnalyticsEvent('page_view', 'Home Portfolio Visited', { path: window.location.pathname });
-
-        // Global Click Tracking for ALL buttons, links, cards & social icons
-        document.addEventListener('click', (e) => {
-            const target = e.target.closest('a, button, .portfolio-card, [id^="hero-"], .dotted-btn, .hover-trigger');
-            if (!target) return;
-
-            let eventType = 'button_click';
-            let eventName = '';
-            let metadata = {};
-
-            // 1. Video Cards
-            if (target.classList.contains('portfolio-card')) {
-                const title = target.querySelector('h4')?.innerText || 'Portfolio Video';
-                eventType = 'video_play';
-                eventName = `Played Video: "${title}"`;
-                metadata = { title };
-            }
-            // 2. Drive HD Link
-            else if (target.innerText && target.innerText.includes('Drive HD')) {
-                eventType = 'video_action';
-                eventName = `Clicked Drive HD Link`;
-                metadata = { href: target.getAttribute('href') };
-            }
-            // 3. Tool Purchase / Gumroad Buttons
-            else if (target.id === 'gumroad-link' || (target.innerText && (target.innerText.includes('Download') || target.innerText.includes('Get Tool')))) {
-                eventType = 'tool_click';
-                const toolName = document.getElementById('modal-title')?.innerText || 'AE Tool';
-                eventName = `Clicked Tool Download: "${toolName}"`;
-                metadata = { tool: toolName, href: target.getAttribute('href') };
-            }
-            // 4. Hero Action CTAs
-            else if (target.innerText && target.innerText.includes('See Selected Works')) {
-                eventType = 'cta_click';
-                eventName = `Clicked CTA: "See Selected Works"`;
-            }
-            else if (target.innerText && target.innerText.includes('Watch Showreel')) {
-                eventType = 'video_play';
-                eventName = `Clicked CTA: "Watch Showreel"`;
-            }
-            // 5. Social Links
-            else if (target.href && (target.href.includes('linkedin.com') || target.href.includes('youtube.com') || target.href.includes('facebook.com') || target.href.includes('wa.me') || target.href.includes('t.me'))) {
-                eventType = 'social_click';
-                const platform = target.innerText.trim() || target.href;
-                eventName = `Clicked Social Link: ${platform}`;
-                metadata = { platform, url: target.href };
-            }
-            // 6. Theme Toggle
-            else if (target.id === 'theme-toggle-desktop' || target.id === 'theme-toggle-mobile') {
-                eventType = 'setting_toggle';
-                const currentTheme = document.body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
-                eventName = `Toggled Theme to ${currentTheme}`;
-            }
-            // 7. General Navigation & Buttons
-            else {
-                const btnText = target.innerText.trim().replace(/\n/g, ' ') || target.getAttribute('title') || target.id || 'Button';
-                if (btnText && btnText.length < 50) {
-                    eventType = 'button_click';
-                    eventName = `Clicked: "${btnText}"`;
-                    metadata = { element: target.tagName, id: target.id, href: target.getAttribute('href') };
-                }
-            }
-
-            if (eventName) {
-                window.trackAnalyticsEvent(eventType, eventName, metadata);
-            }
-        });
-    });
-}
-
     // 4. Expand card
     element.classList.add('portfolio-card-expanded', 'ring-2', 'ring-[#E11D48]');
+    if (window.trackAnalyticsEvent) {
+        window.trackAnalyticsEvent('video_play', `Played Video: "${titleText || 'Portfolio Video'}"`);
+    }
 
     // 5. Hide bottom text info box while video is playing
     const infoBox = element.querySelector('.p-6');
@@ -763,6 +765,9 @@ const videoModal = document.getElementById('video-modal');
 const videoIframe = document.getElementById('video-modal-iframe');
 
 window.openVideoModal = function (videoUrl) {
+    if (window.trackAnalyticsEvent) {
+        window.trackAnalyticsEvent('video_play', 'Played Showreel Video', { videoUrl });
+    }
     const videoData = parseVideoEmbed(videoUrl);
     if (videoIframe && videoModal) {
         videoIframe.src = videoData.embedUrl;

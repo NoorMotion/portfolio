@@ -692,8 +692,31 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
         }
 
         // ANALYTICS & CHARTS
-        function renderAnalytics() {
-            let events = JSON.parse(localStorage.getItem(STORAGE_ANALYTICS) || '[]');
+        async function renderAnalytics() {
+            let events = [];
+            const supabaseUrl = localStorage.getItem('noormotion_supabase_url');
+            const supabaseKey = localStorage.getItem('noormotion_supabase_key');
+
+            if (supabaseUrl && supabaseKey && window.supabase) {
+                try {
+                    const client = window.supabase.createClient(supabaseUrl, supabaseKey);
+                    const { data, error } = await client.from('analytics_events').select('*').order('created_at', { ascending: false }).limit(100);
+                    if (!error && data && data.length > 0) {
+                        events = data.map(item => ({
+                            type: item.event_type,
+                            name: item.event_name,
+                            metadata: item.metadata,
+                            timestamp: item.created_at
+                        }));
+                    }
+                } catch (e) {
+                    console.warn('Supabase analytics fetch error:', e);
+                }
+            }
+
+            if (events.length === 0) {
+                events = JSON.parse(localStorage.getItem(STORAGE_ANALYTICS) || '[]');
+            }
             
             // Seed initial data if empty
             if (events.length === 0) {
@@ -723,7 +746,7 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
             if (events.length === 0) {
                 feedContainer.innerHTML = `<div class="p-3 bg-[#18181C] border border-[#27272A] rounded-lg text-slate-400">No events recorded yet. Visit index.html to generate live analytics!</div>`;
             } else {
-                feedContainer.innerHTML = events.slice(-30).reverse().map(ev => {
+                feedContainer.innerHTML = events.slice(0, 30).map(ev => {
                     let dotColor = 'bg-slate-400';
                     let typeBadge = 'EVENT';
                     if (ev.type === 'page_view') { dotColor = 'bg-blue-500'; typeBadge = 'VISIT'; }
