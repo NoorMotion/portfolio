@@ -1,45 +1,59 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
   <defs>
     <!-- Background Gradient -->
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#09090B" />
-      <stop offset="100%" stop-color="#16161A" />
+      <stop offset="100%" stop-color="#000000" />
     </linearGradient>
-    <!-- Vibrant Brand Red Gradient -->
-    <linearGradient id="brand-red" x1="0%" y1="0%" x2="100%" y2="100%">
+
+    <!-- Brand Red Gradient -->
+    <linearGradient id="red-grad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#FF334B" />
       <stop offset="50%" stop-color="#E11D48" />
       <stop offset="100%" stop-color="#BE123C" />
     </linearGradient>
-    <!-- Glow Effect -->
-    <filter id="red-glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="16" result="blur" />
+
+    <!-- Subtle Red Glow -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
       <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
   </defs>
 
-  <!-- Dark Rounded Container -->
-  <rect width="512" height="512" rx="128" fill="url(#bg)" stroke="#27272A" stroke-width="12" />
+  <!-- Dark Background Badge -->
+  <rect width="512" height="512" rx="96" fill="url(#bg-grad)" stroke="#27272A" stroke-width="8" />
 
-  <!-- Outer Kinetic Motion Ring -->
-  <circle cx="256" cy="256" r="216" fill="none" stroke="url(#brand-red)" stroke-width="12" stroke-dasharray="24 16" opacity="0.4" />
+  <!-- Stylized Red Kufic ALAM Monogram -->
+  <g filter="url(#glow)">
+    <!-- Base Bounding Box for Monogram (x: 48 to 464, y: 112 to 400) -->
+    <rect x="48" y="112" width="416" height="288" fill="url(#red-grad)" rx="4" />
 
-  <!-- Monogram "N" + Motion Play Icon -->
-  <g filter="url(#red-glow)">
-    <!-- Left Vertical Bar of N -->
-    <path d="M 124 136 C 124 127.163 131.163 120 140 120 H 180 C 188.837 120 196 127.163 196 136 V 376 C 196 384.837 188.837 392 180 392 H 140 C 131.163 392 124 384.837 124 376 Z" fill="url(#brand-red)" />
+    <!-- BLACK CUTOUTS -->
+    <!-- 1. Hole in 1st A -->
+    <rect x="80" y="144" width="32" height="32" fill="#000000" />
 
-    <!-- Diagonal Slash of N -->
-    <path d="M 180 120 L 332 344 H 372 C 380.837 344 388 336.837 388 328 V 280 L 236 56 H 196 Z" fill="url(#brand-red)" opacity="0.85" />
+    <!-- 2. Hollow space under 1st A crossbar -->
+    <rect x="80" y="208" width="32" height="96" fill="#000000" />
 
-    <!-- Right Vertical Bar of N -->
-    <path d="M 316 136 C 316 127.163 323.163 120 332 120 H 372 C 380.837 120 388 127.163 388 136 V 376 C 388 384.837 380.837 392 372 392 H 332 C 323.163 392 316 384.837 316 376 Z" fill="url(#brand-red)" />
+    <!-- 3. Top Dip between 1st A and 2nd A -->
+    <rect x="144" y="112" width="32" height="160" fill="#000000" />
 
-    <!-- Motion Play Button Overlay in Center -->
-    <polygon points="236,216 300,256 236,296" fill="#FFFFFF" />
+    <!-- 4. Hole in 2nd A -->
+    <rect x="208" y="144" width="32" height="32" fill="#000000" />
+
+    <!-- 5. Hollow space under 2nd A crossbar -->
+    <rect x="208" y="208" width="32" height="96" fill="#000000" />
+
+    <!-- 6. Vertical Slot 1 in M -->
+    <rect x="272" y="144" width="32" height="160" fill="#000000" />
+
+    <!-- 7. Vertical Slot 2 in M -->
+    <rect x="336" y="144" width="32" height="160" fill="#000000" />
+
+    <!-- 8. Vertical Slot 3 in M -->
+    <rect x="400" y="144" width="32" height="160" fill="#000000" />
+
+    <!-- 9. Horizontal Black Channel above bottom border -->
+    <rect x="80" y="336" width="352" height="32" fill="#000000" />
   </g>
-
-  <!-- Top-Right Red Pulse Dot -->
-  <circle cx="392" cy="120" r="32" fill="#FF334B" />
-  <circle cx="392" cy="120" r="18" fill="#FFFFFF" opacity="0.9" />
 </svg>
