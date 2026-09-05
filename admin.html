@@ -856,36 +856,78 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
                     </td>
                     <td class="p-4"><span class="px-2 py-0.5 bg-[#E11D48]/10 text-[#FF334B] text-[10px] font-mono-custom font-bold rounded">${v.category}</span></td>
                     <td class="p-4 text-right space-x-2">
-                        <button onclick="deleteVideo('${v.id}')" class="text-red-400 hover:text-red-300 font-mono-custom text-xs"><i class="fa-solid fa-trash"></i></button>
+                        <button onclick="editVideo('${v.id}')" class="text-amber-400 hover:text-amber-300 font-mono-custom text-xs mr-2"><i class="fa-solid fa-pen-to-square mr-1"></i>Edit</button>
+                        <button onclick="deleteVideo('${v.id}')" class="text-red-400 hover:text-red-300 font-mono-custom text-xs"><i class="fa-solid fa-trash mr-1"></i>Delete</button>
                     </td>
                 </tr>
             `).join('');
         }
 
+        function editVideo(id) {
+            const videos = JSON.parse(localStorage.getItem(STORAGE_VIDEOS) || '[]');
+            const video = videos.find(v => String(v.id) === String(id));
+            if (!video) return;
+
+            document.getElementById('video-id').value = video.id;
+            document.getElementById('video-title').value = video.title || '';
+            document.getElementById('video-client').value = video.client || '';
+            document.getElementById('video-category').value = video.category || '';
+            document.getElementById('video-url').value = video.video_url || '';
+            document.getElementById('video-thumb').value = video.thumbnail_url || '';
+
+            document.getElementById('video-form-title').innerText = `Edit Video: ${video.title}`;
+            document.getElementById('video-form-card').classList.remove('hidden');
+            document.getElementById('video-form-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
         function toggleVideoForm() {
-            document.getElementById('video-form-card').classList.toggle('hidden');
+            const card = document.getElementById('video-form-card');
+            card.classList.toggle('hidden');
+            if (!card.classList.contains('hidden')) {
+                document.getElementById('video-id').value = '';
+                document.getElementById('video-title').value = '';
+                document.getElementById('video-client').value = '';
+                document.getElementById('video-category').value = '';
+                document.getElementById('video-url').value = '';
+                document.getElementById('video-thumb').value = '';
+                document.getElementById('video-form-title').innerText = 'Add New Video';
+            }
         }
 
         function saveVideo(e) {
             e.preventDefault();
             const videos = JSON.parse(localStorage.getItem(STORAGE_VIDEOS) || '[]');
-            const newVideo = {
-                id: 'v_' + Date.now(),
-                title: document.getElementById('video-title').value,
-                client: document.getElementById('video-client').value,
-                category: document.getElementById('video-category').value,
-                video_url: document.getElementById('video-url').value,
-                thumbnail_url: document.getElementById('video-thumb').value
+            const id = document.getElementById('video-id').value;
+
+            const videoData = {
+                id: id || ('v_' + Date.now()),
+                title: document.getElementById('video-title').value.trim(),
+                client: document.getElementById('video-client').value.trim(),
+                category: document.getElementById('video-category').value.trim(),
+                video_url: document.getElementById('video-url').value.trim(),
+                thumbnail_url: document.getElementById('video-thumb').value.trim()
             };
-            videos.push(newVideo);
+
+            if (id) {
+                const idx = videos.findIndex(v => String(v.id) === String(id));
+                if (idx !== -1) {
+                    videos[idx] = videoData;
+                } else {
+                    videos.push(videoData);
+                }
+            } else {
+                videos.push(videoData);
+            }
+
             localStorage.setItem(STORAGE_VIDEOS, JSON.stringify(videos));
-            toggleVideoForm();
+            document.getElementById('video-id').value = '';
+            document.getElementById('video-form-card').classList.add('hidden');
             renderVideosTable();
         }
 
         function deleteVideo(id) {
             let videos = JSON.parse(localStorage.getItem(STORAGE_VIDEOS) || '[]');
-            videos = videos.filter(v => v.id !== id);
+            videos = videos.filter(v => String(v.id) !== String(id));
             localStorage.setItem(STORAGE_VIDEOS, JSON.stringify(videos));
             renderVideosTable();
         }
@@ -905,38 +947,84 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
                     </td>
                     <td class="p-4"><span class="text-xs text-[#FF334B] font-mono-custom font-bold">${t.price}</span></td>
                     <td class="p-4 text-right space-x-2">
-                        <button onclick="deleteTool('${t.id}')" class="text-red-400 hover:text-red-300 font-mono-custom text-xs"><i class="fa-solid fa-trash"></i></button>
+                        <button onclick="editTool('${t.id}')" class="text-amber-400 hover:text-amber-300 font-mono-custom text-xs mr-2"><i class="fa-solid fa-pen-to-square mr-1"></i>Edit</button>
+                        <button onclick="deleteTool('${t.id}')" class="text-red-400 hover:text-red-300 font-mono-custom text-xs"><i class="fa-solid fa-trash mr-1"></i>Delete</button>
                     </td>
                 </tr>
             `).join('');
         }
 
+        function editTool(id) {
+            const tools = JSON.parse(localStorage.getItem(STORAGE_TOOLS) || '[]');
+            const tool = tools.find(t => String(t.id) === String(id));
+            if (!tool) return;
+
+            document.getElementById('tool-id').value = tool.id;
+            document.getElementById('tool-title').value = tool.title || '';
+            document.getElementById('tool-subtitle').value = tool.subtitle || '';
+            document.getElementById('tool-badge').value = tool.badge || '';
+            document.getElementById('tool-price').value = tool.price || '';
+            document.getElementById('tool-url').value = tool.gumroad_url || '';
+            document.getElementById('tool-image').value = tool.image_url || '';
+            document.getElementById('tool-desc').value = tool.description || '';
+
+            document.getElementById('tool-form-title').innerText = `Edit Tool: ${tool.title}`;
+            document.getElementById('tool-form-card').classList.remove('hidden');
+            document.getElementById('tool-form-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
         function toggleToolForm() {
-            document.getElementById('tool-form-card').classList.toggle('hidden');
+            const card = document.getElementById('tool-form-card');
+            card.classList.toggle('hidden');
+            if (!card.classList.contains('hidden')) {
+                document.getElementById('tool-id').value = '';
+                document.getElementById('tool-title').value = '';
+                document.getElementById('tool-subtitle').value = '';
+                document.getElementById('tool-badge').value = '';
+                document.getElementById('tool-price').value = '';
+                document.getElementById('tool-url').value = '';
+                document.getElementById('tool-image').value = '';
+                document.getElementById('tool-desc').value = '';
+                document.getElementById('tool-form-title').innerText = 'Add New Tool';
+            }
         }
 
         function saveTool(e) {
             e.preventDefault();
             const tools = JSON.parse(localStorage.getItem(STORAGE_TOOLS) || '[]');
-            const newTool = {
-                id: 't_' + Date.now(),
-                title: document.getElementById('tool-title').value,
-                subtitle: document.getElementById('tool-subtitle').value,
-                badge: document.getElementById('tool-badge').value,
-                price: document.getElementById('tool-price').value,
-                gumroad_url: document.getElementById('tool-url').value,
-                image_url: document.getElementById('tool-image').value,
-                description: document.getElementById('tool-desc').value
+            const id = document.getElementById('tool-id').value;
+
+            const toolData = {
+                id: id || ('t_' + Date.now()),
+                title: document.getElementById('tool-title').value.trim(),
+                subtitle: document.getElementById('tool-subtitle').value.trim(),
+                badge: document.getElementById('tool-badge').value.trim(),
+                price: document.getElementById('tool-price').value.trim(),
+                gumroad_url: document.getElementById('tool-url').value.trim(),
+                image_url: document.getElementById('tool-image').value.trim(),
+                description: document.getElementById('tool-desc').value.trim()
             };
-            tools.push(newTool);
+
+            if (id) {
+                const idx = tools.findIndex(t => String(t.id) === String(id));
+                if (idx !== -1) {
+                    tools[idx] = toolData;
+                } else {
+                    tools.push(toolData);
+                }
+            } else {
+                tools.push(toolData);
+            }
+
             localStorage.setItem(STORAGE_TOOLS, JSON.stringify(tools));
-            toggleToolForm();
+            document.getElementById('tool-id').value = '';
+            document.getElementById('tool-form-card').classList.add('hidden');
             renderToolsTable();
         }
 
         function deleteTool(id) {
             let tools = JSON.parse(localStorage.getItem(STORAGE_TOOLS) || '[]');
-            tools = tools.filter(t => t.id !== id);
+            tools = tools.filter(t => String(t.id) !== String(id));
             localStorage.setItem(STORAGE_TOOLS, JSON.stringify(tools));
             renderToolsTable();
         }
@@ -956,43 +1044,88 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
                     </td>
                     <td class="p-4 text-xs text-slate-400 font-mono-custom">${new Date(b.created_at || Date.now()).toLocaleDateString()}</td>
                     <td class="p-4 text-right space-x-2">
-                        <a href="blog.html?slug=${b.slug}" target="_blank" class="text-slate-400 hover:text-white font-mono-custom text-xs mr-2"><i class="fa-solid fa-eye"></i></a>
-                        <button onclick="deleteBlog('${b.id}')" class="text-red-400 hover:text-red-300 font-mono-custom text-xs"><i class="fa-solid fa-trash"></i></button>
+                        <a href="blog.html?slug=${b.slug}" target="_blank" class="text-slate-400 hover:text-white font-mono-custom text-xs mr-2"><i class="fa-solid fa-eye mr-1"></i>View</a>
+                        <button onclick="editBlog('${b.id}')" class="text-amber-400 hover:text-amber-300 font-mono-custom text-xs mr-2"><i class="fa-solid fa-pen-to-square mr-1"></i>Edit</button>
+                        <button onclick="deleteBlog('${b.id}')" class="text-red-400 hover:text-red-300 font-mono-custom text-xs"><i class="fa-solid fa-trash mr-1"></i>Delete</button>
                     </td>
                 </tr>
             `).join('');
         }
 
+        function editBlog(id) {
+            const blogs = JSON.parse(localStorage.getItem(STORAGE_BLOGS) || '[]');
+            const blog = blogs.find(b => String(b.id) === String(id));
+            if (!blog) return;
+
+            document.getElementById('blog-id').value = blog.id;
+            document.getElementById('blog-title').value = blog.title || '';
+            document.getElementById('blog-slug').value = blog.slug || '';
+            document.getElementById('blog-tags').value = blog.tags || '';
+            document.getElementById('blog-cover').value = blog.cover_image || '';
+            document.getElementById('blog-excerpt').value = blog.excerpt || '';
+            document.getElementById('blog-content').value = blog.content || '';
+
+            document.getElementById('blog-form-title').innerText = `Edit Article: ${blog.title}`;
+            document.getElementById('blog-form-card').classList.remove('hidden');
+            document.getElementById('blog-form-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
         function toggleBlogForm() {
-            document.getElementById('blog-form-card').classList.toggle('hidden');
+            const card = document.getElementById('blog-form-card');
+            card.classList.toggle('hidden');
+            if (!card.classList.contains('hidden')) {
+                document.getElementById('blog-id').value = '';
+                document.getElementById('blog-title').value = '';
+                document.getElementById('blog-slug').value = '';
+                document.getElementById('blog-tags').value = '';
+                document.getElementById('blog-cover').value = '';
+                document.getElementById('blog-excerpt').value = '';
+                document.getElementById('blog-content').value = '';
+                document.getElementById('blog-form-title').innerText = 'Write New Article';
+            }
         }
 
         function saveBlog(e) {
             e.preventDefault();
             const blogs = JSON.parse(localStorage.getItem(STORAGE_BLOGS) || '[]');
-            const newBlog = {
-                id: 'b_' + Date.now(),
-                title: document.getElementById('blog-title').value,
-                slug: document.getElementById('blog-slug').value.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-                tags: document.getElementById('blog-tags').value,
-                cover_image: document.getElementById('blog-cover').value,
-                excerpt: document.getElementById('blog-excerpt').value,
-                content: document.getElementById('blog-content').value,
-                created_at: new Date().toISOString()
+            const id = document.getElementById('blog-id').value;
+
+            const blogData = {
+                id: id || ('b_' + Date.now()),
+                title: document.getElementById('blog-title').value.trim(),
+                slug: document.getElementById('blog-slug').value.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+                tags: document.getElementById('blog-tags').value.trim(),
+                cover_image: document.getElementById('blog-cover').value.trim(),
+                excerpt: document.getElementById('blog-excerpt').value.trim(),
+                content: document.getElementById('blog-content').value.trim(),
+                created_at: id ? (blogs.find(b => String(b.id) === String(id))?.created_at || new Date().toISOString()) : new Date().toISOString()
             };
-            blogs.push(newBlog);
+
+            if (id) {
+                const idx = blogs.findIndex(b => String(b.id) === String(id));
+                if (idx !== -1) {
+                    blogs[idx] = blogData;
+                } else {
+                    blogs.push(blogData);
+                }
+            } else {
+                blogs.push(blogData);
+            }
+
             localStorage.setItem(STORAGE_BLOGS, JSON.stringify(blogs));
-            toggleBlogForm();
+            document.getElementById('blog-id').value = '';
+            document.getElementById('blog-form-card').classList.add('hidden');
             renderBlogsTable();
             renderAnalytics();
         }
 
         function deleteBlog(id) {
             let blogs = JSON.parse(localStorage.getItem(STORAGE_BLOGS) || '[]');
-            blogs = blogs.filter(b => b.id !== id);
+            blogs = blogs.filter(b => String(b.id) !== String(id));
             localStorage.setItem(STORAGE_BLOGS, JSON.stringify(blogs));
             renderBlogsTable();
             renderAnalytics();
+        }
         }
 
         // PASSCODE UPDATE (SHA-256)

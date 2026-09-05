@@ -524,15 +524,86 @@ window.collapseVideoCard = function(element) {
     setTimeout(applyPortfolioMasonry, 100);
 };
 
+// Dynamic CMS Data Sync Engine
+function renderDynamicCMSData() {
+    const grid = document.getElementById('portfolio-grid');
+    if (grid) {
+        const storedVideos = JSON.parse(localStorage.getItem('noormotion_cms_videos') || '[]');
+        if (storedVideos.length > 0) {
+            grid.innerHTML = storedVideos.map(v => `
+                <div onclick="expandVideoCard(this, '${v.video_url}')" class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                    <div class="media-box aspect-[4/3] overflow-hidden relative rounded-t-[5px]">
+                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">${v.category || 'MOTION PROJECT'}</span>
+                        <img src="${v.thumbnail_url}" alt="${v.title}" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
+                            <div class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
+                                <i class="fa-solid fa-play ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="font-mono-custom text-xs text-slate-500 uppercase block mb-1">${v.client || v.category || ''}</span>
+                        <h4 class="text-lg font-bold text-slate-900 group-hover:text-[#E11D48] transition">${v.title}</h4>
+                    </div>
+                </div>
+            `).join('');
+        }
+    }
+
+    const productsGrid = document.getElementById('products-grid');
+    if (productsGrid) {
+        const storedTools = JSON.parse(localStorage.getItem('noormotion_cms_tools') || '[]');
+        if (storedTools.length > 0) {
+            siteData.products = storedTools.map((t, index) => ({
+                id: t.id || (index + 1),
+                title: t.title,
+                subtitle: t.subtitle,
+                badge: t.badge || 'AE TOOL',
+                image: t.image_url,
+                price: t.price,
+                details: t.description,
+                youtubeUrl: '',
+                gumroadUrl: t.gumroad_url
+            }));
+
+            productsGrid.innerHTML = storedTools.map(t => `
+                <div class="b44-card rounded-[5px] overflow-hidden group hover-trigger bg-white border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200 rounded-t-[5px]">
+                            <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">${t.badge || 'AE TOOL'}</span>
+                            <img src="${t.image_url}" alt="${t.title}" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="font-mono-custom text-xs text-[#E11D48] uppercase font-bold">${t.subtitle}</span>
+                                <span class="font-mono-custom text-xs font-bold text-slate-900">${t.price}</span>
+                            </div>
+                            <h4 class="text-2xl font-bold text-slate-900 mb-2 group-hover:text-[#E11D48] transition">${t.title}</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">${t.description}</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <button onclick="openProductModal('${t.id}')" class="dotted-btn w-full py-3 bg-slate-100 border border-slate-200 rounded-[5px] text-slate-900 font-mono-custom text-xs uppercase hover:bg-[#E11D48] hover:text-white hover:border-[#E11D48] transition">
+                            View Details &amp; Download <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+    }
+}
+
 // Event Listeners for Masonry Engine
 window.addEventListener('resize', applyPortfolioMasonry);
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
+        renderDynamicCMSData();
         applyPortfolioMasonry();
         setTimeout(applyPortfolioMasonry, 500);
         initGSAPAnimations();
     });
 } else {
+    renderDynamicCMSData();
     applyPortfolioMasonry();
     setTimeout(applyPortfolioMasonry, 500);
     initGSAPAnimations();
@@ -727,7 +798,7 @@ const modalBackdrop = document.getElementById('product-modal-backdrop');
 const modalContent = document.getElementById('product-modal-content');
 
 window.openProductModal = function (productId) {
-    const product = siteData.products.find(p => p.id === productId);
+    const product = siteData.products.find(p => String(p.id) === String(productId));
     if (!product) return;
 
     document.getElementById('modal-title').innerText = product.title;
