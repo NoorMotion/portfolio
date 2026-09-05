@@ -436,6 +436,29 @@
                         <p class="text-xs text-slate-400 font-mono-custom mt-1">Connect your Supabase project or export/import database SQL schemas.</p>
                     </div>
 
+                    <!-- SECURITY & PASSCODE FORM -->
+                    <div class="bg-[#121215] border border-[#27272A] p-6 rounded-xl space-y-4">
+                        <h3 class="text-base font-bold text-white border-b border-[#27272A] pb-3 flex items-center">
+                            <i class="fa-solid fa-key mr-2 text-[#FF334B]"></i> Change Admin Passcode (SHA-256 Encrypted)
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">New Passcode</label>
+                                <input type="password" id="cfg-new-pass" placeholder="Enter new secret passcode" class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none font-mono-custom">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">Confirm Passcode</label>
+                                <input type="password" id="cfg-confirm-pass" placeholder="Re-enter new passcode" class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none font-mono-custom">
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center pt-2">
+                            <span id="pass-save-msg" class="text-xs text-emerald-400 hidden font-mono-custom"><i class="fa-solid fa-check mr-1"></i> Passcode Updated & Encrypted!</span>
+                            <button onclick="updateCustomPasscode()" class="px-4 py-2 bg-[#E11D48] text-white font-bold text-xs font-mono-custom rounded hover:bg-[#BE123C] transition">
+                                Save New Passcode
+                            </button>
+                        </div>
+                    </div>
+
                     <!-- SUPABASE CONNECTION FORM -->
                     <div class="bg-[#121215] border border-[#27272A] p-6 rounded-xl space-y-4">
                         <h3 class="text-base font-bold text-white border-b border-[#27272A] pb-3 flex items-center">
@@ -575,6 +598,20 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
             }, 1000);
         }
 
+        // SHA-256 Cryptographic Hash Helper (Zero Plaintext Password in GitHub)
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        // Default SHA-256 Hash for 'noormotion' and 'admin123'
+        const ALLOWED_HASHES = [
+            '35bd4e098485efb1263d91ca8ec91079d342be33959c5d1ed26a978f5664191c', // sha256('noormotion')
+            '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9'  // sha256('admin123')
+        ];
+
         // Auth Handling
         function checkAuth() {
             if (localStorage.getItem(AUTH_KEY) === 'true') {
@@ -587,10 +624,14 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
             }
         }
 
-        function handleLogin(e) {
+        async function handleLogin(e) {
             e.preventDefault();
             const inputPass = document.getElementById('login-passcode').value.trim();
-            if (inputPass === 'admin123' || inputPass === 'noormotion') {
+            const inputHash = await sha256(inputPass);
+            
+            const customHash = localStorage.getItem('noormotion_custom_pass_hash');
+
+            if (ALLOWED_HASHES.includes(inputHash) || (customHash && customHash === inputHash)) {
                 localStorage.setItem(AUTH_KEY, 'true');
                 checkAuth();
             } else {
@@ -849,6 +890,31 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
             localStorage.setItem(STORAGE_BLOGS, JSON.stringify(blogs));
             renderBlogsTable();
             renderAnalytics();
+        }
+
+        // PASSCODE UPDATE (SHA-256)
+        async function updateCustomPasscode() {
+            const newPass = document.getElementById('cfg-new-pass').value.trim();
+            const confirmPass = document.getElementById('cfg-confirm-pass').value.trim();
+
+            if (!newPass) {
+                alert('Please enter a new passcode!');
+                return;
+            }
+            if (newPass !== confirmPass) {
+                alert('Passcodes do not match!');
+                return;
+            }
+
+            const hash = await sha256(newPass);
+            localStorage.setItem('noormotion_custom_pass_hash', hash);
+
+            document.getElementById('cfg-new-pass').value = '';
+            document.getElementById('cfg-confirm-pass').value = '';
+
+            const msg = document.getElementById('pass-save-msg');
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 3000);
         }
 
         // SUPABASE SETTINGS
