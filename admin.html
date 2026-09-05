@@ -270,9 +270,20 @@
                                 <label class="block text-xs font-mono-custom text-slate-400 mb-1">Video Stream / Drive URL</label>
                                 <input type="url" id="video-url" required placeholder="https://drive.google.com/file/d/.../preview" class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none">
                             </div>
-                            <div class="sm:col-span-2">
-                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">Thumbnail Image URL</label>
-                                <input type="url" id="video-thumb" required placeholder="https://images.unsplash.com/photo-..." class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none">
+                            <div class="sm:col-span-2 space-y-2">
+                                <label class="block text-xs font-mono-custom text-slate-400">Thumbnail Image (URL or Upload Image File)</label>
+                                <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
+                                    <div class="sm:col-span-8">
+                                        <input type="text" id="video-thumb" required placeholder="Paste image URL (https://...) or upload file ->" oninput="updatePreviewFromInput('video-thumb', 'video-thumb-preview')" class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none font-mono-custom">
+                                    </div>
+                                    <div class="sm:col-span-4 flex items-center space-x-3">
+                                        <label class="flex-1 flex items-center justify-center px-3 py-2 bg-[#18181C] hover:bg-[#27272A] border border-[#27272A] rounded cursor-pointer text-xs font-mono-custom text-slate-300 hover:text-white transition">
+                                            <i class="fa-solid fa-upload mr-1.5 text-[#FF334B]"></i> Upload File
+                                            <input type="file" accept="image/*" class="hidden" onchange="handleImageFileUpload(event, 'video-thumb', 'video-thumb-preview')">
+                                        </label>
+                                        <img id="video-thumb-preview" src="" class="w-14 h-9 object-cover rounded border border-[#27272A] hidden" alt="Thumbnail Preview">
+                                    </div>
+                                </div>
                             </div>
                             <div class="sm:col-span-2 flex justify-end space-x-2 pt-2">
                                 <button type="button" onclick="toggleVideoForm()" class="px-4 py-2 bg-[#18181C] text-slate-400 hover:text-white rounded text-xs font-mono-custom">Cancel</button>
@@ -336,9 +347,20 @@
                                 <label class="block text-xs font-mono-custom text-slate-400 mb-1">Gumroad / Purchase Link</label>
                                 <input type="url" id="tool-url" required placeholder="https://gumroad.com/l/..." class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none">
                             </div>
-                            <div>
-                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">Image URL</label>
-                                <input type="url" id="tool-image" required placeholder="https://images.unsplash.com/photo-..." class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none">
+                            <div class="sm:col-span-2 space-y-2">
+                                <label class="block text-xs font-mono-custom text-slate-400">Tool Image (URL or Upload Image File)</label>
+                                <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
+                                    <div class="sm:col-span-8">
+                                        <input type="text" id="tool-image" required placeholder="Paste image URL (https://...) or upload file ->" oninput="updatePreviewFromInput('tool-image', 'tool-image-preview')" class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none font-mono-custom">
+                                    </div>
+                                    <div class="sm:col-span-4 flex items-center space-x-3">
+                                        <label class="flex-1 flex items-center justify-center px-3 py-2 bg-[#18181C] hover:bg-[#27272A] border border-[#27272A] rounded cursor-pointer text-xs font-mono-custom text-slate-300 hover:text-white transition">
+                                            <i class="fa-solid fa-upload mr-1.5 text-[#FF334B]"></i> Upload File
+                                            <input type="file" accept="image/*" class="hidden" onchange="handleImageFileUpload(event, 'tool-image', 'tool-image-preview')">
+                                        </label>
+                                        <img id="tool-image-preview" src="" class="w-10 h-10 object-cover rounded border border-[#27272A] hidden" alt="Tool Preview">
+                                    </div>
+                                </div>
                             </div>
                             <div class="sm:col-span-2">
                                 <label class="block text-xs font-mono-custom text-slate-400 mb-1">Full Description</label>
@@ -398,9 +420,20 @@
                                 <label class="block text-xs font-mono-custom text-slate-400 mb-1">Tags / Category</label>
                                 <input type="text" id="blog-tags" required placeholder="e.g. AE SCRIPTING, TUTORIAL" class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none">
                             </div>
-                            <div>
-                                <label class="block text-xs font-mono-custom text-slate-400 mb-1">Cover Image URL</label>
-                                <input type="url" id="blog-cover" required placeholder="https://images.unsplash.com/photo-..." class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none">
+                            <div class="sm:col-span-2 space-y-2">
+                                <label class="block text-xs font-mono-custom text-slate-400">Cover Image (URL or Upload Image File)</label>
+                                <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
+                                    <div class="sm:col-span-8">
+                                        <input type="text" id="blog-cover" required placeholder="Paste image URL (https://...) or upload file ->" oninput="updatePreviewFromInput('blog-cover', 'blog-cover-preview')" class="w-full px-3 py-2 bg-[#18181C] border border-[#27272A] rounded text-white text-sm focus:border-[#E11D48] focus:outline-none font-mono-custom">
+                                    </div>
+                                    <div class="sm:col-span-4 flex items-center space-x-3">
+                                        <label class="flex-1 flex items-center justify-center px-3 py-2 bg-[#18181C] hover:bg-[#27272A] border border-[#27272A] rounded cursor-pointer text-xs font-mono-custom text-slate-300 hover:text-white transition">
+                                            <i class="fa-solid fa-upload mr-1.5 text-[#FF334B]"></i> Upload File
+                                            <input type="file" accept="image/*" class="hidden" onchange="handleImageFileUpload(event, 'blog-cover', 'blog-cover-preview')">
+                                        </label>
+                                        <img id="blog-cover-preview" src="" class="w-14 h-9 object-cover rounded border border-[#27272A] hidden" alt="Cover Preview">
+                                    </div>
+                                </div>
                             </div>
                             <div class="sm:col-span-2">
                                 <label class="block text-xs font-mono-custom text-slate-400 mb-1">Short Excerpt</label>
@@ -858,6 +891,39 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
             }
         }
 
+        // Image Upload & Live Preview Helpers
+        function handleImageFileUpload(e, targetInputId, previewImgId) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            if (file.size > 5 * 1024 * 1024) {
+                alert('File size exceeds 5MB! Please select a smaller image file.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                const base64Data = evt.target.result;
+                document.getElementById(targetInputId).value = base64Data;
+                updatePreviewFromInput(targetInputId, previewImgId);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function updatePreviewFromInput(inputId, previewId) {
+            const val = document.getElementById(inputId).value.trim();
+            const prev = document.getElementById(previewId);
+            if (prev) {
+                if (val) {
+                    prev.src = val;
+                    prev.classList.remove('hidden');
+                } else {
+                    prev.src = '';
+                    prev.classList.add('hidden');
+                }
+            }
+        }
+
         // VIDEOS CRUD
         function renderVideosTable() {
             const videos = JSON.parse(localStorage.getItem(STORAGE_VIDEOS) || '[]');
@@ -891,6 +957,7 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
             document.getElementById('video-category').value = video.category || '';
             document.getElementById('video-url').value = video.video_url || '';
             document.getElementById('video-thumb').value = video.thumbnail_url || '';
+            updatePreviewFromInput('video-thumb', 'video-thumb-preview');
 
             document.getElementById('video-form-title').innerText = `Edit Video: ${video.title}`;
             document.getElementById('video-form-card').classList.remove('hidden');
@@ -907,6 +974,7 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
                 document.getElementById('video-category').value = '';
                 document.getElementById('video-url').value = '';
                 document.getElementById('video-thumb').value = '';
+                updatePreviewFromInput('video-thumb', 'video-thumb-preview');
                 document.getElementById('video-form-title').innerText = 'Add New Video';
             }
         }
@@ -938,6 +1006,8 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
 
             localStorage.setItem(STORAGE_VIDEOS, JSON.stringify(videos));
             document.getElementById('video-id').value = '';
+            document.getElementById('video-thumb').value = '';
+            updatePreviewFromInput('video-thumb', 'video-thumb-preview');
             document.getElementById('video-form-card').classList.add('hidden');
             renderVideosTable();
         }
@@ -984,6 +1054,7 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
             document.getElementById('tool-url').value = tool.gumroad_url || '';
             document.getElementById('tool-image').value = tool.image_url || '';
             document.getElementById('tool-desc').value = tool.description || '';
+            updatePreviewFromInput('tool-image', 'tool-image-preview');
 
             document.getElementById('tool-form-title').innerText = `Edit Tool: ${tool.title}`;
             document.getElementById('tool-form-card').classList.remove('hidden');
@@ -1002,6 +1073,7 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
                 document.getElementById('tool-url').value = '';
                 document.getElementById('tool-image').value = '';
                 document.getElementById('tool-desc').value = '';
+                updatePreviewFromInput('tool-image', 'tool-image-preview');
                 document.getElementById('tool-form-title').innerText = 'Add New Tool';
             }
         }
@@ -1035,6 +1107,8 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
 
             localStorage.setItem(STORAGE_TOOLS, JSON.stringify(tools));
             document.getElementById('tool-id').value = '';
+            document.getElementById('tool-image').value = '';
+            updatePreviewFromInput('tool-image', 'tool-image-preview');
             document.getElementById('tool-form-card').classList.add('hidden');
             renderToolsTable();
         }
@@ -1081,6 +1155,7 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
             document.getElementById('blog-cover').value = blog.cover_image || '';
             document.getElementById('blog-excerpt').value = blog.excerpt || '';
             document.getElementById('blog-content').value = blog.content || '';
+            updatePreviewFromInput('blog-cover', 'blog-cover-preview');
 
             document.getElementById('blog-form-title').innerText = `Edit Article: ${blog.title}`;
             document.getElementById('blog-form-card').classList.remove('hidden');
@@ -1098,6 +1173,7 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
                 document.getElementById('blog-cover').value = '';
                 document.getElementById('blog-excerpt').value = '';
                 document.getElementById('blog-content').value = '';
+                updatePreviewFromInput('blog-cover', 'blog-cover-preview');
                 document.getElementById('blog-form-title').innerText = 'Write New Article';
             }
         }
@@ -1131,6 +1207,8 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
 
             localStorage.setItem(STORAGE_BLOGS, JSON.stringify(blogs));
             document.getElementById('blog-id').value = '';
+            document.getElementById('blog-cover').value = '';
+            updatePreviewFromInput('blog-cover', 'blog-cover-preview');
             document.getElementById('blog-form-card').classList.add('hidden');
             renderBlogsTable();
             renderAnalytics();
