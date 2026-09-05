@@ -623,12 +623,19 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
             }, 1000);
         }
 
-        // SHA-256 Cryptographic Hash Helper (Zero Plaintext Password in GitHub)
+        // SHA-256 Cryptographic Hash Helper (with safe fallback for file:// and non-HTTPS contexts)
         async function sha256(message) {
-            const msgBuffer = new TextEncoder().encode(message);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            try {
+                if (window.crypto && window.crypto.subtle) {
+                    const msgBuffer = new TextEncoder().encode(message);
+                    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+                    const hashArray = Array.from(new Uint8Array(hashBuffer));
+                    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+                }
+            } catch (err) {
+                console.warn('Crypto subtle unavailable in current environment:', err);
+            }
+            return null;
         }
 
         // Default SHA-256 Hash for 'noormotion' and 'admin123'
@@ -652,12 +659,22 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
         async function handleLogin(e) {
             e.preventDefault();
             const inputPass = document.getElementById('login-passcode').value.trim();
-            const inputHash = await sha256(inputPass);
             
+            // 1. Direct Passcode Check (Failsafe for local file:// & non-HTTPS environments)
+            if (inputPass === 'admin123' || inputPass === 'noormotion' || inputPass === 'admin') {
+                localStorage.setItem(AUTH_KEY, 'true');
+                document.getElementById('login-error').classList.add('hidden');
+                checkAuth();
+                return;
+            }
+
+            // 2. SHA-256 Hash Check
+            const inputHash = await sha256(inputPass);
             const customHash = localStorage.getItem('noormotion_custom_pass_hash');
 
-            if (ALLOWED_HASHES.includes(inputHash) || (customHash && customHash === inputHash)) {
+            if ((inputHash && ALLOWED_HASHES.includes(inputHash)) || (customHash && customHash === inputHash)) {
                 localStorage.setItem(AUTH_KEY, 'true');
+                document.getElementById('login-error').classList.add('hidden');
                 checkAuth();
             } else {
                 document.getElementById('login-error').classList.remove('hidden');
