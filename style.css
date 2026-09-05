@@ -204,20 +204,13 @@ body {
     transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-@media (hover: hover) and (pointer: fine) {
-    body {
-        cursor: none;
-    }
-
-    body:not(:has(.cursor-dot)) {
-        cursor: auto !important;
-    }
+/* Standard Normal Mouse Cursor */
+body {
+    cursor: auto !important;
 }
 
-@media (max-width: 767px) {
-    body {
-        cursor: auto !important;
-    }
+.cursor-dot, .cursor-outline {
+    display: none !important;
 }
 
 h1,
