@@ -668,38 +668,7 @@ if (modalBackdrop) {
     });
 }
 
-// ==========================================
-// 🔒 SECRET ADMIN PORTAL TRIGGERS (STEALTH MODE)
-// ==========================================
-let logoClickCount = 0;
-let logoClickTimer = null;
 
-if (typeof window !== 'undefined') {
-    // 1. Keyboard Shortcut: Ctrl + Shift + A (or Cmd + Shift + A)
-    window.addEventListener('keydown', (e) => {
-        if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
-            e.preventDefault();
-            window.open('admin.html', '_blank');
-        }
-    });
-
-    // 2. Secret 5-Click Trigger on Footer Logo
-    window.addEventListener('DOMContentLoaded', () => {
-        const footerLogo = document.getElementById('footer-logo');
-        if (footerLogo) {
-            footerLogo.addEventListener('click', () => {
-                logoClickCount++;
-                if (logoClickTimer) clearTimeout(logoClickTimer);
-                if (logoClickCount >= 5) {
-                    logoClickCount = 0;
-                    window.open('admin.html', '_blank');
-                } else {
-                    logoClickTimer = setTimeout(() => { logoClickCount = 0; }, 2000);
-                }
-            });
-        }
-    });
-}
 const videoModal = document.getElementById('video-modal');
 const videoIframe = document.getElementById('video-modal-iframe');
 
