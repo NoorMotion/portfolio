@@ -1,11 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1280">
-  <title>Exact vector recreation of supplied logo</title>
-  <rect width="1280" height="1280" fill="#000"/>
-  <!-- Outer #FF0000 silhouette, traced from supplied image -->
-  <path fill="#FF0000" d="M162 333 L162 950 L1116 950 L1116 332 L513 332 L512 677 L510 679 L423 679 L421 677 L420 332 Z"/>
-  <!-- Internal negative-space motif -->
-  <path fill="#000" d="M1034 418 L1035 858 L1033 861 L245 860 L245 592 L248 589 L333 589 L336 592 L336 762 L595 762 L596 591 L598 589 L683 589 L686 592 L686 762 L770 762 L771 418 L773 416 L859 416 L861 419 L861 762 L944 762 L944 418 L946 416 L1032 416 Z"/>
-  <!-- Square cutouts -->
-  <path fill="#000" d="M598 416 L685 417 L686 503 L684 505 L599 506 L596 504 L596 418 Z"/>
-  <path fill="#000" d="M248 416 L335 417 L336 502 L334 505 L249 506 L246 504 L245 420 Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Brand Red Gradient -->
+    <linearGradient id="brand-red" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF334B" />
+      <stop offset="100%" stop-color="#E11D48" />
+    </linearGradient>
+  </defs>
+
+  <!-- Clean Transparent Red Kufic ALAM Vector Icon -->
+  <path fill="url(#brand-red)" fill-rule="evenodd" d="
+    M 48 112 H 464 V 400 H 48 Z
+    M 80 144 H 112 V 176 H 80 Z
+    M 80 208 H 112 V 256 H 80 Z
+    M 144 112 H 176 V 256 H 144 Z
+    M 208 144 H 240 V 176 H 208 Z
+    M 208 208 H 240 V 256 H 208 Z
+    M 272 144 H 304 V 288 H 272 Z
+    M 336 144 H 368 V 288 H 336 Z
+    M 400 144 H 432 V 288 H 400 Z
+    M 80 304 H 432 V 352 H 80 Z
+  " />
 </svg>
