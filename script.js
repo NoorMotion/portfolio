@@ -468,11 +468,7 @@ window.expandVideoCard = function(element, rawVideoUrl) {
         infoBox.classList.add('hidden');
     }
     
-    // 6. Replace media box with aspect-video iframe & touch-friendly controls (Perfect 16:9 ratio, zero clipping)
-    const iframeClass = videoData.isDrive 
-        ? "w-full border-0 rounded-[5px] absolute left-0 top-[-48px] h-[calc(100%+52px)] z-10"
-        : "w-full h-full border-0 rounded-[5px] absolute inset-0 z-10";
-
+    // 6. Replace media box with 16:9 aspect-video iframe & controls (Exact 1:1 frame match, normal size controls)
     mediaBox.classList.remove('aspect-[4/3]');
     mediaBox.classList.add('aspect-video', 'rounded-[5px]', 'relative', 'overflow-hidden');
     mediaBox.innerHTML = `
@@ -495,7 +491,7 @@ window.expandVideoCard = function(element, rawVideoUrl) {
                     </button>
                 </div>
             </div>
-            <iframe class="${iframeClass}" src="${videoData.embedUrl}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+            <iframe class="w-full h-full border-0 rounded-[5px] absolute inset-0 z-10" src="${videoData.embedUrl}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
         </div>
     `;
 

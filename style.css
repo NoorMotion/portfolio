@@ -330,10 +330,19 @@ body.dark-mode .b44-card:hover {
     will-change: transform, width, height;
 }
 
-.portfolio-item-card .media-box,
-.portfolio-item-card iframe {
+.portfolio-item-card .media-box {
     border-radius: 5px !important;
     overflow: hidden !important;
+    position: relative !important;
+}
+
+.portfolio-item-card iframe {
+    width: 100% !important;
+    height: 100% !important;
+    border: 0 !important;
+    border-radius: 5px !important;
+    overflow: hidden !important;
+    transform: none !important;
 }
 
 .portfolio-card-expanded {
@@ -345,10 +354,6 @@ body.dark-mode .b44-card:hover {
 @media (max-width: 767px) {
     .portfolio-card-expanded {
         transform: none !important;
-    }
-    .portfolio-item-card .media-box {
-        position: relative !important;
-        overflow: hidden !important;
     }
 }
 
