@@ -13,13 +13,13 @@
     --bg-card-hover: #FFFFFF;
     --border-subtle: #DCD9D7;
     --border-hover: #E11D48;
-    
-    --accent-lime: #E11D48;
+
+    --accent-lime: #e11d48;
     --accent-blue: #F43F5E;
     --text-primary: #121212;
     --text-muted: #555555;
     --text-dim: #888888;
-    
+
     --font-sans: 'Inter', 'Hind Siliguri', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
     --font-serif: 'Instrument Serif', 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
@@ -33,7 +33,7 @@ body.dark-mode {
     --bg-card-hover: #181818;
     --border-subtle: rgba(255, 255, 255, 0.1);
     --border-hover: #FF334B;
-    
+
     --accent-lime: #FF334B;
     --accent-blue: #FF5268;
     --text-primary: #F8FAFC;
@@ -188,7 +188,8 @@ html.lenis {
     overflow: hidden;
 }
 
-html, body {
+html,
+body {
     overflow-x: hidden;
     width: 100%;
     max-width: 100vw;
@@ -207,6 +208,7 @@ body {
     body {
         cursor: none;
     }
+
     body:not(:has(.cursor-dot)) {
         cursor: auto !important;
     }
@@ -218,7 +220,15 @@ body {
     }
 }
 
-h1, h2, h3, h4, h5, h6, p, span, a {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a {
     overflow-wrap: break-word;
     word-break: break-word;
 }
@@ -246,13 +256,16 @@ body.dark-mode {
 ::-webkit-scrollbar {
     width: 6px;
 }
+
 ::-webkit-scrollbar-track {
     background: var(--bg-dark);
 }
+
 ::-webkit-scrollbar-thumb {
     background: #BBB7B5;
     border-radius: 3px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
     background: var(--accent-lime);
 }
@@ -289,10 +302,10 @@ body.dark-mode ::-webkit-scrollbar-thumb {
     border: 1px solid var(--border-subtle);
     border-radius: 5px !important;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
-                box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
-                border-color 0.4s ease,
-                background-color 0.4s ease;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.4s ease,
+        background-color 0.4s ease;
 }
 
 .b44-card:hover {
@@ -345,6 +358,7 @@ body.dark-mode .b44-card:hover {
         opacity: 0;
         transform: scale(0.96);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
@@ -449,7 +463,8 @@ body.dark-mode .loader-bar {
 }
 
 /* Modal Backdrops */
-#product-modal-backdrop, #video-modal {
+#product-modal-backdrop,
+#video-modal {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
 }
@@ -459,14 +474,16 @@ body.dark-mode .loader-bar {
     .b44-card {
         box-shadow: 0 1px 6px rgba(0, 0, 0, 0.03);
     }
-    
+
     #product-modal-content {
         max-height: 92vh;
         margin: 1rem;
     }
-    
+
     /* Ensure minimum touch target sizes */
-    .dotted-btn, button, a.mobile-link {
+    .dotted-btn,
+    button,
+    a.mobile-link {
         min-height: 44px;
     }
 }
