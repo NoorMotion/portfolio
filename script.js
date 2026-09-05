@@ -311,7 +311,7 @@ window.expandVideoCard = function(element, rawVideoUrl) {
     const videoData = parseVideoEmbed(rawVideoUrl);
 
 // ==========================================
-// 📊 REAL-TIME ANALYTICS TRACKER (Noor Motion)
+// 📊 REAL-TIME UNIVERSAL ANALYTICS TRACKER (Noor Motion)
 // ==========================================
 window.trackAnalyticsEvent = function(eventType, eventName, metadata = {}) {
     try {
@@ -340,18 +340,81 @@ window.trackAnalyticsEvent = function(eventType, eventName, metadata = {}) {
     }
 };
 
-// Track initial page view
+// Global Click & Video Event Listener
 if (typeof window !== 'undefined') {
     window.addEventListener('DOMContentLoaded', () => {
         window.trackAnalyticsEvent('page_view', 'Home Portfolio Visited', { path: window.location.pathname });
+
+        // Global Click Tracking for ALL buttons, links, cards & social icons
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('a, button, .portfolio-card, [id^="hero-"], .dotted-btn, .hover-trigger');
+            if (!target) return;
+
+            let eventType = 'button_click';
+            let eventName = '';
+            let metadata = {};
+
+            // 1. Video Cards
+            if (target.classList.contains('portfolio-card')) {
+                const title = target.querySelector('h4')?.innerText || 'Portfolio Video';
+                eventType = 'video_play';
+                eventName = `Played Video: "${title}"`;
+                metadata = { title };
+            }
+            // 2. Drive HD Link
+            else if (target.innerText && target.innerText.includes('Drive HD')) {
+                eventType = 'video_action';
+                eventName = `Clicked Drive HD Link`;
+                metadata = { href: target.getAttribute('href') };
+            }
+            // 3. Tool Purchase / Gumroad Buttons
+            else if (target.id === 'gumroad-link' || (target.innerText && (target.innerText.includes('Download') || target.innerText.includes('Get Tool')))) {
+                eventType = 'tool_click';
+                const toolName = document.getElementById('modal-title')?.innerText || 'AE Tool';
+                eventName = `Clicked Tool Download: "${toolName}"`;
+                metadata = { tool: toolName, href: target.getAttribute('href') };
+            }
+            // 4. Hero Action CTAs
+            else if (target.innerText && target.innerText.includes('See Selected Works')) {
+                eventType = 'cta_click';
+                eventName = `Clicked CTA: "See Selected Works"`;
+            }
+            else if (target.innerText && target.innerText.includes('Watch Showreel')) {
+                eventType = 'video_play';
+                eventName = `Clicked CTA: "Watch Showreel"`;
+            }
+            // 5. Social Links
+            else if (target.href && (target.href.includes('linkedin.com') || target.href.includes('youtube.com') || target.href.includes('facebook.com') || target.href.includes('wa.me') || target.href.includes('t.me'))) {
+                eventType = 'social_click';
+                const platform = target.innerText.trim() || target.href;
+                eventName = `Clicked Social Link: ${platform}`;
+                metadata = { platform, url: target.href };
+            }
+            // 6. Theme Toggle
+            else if (target.id === 'theme-toggle-desktop' || target.id === 'theme-toggle-mobile') {
+                eventType = 'setting_toggle';
+                const currentTheme = document.body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+                eventName = `Toggled Theme to ${currentTheme}`;
+            }
+            // 7. General Navigation & Buttons
+            else {
+                const btnText = target.innerText.trim().replace(/\n/g, ' ') || target.getAttribute('title') || target.id || 'Button';
+                if (btnText && btnText.length < 50) {
+                    eventType = 'button_click';
+                    eventName = `Clicked: "${btnText}"`;
+                    metadata = { element: target.tagName, id: target.id, href: target.getAttribute('href') };
+                }
+            }
+
+            if (eventName) {
+                window.trackAnalyticsEvent(eventType, eventName, metadata);
+            }
+        });
     });
 }
 
     // 4. Expand card
     element.classList.add('portfolio-card-expanded', 'ring-2', 'ring-[#E11D48]');
-    if (window.trackAnalyticsEvent) {
-        window.trackAnalyticsEvent('video_play', `Played Video: ${titleText || 'Portfolio Video'}`);
-    }
 
     // 5. Hide bottom text info box while video is playing
     const infoBox = element.querySelector('.p-6');

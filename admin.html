@@ -687,15 +687,26 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
             if (events.length === 0) {
                 feedContainer.innerHTML = `<div class="p-3 bg-[#18181C] border border-[#27272A] rounded-lg text-slate-400">No events recorded yet. Visit index.html to generate live analytics!</div>`;
             } else {
-                feedContainer.innerHTML = events.slice(-15).reverse().map(ev => `
-                    <div class="p-2.5 bg-[#18181C] border border-[#27272A] rounded-lg flex items-center justify-between">
-                        <div class="flex items-center space-x-2">
-                            <span class="w-2 h-2 rounded-full ${ev.type === 'page_view' ? 'bg-blue-500' : ev.type === 'video_play' ? 'bg-[#FF334B]' : 'bg-emerald-500'}"></span>
-                            <span class="text-white font-semibold">${ev.name}</span>
+                feedContainer.innerHTML = events.slice(-30).reverse().map(ev => {
+                    let dotColor = 'bg-slate-400';
+                    let typeBadge = 'EVENT';
+                    if (ev.type === 'page_view') { dotColor = 'bg-blue-500'; typeBadge = 'VISIT'; }
+                    else if (ev.type === 'video_play') { dotColor = 'bg-[#FF334B]'; typeBadge = 'VIDEO'; }
+                    else if (ev.type === 'tool_click') { dotColor = 'bg-emerald-500'; typeBadge = 'TOOL'; }
+                    else if (ev.type === 'social_click') { dotColor = 'bg-purple-500'; typeBadge = 'SOCIAL'; }
+                    else if (ev.type === 'cta_click') { dotColor = 'bg-amber-500'; typeBadge = 'CTA'; }
+                    
+                    return `
+                        <div class="p-2.5 bg-[#18181C] border border-[#27272A] rounded-lg flex items-center justify-between">
+                            <div class="flex items-center space-x-2 truncate mr-2">
+                                <span class="w-2 h-2 rounded-full flex-shrink-0 ${dotColor}"></span>
+                                <span class="px-1.5 py-0.2 text-[9px] font-mono-custom bg-white/5 border border-white/10 rounded uppercase text-slate-400">${typeBadge}</span>
+                                <span class="text-white font-semibold truncate">${ev.name}</span>
+                            </div>
+                            <span class="text-[10px] text-slate-500 flex-shrink-0">${new Date(ev.timestamp).toLocaleTimeString()}</span>
                         </div>
-                        <span class="text-[10px] text-slate-500">${new Date(ev.timestamp).toLocaleTimeString()}</span>
-                    </div>
-                `).join('');
+                    `;
+                }).join('');
             }
 
             // Render Chart
