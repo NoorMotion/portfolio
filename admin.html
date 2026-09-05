@@ -169,11 +169,11 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         <div class="bg-[#121215] border border-[#27272A] p-5 rounded-xl">
                             <div class="flex justify-between items-center text-slate-400 mb-2">
-                                <span class="text-xs font-mono-custom uppercase">Total Visitors</span>
+                                <span class="text-xs font-mono-custom uppercase">Unique Visitors</span>
                                 <i class="fa-solid fa-users text-[#FF334B]"></i>
                             </div>
                             <h3 id="stat-visitors" class="text-3xl font-extrabold text-white">0</h3>
-                            <p class="text-[11px] text-emerald-400 mt-1 font-mono-custom"><i class="fa-solid fa-arrow-trend-up mr-1"></i> Live Pageviews</p>
+                            <p class="text-[11px] text-emerald-400 mt-1 font-mono-custom"><i class="fa-solid fa-users-viewfinder mr-1"></i> Tracked Devices</p>
                         </div>
 
                         <div class="bg-[#121215] border border-[#27272A] p-5 rounded-xl">
@@ -705,6 +705,7 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
                         events = data.map(item => ({
                             type: item.event_type,
                             name: item.event_name,
+                            visitor_id: item.metadata?.visitor_id || 'Visitor #Cloud',
                             metadata: item.metadata,
                             timestamp: item.created_at
                         }));
@@ -722,21 +723,28 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
             if (events.length === 0) {
                 const now = Date.now();
                 events = [
-                    { type: 'page_view', name: 'Home Portfolio Visited', metadata: { country: 'Bangladesh' }, timestamp: new Date(now - 120000).toISOString() },
-                    { type: 'video_play', name: 'Played Video: "DrivePhase.ai Explainer"', metadata: { title: 'DrivePhase.ai Explainer' }, timestamp: new Date(now - 90000).toISOString() },
-                    { type: 'page_view', name: 'Home Portfolio Visited', metadata: { country: 'United States' }, timestamp: new Date(now - 60000).toISOString() },
-                    { type: 'tool_click', name: 'Clicked Tool Download: "BoundingBox Pro AE Script"', metadata: { tool: 'BoundingBox Pro AE Script' }, timestamp: new Date(now - 30000).toISOString() },
-                    { type: 'video_play', name: 'Played Video: "School Management Software"', metadata: { title: 'School Management Software' }, timestamp: new Date(now - 10000).toISOString() }
+                    { type: 'page_view', name: 'Home Portfolio Visited', visitor_id: 'Visitor #A8F3', metadata: { country: 'Bangladesh', visitor_id: 'Visitor #A8F3' }, timestamp: new Date(now - 120000).toISOString() },
+                    { type: 'video_play', name: 'Played Video: "DrivePhase.ai Explainer"', visitor_id: 'Visitor #A8F3', metadata: { title: 'DrivePhase.ai Explainer', visitor_id: 'Visitor #A8F3' }, timestamp: new Date(now - 90000).toISOString() },
+                    { type: 'page_view', name: 'Home Portfolio Visited', visitor_id: 'Visitor #9C2E', metadata: { country: 'United States', visitor_id: 'Visitor #9C2E' }, timestamp: new Date(now - 60000).toISOString() },
+                    { type: 'tool_click', name: 'Clicked Tool Download: "BoundingBox Pro AE Script"', visitor_id: 'Visitor #9C2E', metadata: { tool: 'BoundingBox Pro AE Script', visitor_id: 'Visitor #9C2E' }, timestamp: new Date(now - 30000).toISOString() },
+                    { type: 'video_play', name: 'Played Video: "School Management Software"', visitor_id: 'Visitor #A8F3', metadata: { title: 'School Management Software', visitor_id: 'Visitor #A8F3' }, timestamp: new Date(now - 10000).toISOString() }
                 ];
                 localStorage.setItem(STORAGE_ANALYTICS, JSON.stringify(events));
             }
+
+            // Always sort events DESCENDING by timestamp (Newest events at TOP)
+            events.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            // Count UNIQUE Visitors (per unique visitor_id / device)
+            const uniqueVisitorsSet = new Set(events.map(e => e.visitor_id || (e.metadata && e.metadata.visitor_id)).filter(Boolean));
+            const uniqueVisitorsCount = uniqueVisitorsSet.size;
 
             const pageViews = events.filter(e => e.type === 'page_view').length;
             const videoPlays = events.filter(e => e.type === 'video_play').length;
             const toolClicks = events.filter(e => e.type === 'tool_click').length;
             const blogsCount = JSON.parse(localStorage.getItem(STORAGE_BLOGS) || '[]').length;
 
-            document.getElementById('stat-visitors').innerText = pageViews;
+            document.getElementById('stat-visitors').innerText = uniqueVisitorsCount;
             document.getElementById('stat-video-plays').innerText = videoPlays;
             document.getElementById('stat-tool-clicks').innerText = toolClicks;
             document.getElementById('stat-blogs-count').innerText = blogsCount;
@@ -746,7 +754,7 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
             if (events.length === 0) {
                 feedContainer.innerHTML = `<div class="p-3 bg-[#18181C] border border-[#27272A] rounded-lg text-slate-400">No events recorded yet. Visit index.html to generate live analytics!</div>`;
             } else {
-                feedContainer.innerHTML = events.slice(0, 30).map(ev => {
+                feedContainer.innerHTML = events.slice(0, 50).map(ev => {
                     let dotColor = 'bg-slate-400';
                     let typeBadge = 'EVENT';
                     if (ev.type === 'page_view') { dotColor = 'bg-blue-500'; typeBadge = 'VISIT'; }
@@ -755,14 +763,19 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
                     else if (ev.type === 'social_click') { dotColor = 'bg-purple-500'; typeBadge = 'SOCIAL'; }
                     else if (ev.type === 'cta_click') { dotColor = 'bg-amber-500'; typeBadge = 'CTA'; }
                     
+                    const vTag = ev.visitor_id || (ev.metadata && ev.metadata.visitor_id) || 'Visitor #Guest';
+
                     return `
-                        <div class="p-2.5 bg-[#18181C] border border-[#27272A] rounded-lg flex items-center justify-between">
+                        <div class="p-2.5 bg-[#18181C] border border-[#27272A] rounded-lg flex items-center justify-between hover:border-[#E11D48]/40 transition">
                             <div class="flex items-center space-x-2 truncate mr-2">
                                 <span class="w-2 h-2 rounded-full flex-shrink-0 ${dotColor}"></span>
-                                <span class="px-1.5 py-0.2 text-[9px] font-mono-custom bg-white/5 border border-white/10 rounded uppercase text-slate-400">${typeBadge}</span>
-                                <span class="text-white font-semibold truncate">${ev.name}</span>
+                                <span class="px-1.5 py-0.5 text-[9px] font-mono-custom bg-white/5 border border-white/10 rounded uppercase text-slate-400">${typeBadge}</span>
+                                <span class="px-1.5 py-0.5 text-[9px] font-mono-custom bg-[#E11D48]/10 text-[#FF334B] border border-[#E11D48]/30 rounded font-bold flex-shrink-0">
+                                    <i class="fa-solid fa-user-tag text-[8px] mr-1"></i>${vTag}
+                                </span>
+                                <span class="text-white font-semibold truncate text-xs">${ev.name}</span>
                             </div>
-                            <span class="text-[10px] text-slate-500 flex-shrink-0">${new Date(ev.timestamp).toLocaleTimeString()}</span>
+                            <span class="text-[10px] text-slate-400 font-mono-custom flex-shrink-0">${new Date(ev.timestamp).toLocaleTimeString()}</span>
                         </div>
                     `;
                 }).join('');

@@ -19,16 +19,27 @@ tailwind.config = {
 // 📊 REAL-TIME UNIVERSAL ANALYTICS TRACKER (Noor Motion)
 // ==========================================
 const ANALYTICS_KEY = 'noormotion_cms_analytics';
+const VISITOR_ID_KEY = 'noormotion_visitor_id';
+
+function getOrCreateVisitorId() {
+    let id = localStorage.getItem(VISITOR_ID_KEY);
+    if (!id) {
+        const randTag = Math.floor(Math.random() * 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
+        id = `Visitor #${randTag}`;
+        localStorage.setItem(VISITOR_ID_KEY, id);
+    }
+    return id;
+}
 
 function initDefaultAnalytics() {
     if (!localStorage.getItem(ANALYTICS_KEY)) {
         const now = Date.now();
         const initialEvents = [
-            { type: 'page_view', name: 'Home Portfolio Visited', metadata: { country: 'Bangladesh' }, timestamp: new Date(now - 120000).toISOString() },
-            { type: 'video_play', name: 'Played Video: "DrivePhase.ai Explainer"', metadata: { title: 'DrivePhase.ai Explainer' }, timestamp: new Date(now - 90000).toISOString() },
-            { type: 'page_view', name: 'Home Portfolio Visited', metadata: { country: 'United States' }, timestamp: new Date(now - 60000).toISOString() },
-            { type: 'tool_click', name: 'Clicked Tool Download: "BoundingBox Pro AE Script"', metadata: { tool: 'BoundingBox Pro AE Script' }, timestamp: new Date(now - 30000).toISOString() },
-            { type: 'video_play', name: 'Played Video: "School Management Software"', metadata: { title: 'School Management Software' }, timestamp: new Date(now - 10000).toISOString() }
+            { type: 'page_view', name: 'Home Portfolio Visited', visitor_id: 'Visitor #A8F3', metadata: { country: 'Bangladesh', visitor_id: 'Visitor #A8F3' }, timestamp: new Date(now - 120000).toISOString() },
+            { type: 'video_play', name: 'Played Video: "DrivePhase.ai Explainer"', visitor_id: 'Visitor #A8F3', metadata: { title: 'DrivePhase.ai Explainer', visitor_id: 'Visitor #A8F3' }, timestamp: new Date(now - 90000).toISOString() },
+            { type: 'page_view', name: 'Home Portfolio Visited', visitor_id: 'Visitor #9C2E', metadata: { country: 'United States', visitor_id: 'Visitor #9C2E' }, timestamp: new Date(now - 60000).toISOString() },
+            { type: 'tool_click', name: 'Clicked Tool Download: "BoundingBox Pro AE Script"', visitor_id: 'Visitor #9C2E', metadata: { tool: 'BoundingBox Pro AE Script', visitor_id: 'Visitor #9C2E' }, timestamp: new Date(now - 30000).toISOString() },
+            { type: 'video_play', name: 'Played Video: "School Management Software"', visitor_id: 'Visitor #A8F3', metadata: { title: 'School Management Software', visitor_id: 'Visitor #A8F3' }, timestamp: new Date(now - 10000).toISOString() }
         ];
         localStorage.setItem(ANALYTICS_KEY, JSON.stringify(initialEvents));
     }
@@ -37,10 +48,14 @@ initDefaultAnalytics();
 
 window.trackAnalyticsEvent = function(eventType, eventName, metadata = {}) {
     try {
+        const visitorId = getOrCreateVisitorId();
+        metadata.visitor_id = visitorId;
+
         const events = JSON.parse(localStorage.getItem(ANALYTICS_KEY) || '[]');
         const newEvent = {
             type: eventType,
             name: eventName,
+            visitor_id: visitorId,
             metadata: metadata,
             timestamp: new Date().toISOString()
         };
