@@ -340,9 +340,10 @@ function parseVideoEmbed(url) {
     return { embedUrl: url, rawUrl: url, isDrive: url.includes('drive.google.com') };
 }
 
-// Showreel Single Click Video Player Handler (Clean Frame without YouTube branding or channel name)
+// Showreel Single Click Video Player Handler (Clean Frame with 1080p HD Quality Enforcement)
 window.showreelIsPlaying = true;
 window.showreelIsMuted = false;
+window.showreelYTPlayer = null;
 
 window.playShowreelVideo = function() {
     const card = document.getElementById('showreel-card');
@@ -361,12 +362,7 @@ window.playShowreelVideo = function() {
         <div class="relative w-full h-full bg-black overflow-hidden rounded-[5px] group video-frame-fadein flex justify-center items-center">
             <!-- YouTube Iframe Top-Cropped (Enforces 1080p HD default quality, no branding/avatar) -->
             <div class="absolute inset-0 overflow-hidden rounded-[5px]">
-                <iframe id="showreel-iframe" 
-                        class="absolute left-[-2%] w-[104%] h-[134%] top-[-17%] border-0 rounded-[5px] pointer-events-auto" 
-                        src="https://www.youtube.com/embed/pdp05Yl0Bp4?autoplay=1&vq=hd1080&hd=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1&enablejsapi=1" 
-                        title="Noor Motion Showreel 2026" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen></iframe>
+                <div id="showreel-iframe-container" class="absolute left-[-2%] w-[104%] h-[134%] top-[-17%] pointer-events-auto"></div>
             </div>
 
             <!-- Minimalist Custom Clean Controls (Appears on hover) -->
@@ -384,50 +380,84 @@ window.playShowreelVideo = function() {
         </div>
     `;
 
-    // Enforce 1080p HD quality via YouTube Player API postMessage
-    setTimeout(() => {
-        const iframe = document.getElementById('showreel-iframe');
-        if (iframe && iframe.contentWindow) {
-            try {
-                iframe.contentWindow.postMessage('{"event":"command","func":"setPlaybackQuality","args":["hd1080"]}', '*');
-                iframe.contentWindow.postMessage('{"event":"command","func":"setSuggestedQuality","args":["hd1080"]}', '*');
-            } catch(e) {}
-        }
-    }, 600);
+    function initYTPlayer() {
+        if (typeof YT === 'undefined' || !YT.Player) return;
+        window.showreelYTPlayer = new YT.Player('showreel-iframe-container', {
+            videoId: 'pdp05Yl0Bp4',
+            playerVars: {
+                autoplay: 1,
+                controls: 0,
+                modestbranding: 1,
+                rel: 0,
+                showinfo: 0,
+                iv_load_policy: 3,
+                playsinline: 1,
+                enablejsapi: 1,
+                vq: 'hd1080',
+                hd: 1
+            },
+            events: {
+                onReady: function(event) {
+                    try {
+                        event.target.setPlaybackQuality('hd1080');
+                        event.target.setSuggestedQuality('hd1080');
+                        event.target.playVideo();
+                    } catch(e) {}
+                },
+                onStateChange: function(event) {
+                    try {
+                        if (event.data === YT.PlayerState.PLAYING || event.data === YT.PlayerState.BUFFERING) {
+                            event.target.setPlaybackQuality('hd1080');
+                            event.target.setSuggestedQuality('hd1080');
+                        }
+                    } catch(e) {}
+                }
+            }
+        });
+    }
+
+    if (typeof YT !== 'undefined' && YT.Player) {
+        initYTPlayer();
+    } else {
+        const oldCallback = window.onYouTubeIframeAPIReady;
+        window.onYouTubeIframeAPIReady = function() {
+            if (typeof oldCallback === 'function') oldCallback();
+            initYTPlayer();
+        };
+    }
 };
 
 window.toggleShowreelPlay = function(btn) {
-    const iframe = document.getElementById('showreel-iframe');
     const icon = document.getElementById('showreel-play-icon');
     const text = document.getElementById('showreel-play-text');
-    if (!iframe) return;
-
-    if (window.showreelIsPlaying) {
-        iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-        window.showreelIsPlaying = false;
-        if (icon) icon.className = 'fa-solid fa-play text-[11px]';
-        if (text) text.innerText = 'Play';
-    } else {
-        iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-        window.showreelIsPlaying = true;
-        if (icon) icon.className = 'fa-solid fa-pause text-[11px]';
-        if (text) text.innerText = 'Pause';
+    if (window.showreelYTPlayer && typeof window.showreelYTPlayer.pauseVideo === 'function') {
+        if (window.showreelIsPlaying) {
+            window.showreelYTPlayer.pauseVideo();
+            window.showreelIsPlaying = false;
+            if (icon) icon.className = 'fa-solid fa-play text-[11px]';
+            if (text) text.innerText = 'Play';
+        } else {
+            window.showreelYTPlayer.playVideo();
+            try { window.showreelYTPlayer.setPlaybackQuality('hd1080'); } catch(e) {}
+            window.showreelIsPlaying = true;
+            if (icon) icon.className = 'fa-solid fa-pause text-[11px]';
+            if (text) text.innerText = 'Pause';
+        }
     }
 };
 
 window.toggleShowreelMute = function(btn) {
-    const iframe = document.getElementById('showreel-iframe');
     const icon = document.getElementById('showreel-mute-icon');
-    if (!iframe) return;
-
-    if (window.showreelIsMuted) {
-        iframe.contentWindow.postMessage('{"event":"command","func":"unMute","args":""}', '*');
-        window.showreelIsMuted = false;
-        if (icon) icon.className = 'fa-solid fa-volume-high text-[11px]';
-    } else {
-        iframe.contentWindow.postMessage('{"event":"command","func":"mute","args":""}', '*');
-        window.showreelIsMuted = true;
-        if (icon) icon.className = 'fa-solid fa-volume-xmark text-[11px]';
+    if (window.showreelYTPlayer && typeof window.showreelYTPlayer.mute === 'function') {
+        if (window.showreelIsMuted) {
+            window.showreelYTPlayer.unMute();
+            window.showreelIsMuted = false;
+            if (icon) icon.className = 'fa-solid fa-volume-high text-[11px]';
+        } else {
+            window.showreelYTPlayer.mute();
+            window.showreelIsMuted = true;
+            if (icon) icon.className = 'fa-solid fa-volume-xmark text-[11px]';
+        }
     }
 };
 
