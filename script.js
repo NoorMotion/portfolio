@@ -330,7 +330,7 @@ function parseVideoEmbed(url) {
         }
         if (videoId) {
             return {
-                embedUrl: `https://www.youtube.com/embed/${videoId}?autoplay=1`,
+                embedUrl: `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1&enablejsapi=1`,
                 rawUrl: url,
                 isDrive: false
             };
@@ -340,7 +340,10 @@ function parseVideoEmbed(url) {
     return { embedUrl: url, rawUrl: url, isDrive: url.includes('drive.google.com') };
 }
 
-// Showreel Single Click Video Player Handler (Pure Native YouTube Controls on Hover)
+// Showreel Single Click Video Player Handler (Clean Frame without YouTube branding or channel name)
+window.showreelIsPlaying = true;
+window.showreelIsMuted = false;
+
 window.playShowreelVideo = function() {
     const card = document.getElementById('showreel-card');
     const box = document.getElementById('showreel-player-box');
@@ -351,13 +354,68 @@ window.playShowreelVideo = function() {
         card.classList.remove('cursor-pointer');
     }
 
+    window.showreelIsPlaying = true;
+    window.showreelIsMuted = false;
+
     box.innerHTML = `
-        <iframe class="w-full h-full border-0 rounded-[5px] video-frame-fadein" 
-                src="https://www.youtube.com/embed/pdp05Yl0Bp4?autoplay=1&controls=1&modestbranding=1&rel=0" 
-                title="Noor Motion Showreel 2026" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen></iframe>
+        <div class="relative w-full h-full bg-black overflow-hidden rounded-[5px] group video-frame-fadein flex justify-center items-center">
+            <!-- YouTube Iframe (Clean frame: no YouTube branding, channel title, or native controls) -->
+            <iframe id="showreel-iframe" 
+                    class="w-full h-full border-0 rounded-[5px] scale-[1.05] pointer-events-auto" 
+                    src="https://www.youtube.com/embed/pdp05Yl0Bp4?autoplay=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1&enablejsapi=1" 
+                    title="Noor Motion Showreel 2026" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen></iframe>
+
+            <!-- Minimalist Custom Clean Controls (Appears on hover) -->
+            <div id="showreel-custom-controls" class="absolute bottom-3 right-3 z-30 flex items-center space-x-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition duration-300 pointer-events-auto">
+                <button onclick="event.stopPropagation(); toggleShowreelPlay(this)" 
+                        class="px-3 py-1.5 bg-black/80 backdrop-blur-md text-white font-mono-custom text-xs uppercase rounded-[3px] border border-white/20 hover:bg-[#E11D48] hover:border-[#E11D48] transition flex items-center space-x-1.5 shadow-lg">
+                    <i class="fa-solid fa-pause text-[11px]" id="showreel-play-icon"></i>
+                    <span id="showreel-play-text">Pause</span>
+                </button>
+                <button onclick="event.stopPropagation(); toggleShowreelMute(this)" 
+                        class="px-3 py-1.5 bg-black/80 backdrop-blur-md text-white font-mono-custom text-xs uppercase rounded-[3px] border border-white/20 hover:bg-[#E11D48] hover:border-[#E11D48] transition flex items-center space-x-1.5 shadow-lg">
+                    <i class="fa-solid fa-volume-high text-[11px]" id="showreel-mute-icon"></i>
+                </button>
+            </div>
+        </div>
     `;
+};
+
+window.toggleShowreelPlay = function(btn) {
+    const iframe = document.getElementById('showreel-iframe');
+    const icon = document.getElementById('showreel-play-icon');
+    const text = document.getElementById('showreel-play-text');
+    if (!iframe) return;
+
+    if (window.showreelIsPlaying) {
+        iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        window.showreelIsPlaying = false;
+        if (icon) icon.className = 'fa-solid fa-play text-[11px]';
+        if (text) text.innerText = 'Play';
+    } else {
+        iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+        window.showreelIsPlaying = true;
+        if (icon) icon.className = 'fa-solid fa-pause text-[11px]';
+        if (text) text.innerText = 'Pause';
+    }
+};
+
+window.toggleShowreelMute = function(btn) {
+    const iframe = document.getElementById('showreel-iframe');
+    const icon = document.getElementById('showreel-mute-icon');
+    if (!iframe) return;
+
+    if (window.showreelIsMuted) {
+        iframe.contentWindow.postMessage('{"event":"command","func":"unMute","args":""}', '*');
+        window.showreelIsMuted = false;
+        if (icon) icon.className = 'fa-solid fa-volume-high text-[11px]';
+    } else {
+        iframe.contentWindow.postMessage('{"event":"command","func":"mute","args":""}', '*');
+        window.showreelIsMuted = true;
+        if (icon) icon.className = 'fa-solid fa-volume-xmark text-[11px]';
+    }
 };
 
 // ==========================================
@@ -813,7 +871,7 @@ window.openProductModal = function (productId) {
 
     const mediaContainer = document.getElementById('modal-media-container');
     if (product.youtubeUrl && product.youtubeUrl !== "") {
-        mediaContainer.innerHTML = `<iframe class="w-full h-full rounded-[5px]" src="${product.youtubeUrl}?autoplay=1&mute=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        mediaContainer.innerHTML = `<iframe class="w-full h-full rounded-[5px] scale-[1.04]" src="${product.youtubeUrl}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1&enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
     } else {
         mediaContainer.innerHTML = `<img src="${product.image}" class="w-full h-full object-cover rounded-[5px]" alt="${product.title}" />`;
     }
