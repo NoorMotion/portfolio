@@ -330,7 +330,7 @@ function parseVideoEmbed(url) {
         }
         if (videoId) {
             return {
-                embedUrl: `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1&enablejsapi=1`,
+                embedUrl: `https://www.youtube.com/embed/${videoId}?autoplay=1&vq=hd1080&hd=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1&enablejsapi=1`,
                 rawUrl: url,
                 isDrive: false
             };
@@ -359,11 +359,11 @@ window.playShowreelVideo = function() {
 
     box.innerHTML = `
         <div class="relative w-full h-full bg-black overflow-hidden rounded-[5px] group video-frame-fadein flex justify-center items-center">
-            <!-- YouTube Iframe Top-Cropped: Crop top 17% to completely eliminate channel avatar, title bar & YouTube overlays -->
+            <!-- YouTube Iframe Top-Cropped (Enforces 1080p HD default quality, no branding/avatar) -->
             <div class="absolute inset-0 overflow-hidden rounded-[5px]">
                 <iframe id="showreel-iframe" 
                         class="absolute left-[-2%] w-[104%] h-[134%] top-[-17%] border-0 rounded-[5px] pointer-events-auto" 
-                        src="https://www.youtube.com/embed/pdp05Yl0Bp4?autoplay=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1&enablejsapi=1" 
+                        src="https://www.youtube.com/embed/pdp05Yl0Bp4?autoplay=1&vq=hd1080&hd=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1&enablejsapi=1" 
                         title="Noor Motion Showreel 2026" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         allowfullscreen></iframe>
@@ -383,6 +383,17 @@ window.playShowreelVideo = function() {
             </div>
         </div>
     `;
+
+    // Enforce 1080p HD quality via YouTube Player API postMessage
+    setTimeout(() => {
+        const iframe = document.getElementById('showreel-iframe');
+        if (iframe && iframe.contentWindow) {
+            try {
+                iframe.contentWindow.postMessage('{"event":"command","func":"setPlaybackQuality","args":["hd1080"]}', '*');
+                iframe.contentWindow.postMessage('{"event":"command","func":"setSuggestedQuality","args":["hd1080"]}', '*');
+            } catch(e) {}
+        }
+    }, 600);
 };
 
 window.toggleShowreelPlay = function(btn) {
@@ -875,7 +886,7 @@ window.openProductModal = function (productId) {
     if (product.youtubeUrl && product.youtubeUrl !== "") {
         mediaContainer.innerHTML = `
             <div class="relative w-full h-full overflow-hidden rounded-[5px]">
-                <iframe class="absolute left-[-2%] w-[104%] h-[134%] top-[-17%] border-0 rounded-[5px]" src="${product.youtubeUrl}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1&enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe class="absolute left-[-2%] w-[104%] h-[134%] top-[-17%] border-0 rounded-[5px]" src="${product.youtubeUrl}?autoplay=1&mute=1&vq=hd1080&hd=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1&enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         `;
     } else {
