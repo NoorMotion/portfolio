@@ -494,6 +494,25 @@ body.dark-mode .loader-bar {
     a.mobile-link {
         min-height: 44px;
     }
+
+    /* Mobile Video Frame & Controls Optimization */
+    .portfolio-item-card.portfolio-card-expanded .media-box {
+        aspect-ratio: auto !important;
+        min-height: 290px !important;
+    }
+
+    #video-modal > div {
+        min-height: 260px !important;
+        max-height: 80vh !important;
+    }
+
+    #modal-media-container {
+        min-height: 240px !important;
+    }
+
+    #showreel-player-box {
+        min-height: 240px !important;
+    }
 }
 
 /* Morphing Navigation Header (Floating Pill Shape on Scroll) */

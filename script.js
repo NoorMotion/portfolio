@@ -468,30 +468,33 @@ window.expandVideoCard = function(element, rawVideoUrl) {
         infoBox.classList.add('hidden');
     }
     
-    // 6. Replace media box with 16:9 aspect-video iframe & controls (Exact 1:1 frame match, normal size controls)
+    // 6. Replace media box with iframe & controls optimized for both desktop and mobile screens
     mediaBox.classList.remove('aspect-[4/3]');
-    mediaBox.classList.add('aspect-video', 'rounded-[5px]', 'relative', 'overflow-hidden');
+    mediaBox.classList.add('aspect-video', 'min-h-[260px]', 'xs:min-h-[290px]', 'sm:min-h-0', 'rounded-[5px]', 'relative', 'overflow-hidden', 'flex', 'flex-col');
     mediaBox.innerHTML = `
-        <div class="relative w-full h-full bg-black overflow-hidden rounded-[5px] group video-frame-fadein flex justify-center items-center">
-            <!-- Top Controls Bar (Always visible on mobile touch, hover on desktop) -->
-            <div class="absolute top-0 inset-x-0 p-2 sm:p-3 z-30 flex justify-between items-center bg-gradient-to-b from-black/90 via-black/50 to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition duration-300 pointer-events-none">
-                <span class="text-white font-bold text-[10px] sm:text-xs font-mono-custom tracking-wide truncate max-w-[40%] sm:max-w-[55%] px-2 py-0.5 sm:px-2.5 sm:py-1 bg-black/70 backdrop-blur-md rounded-[3px] border border-white/10 shadow-lg pointer-events-auto">
+        <div class="relative w-full h-full bg-black overflow-hidden rounded-[5px] group video-frame-fadein flex flex-col">
+            <!-- Top Controls Bar (Sleek non-blocking header on mobile, hover overlay on desktop) -->
+            <div class="z-30 flex justify-between items-center bg-slate-900/95 sm:bg-gradient-to-b sm:from-black/90 sm:via-black/50 sm:to-transparent p-2 sm:p-3 sm:absolute sm:top-0 sm:inset-x-0 transition duration-300">
+                <span class="text-white font-bold text-[11px] sm:text-xs font-mono-custom tracking-wide truncate max-w-[45%] sm:max-w-[55%] px-2 py-0.5 sm:px-2.5 sm:py-1 bg-black/70 backdrop-blur-md rounded-[3px] border border-white/10 shadow-lg">
                     ${titleText}
                 </span>
-                <div class="flex items-center space-x-1 sm:space-x-2 pointer-events-auto">
+                <div class="flex items-center space-x-1.5 sm:space-x-2">
                     <a href="${videoData.rawUrl}" target="_blank" rel="noopener noreferrer" 
                        onclick="event.stopPropagation()"
-                       class="px-2 py-0.5 sm:px-2.5 sm:py-1 bg-black/80 backdrop-blur-md text-white font-mono-custom text-[10px] sm:text-xs uppercase rounded-[3px] border border-white/20 hover:bg-[#E11D48] hover:border-[#E11D48] transition flex items-center space-x-1 shadow-lg">
+                       class="px-2 py-1 sm:px-2.5 sm:py-1 bg-black/80 backdrop-blur-md text-white font-mono-custom text-[10px] sm:text-xs uppercase rounded-[3px] border border-white/20 hover:bg-[#E11D48] hover:border-[#E11D48] transition flex items-center space-x-1 shadow-lg">
                         <span>Drive HD</span>
                         <i class="fa-solid fa-arrow-up-right-from-square text-[9px] sm:text-[10px] ml-1"></i>
                     </a>
                     <button onclick="event.stopPropagation(); collapseVideoCard(this.closest('.portfolio-card-expanded'))" 
-                            class="px-2 py-0.5 sm:px-2.5 sm:py-1 bg-black/80 backdrop-blur-md text-white font-mono-custom text-[10px] sm:text-xs uppercase rounded-[3px] border border-white/20 hover:bg-red-600 hover:border-red-600 transition flex items-center space-x-1 shadow-lg">
+                            class="px-2 py-1 sm:px-2.5 sm:py-1 bg-red-600 sm:bg-black/80 backdrop-blur-md text-white font-mono-custom text-[10px] sm:text-xs uppercase rounded-[3px] border border-white/20 hover:bg-red-700 hover:border-red-700 transition flex items-center space-x-1 shadow-lg">
                         <span>Close [X]</span>
                     </button>
                 </div>
             </div>
-            <iframe class="w-full h-full border-0 rounded-[5px] absolute inset-0 z-10" src="${videoData.embedUrl}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+            <!-- Video Player Iframe Container -->
+            <div class="relative w-full flex-1 min-h-[220px] xs:min-h-[250px] sm:min-h-0 bg-black">
+                <iframe class="w-full h-full border-0 rounded-b-[5px] sm:rounded-[5px] absolute inset-0 z-10" src="${videoData.embedUrl}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+            </div>
         </div>
     `;
 
@@ -518,7 +521,7 @@ window.collapseVideoCard = function(element) {
 
     const mediaBox = element.querySelector('.media-box');
     if (mediaBox && element.dataset.originalMedia) {
-        mediaBox.classList.remove('aspect-video');
+        mediaBox.classList.remove('aspect-video', 'min-h-[260px]', 'xs:min-h-[290px]', 'sm:min-h-0', 'flex', 'flex-col');
         mediaBox.classList.add('aspect-[4/3]');
         mediaBox.innerHTML = element.dataset.originalMedia;
     }
