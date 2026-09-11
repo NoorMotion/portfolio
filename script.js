@@ -491,18 +491,35 @@ window.seekShowreelVideo = function(percent) {
 
 window.forceShowreel1080p = function(btn) {
     const text = document.getElementById('showreel-quality-text');
-    if (window.showreelYTPlayer && typeof window.showreelYTPlayer.setPlaybackQuality === 'function') {
-        try {
-            window.showreelYTPlayer.setPlaybackQuality('hd1080');
-            window.showreelYTPlayer.setSuggestedQuality('hd1080');
-        } catch(e) {}
+
+    // Get current playback position to resume at same point on YouTube
+    let currentTime = 0;
+    if (window.showreelYTPlayer && typeof window.showreelYTPlayer.getCurrentTime === 'function') {
+        currentTime = Math.floor(window.showreelYTPlayer.getCurrentTime() || 0);
     }
+
+    // Pause the embedded player
+    if (window.showreelYTPlayer && typeof window.showreelYTPlayer.pauseVideo === 'function') {
+        window.showreelYTPlayer.pauseVideo();
+        window.showreelIsPlaying = false;
+        const icon = document.getElementById('showreel-play-icon');
+        const playText = document.getElementById('showreel-play-text');
+        if (icon) icon.className = 'fa-solid fa-play text-[11px]';
+        if (playText) playText.innerText = 'Play';
+    }
+
+    // Visual feedback on button
     if (text) {
-        text.innerText = '1080p [ENFORCED]';
-        setTimeout(() => {
-            if (text) text.innerText = '1080p HD [ON]';
-        }, 1500);
+        text.innerText = 'Opening 1080p...';
     }
+
+    // Open full YouTube page at exact timestamp — quality settings fully work on youtube.com
+    const ytUrl = `https://www.youtube.com/watch?v=pdp05Yl0Bp4&t=${currentTime}s&vq=hd1080`;
+    window.open(ytUrl, '_blank', 'noopener,noreferrer');
+
+    setTimeout(() => {
+        if (text) text.innerText = '1080p HD [ON]';
+    }, 1500);
 };
 
 window.toggleShowreelPlay = function(btn) {
