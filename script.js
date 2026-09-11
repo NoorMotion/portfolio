@@ -362,9 +362,48 @@ window.playShowreelVideo = function() {
 
     box.innerHTML = `
         <div class="relative w-full h-full bg-black overflow-hidden rounded-[5px] group video-frame-fadein flex justify-center items-center">
-            <!-- YouTube Iframe with Native YouTube Controls & Settings Gear Icon (Top-Cropped to hide channel header) -->
+            <!-- YouTube Iframe Top-Cropped (Enforces 1080p HD default quality, no branding/avatar) -->
             <div class="absolute inset-0 overflow-hidden rounded-[5px]">
-                <div id="showreel-iframe-container" class="absolute left-0 w-full top-[-14%] h-[114%] pointer-events-auto"></div>
+                <div id="showreel-iframe-container" class="absolute left-[-2%] w-[104%] h-[134%] top-[-17%] pointer-events-auto"></div>
+            </div>
+
+            <!-- Sleek Custom Player Controls Overlay (Seekbar + 1080p Quality Switch + Play/Pause) -->
+            <div id="showreel-custom-controls" class="absolute inset-x-0 bottom-0 p-3 sm:p-4 z-30 flex flex-col justify-end space-y-2 bg-gradient-to-t from-black/95 via-black/60 to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition duration-300 pointer-events-auto">
+                
+                <!-- Interactive Seekbar & Time Counter -->
+                <div class="w-full flex items-center space-x-3 px-1">
+                    <span id="showreel-time" class="text-white font-mono-custom text-[10px] sm:text-xs min-w-[70px] select-none">0:00 / 0:00</span>
+                    <input type="range" id="showreel-seekbar" min="0" max="100" value="0" step="0.1" 
+                           onmousedown="window.isSeekingShowreel = true"
+                           onmouseup="window.isSeekingShowreel = false"
+                           onchange="seekShowreelVideo(this.value)"
+                           oninput="seekShowreelVideo(this.value)"
+                           class="w-full h-1.5 bg-white/30 rounded-lg appearance-none cursor-pointer accent-[#E11D48] hover:h-2 transition-all" />
+                </div>
+
+                <!-- Bottom Control Buttons Bar -->
+                <div class="flex justify-between items-center w-full pt-1">
+                    <!-- Left: Play/Pause & Mute Buttons -->
+                    <div class="flex items-center space-x-2">
+                        <button onclick="event.stopPropagation(); toggleShowreelPlay(this)" 
+                                class="px-3 py-1.5 bg-black/80 backdrop-blur-md text-white font-mono-custom text-xs uppercase rounded-[3px] border border-white/20 hover:bg-[#E11D48] hover:border-[#E11D48] transition flex items-center space-x-1.5 shadow-lg">
+                            <i class="fa-solid fa-pause text-[11px]" id="showreel-play-icon"></i>
+                            <span id="showreel-play-text">Pause</span>
+                        </button>
+                        <button onclick="event.stopPropagation(); toggleShowreelMute(this)" 
+                                class="px-3 py-1.5 bg-black/80 backdrop-blur-md text-white font-mono-custom text-xs uppercase rounded-[3px] border border-white/20 hover:bg-[#E11D48] hover:border-[#E11D48] transition flex items-center space-x-1.5 shadow-lg">
+                            <i class="fa-solid fa-volume-high text-[11px]" id="showreel-mute-icon"></i>
+                        </button>
+                    </div>
+
+                    <!-- Right: Dedicated 1080p HD Quality Switch Button -->
+                    <button onclick="event.stopPropagation(); forceShowreel1080p(this)" 
+                            class="px-3 py-1.5 bg-[#E11D48] text-white font-mono-custom text-xs font-bold uppercase rounded-[3px] border border-white/20 hover:bg-red-600 transition flex items-center space-x-1.5 shadow-lg"
+                            title="Force Convert Video to 1080p Full HD">
+                        <i class="fa-solid fa-gear text-[10px]"></i>
+                        <span id="showreel-quality-text">1080p HD [ON]</span>
+                    </button>
+                </div>
             </div>
         </div>
     `;
@@ -375,7 +414,7 @@ window.playShowreelVideo = function() {
             videoId: 'pdp05Yl0Bp4',
             playerVars: {
                 autoplay: 1,
-                controls: 1,
+                controls: 0,
                 modestbranding: 1,
                 rel: 0,
                 showinfo: 0,
@@ -392,6 +431,7 @@ window.playShowreelVideo = function() {
                         event.target.setSuggestedQuality('hd1080');
                         event.target.playVideo();
                     } catch(e) {}
+                    startShowreelProgressTracker();
                 },
                 onStateChange: function(event) {
                     try {
@@ -451,71 +491,17 @@ window.seekShowreelVideo = function(percent) {
 
 window.forceShowreel1080p = function(btn) {
     const text = document.getElementById('showreel-quality-text');
-    const player = window.showreelYTPlayer;
-
-    if (text) {
-        text.innerText = 'SWITCHING TO 1080P...';
-    }
-
-    if (player) {
+    if (window.showreelYTPlayer && typeof window.showreelYTPlayer.setPlaybackQuality === 'function') {
         try {
-            // 1. Direct API Quality requests
-            if (typeof player.setPlaybackQuality === 'function') player.setPlaybackQuality('hd1080');
-            if (typeof player.setSuggestedQuality === 'function') player.setSuggestedQuality('hd1080');
-
-            // 2. Reload stream at current timestamp using loadVideoById with suggestedQuality 'hd1080'
-            if (typeof player.getCurrentTime === 'function' && typeof player.loadVideoById === 'function') {
-                const currentTime = player.getCurrentTime() || 0;
-                const wasPlaying = window.showreelIsPlaying;
-
-                player.loadVideoById({
-                    videoId: 'pdp05Yl0Bp4',
-                    startSeconds: currentTime,
-                    suggestedQuality: 'hd1080'
-                });
-
-                if (typeof player.setPlaybackQuality === 'function') player.setPlaybackQuality('hd1080');
-
-                if (!wasPlaying && typeof player.pauseVideo === 'function') {
-                    setTimeout(() => { try { player.pauseVideo(); } catch(e){} }, 600);
-                }
-            }
-        } catch(e) {
-            console.warn('Error applying 1080p quality:', e);
-        }
-
-        // 3. PostMessage fallback directly to iframe content window
-        const iframe = document.querySelector('#showreel-iframe-container iframe');
-        if (iframe && iframe.contentWindow) {
-            try {
-                iframe.contentWindow.postMessage(JSON.stringify({
-                    event: 'command',
-                    func: 'setPlaybackQuality',
-                    args: ['hd1080', true]
-                }), '*');
-                iframe.contentWindow.postMessage(JSON.stringify({
-                    event: 'command',
-                    func: 'setSuggestedQuality',
-                    args: ['hd1080', true]
-                }), '*');
-            } catch(e) {}
-        }
+            window.showreelYTPlayer.setPlaybackQuality('hd1080');
+            window.showreelYTPlayer.setSuggestedQuality('hd1080');
+        } catch(e) {}
     }
-
-    if (btn) {
-        btn.classList.remove('bg-[#E11D48]');
-        btn.classList.add('bg-emerald-600', 'border-emerald-400');
-    }
-
     if (text) {
-        text.innerText = '1080P FULL HD [ACTIVE]';
+        text.innerText = '1080p [ENFORCED]';
         setTimeout(() => {
             if (text) text.innerText = '1080p HD [ON]';
-            if (btn) {
-                btn.classList.remove('bg-emerald-600', 'border-emerald-400');
-                btn.classList.add('bg-[#E11D48]');
-            }
-        }, 2500);
+        }, 1500);
     }
 };
 
