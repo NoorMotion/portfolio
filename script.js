@@ -359,13 +359,15 @@ window.playShowreelVideo = function() {
 
     box.innerHTML = `
         <div class="relative w-full h-full bg-black overflow-hidden rounded-[5px] group video-frame-fadein flex justify-center items-center">
-            <!-- YouTube Iframe (Clean frame: no YouTube branding, channel title, or native controls) -->
-            <iframe id="showreel-iframe" 
-                    class="w-full h-full border-0 rounded-[5px] scale-[1.05] pointer-events-auto" 
-                    src="https://www.youtube.com/embed/pdp05Yl0Bp4?autoplay=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1&enablejsapi=1" 
-                    title="Noor Motion Showreel 2026" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen></iframe>
+            <!-- YouTube Iframe Top-Cropped: Crop top 17% to completely eliminate channel avatar, title bar & YouTube overlays -->
+            <div class="absolute inset-0 overflow-hidden rounded-[5px]">
+                <iframe id="showreel-iframe" 
+                        class="absolute left-[-2%] w-[104%] h-[134%] top-[-17%] border-0 rounded-[5px] pointer-events-auto" 
+                        src="https://www.youtube.com/embed/pdp05Yl0Bp4?autoplay=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1&enablejsapi=1" 
+                        title="Noor Motion Showreel 2026" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen></iframe>
+            </div>
 
             <!-- Minimalist Custom Clean Controls (Appears on hover) -->
             <div id="showreel-custom-controls" class="absolute bottom-3 right-3 z-30 flex items-center space-x-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition duration-300 pointer-events-auto">
@@ -871,7 +873,11 @@ window.openProductModal = function (productId) {
 
     const mediaContainer = document.getElementById('modal-media-container');
     if (product.youtubeUrl && product.youtubeUrl !== "") {
-        mediaContainer.innerHTML = `<iframe class="w-full h-full rounded-[5px] scale-[1.04]" src="${product.youtubeUrl}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1&enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        mediaContainer.innerHTML = `
+            <div class="relative w-full h-full overflow-hidden rounded-[5px]">
+                <iframe class="absolute left-[-2%] w-[104%] h-[134%] top-[-17%] border-0 rounded-[5px]" src="${product.youtubeUrl}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1&enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        `;
     } else {
         mediaContainer.innerHTML = `<img src="${product.image}" class="w-full h-full object-cover rounded-[5px]" alt="${product.title}" />`;
     }
