@@ -345,17 +345,24 @@ body.dark-mode .b44-card:hover {
     transform: none !important;
 }
 
-/* Google Drive Video Framing Engine (Symmetrical top & bottom black spacing for visual equality) */
+/* Google Drive Video Framing Engine (Center Aligns Video Vertically inside Frame) */
 .gdrive-iframe {
     position: absolute !important;
-    top: 0 !important;
+    top: -28px !important;
     left: 0 !important;
     width: 100% !important;
-    height: 100% !important;
+    height: calc(100% + 28px) !important;
     border: 0 !important;
     border-radius: 5px !important;
     transform: none !important;
     z-index: 10 !important;
+}
+
+@media (max-width: 639px) {
+    .gdrive-iframe {
+        top: -24px !important;
+        height: calc(100% + 24px) !important;
+    }
 }
 
 /* Expanded Portfolio Video Frame (Unscaled 16:9 on Mobile, Spacious Frame on Desktop) */
