@@ -616,8 +616,11 @@ function applyPortfolioMasonry() {
 window.expandVideoCard = function(element, rawVideoUrl) {
     if (!element) return;
 
-    // 1. If clicking on already expanded card, do nothing
-    if (element.classList.contains('portfolio-card-expanded')) return;
+    // 1. If clicking on already expanded card, collapse it
+    if (element.classList.contains('portfolio-card-expanded')) {
+        collapseVideoCard(element);
+        return;
+    }
 
     // 2. Collapse any currently expanded card in grid
     const currentExpanded = document.querySelector('.portfolio-card-expanded');
@@ -647,34 +650,12 @@ window.expandVideoCard = function(element, rawVideoUrl) {
         infoBox.classList.add('hidden');
     }
     
-    // 6. Replace media box with iframe & controls overlaying directly on top of the video
+    // 6. Replace media box with full frame video iframe only (No text, no buttons on top of video)
     mediaBox.classList.remove('aspect-[4/3]');
     mediaBox.classList.add('aspect-video', 'rounded-[5px]', 'relative', 'overflow-hidden');
     mediaBox.innerHTML = `
         <div class="relative w-full h-full bg-black overflow-hidden rounded-[5px] group video-frame-fadein">
-            <!-- Video Player Iframe Container (Full 100% overlay, no extra space taken) -->
-            <div class="absolute inset-0 w-full h-full bg-black overflow-hidden z-10">
-                <iframe class="${videoData.isDrive ? 'gdrive-iframe' : 'w-full h-full border-0 rounded-[5px] absolute inset-0 z-10'}" src="${videoData.embedUrl}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-            </div>
-
-            <!-- Floating Top Overlay Controls Bar (Overlays directly ON TOP of video content) -->
-            <div class="absolute top-0 inset-x-0 z-30 flex justify-between items-center p-2.5 sm:p-3 bg-gradient-to-b from-black/80 via-black/30 to-transparent pointer-events-none transition duration-300">
-                <span class="pointer-events-auto text-white font-bold text-[11px] sm:text-xs font-mono-custom tracking-wide truncate max-w-[50%] sm:max-w-[60%] px-2.5 py-1 bg-black/70 backdrop-blur-md rounded-[3px] border border-white/10 shadow-lg">
-                    ${titleText}
-                </span>
-                <div class="pointer-events-auto flex items-center space-x-1.5 sm:space-x-2">
-                    <a href="${videoData.rawUrl}" target="_blank" rel="noopener noreferrer" 
-                       onclick="event.stopPropagation()"
-                       class="px-2.5 py-1 bg-black/80 backdrop-blur-md text-white font-mono-custom text-[10px] sm:text-xs uppercase rounded-[3px] border border-white/20 hover:bg-[#E11D48] hover:border-[#E11D48] transition flex items-center space-x-1 shadow-lg">
-                        <span>Drive HD</span>
-                        <i class="fa-solid fa-arrow-up-right-from-square text-[9px] sm:text-[10px] ml-1"></i>
-                    </a>
-                    <button onclick="event.stopPropagation(); collapseVideoCard(this.closest('.portfolio-card-expanded'))" 
-                            class="px-2.5 py-1 bg-red-600 sm:bg-black/80 backdrop-blur-md text-white font-mono-custom text-[10px] sm:text-xs uppercase rounded-[3px] border border-white/20 hover:bg-red-700 hover:border-red-700 transition flex items-center space-x-1 shadow-lg">
-                        <span>Close [X]</span>
-                    </button>
-                </div>
-            </div>
+            <iframe class="${videoData.isDrive ? 'gdrive-iframe' : 'w-full h-full border-0 rounded-[5px] absolute inset-0 z-10'}" src="${videoData.embedUrl}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
         </div>
     `;
 
