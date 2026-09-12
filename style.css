@@ -358,6 +358,18 @@ body.dark-mode .b44-card:hover {
     z-index: 10 !important;
 }
 
+/* Expanded Portfolio Video Frame (Vertically Taller Frame with Equal Top & Bottom Blank Space) */
+.portfolio-card-expanded .media-box {
+    aspect-ratio: 16 / 10.2 !important;
+    min-height: 280px !important;
+}
+
+@media (min-width: 640px) {
+    .portfolio-card-expanded .media-box {
+        min-height: 340px !important;
+    }
+}
+
 .portfolio-card-expanded {
     transform: scale(1.01);
     z-index: 20;
