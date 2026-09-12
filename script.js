@@ -107,10 +107,10 @@ if (typeof window !== 'undefined') {
                 eventName = `Played Video: "${title}"`;
                 metadata = { title };
             }
-            // 2. Drive HD Link
-            else if (target.innerText && target.innerText.includes('Drive HD')) {
+            // 2. HD Video Link Click
+            else if (target.innerText && (target.innerText.includes('Drive HD') || target.innerText.includes('pCloud HD') || target.innerText.includes('Watch HD'))) {
                 eventType = 'video_action';
-                eventName = `Clicked Drive HD Link`;
+                eventName = `Clicked Video HD Link`;
                 metadata = { href: target.getAttribute('href') };
             }
             // 3. Tool Purchase / Gumroad Buttons
@@ -230,7 +230,7 @@ const siteData = {
             category: "Promo Video",
             badge: "PROMO VIDEO",
             image: "https://noormotion.carrd.co/assets/videos/video09_thumbnail.jpg?v=86a3e49b",
-            videoUrl: "https://drive.google.com/file/d/13WzQi1z3SSCRwcKSTVyWQV6fb5FwYucF/view"
+            videoUrl: "https://u.pcloud.link/publink/show?code=XZKOSzJZvueCtgc6fL0I0hD0MxfYKXV57jb7"
         },
         {
             title: "NextCRM Marketing Automation",
@@ -309,7 +309,7 @@ const siteData = {
 
 // Robust Video URL Parsing Function
 function parseVideoEmbed(url) {
-    if (!url) return { embedUrl: '', rawUrl: '#', isDrive: false };
+    if (!url) return { embedUrl: '', rawUrl: '#', isDrive: false, isPcloud: false };
 
     if (url.includes('drive.google.com')) {
         const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
@@ -318,9 +318,17 @@ function parseVideoEmbed(url) {
             return {
                 embedUrl: `https://drive.google.com/file/d/${fileId}/preview`,
                 rawUrl: `https://drive.google.com/file/d/${fileId}/view?usp=sharing`,
-                isDrive: true
+                isDrive: true,
+                isPcloud: false
             };
         }
+    } else if (url.includes('pcloud.link') || url.includes('pcloud.com')) {
+        return {
+            embedUrl: url,
+            rawUrl: url,
+            isDrive: false,
+            isPcloud: true
+        };
     } else if (url.includes('youtube.com') || url.includes('youtu.be')) {
         let videoId = '';
         if (url.includes('youtube.com/watch')) {
@@ -332,12 +340,18 @@ function parseVideoEmbed(url) {
             return {
                 embedUrl: `https://www.youtube.com/embed/${videoId}?autoplay=1&vq=hd1080&hd=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1&enablejsapi=1`,
                 rawUrl: url,
-                isDrive: false
+                isDrive: false,
+                isPcloud: false
             };
         }
     }
 
-    return { embedUrl: url, rawUrl: url, isDrive: url.includes('drive.google.com') };
+    return { 
+        embedUrl: url, 
+        rawUrl: url, 
+        isDrive: url.includes('drive.google.com'),
+        isPcloud: url.includes('pcloud.link') || url.includes('pcloud.com')
+    };
 }
 
 // Showreel Single Click Video Player Handler (Clean Frame with 1080p HD Quality Switch & Interactive Seekbar)
@@ -661,7 +675,7 @@ window.expandVideoCard = function(element, rawVideoUrl) {
                     <a href="${videoData.rawUrl}" target="_blank" rel="noopener noreferrer" 
                        onclick="event.stopPropagation()"
                        class="px-2 py-1 sm:px-2.5 sm:py-1 bg-black/80 backdrop-blur-md text-white font-mono-custom text-[10px] sm:text-xs uppercase rounded-[3px] border border-white/20 hover:bg-[#E11D48] hover:border-[#E11D48] transition flex items-center space-x-1 shadow-lg">
-                        <span>Drive HD</span>
+                        <span>${videoData.isDrive ? 'Drive HD' : (videoData.isPcloud ? 'pCloud HD' : 'Watch HD')}</span>
                         <i class="fa-solid fa-arrow-up-right-from-square text-[9px] sm:text-[10px] ml-1"></i>
                     </a>
                     <button onclick="event.stopPropagation(); collapseVideoCard(this.closest('.portfolio-card-expanded'))" 
