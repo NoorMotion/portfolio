@@ -345,17 +345,24 @@ body.dark-mode .b44-card:hover {
     transform: none !important;
 }
 
-/* Google Drive Video Framing Engine (Crops GDrive top header & bottom letterbox for 100% full-frame edge-to-edge video) */
+/* Google Drive Video Framing Engine (Precise 1920x1080 16:9 framing - zero scale-up, zero cropping, zero black bars) */
 .gdrive-iframe {
     position: absolute !important;
-    left: -2% !important;
-    width: 104% !important;
-    top: -16% !important;
-    height: 132% !important;
+    left: 0 !important;
+    width: 100% !important;
+    top: -56px !important;
+    height: calc(100% + 56px) !important;
     border: 0 !important;
     border-radius: 5px !important;
     transform: none !important;
     z-index: 10 !important;
+}
+
+@media (max-width: 639px) {
+    .gdrive-iframe {
+        top: -48px !important;
+        height: calc(100% + 48px) !important;
+    }
 }
 
 .portfolio-card-expanded {
