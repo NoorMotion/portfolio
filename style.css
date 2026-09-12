@@ -358,14 +358,15 @@ body.dark-mode .b44-card:hover {
     z-index: 10 !important;
 }
 
-/* Expanded Portfolio Video Frame (Vertically Taller Frame with Equal Top & Bottom Blank Space) */
+/* Expanded Portfolio Video Frame (Unscaled 16:9 on Mobile, Spacious Frame on Desktop) */
 .portfolio-card-expanded .media-box {
-    aspect-ratio: 16 / 10.2 !important;
-    min-height: 280px !important;
+    aspect-ratio: 16 / 9 !important;
+    min-height: auto !important;
 }
 
 @media (min-width: 640px) {
     .portfolio-card-expanded .media-box {
+        aspect-ratio: 16 / 10.2 !important;
         min-height: 340px !important;
     }
 }
@@ -520,9 +521,11 @@ body.dark-mode .loader-bar {
         min-height: 44px;
     }
 
-    /* Mobile Video Frame & Controls Optimization */
+    /* Mobile Video Frame Optimization (Strict Unscaled 16:9 for Phone Screens) */
     .portfolio-item-card.portfolio-card-expanded .media-box {
         aspect-ratio: 16 / 9 !important;
+        min-height: auto !important;
+        height: auto !important;
     }
 
     #video-modal > div {
