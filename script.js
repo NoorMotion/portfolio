@@ -107,10 +107,10 @@ if (typeof window !== 'undefined') {
                 eventName = `Played Video: "${title}"`;
                 metadata = { title };
             }
-            // 2. HD Video Link Click
-            else if (target.innerText && (target.innerText.includes('Drive HD') || target.innerText.includes('pCloud HD') || target.innerText.includes('Watch HD'))) {
+            // 2. Drive HD Link
+            else if (target.innerText && target.innerText.includes('Drive HD')) {
                 eventType = 'video_action';
-                eventName = `Clicked Video HD Link`;
+                eventName = `Clicked Drive HD Link`;
                 metadata = { href: target.getAttribute('href') };
             }
             // 3. Tool Purchase / Gumroad Buttons
@@ -230,7 +230,7 @@ const siteData = {
             category: "Promo Video",
             badge: "PROMO VIDEO",
             image: "https://noormotion.carrd.co/assets/videos/video09_thumbnail.jpg?v=86a3e49b",
-            videoUrl: "https://u.pcloud.link/publink/show?code=XZKOSzJZvueCtgc6fL0I0hD0MxfYKXV57jb7"
+            videoUrl: "https://drive.google.com/file/d/13WzQi1z3SSCRwcKSTVyWQV6fb5FwYucF/view"
         },
         {
             title: "NextCRM Marketing Automation",
@@ -309,7 +309,7 @@ const siteData = {
 
 // Robust Video URL Parsing Function
 function parseVideoEmbed(url) {
-    if (!url) return { embedUrl: '', rawUrl: '#', isDrive: false, isPcloud: false };
+    if (!url) return { embedUrl: '', rawUrl: '#', isDrive: false };
 
     if (url.includes('drive.google.com')) {
         const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
@@ -318,17 +318,9 @@ function parseVideoEmbed(url) {
             return {
                 embedUrl: `https://drive.google.com/file/d/${fileId}/preview`,
                 rawUrl: `https://drive.google.com/file/d/${fileId}/view?usp=sharing`,
-                isDrive: true,
-                isPcloud: false
+                isDrive: true
             };
         }
-    } else if (url.includes('pcloud.link') || url.includes('pcloud.com')) {
-        return {
-            embedUrl: url,
-            rawUrl: url,
-            isDrive: false,
-            isPcloud: true
-        };
     } else if (url.includes('youtube.com') || url.includes('youtu.be')) {
         let videoId = '';
         if (url.includes('youtube.com/watch')) {
@@ -340,18 +332,12 @@ function parseVideoEmbed(url) {
             return {
                 embedUrl: `https://www.youtube.com/embed/${videoId}?autoplay=1&vq=hd1080&hd=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1&enablejsapi=1`,
                 rawUrl: url,
-                isDrive: false,
-                isPcloud: false
+                isDrive: false
             };
         }
     }
 
-    return { 
-        embedUrl: url, 
-        rawUrl: url, 
-        isDrive: url.includes('drive.google.com'),
-        isPcloud: url.includes('pcloud.link') || url.includes('pcloud.com')
-    };
+    return { embedUrl: url, rawUrl: url, isDrive: url.includes('drive.google.com') };
 }
 
 // Showreel Single Click Video Player Handler (Clean Frame with 1080p HD Quality Switch & Interactive Seekbar)
@@ -661,32 +647,33 @@ window.expandVideoCard = function(element, rawVideoUrl) {
         infoBox.classList.add('hidden');
     }
     
-    // 6. Replace media box with iframe & controls optimized for both desktop and mobile screens
+    // 6. Replace media box with iframe & controls overlaying directly on top of the video
     mediaBox.classList.remove('aspect-[4/3]');
-    mediaBox.classList.add('aspect-video', 'min-h-[260px]', 'xs:min-h-[290px]', 'sm:min-h-0', 'rounded-[5px]', 'relative', 'overflow-hidden', 'flex', 'flex-col');
+    mediaBox.classList.add('aspect-video', 'rounded-[5px]', 'relative', 'overflow-hidden');
     mediaBox.innerHTML = `
-        <div class="relative w-full h-full bg-black overflow-hidden rounded-[5px] group video-frame-fadein flex flex-col">
-            <!-- Top Controls Bar (Sleek non-blocking header on mobile, hover overlay on desktop) -->
-            <div class="z-30 flex justify-between items-center bg-slate-900/95 sm:bg-gradient-to-b sm:from-black/90 sm:via-black/50 sm:to-transparent p-2 sm:p-3 sm:absolute sm:top-0 sm:inset-x-0 transition duration-300">
-                <span class="text-white font-bold text-[11px] sm:text-xs font-mono-custom tracking-wide truncate max-w-[45%] sm:max-w-[55%] px-2 py-0.5 sm:px-2.5 sm:py-1 bg-black/70 backdrop-blur-md rounded-[3px] border border-white/10 shadow-lg">
+        <div class="relative w-full h-full bg-black overflow-hidden rounded-[5px] group video-frame-fadein">
+            <!-- Video Player Iframe Container (Full 100% overlay, no extra space taken) -->
+            <div class="absolute inset-0 w-full h-full bg-black overflow-hidden z-10">
+                <iframe class="${videoData.isDrive ? 'gdrive-iframe' : 'w-full h-full border-0 rounded-[5px] absolute inset-0 z-10'}" src="${videoData.embedUrl}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <!-- Floating Top Overlay Controls Bar (Overlays directly ON TOP of video content) -->
+            <div class="absolute top-0 inset-x-0 z-30 flex justify-between items-center p-2.5 sm:p-3 bg-gradient-to-b from-black/80 via-black/30 to-transparent pointer-events-none transition duration-300">
+                <span class="pointer-events-auto text-white font-bold text-[11px] sm:text-xs font-mono-custom tracking-wide truncate max-w-[50%] sm:max-w-[60%] px-2.5 py-1 bg-black/70 backdrop-blur-md rounded-[3px] border border-white/10 shadow-lg">
                     ${titleText}
                 </span>
-                <div class="flex items-center space-x-1.5 sm:space-x-2">
+                <div class="pointer-events-auto flex items-center space-x-1.5 sm:space-x-2">
                     <a href="${videoData.rawUrl}" target="_blank" rel="noopener noreferrer" 
                        onclick="event.stopPropagation()"
-                       class="px-2 py-1 sm:px-2.5 sm:py-1 bg-black/80 backdrop-blur-md text-white font-mono-custom text-[10px] sm:text-xs uppercase rounded-[3px] border border-white/20 hover:bg-[#E11D48] hover:border-[#E11D48] transition flex items-center space-x-1 shadow-lg">
-                        <span>${videoData.isDrive ? 'Drive HD' : (videoData.isPcloud ? 'pCloud HD' : 'Watch HD')}</span>
+                       class="px-2.5 py-1 bg-black/80 backdrop-blur-md text-white font-mono-custom text-[10px] sm:text-xs uppercase rounded-[3px] border border-white/20 hover:bg-[#E11D48] hover:border-[#E11D48] transition flex items-center space-x-1 shadow-lg">
+                        <span>Drive HD</span>
                         <i class="fa-solid fa-arrow-up-right-from-square text-[9px] sm:text-[10px] ml-1"></i>
                     </a>
                     <button onclick="event.stopPropagation(); collapseVideoCard(this.closest('.portfolio-card-expanded'))" 
-                            class="px-2 py-1 sm:px-2.5 sm:py-1 bg-red-600 sm:bg-black/80 backdrop-blur-md text-white font-mono-custom text-[10px] sm:text-xs uppercase rounded-[3px] border border-white/20 hover:bg-red-700 hover:border-red-700 transition flex items-center space-x-1 shadow-lg">
+                            class="px-2.5 py-1 bg-red-600 sm:bg-black/80 backdrop-blur-md text-white font-mono-custom text-[10px] sm:text-xs uppercase rounded-[3px] border border-white/20 hover:bg-red-700 hover:border-red-700 transition flex items-center space-x-1 shadow-lg">
                         <span>Close [X]</span>
                     </button>
                 </div>
-            </div>
-            <!-- Video Player Iframe Container -->
-            <div class="relative w-full flex-1 min-h-[220px] xs:min-h-[250px] sm:min-h-0 bg-black">
-                <iframe class="w-full h-full border-0 rounded-b-[5px] sm:rounded-[5px] absolute inset-0 z-10" src="${videoData.embedUrl}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
     `;
@@ -1059,6 +1046,11 @@ window.openVideoModal = function (videoUrl) {
     const videoData = parseVideoEmbed(videoUrl);
     if (videoIframe && videoModal) {
         videoIframe.src = videoData.embedUrl;
+        if (videoData.isDrive) {
+            videoIframe.className = 'gdrive-iframe';
+        } else {
+            videoIframe.className = 'w-full h-full border-0 rounded-[5px]';
+        }
         videoModal.classList.remove('hidden');
         setTimeout(() => videoModal.classList.remove('opacity-0'), 10);
         document.body.style.overflow = 'hidden';

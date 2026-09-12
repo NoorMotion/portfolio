@@ -336,13 +336,33 @@ body.dark-mode .b44-card:hover {
     position: relative !important;
 }
 
-.portfolio-item-card iframe {
+.portfolio-item-card iframe:not(.gdrive-iframe) {
     width: 100% !important;
     height: 100% !important;
     border: 0 !important;
     border-radius: 5px !important;
     overflow: hidden !important;
     transform: none !important;
+}
+
+/* Google Drive Video Framing Engine (Crops Google Drive's native 54px header & perfectly aligns video content & control bar) */
+.gdrive-iframe {
+    position: absolute !important;
+    left: 0 !important;
+    width: 100% !important;
+    top: -54px !important;
+    height: calc(100% + 56px) !important;
+    border: 0 !important;
+    border-radius: 5px !important;
+    transform: none !important;
+    z-index: 10 !important;
+}
+
+@media (max-width: 639px) {
+    .gdrive-iframe {
+        top: -50px !important;
+        height: calc(100% + 52px) !important;
+    }
 }
 
 .portfolio-card-expanded {
@@ -497,8 +517,7 @@ body.dark-mode .loader-bar {
 
     /* Mobile Video Frame & Controls Optimization */
     .portfolio-item-card.portfolio-card-expanded .media-box {
-        aspect-ratio: auto !important;
-        min-height: 290px !important;
+        aspect-ratio: 16 / 9 !important;
     }
 
     #video-modal > div {
