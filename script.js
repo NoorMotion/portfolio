@@ -330,7 +330,7 @@ function parseVideoEmbed(url) {
         }
         if (videoId) {
             return {
-                embedUrl: `https://www.youtube.com/embed/${videoId}?autoplay=1&vq=hd1080&hd=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1&enablejsapi=1`,
+                embedUrl: `https://www.youtube.com/embed/${videoId}?autoplay=1&vq=hd1080&hd=1&controls=1&rel=0&playsinline=1&enablejsapi=1`,
                 rawUrl: url,
                 isDrive: false
             };
