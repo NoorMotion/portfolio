@@ -130,7 +130,7 @@ if (typeof window !== 'undefined') {
                 eventName = `Clicked CTA: "Watch Showreel"`;
             }
             // 5. Social Links
-            else if (target.href && (target.href.includes('linkedin.com') || target.href.includes('youtube.com') || target.href.includes('facebook.com') || target.href.includes('wa.me') || target.href.includes('t.me'))) {
+            else if (target.href && (target.href.includes('gumroad.com') || target.href.includes('linkedin.com') || target.href.includes('youtube.com') || target.href.includes('facebook.com') || target.href.includes('wa.me') || target.href.includes('t.me'))) {
                 eventType = 'social_click';
                 const platform = target.innerText.trim() || target.href;
                 eventName = `Clicked Social Link: ${platform}`;
@@ -299,6 +299,7 @@ const siteData = {
         { name: "Rafsan Jani", company: "StartUp Inc.", review: "His sense of animation is very modern. He gave our brand identity a whole new look." }
     ],
     socials: [
+        { name: "Gumroad", icon: "fa-gumroad", url: "https://nralam.gumroad.com/" },
         { name: "LinkedIn", icon: "fa-linkedin-in", url: "https://www.linkedin.com/in/motionoor-alam-/" },
         { name: "YouTube", icon: "fa-youtube", url: "https://www.youtube.com/@Motionoor" },
         { name: "Facebook", icon: "fa-facebook-f", url: "https://www.facebook.com/Nr.Alm96" },
