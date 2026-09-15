@@ -365,7 +365,7 @@ body.dark-mode .b44-card:hover {
     }
 }
 
-/* Expanded Portfolio Video Frame (Unscaled 16:9 on Mobile, Spacious Frame on Desktop) */
+/* Expanded Portfolio Video Frame (Strict 16:9 Aspect Ratio matching exact video dimensions) */
 .portfolio-card-expanded .media-box {
     aspect-ratio: 16 / 9 !important;
     min-height: auto !important;
@@ -373,8 +373,8 @@ body.dark-mode .b44-card:hover {
 
 @media (min-width: 640px) {
     .portfolio-card-expanded .media-box {
-        aspect-ratio: 16 / 10.2 !important;
-        min-height: 340px !important;
+        aspect-ratio: 16 / 9 !important;
+        min-height: auto !important;
     }
 }
 
