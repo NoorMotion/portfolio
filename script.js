@@ -330,7 +330,7 @@ function parseVideoEmbed(url) {
         }
         if (videoId) {
             return {
-                embedUrl: `https://www.youtube.com/embed/${videoId}?autoplay=1&vq=hd1080&hd=1&controls=1&rel=0&playsinline=1&enablejsapi=1`,
+                embedUrl: `https://www.youtube.com/embed/${videoId}?autoplay=1&vq=hd1080&hd=1&controls=1&autohide=1&rel=0&playsinline=1&enablejsapi=1`,
                 rawUrl: url,
                 isDrive: false
             };
@@ -656,7 +656,9 @@ window.expandVideoCard = function(element, rawVideoUrl) {
     mediaBox.classList.remove('aspect-[4/3]');
     mediaBox.classList.add('aspect-video', 'rounded-[5px]', 'relative', 'overflow-hidden');
     mediaBox.innerHTML = `
-        <div class="relative w-full h-full bg-black overflow-hidden rounded-[5px] group video-frame-fadein">
+        <div class="relative w-full h-full bg-black overflow-hidden rounded-[5px] group video-frame-fadein video-player-wrapper"
+             onmouseenter="const iframe = this.querySelector('iframe'); if (iframe) iframe.style.pointerEvents = 'auto';"
+             onmouseleave="const iframe = this.querySelector('iframe'); if (iframe) iframe.style.pointerEvents = 'none';">
             <iframe class="${videoData.isDrive ? 'gdrive-iframe' : 'w-full h-full border-0 rounded-[5px] absolute inset-0 z-10'}" src="${videoData.embedUrl}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
         </div>
     `;

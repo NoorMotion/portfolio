@@ -394,6 +394,10 @@ body.dark-mode .b44-card:hover {
     animation: fadeInVideo 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+.video-player-wrapper iframe {
+    transition: pointer-events 0.15s ease;
+}
+
 @keyframes fadeInVideo {
     from {
         opacity: 0;
