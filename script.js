@@ -543,73 +543,75 @@ window.toggleShowreelMute = function(btn) {
 // 🧩 DYNAMIC MASONRY ENGINE (Zero Gap Packing)
 // ==========================================
 function applyPortfolioMasonry() {
-    const grid = document.getElementById('portfolio-grid');
-    if (!grid) return;
+    ['portfolio-grid', 'walkthroughs-grid'].forEach(gridId => {
+        const grid = document.getElementById(gridId);
+        if (!grid) return;
 
-    const cards = Array.from(grid.querySelectorAll('.portfolio-item-card'));
-    if (!cards.length) return;
+        const cards = Array.from(grid.querySelectorAll('.portfolio-item-card'));
+        if (!cards.length) return;
 
-    const windowWidth = window.innerWidth;
-    
-    // On mobile screens (< 768px), disable absolute positioning and reset grid
-    if (windowWidth < 768) {
-        grid.style.height = 'auto';
-        grid.style.position = 'static';
+        const windowWidth = window.innerWidth;
+        
+        // On mobile screens (< 768px), disable absolute positioning and reset grid
+        if (windowWidth < 768) {
+            grid.style.height = 'auto';
+            grid.style.position = 'static';
+            cards.forEach(card => {
+                card.style.position = 'static';
+                card.style.transform = 'none';
+                card.style.width = '100%';
+            });
+            return;
+        }
+
+        const cols = windowWidth >= 1024 ? 3 : 2;
+        const gap = 32; // 32px gap
+        const gridWidth = grid.clientWidth;
+        const colWidth = (gridWidth - (cols - 1) * gap) / cols;
+        const colHeights = new Array(cols).fill(0);
+
+        grid.style.position = 'relative';
+
         cards.forEach(card => {
-            card.style.position = 'static';
-            card.style.transform = 'none';
-            card.style.width = '100%';
-        });
-        return;
-    }
+            card.style.position = 'absolute';
+            card.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), width 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease';
 
-    const cols = windowWidth >= 1024 ? 3 : 2;
-    const gap = 32; // 32px gap
-    const gridWidth = grid.clientWidth;
-    const colWidth = (gridWidth - (cols - 1) * gap) / cols;
-    const colHeights = new Array(cols).fill(0);
+            let span = 1;
+            if (card.classList.contains('portfolio-card-expanded') && cols >= 2) {
+                span = 2;
+            }
 
-    grid.style.position = 'relative';
+            // Find the column index range with the lowest height
+            let targetCol = 0;
+            let minH = Infinity;
 
-    cards.forEach(card => {
-        card.style.position = 'absolute';
-        card.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), width 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease';
+            for (let i = 0; i <= cols - span; i++) {
+                let maxHInSpan = 0;
+                for (let j = 0; j < span; j++) {
+                    maxHInSpan = Math.max(maxHInSpan, colHeights[i + j]);
+                }
+                if (maxHInSpan < minH) {
+                    minH = maxHInSpan;
+                    targetCol = i;
+                }
+            }
 
-        let span = 1;
-        if (card.classList.contains('portfolio-card-expanded') && cols >= 2) {
-            span = 2;
-        }
+            const posX = targetCol * (colWidth + gap);
+            const posY = minH;
+            const itemWidth = span === 2 ? (colWidth * 2 + gap) : colWidth;
 
-        // Find the column index range with the lowest height
-        let targetCol = 0;
-        let minH = Infinity;
+            card.style.width = `${itemWidth}px`;
+            card.style.transform = `translate3d(${posX}px, ${posY}px, 0)`;
 
-        for (let i = 0; i <= cols - span; i++) {
-            let maxHInSpan = 0;
+            const cardHeight = card.offsetHeight;
             for (let j = 0; j < span; j++) {
-                maxHInSpan = Math.max(maxHInSpan, colHeights[i + j]);
+                colHeights[targetCol + j] = posY + cardHeight + gap;
             }
-            if (maxHInSpan < minH) {
-                minH = maxHInSpan;
-                targetCol = i;
-            }
-        }
+        });
 
-        const posX = targetCol * (colWidth + gap);
-        const posY = minH;
-        const itemWidth = span === 2 ? (colWidth * 2 + gap) : colWidth;
-
-        card.style.width = `${itemWidth}px`;
-        card.style.transform = `translate3d(${posX}px, ${posY}px, 0)`;
-
-        const cardHeight = card.offsetHeight;
-        for (let j = 0; j < span; j++) {
-            colHeights[targetCol + j] = posY + cardHeight + gap;
-        }
+        const maxGridHeight = Math.max(...colHeights);
+        grid.style.height = `${maxGridHeight}px`;
     });
-
-    const maxGridHeight = Math.max(...colHeights);
-    grid.style.height = `${maxGridHeight}px`;
 }
 
 // In-Place Expand Video Card Logic with Hover-Only Overlay, 5px Masking & Zero Letterbox Scaling
