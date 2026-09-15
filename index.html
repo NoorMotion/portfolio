@@ -5,12 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noor Motion | Motion Designer & Design Engineer</title>
-    <meta name="description" content="Portfolio of Noor Motion — Motion Designer, SaaS Explainer Specialist & AE Script Builder.">
+    <meta name="description"
+        content="Portfolio of Noor Motion — Motion Designer, SaaS Explainer Specialist & AE Script Builder.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,600;1,700&family=Hind+Siliguri:wght@300;400;500;600;700&family=Instrument+Serif:ital@1&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@1,400;1,600;1,700;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,600;1,700&family=Hind+Siliguri:wght@300;400;500;600;700&family=Instrument+Serif:ital@1&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@1,400;1,600;1,700;1,900&display=swap"
+        rel="stylesheet">
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -42,18 +45,23 @@
     <div id="loader">
         <div class="flex items-center space-x-3 mb-2">
             <img src="favicon.svg" class="w-10 h-10 rounded-md object-contain" alt="NoorMotion Logo">
-            <h1 class="text-3xl font-bold tracking-widest font-mono-custom text-slate-900" id="loader-logo">NOOR<span class="text-[#E11D48]">MOTION</span></h1>
+            <h1 class="text-3xl font-bold tracking-widest font-mono-custom text-slate-900" id="loader-logo">NOOR<span
+                    class="text-[#E11D48]">MOTION</span></h1>
         </div>
         <div class="loader-bar">
             <div class="loader-progress" id="loader-progress"></div>
         </div>
-        <p class="mt-4 text-xs font-mono-custom text-slate-500 tracking-widest uppercase" id="loader-text">Loading System Visuals...</p>
+        <p class="mt-4 text-xs font-mono-custom text-slate-500 tracking-widest uppercase" id="loader-text">Loading
+            System Visuals...</p>
     </div>
 
     <!-- System Header Navigation Bar (haoqi.design Terminal Bar - Base44 Warm Stone Blur) -->
-    <header id="main-header" class="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-4 py-3 sm:px-6 lg:px-12 backdrop-blur-md bg-[#EEECEB]/80 border-b border-black/10 font-mono-custom text-xs uppercase">
+    <header id="main-header"
+        class="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-4 py-3 sm:px-6 lg:px-12 backdrop-blur-md bg-[#EEECEB]/80 border-b border-black/10 font-mono-custom text-xs uppercase">
         <!-- Logo -->
-        <a href="#" class="dotted-btn p-1.5 font-bold text-sm text-slate-900 tracking-wider hover-trigger flex items-center space-x-2" id="nav-logo">
+        <a href="#"
+            class="dotted-btn p-1.5 font-bold text-sm text-slate-900 tracking-wider hover-trigger flex items-center space-x-2"
+            id="nav-logo">
             <img src="favicon.svg" class="w-6 h-6 rounded-md object-contain" alt="NoorMotion Logo">
             <span>NOOR<span class="text-[#E11D48]">MOTION</span></span>
         </a>
@@ -61,35 +69,44 @@
         <!-- Desktop Menu Nav -->
         <nav class="hidden md:flex items-center space-x-6 text-slate-600 flex-nowrap whitespace-nowrap">
             <a href="blog.html" class="dotted-btn p-2 hover:text-[#E11D48] transition hover-trigger font-bold">Blog</a>
+            <a href="#walkthroughs" class="dotted-btn p-2 hover:text-[#E11D48] transition hover-trigger font-bold">Walkthroughs</a>
             <a href="#about" class="dotted-btn p-2 hover:text-slate-900 transition hover-trigger">About</a>
-            <a href="#contact" class="dotted-btn p-2 text-[#E11D48] font-bold hover:text-slate-900 transition hover-trigger">Contact</a>
+            <a href="#contact"
+                class="dotted-btn p-2 text-[#E11D48] font-bold hover:text-slate-900 transition hover-trigger">Contact</a>
         </nav>
 
         <!-- System Controls (Clock, Theme) -->
         <div class="flex items-center space-x-2 sm:space-x-4">
-            <span class="hidden sm:inline-block text-slate-600 px-2 py-1 bg-black/5 rounded border border-black/10" id="live-clock">GMT+6 BD 00:00</span>
-            
+            <span class="hidden sm:inline-block text-slate-600 px-2 py-1 bg-black/5 rounded border border-black/10"
+                id="live-clock">GMT+6 BD 00:00</span>
+
             <!-- Theme Toggle Button -->
             <button id="theme-toggle-desktop" class="dotted-btn p-2 text-slate-900 hover-trigger" title="Toggle Theme">
                 THEME[<span class="text-[#E11D48]">L</span>]
             </button>
 
             <!-- Mobile Hamburger -->
-            <button id="mobile-menu-btn" class="md:hidden text-slate-900 text-lg p-2 min-w-[44px] min-h-[44px] flex items-center justify-center" title="Open Menu">
+            <button id="mobile-menu-btn"
+                class="md:hidden text-slate-900 text-lg p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                title="Open Menu">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
     </header>
 
     <!-- Mobile Slide-out Menu (z-[100] above header with full system controls) -->
-    <div id="mobile-menu" class="fixed inset-0 bg-[#EEECEB] z-[100] flex flex-col justify-between items-center p-6 sm:p-8 transform translate-x-full transition-transform duration-500 font-mono-custom">
+    <div id="mobile-menu"
+        class="fixed inset-0 bg-[#EEECEB] z-[100] flex flex-col justify-between items-center p-6 sm:p-8 transform translate-x-full transition-transform duration-500 font-mono-custom">
         <!-- Top bar inside mobile menu -->
         <div class="w-full flex justify-between items-center pt-2">
             <div class="flex items-center space-x-2">
                 <img src="favicon.svg" class="w-6 h-6 rounded-md object-contain" alt="NoorMotion Logo">
-                <span class="font-bold text-sm text-slate-900 tracking-wider">NOOR<span class="text-[#E11D48]">MOTION</span></span>
+                <span class="font-bold text-sm text-slate-900 tracking-wider">NOOR<span
+                        class="text-[#E11D48]">MOTION</span></span>
             </div>
-            <button id="mobile-menu-close" class="text-2xl text-slate-900 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center" title="Close Menu">
+            <button id="mobile-menu-close"
+                class="text-2xl text-slate-900 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                title="Close Menu">
                 <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
@@ -97,6 +114,7 @@
         <!-- Navigation Links -->
         <nav class="flex flex-col justify-center items-center space-y-6 text-xl my-auto">
             <a href="blog.html" class="mobile-link text-slate-900 hover:text-[#E11D48] transition font-bold">Blog</a>
+            <a href="#walkthroughs" class="mobile-link text-slate-900 hover:text-[#E11D48] transition font-bold">Walkthroughs</a>
             <a href="#about" class="mobile-link text-slate-900 hover:text-[#E11D48] transition">About</a>
             <a href="#contact" class="mobile-link text-[#E11D48] font-bold">Contact</a>
         </nav>
@@ -104,54 +122,76 @@
         <!-- System Controls inside mobile menu -->
         <div class="w-full flex flex-col items-center space-y-4 pt-4 border-t border-black/10 text-xs uppercase">
             <div class="flex items-center space-x-3">
-                <button id="theme-toggle-mobile" class="dotted-btn px-4 py-2 bg-black/5 rounded text-slate-900 font-mono-custom">
+                <button id="theme-toggle-mobile"
+                    class="dotted-btn px-4 py-2 bg-black/5 rounded text-slate-900 font-mono-custom">
                     THEME[<span class="text-[#E11D48]" id="theme-mobile-indicator">L</span>]
                 </button>
             </div>
-            <span class="text-slate-600 px-3 py-1 bg-black/5 rounded border border-black/10" id="live-clock-mobile">GMT+6 BD 00:00</span>
+            <span class="text-slate-600 px-3 py-1 bg-black/5 rounded border border-black/10"
+                id="live-clock-mobile">GMT+6 BD 00:00</span>
         </div>
     </div>
 
     <!-- Hero Section (Kinetic Typography & Showreel Background) -->
-    <section class="relative min-h-screen flex items-center pt-24 pb-12 sm:pt-28 sm:pb-20 overflow-hidden border-b border-black/10" id="hero">
+    <section
+        class="relative min-h-screen flex items-center pt-24 pb-12 sm:pt-28 sm:pb-20 overflow-hidden border-b border-black/10"
+        id="hero">
         <!-- Background Showreel Ambient Overlay -->
         <div class="absolute inset-0 pointer-events-none opacity-10">
             <div class="video-vignette-vertical"></div>
             <div class="video-vignette-horizontal"></div>
-            <iframe class="w-full h-full object-cover aspect-video filter blur-sm scale-110" 
-                    src="https://www.youtube.com/embed/pdp05Yl0Bp4?autoplay=1&mute=1&loop=1&playlist=pdp05Yl0Bp4&vq=hd1080&hd=1&controls=0&showinfo=0&rel=0" 
-                    allow="autoplay; encrypted-media"></iframe>
+            <iframe class="w-full h-full object-cover aspect-video filter blur-sm scale-110"
+                src="https://www.youtube.com/embed/pdp05Yl0Bp4?autoplay=1&mute=1&loop=1&playlist=pdp05Yl0Bp4&vq=hd1080&hd=1&controls=0&showinfo=0&rel=0"
+                allow="autoplay; encrypted-media"></iframe>
         </div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center relative z-10">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center relative z-10">
             <div class="lg:col-span-8 flex flex-col items-start space-y-6">
 
                 <!-- Hero Kinetic Title (Ultra-Stylish Instrument Serif, Arrow shifted 4px down & Staggered GSAP Character Wiggle for "motion") -->
-                <h1 class="text-3xl xs:text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] text-slate-900 break-words max-w-full">
-                    <span class="block">Your <span class="font-serif-italic font-normal italic text-[#E11D48] tracking-wide text-[1.08em] sm:text-[1.12em]">digital</span> product</span>
-                    <span class="block">Moves in <span id="hero-motion-word" class="font-serif-italic font-normal italic text-slate-900 tracking-wide text-[1.08em] sm:text-[1.12em] inline-block"><span class="hero-motion-char inline-block">m</span><span class="hero-motion-char inline-block">o</span><span class="hero-motion-char inline-block">t</span><span class="hero-motion-char inline-block">i</span><span class="hero-motion-char inline-block">o</span><span class="hero-motion-char inline-block">n</span></span></span>
-                    
+                <h1
+                    class="text-3xl xs:text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] text-slate-900 break-words max-w-full">
+                    <span class="block">Your <span
+                            class="font-serif-italic font-normal italic text-[#E11D48] tracking-wide text-[1.08em] sm:text-[1.12em]">digital</span>
+                        product</span>
+                    <span class="block">Moves in <span id="hero-motion-word"
+                            class="font-serif-italic font-normal italic text-slate-900 tracking-wide text-[1.08em] sm:text-[1.12em] inline-block"><span
+                                class="hero-motion-char inline-block">m</span><span
+                                class="hero-motion-char inline-block">o</span><span
+                                class="hero-motion-char inline-block">t</span><span
+                                class="hero-motion-char inline-block">i</span><span
+                                class="hero-motion-char inline-block">o</span><span
+                                class="hero-motion-char inline-block">n</span></span></span>
+
                     <!-- Line 3: Underline removed, Arrow shifted 4px down after "Sales." -->
-                    <span class="block text-xl sm:text-4xl lg:text-5xl mt-3 font-semibold text-slate-800 tracking-normal flex flex-wrap items-center">
-                        <span class="font-serif-italic font-normal italic text-[#E11D48] text-[1.2em] tracking-wide mr-2">Story</span> 
+                    <span
+                        class="block text-xl sm:text-4xl lg:text-5xl mt-3 font-semibold text-slate-800 tracking-normal flex flex-wrap items-center">
+                        <span
+                            class="font-serif-italic font-normal italic text-[#E11D48] text-[1.2em] tracking-wide mr-2">Story</span>
                         <span class="inline-flex items-center flex-wrap">
                             <span class="mr-2">that Sales.</span>
-                            <i class="fa-solid fa-arrow-right-long text-[#E11D48] text-[0.85em] inline-block transform translate-y-[2px] sm:translate-y-[4px] hover:translate-x-2 transition duration-300"></i>
+                            <i
+                                class="fa-solid fa-arrow-right-long text-[#E11D48] text-[0.85em] inline-block transform translate-y-[2px] sm:translate-y-[4px] hover:translate-x-2 transition duration-300"></i>
                         </span>
                     </span>
                 </h1>
 
                 <!-- Hero Subtitle -->
                 <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed" id="hero-desc">
-                    I craft SaaS product explainer videos, motion graphic visuals, and custom Adobe After Effects workflow automation tools that elevate brand stories.
+                    I craft SaaS product explainer videos, motion graphic visuals, and custom Adobe After Effects
+                    workflow automation tools that elevate brand stories.
                 </p>
 
                 <!-- Action CTA Group -->
                 <div class="flex flex-col sm:flex-row w-full sm:w-auto gap-3 pt-4">
-                    <a href="#portfolio" class="dotted-btn px-6 sm:px-8 py-3.5 sm:py-4 bg-[#E11D48] text-white font-bold text-sm rounded-[5px] hover:bg-slate-900 transition-all text-center justify-center hover-trigger" id="hero-btn-1">
+                    <a href="#portfolio"
+                        class="dotted-btn px-6 sm:px-8 py-3.5 sm:py-4 bg-[#E11D48] text-white font-bold text-sm rounded-[5px] hover:bg-slate-900 transition-all text-center justify-center hover-trigger"
+                        id="hero-btn-1">
                         See Selected Works
                     </a>
-                    <a href="#showreel" class="dotted-btn px-6 sm:px-8 py-3.5 sm:py-4 border border-black/15 bg-black/5 text-slate-900 font-bold text-sm rounded-[5px] hover:bg-black/10 transition-all flex items-center justify-center space-x-3 hover-trigger">
+                    <a href="#showreel"
+                        class="dotted-btn px-6 sm:px-8 py-3.5 sm:py-4 border border-black/15 bg-black/5 text-slate-900 font-bold text-sm rounded-[5px] hover:bg-black/10 transition-all flex items-center justify-center space-x-3 hover-trigger">
                         <i class="fa-solid fa-play text-[#E11D48]"></i>
                         <span>Watch Showreel</span>
                     </a>
@@ -161,28 +201,36 @@
             <!-- Right: Portrait & Social Link Column (Column of small social icons on the right side of hero) -->
             <div class="lg:col-span-4 flex flex-row items-center justify-center lg:justify-end gap-3 sm:gap-4 w-full">
                 <!-- Portrait Badge -->
-                <div class="relative flex-1 max-w-[240px] xs:max-w-[270px] sm:max-w-sm lg:max-w-[340px] aspect-square rounded-[5px] flex justify-center items-center group overflow-hidden bg-transparent border border-black/20 shadow-md p-[5px] pt-[20px] sm:pt-[25px]">
-                    <img id="hero-portrait-img" 
-                         src="https://nooralam.carrd.co/assets/images/image01.png?v=1e1d6b0a" 
-                         alt="Noor Motion" 
-                         class="w-full h-full object-cover rounded-[5px] transition duration-500 transform group-hover:scale-105">
+                <div
+                    class="relative flex-1 max-w-[240px] xs:max-w-[270px] sm:max-w-sm lg:max-w-[340px] aspect-square rounded-[5px] flex justify-center items-center group overflow-hidden bg-transparent border border-black/20 shadow-md p-[5px] pt-[20px] sm:pt-[25px]">
+                    <img id="hero-portrait-img" src="https://nooralam.carrd.co/assets/images/image01.png?v=1e1d6b0a"
+                        alt="Noor Motion"
+                        class="w-full h-full object-cover rounded-[5px] transition duration-500 transform group-hover:scale-105">
                 </div>
 
                 <!-- Vertical Social Icon Column -->
                 <div class="flex flex-col items-center justify-center space-y-2.5 sm:space-y-3" id="hero-social-column">
-                    <a href="https://www.linkedin.com/in/motionoor-alam-/" target="_blank" rel="noopener noreferrer" title="LinkedIn" class="dotted-btn w-9 h-9 sm:w-10 sm:h-10 rounded-[5px] bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-110 hover-trigger">
+                    <a href="https://www.linkedin.com/in/motionoor-alam-/" target="_blank" rel="noopener noreferrer"
+                        title="LinkedIn"
+                        class="dotted-btn w-9 h-9 sm:w-10 sm:h-10 rounded-[5px] bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-110 hover-trigger">
                         <i class="fa-brands fa-linkedin-in text-sm"></i>
                     </a>
-                    <a href="https://www.youtube.com/@Motionoor" target="_blank" rel="noopener noreferrer" title="YouTube" class="dotted-btn w-9 h-9 sm:w-10 sm:h-10 rounded-[5px] bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-110 hover-trigger">
+                    <a href="https://www.youtube.com/@Motionoor" target="_blank" rel="noopener noreferrer"
+                        title="YouTube"
+                        class="dotted-btn w-9 h-9 sm:w-10 sm:h-10 rounded-[5px] bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-110 hover-trigger">
                         <i class="fa-brands fa-youtube text-sm"></i>
                     </a>
-                    <a href="https://www.facebook.com/Nr.Alm96" target="_blank" rel="noopener noreferrer" title="Facebook" class="dotted-btn w-9 h-9 sm:w-10 sm:h-10 rounded-[5px] bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-110 hover-trigger">
+                    <a href="https://www.facebook.com/Nr.Alm96" target="_blank" rel="noopener noreferrer"
+                        title="Facebook"
+                        class="dotted-btn w-9 h-9 sm:w-10 sm:h-10 rounded-[5px] bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-110 hover-trigger">
                         <i class="fa-brands fa-facebook-f text-sm"></i>
                     </a>
-                    <a href="https://wa.me/+8801867739749" target="_blank" rel="noopener noreferrer" title="WhatsApp" class="dotted-btn w-9 h-9 sm:w-10 sm:h-10 rounded-[5px] bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-110 hover-trigger">
+                    <a href="https://wa.me/+8801867739749" target="_blank" rel="noopener noreferrer" title="WhatsApp"
+                        class="dotted-btn w-9 h-9 sm:w-10 sm:h-10 rounded-[5px] bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-110 hover-trigger">
                         <i class="fa-brands fa-whatsapp text-sm"></i>
                     </a>
-                    <a href="https://t.me/+8801867739749" target="_blank" rel="noopener noreferrer" title="Telegram" class="dotted-btn w-9 h-9 sm:w-10 sm:h-10 rounded-[5px] bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-110 hover-trigger">
+                    <a href="https://t.me/+8801867739749" target="_blank" rel="noopener noreferrer" title="Telegram"
+                        class="dotted-btn w-9 h-9 sm:w-10 sm:h-10 rounded-[5px] bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-110 hover-trigger">
                         <i class="fa-brands fa-telegram text-sm"></i>
                     </a>
                 </div>
@@ -194,21 +242,23 @@
     <section class="py-16 border-b border-black/10 relative z-10" id="showreel">
         <div class="max-w-5xl mx-auto px-6 lg:px-12">
             <div class="text-center mb-8">
-                <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-2">FEATURED SHOWREEL</span>
+                <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-2">FEATURED
+                    SHOWREEL</span>
                 <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">Motion Reel 2026</h2>
             </div>
 
             <!-- Showreel Video Container (5px Radius + Edge-to-Edge Crop) -->
-            <div class="b44-card rounded-[5px] overflow-hidden bg-black border border-black/10 shadow-2xl relative group max-w-3xl mx-auto cursor-pointer hover-trigger" 
-                 id="showreel-card"
-                 onclick="playShowreelVideo()">
-                <div class="aspect-video w-full relative overflow-hidden flex justify-center items-center rounded-[5px]" id="showreel-player-box">
-                    <img src="https://img.youtube.com/vi/pdp05Yl0Bp4/maxresdefault.jpg" 
-                         alt="Noor Motion Showreel 2026" 
-                         class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
-                    
-                    <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition duration-300 flex justify-center items-center pointer-events-none">
-                        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-2xl transform scale-90 group-hover:scale-110 transition duration-500 ring-4 ring-white/20">
+            <div class="b44-card rounded-[5px] overflow-hidden bg-black border border-black/10 shadow-2xl relative group max-w-3xl mx-auto cursor-pointer hover-trigger"
+                id="showreel-card" onclick="playShowreelVideo()">
+                <div class="aspect-video w-full relative overflow-hidden flex justify-center items-center rounded-[5px]"
+                    id="showreel-player-box">
+                    <img src="https://img.youtube.com/vi/pdp05Yl0Bp4/maxresdefault.jpg" alt="Noor Motion Showreel 2026"
+                        class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+
+                    <div
+                        class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition duration-300 flex justify-center items-center pointer-events-none">
+                        <div
+                            class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-2xl transform scale-90 group-hover:scale-110 transition duration-500 ring-4 ring-white/20">
                             <i class="fa-solid fa-play text-xl sm:text-2xl ml-1"></i>
                         </div>
                     </div>
@@ -220,9 +270,11 @@
     <!-- Selected Works / Portfolio Section (In-Place Expanding Cards - 5px Radius) -->
     <section class="py-24 border-b border-black/10 relative z-10" id="portfolio">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 space-y-4 md:space-y-0">
+            <div
+                class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 space-y-4 md:space-y-0">
                 <div>
-                    <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-2">SELECTED PROJECTS</span>
+                    <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-2">SELECTED
+                        PROJECTS</span>
                     <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-slate-900">Featured Motion Works</h2>
                 </div>
                 <span class="font-mono-custom text-xs text-slate-500 uppercase">Click card to play in-place</span>
@@ -231,129 +283,233 @@
             <!-- Grid Matrix -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
                 <!-- Card 1 -->
-                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1p22ilqvf2cyatv4v5cVLOdEq7K0-tfoT/view')" class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1p22ilqvf2cyatv4v5cVLOdEq7K0-tfoT/view')"
+                    class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
                     <div class="media-box aspect-[4/3] overflow-hidden relative rounded-t-[5px]">
-                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">MOTION PROJECT</span>
-                        <img src="https://noormotion.carrd.co/assets/videos/video11_thumbnail.jpg?v=86a3e49b" alt="DrivePhase.ai Explainer" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
-                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
-                            <div class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
+                        <span
+                            class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">MOTION
+                            PROJECT</span>
+                        <img src="https://noormotion.carrd.co/assets/videos/video11_thumbnail.jpg?v=86a3e49b"
+                            alt="DrivePhase.ai Explainer"
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                        <div
+                            class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
+                            <div
+                                class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
                                 <i class="fa-solid fa-play ml-1"></i>
                             </div>
                         </div>
                     </div>
                     <div class="p-6">
                         <span class="font-mono-custom text-xs text-slate-500 uppercase block mb-1">SaaS Explainer</span>
-                        <h4 class="text-lg font-bold text-slate-900 group-hover:text-[#E11D48] transition">DrivePhase.ai Explainer</h4>
+                        <h4 class="text-lg font-bold text-slate-900 group-hover:text-[#E11D48] transition">DrivePhase.ai
+                            Explainer</h4>
                     </div>
                 </div>
 
                 <!-- Card 2 -->
-                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1A7NU3RcdVyAI4CL4w2_hnXHDGuPmpLJX/view')" class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1A7NU3RcdVyAI4CL4w2_hnXHDGuPmpLJX/view')"
+                    class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
                     <div class="media-box aspect-[4/3] overflow-hidden relative rounded-t-[5px]">
-                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">MOTION PROJECT</span>
-                        <img src="https://noormotion.carrd.co/assets/videos/video04_thumbnail.jpg?v=86a3e49b" alt="School Management Software" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
-                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
-                            <div class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
+                        <span
+                            class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">MOTION
+                            PROJECT</span>
+                        <img src="https://noormotion.carrd.co/assets/videos/video04_thumbnail.jpg?v=86a3e49b"
+                            alt="School Management Software"
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                        <div
+                            class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
+                            <div
+                                class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
                                 <i class="fa-solid fa-play ml-1"></i>
                             </div>
                         </div>
                     </div>
                     <div class="p-6">
                         <span class="font-mono-custom text-xs text-slate-500 uppercase block mb-1">Product Promo</span>
-                        <h4 class="text-lg font-bold text-slate-900 group-hover:text-[#E11D48] transition">School Management Software</h4>
+                        <h4 class="text-lg font-bold text-slate-900 group-hover:text-[#E11D48] transition">School
+                            Management Software</h4>
                     </div>
                 </div>
 
                 <!-- Card 3 -->
-                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1h89xJaYIL_Crq97M6JXh0eWEN1u3d4Xr/view')" class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1h89xJaYIL_Crq97M6JXh0eWEN1u3d4Xr/view')"
+                    class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
                     <div class="media-box aspect-[4/3] overflow-hidden relative rounded-t-[5px]">
-                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">PLUGIN PROMO</span>
-                        <img src="https://noormotion.carrd.co/assets/videos/video05_thumbnail.jpg?v=86a3e49b" alt="Next Video Review" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
-                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
-                            <div class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
+                        <span
+                            class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">PLUGIN
+                            PROMO</span>
+                        <img src="https://noormotion.carrd.co/assets/videos/video05_thumbnail.jpg?v=86a3e49b"
+                            alt="Next Video Review"
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                        <div
+                            class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
+                            <div
+                                class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
                                 <i class="fa-solid fa-play ml-1"></i>
                             </div>
                         </div>
                     </div>
                     <div class="p-6">
-                        <span class="font-mono-custom text-xs text-slate-500 uppercase block mb-1">WordPress Plugin Promo</span>
-                        <h4 class="text-lg font-bold text-slate-900 group-hover:text-[#E11D48] transition">Next Video Review</h4>
+                        <span class="font-mono-custom text-xs text-slate-500 uppercase block mb-1">WordPress Plugin
+                            Promo</span>
+                        <h4 class="text-lg font-bold text-slate-900 group-hover:text-[#E11D48] transition">Next Video
+                            Review</h4>
                     </div>
                 </div>
 
                 <!-- Card 4 -->
-                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1lIxJSS9FBU143EQFGamtFwmglblQvbgW/view')" class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1lIxJSS9FBU143EQFGamtFwmglblQvbgW/view')"
+                    class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
                     <div class="media-box aspect-[4/3] overflow-hidden relative rounded-t-[5px]">
-                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">PLUGIN EXPLAINER</span>
-                        <img src="https://noormotion.carrd.co/assets/videos/video08_thumbnail.jpg?v=86a3e49b" alt="Washer Service Booking" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
-                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
-                            <div class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
+                        <span
+                            class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">PLUGIN
+                            EXPLAINER</span>
+                        <img src="https://noormotion.carrd.co/assets/videos/video08_thumbnail.jpg?v=86a3e49b"
+                            alt="Washer Service Booking"
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                        <div
+                            class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
+                            <div
+                                class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
                                 <i class="fa-solid fa-play ml-1"></i>
                             </div>
                         </div>
                     </div>
                     <div class="p-6">
-                        <span class="font-mono-custom text-xs text-slate-500 uppercase block mb-1">Plugin Explainer</span>
-                        <h4 class="text-lg font-bold text-slate-900 group-hover:text-[#E11D48] transition">Washer Service Booking</h4>
+                        <span class="font-mono-custom text-xs text-slate-500 uppercase block mb-1">Plugin
+                            Explainer</span>
+                        <h4 class="text-lg font-bold text-slate-900 group-hover:text-[#E11D48] transition">Washer
+                            Service Booking</h4>
                     </div>
                 </div>
 
                 <!-- Card 5 -->
-                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1hc2joGAoRFD3e0jqdivD9inTIYIXckZJ/view')" class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1hc2joGAoRFD3e0jqdivD9inTIYIXckZJ/view')"
+                    class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
                     <div class="media-box aspect-[4/3] overflow-hidden relative rounded-t-[5px]">
-                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">PROMO VIDEO</span>
-                        <img src="https://noormotion.carrd.co/assets/videos/video06_thumbnail.jpg?v=86a3e49b" alt="Salonly Salon Booking" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
-                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
-                            <div class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
+                        <span
+                            class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">PROMO
+                            VIDEO</span>
+                        <img src="https://noormotion.carrd.co/assets/videos/video06_thumbnail.jpg?v=86a3e49b"
+                            alt="Salonly Salon Booking"
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                        <div
+                            class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
+                            <div
+                                class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
                                 <i class="fa-solid fa-play ml-1"></i>
                             </div>
                         </div>
                     </div>
                     <div class="p-6">
-                        <span class="font-mono-custom text-xs text-slate-500 uppercase block mb-1">WordPress Plugin Promo</span>
-                        <h4 class="text-lg font-bold text-slate-900 group-hover:text-[#E11D48] transition">Salonly Salon Booking</h4>
+                        <span class="font-mono-custom text-xs text-slate-500 uppercase block mb-1">WordPress Plugin
+                            Promo</span>
+                        <h4 class="text-lg font-bold text-slate-900 group-hover:text-[#E11D48] transition">Salonly Salon
+                            Booking</h4>
                     </div>
                 </div>
 
                 <!-- Card 6 -->
-                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/13WzQi1z3SSCRwcKSTVyWQV6fb5FwYucF/view')" class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/13WzQi1z3SSCRwcKSTVyWQV6fb5FwYucF/view')"
+                    class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
                     <div class="media-box aspect-[4/3] overflow-hidden relative rounded-t-[5px]">
-                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">PROMO VIDEO</span>
-                        <img src="https://noormotion.carrd.co/assets/videos/video09_thumbnail.jpg?v=86a3e49b" alt="Cleanly Booking System" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
-                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
-                            <div class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
+                        <span
+                            class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">PROMO
+                            VIDEO</span>
+                        <img src="https://noormotion.carrd.co/assets/videos/video09_thumbnail.jpg?v=86a3e49b"
+                            alt="Cleanly Booking System"
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                        <div
+                            class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
+                            <div
+                                class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
                                 <i class="fa-solid fa-play ml-1"></i>
                             </div>
                         </div>
                     </div>
                     <div class="p-6">
                         <span class="font-mono-custom text-xs text-slate-500 uppercase block mb-1">Promo Video</span>
-                        <h4 class="text-lg font-bold text-slate-900 group-hover:text-[#E11D48] transition">Cleanly Booking System</h4>
+                        <h4 class="text-lg font-bold text-slate-900 group-hover:text-[#E11D48] transition">Cleanly
+                            Booking System</h4>
                     </div>
                 </div>
 
                 <!-- Card 7 -->
-                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1a_OsNZAlauYXjLN6Meoh6ryZhqQE0Y9r/view')" class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1a_OsNZAlauYXjLN6Meoh6ryZhqQE0Y9r/view')"
+                    class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
                     <div class="media-box aspect-[4/3] overflow-hidden relative rounded-t-[5px]">
-                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">SAAS EXPLAINER</span>
-                        <img src="https://noormotion.carrd.co/assets/videos/video01_thumbnail.jpg?v=86a3e49b" alt="NextCRM Marketing Automation" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
-                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
-                            <div class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
+                        <span
+                            class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">SAAS
+                            EXPLAINER</span>
+                        <img src="https://noormotion.carrd.co/assets/videos/video01_thumbnail.jpg?v=86a3e49b"
+                            alt="NextCRM Marketing Automation"
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                        <div
+                            class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
+                            <div
+                                class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
                                 <i class="fa-solid fa-play ml-1"></i>
                             </div>
                         </div>
                     </div>
                     <div class="p-6">
                         <span class="font-mono-custom text-xs text-slate-500 uppercase block mb-1">SaaS Explainer</span>
-                        <h4 class="text-lg font-bold text-slate-900 group-hover:text-[#E11D48] transition">NextCRM Marketing Automation</h4>
+                        <h4 class="text-lg font-bold text-slate-900 group-hover:text-[#E11D48] transition">NextCRM
+                            Marketing Automation</h4>
                     </div>
                 </div>
 
                 <!-- Card 8 -->
-                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1R0L7_DTxNBJHL_B7PMc1OStOiCMcGAEC/view')" class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1R0L7_DTxNBJHL_B7PMc1OStOiCMcGAEC/view')"
+                    class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
                     <div class="media-box aspect-[4/3] overflow-hidden relative rounded-t-[5px]">
-                        <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">PLUGIN PROMO</span>
-                        <img src="https://noormotion.carrd.co/assets/videos/video03_thumbnail.jpg?v=86a3e49b" alt="Next3 Offload Optimizer" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                        <span
+                            class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">PLUGIN
+                            PROMO</span>
+                        <img src="https://noormotion.carrd.co/assets/videos/video03_thumbnail.jpg?v=86a3e49b"
+                            alt="Next3 Offload Optimizer"
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                        <div
+                            class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
+                            <div
+                                class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
+                                <i class="fa-solid fa-play ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="font-mono-custom text-xs text-slate-500 uppercase block mb-1">Plugin Promo</span>
+                        <h4 class="text-lg font-bold text-slate-900 group-hover:text-[#E11D48] transition">Next3 Offload
+                            Optimizer</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical SaaS Product Walkthroughs Section (Clean New User Onboarding & Feature Guides) -->
+    <section class="py-24 border-b border-black/10 relative z-10" id="walkthroughs">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 space-y-4 md:space-y-0">
+                <div>
+                    <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-2">USER ONBOARDING &amp; GUIDANCE</span>
+                    <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-slate-900">Technical SaaS Product Walkthroughs</h2>
+                    <p class="text-slate-600 text-sm md:text-base mt-2 max-w-2xl">Clean, step-by-step product walkthroughs and onboarding videos designed to guide new users effortlessly through complex SaaS platforms.</p>
+                </div>
+                <span class="font-mono-custom text-xs text-slate-500 uppercase">3 Featured Guides</span>
+            </div>
+
+            <!-- Walkthrough Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="walkthroughs-grid">
+                <!-- Walkthrough 1 -->
+                <div onclick="expandVideoCard(this, 'https://www.youtube.com/watch?v=yI97ztJJiwA')"
+                    class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                    <div class="media-box aspect-[16/9] overflow-hidden relative rounded-t-[5px]">
+                        <span class="absolute top-3 right-3 z-10 px-2.5 py-1 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">ONBOARDING GUIDE</span>
+                        <img src="https://img.youtube.com/vi/yI97ztJJiwA/maxresdefault.jpg"
+                            alt="Payrun Onboarding Tutorial"
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
                             <div class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
                                 <i class="fa-solid fa-play ml-1"></i>
@@ -361,8 +517,51 @@
                         </div>
                     </div>
                     <div class="p-6">
-                        <span class="font-mono-custom text-xs text-slate-500 uppercase block mb-1">Plugin Promo</span>
-                        <h4 class="text-lg font-bold text-slate-900 group-hover:text-[#E11D48] transition">Next3 Offload Optimizer</h4>
+                        <span class="font-mono-custom text-xs text-[#E11D48] uppercase font-semibold block mb-1">User Signup &amp; Setup</span>
+                        <h4 class="text-lg font-bold text-slate-900 group-hover:text-[#E11D48] transition">Payrun Onboarding Tutorial</h4>
+                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">User signup, organization setup, and full dashboard overview designed for new user onboarding.</p>
+                    </div>
+                </div>
+
+                <!-- Walkthrough 2 -->
+                <div onclick="expandVideoCard(this, 'https://www.youtube.com/watch?v=vcYG2NTIf7o')"
+                    class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                    <div class="media-box aspect-[16/9] overflow-hidden relative rounded-t-[5px]">
+                        <span class="absolute top-3 right-3 z-10 px-2.5 py-1 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">MODULE WALKTHROUGH</span>
+                        <img src="https://img.youtube.com/vi/vcYG2NTIf7o/maxresdefault.jpg"
+                            alt="Payrun Attendance Module Tutorial"
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
+                            <div class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
+                                <i class="fa-solid fa-play ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="font-mono-custom text-xs text-[#E11D48] uppercase font-semibold block mb-1">Time &amp; Shift Management</span>
+                        <h4 class="text-lg font-bold text-slate-900 group-hover:text-[#E11D48] transition">Payrun Attendance Module Guide</h4>
+                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">Complete walkthrough of tracking time, managing employee shifts, and attendance logs.</p>
+                    </div>
+                </div>
+
+                <!-- Walkthrough 3 -->
+                <div onclick="expandVideoCard(this, 'https://www.youtube.com/watch?v=32xnuExV4oM')"
+                    class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
+                    <div class="media-box aspect-[16/9] overflow-hidden relative rounded-t-[5px]">
+                        <span class="absolute top-3 right-3 z-10 px-2.5 py-1 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">FEATURE TUTORIAL</span>
+                        <img src="https://img.youtube.com/vi/32xnuExV4oM/maxresdefault.jpg"
+                            alt="Payrun Leave Module Tutorial"
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
+                            <div class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
+                                <i class="fa-solid fa-play ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="font-mono-custom text-xs text-[#E11D48] uppercase font-semibold block mb-1">HR &amp; Leave Workflow</span>
+                        <h4 class="text-lg font-bold text-slate-900 group-hover:text-[#E11D48] transition">Payrun Leave Module Guide</h4>
+                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">Complete leave management guide for HRs and managers to configure leave policies.</p>
                     </div>
                 </div>
             </div>
@@ -372,10 +571,13 @@
     <!-- AE Scripts & Digital Products Section (5px Corner Radius) -->
     <section class="py-24 border-b border-black/10 relative z-10" id="products">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 space-y-4 md:space-y-0">
+            <div
+                class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 space-y-4 md:space-y-0">
                 <div>
-                    <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-2">WORKFLOW TOOLS</span>
-                    <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-slate-900">After Effects Scripts &amp; Presets</h2>
+                    <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-2">WORKFLOW
+                        TOOLS</span>
+                    <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-slate-900">After Effects Scripts &amp;
+                        Presets</h2>
                 </div>
                 <span class="font-mono-custom text-xs text-slate-500 uppercase">Free &amp; Open Tools</span>
             </div>
@@ -383,135 +585,184 @@
             <!-- Product Grid Matrix with Thumbnails (5px Corner Radius) -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="products-grid">
                 <!-- Product 1 -->
-                <div class="b44-card rounded-[5px] overflow-hidden group hover-trigger bg-white border border-slate-200 flex flex-col justify-between">
+                <div
+                    class="b44-card rounded-[5px] overflow-hidden group hover-trigger bg-white border border-slate-200 flex flex-col justify-between">
                     <div>
                         <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200 rounded-t-[5px]">
-                            <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">AE TOOL</span>
-                            <img src="https://noormotion.carrd.co/assets/images/gallery02/541290cb.jpg?v=86a3e49b" alt="CompSync 2.0" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                            <span
+                                class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">AE
+                                TOOL</span>
+                            <img src="https://noormotion.carrd.co/assets/images/gallery02/541290cb.jpg?v=86a3e49b"
+                                alt="CompSync 2.0"
+                                class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         </div>
                         <div class="p-6">
                             <div class="flex justify-between items-center mb-3">
-                                <span class="font-mono-custom text-xs text-[#E11D48] uppercase font-bold">After Effects Script</span>
+                                <span class="font-mono-custom text-xs text-[#E11D48] uppercase font-bold">After Effects
+                                    Script</span>
                                 <span class="font-mono-custom text-xs font-bold text-slate-900">Free / Donation</span>
                             </div>
-                            <h4 class="text-2xl font-bold text-slate-900 mb-2 group-hover:text-[#E11D48] transition">CompSync 2.0</h4>
-                            <p class="text-sm text-slate-600 leading-relaxed">A powerful After Effects script tool that enables you to save compositions as standalone projects dynamically and build your own motion animation libraries.</p>
+                            <h4 class="text-2xl font-bold text-slate-900 mb-2 group-hover:text-[#E11D48] transition">
+                                CompSync 2.0</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">A powerful After Effects script tool that
+                                enables you to save compositions as standalone projects dynamically and build your own
+                                motion animation libraries.</p>
                         </div>
                     </div>
                     <div class="p-6 pt-0">
-                        <button onclick="openProductModal(1)" class="dotted-btn w-full py-3 bg-slate-100 border border-slate-200 rounded-[5px] text-slate-900 font-mono-custom text-xs uppercase hover:bg-[#E11D48] hover:text-white hover:border-[#E11D48] transition">
+                        <button onclick="openProductModal(1)"
+                            class="dotted-btn w-full py-3 bg-slate-100 border border-slate-200 rounded-[5px] text-slate-900 font-mono-custom text-xs uppercase hover:bg-[#E11D48] hover:text-white hover:border-[#E11D48] transition">
                             View Details &amp; Download <i class="fa-solid fa-arrow-right ml-2"></i>
                         </button>
                     </div>
                 </div>
 
                 <!-- Product 2 -->
-                <div class="b44-card rounded-[5px] overflow-hidden group hover-trigger bg-white border border-slate-200 flex flex-col justify-between">
+                <div
+                    class="b44-card rounded-[5px] overflow-hidden group hover-trigger bg-white border border-slate-200 flex flex-col justify-between">
                     <div>
                         <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200 rounded-t-[5px]">
-                            <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">AE PRESET</span>
-                            <img src="https://noormotion.carrd.co/assets/images/gallery02/d186352f.jpg?v=86a3e49b" alt="AutoCaption 2.0" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                            <span
+                                class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">AE
+                                PRESET</span>
+                            <img src="https://noormotion.carrd.co/assets/images/gallery02/d186352f.jpg?v=86a3e49b"
+                                alt="AutoCaption 2.0"
+                                class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         </div>
                         <div class="p-6">
                             <div class="flex justify-between items-center mb-3">
-                                <span class="font-mono-custom text-xs text-[#E11D48] uppercase font-bold">After Effects Preset</span>
+                                <span class="font-mono-custom text-xs text-[#E11D48] uppercase font-bold">After Effects
+                                    Preset</span>
                                 <span class="font-mono-custom text-xs font-bold text-slate-900">Free / Donation</span>
                             </div>
-                            <h4 class="text-2xl font-bold text-slate-900 mb-2 group-hover:text-[#E11D48] transition">AutoCaption 2.0</h4>
-                            <p class="text-sm text-slate-600 leading-relaxed">An automated After Effects caption generator designed to convert SRT subtitle files into dynamic animated captions instantly.</p>
+                            <h4 class="text-2xl font-bold text-slate-900 mb-2 group-hover:text-[#E11D48] transition">
+                                AutoCaption 2.0</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">An automated After Effects caption
+                                generator designed to convert SRT subtitle files into dynamic animated captions
+                                instantly.</p>
                         </div>
                     </div>
                     <div class="p-6 pt-0">
-                        <button onclick="openProductModal(2)" class="dotted-btn w-full py-3 bg-slate-100 border border-slate-200 rounded-[5px] text-slate-900 font-mono-custom text-xs uppercase hover:bg-[#E11D48] hover:text-white hover:border-[#E11D48] transition">
+                        <button onclick="openProductModal(2)"
+                            class="dotted-btn w-full py-3 bg-slate-100 border border-slate-200 rounded-[5px] text-slate-900 font-mono-custom text-xs uppercase hover:bg-[#E11D48] hover:text-white hover:border-[#E11D48] transition">
                             View Details &amp; Download <i class="fa-solid fa-arrow-right ml-2"></i>
                         </button>
                     </div>
                 </div>
 
                 <!-- Product 3 -->
-                <div class="b44-card rounded-[5px] overflow-hidden group hover-trigger bg-white border border-slate-200 flex flex-col justify-between">
+                <div
+                    class="b44-card rounded-[5px] overflow-hidden group hover-trigger bg-white border border-slate-200 flex flex-col justify-between">
                     <div>
                         <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200 rounded-t-[5px]">
-                            <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">TYPOGRAPHY PRESET</span>
-                            <img src="https://noormotion.carrd.co/assets/images/gallery02/b70ecfc2.jpg?v=86a3e49b" alt="textEco Text Animator" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                            <span
+                                class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">TYPOGRAPHY
+                                PRESET</span>
+                            <img src="https://noormotion.carrd.co/assets/images/gallery02/b70ecfc2.jpg?v=86a3e49b"
+                                alt="textEco Text Animator"
+                                class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         </div>
                         <div class="p-6">
                             <div class="flex justify-between items-center mb-3">
-                                <span class="font-mono-custom text-xs text-[#E11D48] uppercase font-bold">After Effects Text Preset</span>
+                                <span class="font-mono-custom text-xs text-[#E11D48] uppercase font-bold">After Effects
+                                    Text Preset</span>
                                 <span class="font-mono-custom text-xs font-bold text-slate-900">Free / Donation</span>
                             </div>
-                            <h4 class="text-2xl font-bold text-slate-900 mb-2 group-hover:text-[#E11D48] transition">textEco Text Animator</h4>
-                            <p class="text-sm text-slate-600 leading-relaxed">An all-in-one text animator preset that allows creators to build unlimited variations of professional typography animations using a single customizable setup.</p>
+                            <h4 class="text-2xl font-bold text-slate-900 mb-2 group-hover:text-[#E11D48] transition">
+                                textEco Text Animator</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">An all-in-one text animator preset that
+                                allows creators to build unlimited variations of professional typography animations
+                                using a single customizable setup.</p>
                         </div>
                     </div>
                     <div class="p-6 pt-0">
-                        <button onclick="openProductModal(3)" class="dotted-btn w-full py-3 bg-[#E11D48]/10 border border-[#E11D48]/20 rounded-[5px] text-[#E11D48] font-mono-custom text-xs uppercase hover:bg-[#E11D48] hover:text-white transition">
+                        <button onclick="openProductModal(3)"
+                            class="dotted-btn w-full py-3 bg-[#E11D48]/10 border border-[#E11D48]/20 rounded-[5px] text-[#E11D48] font-mono-custom text-xs uppercase hover:bg-[#E11D48] hover:text-white transition">
                             View Details &amp; Download <i class="fa-solid fa-arrow-right ml-2"></i>
                         </button>
                     </div>
                 </div>
 
                 <!-- Product 4 -->
-                <div class="b44-card rounded-[5px] overflow-hidden group hover-trigger bg-white border border-slate-200 flex flex-col justify-between">
+                <div
+                    class="b44-card rounded-[5px] overflow-hidden group hover-trigger bg-white border border-slate-200 flex flex-col justify-between">
                     <div>
                         <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200 rounded-t-[5px]">
-                            <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">MASKING TOOL</span>
-                            <img src="https://noormotion.carrd.co/assets/images/gallery02/a65c20db.jpg?v=86a3e49b" alt="Master Mask" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                            <span
+                                class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">MASKING
+                                TOOL</span>
+                            <img src="https://noormotion.carrd.co/assets/images/gallery02/a65c20db.jpg?v=86a3e49b"
+                                alt="Master Mask"
+                                class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         </div>
                         <div class="p-6">
                             <div class="flex justify-between items-center mb-3">
-                                <span class="font-mono-custom text-xs text-[#E11D48] uppercase font-bold">After Effects Mask Preset</span>
+                                <span class="font-mono-custom text-xs text-[#E11D48] uppercase font-bold">After Effects
+                                    Mask Preset</span>
                                 <span class="font-mono-custom text-xs font-bold text-slate-900">Free / Donation</span>
                             </div>
-                            <h4 class="text-2xl font-bold text-slate-900 mb-2 group-hover:text-[#E11D48] transition">Master Mask</h4>
-                            <p class="text-sm text-slate-600 leading-relaxed">A corner-radius and mask shape control preset for After Effects that lets you separately handle individual vertex controls, mask dimensions, and rotation angles dynamically.</p>
+                            <h4 class="text-2xl font-bold text-slate-900 mb-2 group-hover:text-[#E11D48] transition">
+                                Master Mask</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">A corner-radius and mask shape control
+                                preset for After Effects that lets you separately handle individual vertex controls,
+                                mask dimensions, and rotation angles dynamically.</p>
                         </div>
                     </div>
                     <div class="p-6 pt-0">
-                        <button onclick="openProductModal(4)" class="dotted-btn w-full py-3 bg-slate-100 border border-slate-200 rounded-[5px] text-slate-900 font-mono-custom text-xs uppercase hover:bg-[#E11D48] hover:text-white hover:border-[#E11D48] transition">
+                        <button onclick="openProductModal(4)"
+                            class="dotted-btn w-full py-3 bg-slate-100 border border-slate-200 rounded-[5px] text-slate-900 font-mono-custom text-xs uppercase hover:bg-[#E11D48] hover:text-white hover:border-[#E11D48] transition">
                             View Details &amp; Download <i class="fa-solid fa-arrow-right ml-2"></i>
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-    </section>    <!-- Services Section (5px Corner Radius) -->
+    </section> <!-- Services Section (5px Corner Radius) -->
     <section class="py-24 border-b border-black/10 relative z-10" id="services">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="mb-16">
-                <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-2">CAPABILITIES</span>
+                <span
+                    class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-2">CAPABILITIES</span>
                 <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-slate-900">Services &amp; Solutions</h2>
             </div>
 
             <!-- Services Cards Grid (5px Corner Radius) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="services-grid">
                 <div class="b44-card p-6 rounded-[5px] group hover-trigger bg-white border border-slate-200">
-                    <div class="w-12 h-12 rounded-[5px] bg-slate-100 border border-slate-200 flex justify-center items-center text-xl text-[#E11D48] mb-6 group-hover:bg-[#E11D48] group-hover:text-white transition duration-300">
+                    <div
+                        class="w-12 h-12 rounded-[5px] bg-slate-100 border border-slate-200 flex justify-center items-center text-xl text-[#E11D48] mb-6 group-hover:bg-[#E11D48] group-hover:text-white transition duration-300">
                         <i class="fa-solid fa-video"></i>
                     </div>
                     <h4 class="text-lg font-bold text-slate-900 mb-2">SaaS Explainer Videos</h4>
-                    <p class="text-xs text-slate-600 leading-relaxed">High-end product explainer and SaaS promo animations.</p>
+                    <p class="text-xs text-slate-600 leading-relaxed">High-end product explainer and SaaS promo
+                        animations.</p>
                 </div>
                 <div class="b44-card p-6 rounded-[5px] group hover-trigger bg-white border border-slate-200">
-                    <div class="w-12 h-12 rounded-[5px] bg-slate-100 border border-slate-200 flex justify-center items-center text-xl text-[#E11D48] mb-6 group-hover:bg-[#E11D48] group-hover:text-white transition duration-300">
+                    <div
+                        class="w-12 h-12 rounded-[5px] bg-slate-100 border border-slate-200 flex justify-center items-center text-xl text-[#E11D48] mb-6 group-hover:bg-[#E11D48] group-hover:text-white transition duration-300">
                         <i class="fa-solid fa-film"></i>
                     </div>
                     <h4 class="text-lg font-bold text-slate-900 mb-2">Brand Commercials</h4>
-                    <p class="text-xs text-slate-600 leading-relaxed">Cinematic promotional and commercial videos for products.</p>
+                    <p class="text-xs text-slate-600 leading-relaxed">Cinematic promotional and commercial videos for
+                        products.</p>
                 </div>
                 <div class="b44-card p-6 rounded-[5px] group hover-trigger bg-white border border-slate-200">
-                    <div class="w-12 h-12 rounded-[5px] bg-slate-100 border border-slate-200 flex justify-center items-center text-xl text-[#E11D48] mb-6 group-hover:bg-[#E11D48] group-hover:text-white transition duration-300">
+                    <div
+                        class="w-12 h-12 rounded-[5px] bg-slate-100 border border-slate-200 flex justify-center items-center text-xl text-[#E11D48] mb-6 group-hover:bg-[#E11D48] group-hover:text-white transition duration-300">
                         <i class="fa-solid fa-layer-group"></i>
                     </div>
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">Motion Design &amp; UI</h4>
-                    <p class="text-xs text-slate-600 leading-relaxed">Technical product explainers, complex SaaS &amp; WP plugin walkthroughs, UI animations, and visual storytelling.</p>
+                    <h4 class="text-lg font-bold text-slate-900 mb-2">Technical product explainers</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">Complex SaaS &amp; WP plugin walkthroughs, Using
+                        UI animations, and visual storytelling.</p>
                 </div>
                 <div class="b44-card p-6 rounded-[5px] group hover-trigger bg-white border border-slate-200">
-                    <div class="w-12 h-12 rounded-[5px] bg-slate-100 border border-slate-200 flex justify-center items-center text-xl text-[#E11D48] mb-6 group-hover:bg-[#E11D48] group-hover:text-white transition duration-300">
+                    <div
+                        class="w-12 h-12 rounded-[5px] bg-slate-100 border border-slate-200 flex justify-center items-center text-xl text-[#E11D48] mb-6 group-hover:bg-[#E11D48] group-hover:text-white transition duration-300">
                         <i class="fa-solid fa-code"></i>
                     </div>
                     <h4 class="text-lg font-bold text-slate-900 mb-2">AE Scripts &amp; Tools</h4>
-                    <p class="text-xs text-slate-600 leading-relaxed">Custom workflow automation scripts to speed up After Effects tasks.</p>
+                    <p class="text-xs text-slate-600 leading-relaxed">Custom workflow automation scripts to speed up
+                        After Effects tasks.</p>
                 </div>
             </div>
         </div>
@@ -521,16 +772,20 @@
     <section class="py-24 border-b border-black/10 relative z-10" id="testimonials">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="mb-16">
-                <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-2">FEEDBACK</span>
+                <span
+                    class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-2">FEEDBACK</span>
                 <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-slate-900">Client Recommendations</h2>
             </div>
 
             <!-- Testimonials Grid (5px Corner Radius) -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="testimonial-grid">
                 <div class="b44-card p-6 md:p-8 rounded-[5px] bg-white border border-slate-200">
-                    <p class="text-sm text-slate-700 leading-relaxed mb-6">"Outstanding work quality! Our product launch explainer video became this successful because of his motion design."</p>
+                    <p class="text-sm text-slate-700 leading-relaxed mb-6">"Outstanding work quality! Our product launch
+                        explainer video became this successful because of his motion design."</p>
                     <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-full bg-[#E11D48] text-white font-bold flex justify-center items-center text-sm">A</div>
+                        <div
+                            class="w-10 h-10 rounded-full bg-[#E11D48] text-white font-bold flex justify-center items-center text-sm">
+                            A</div>
                         <div>
                             <h4 class="text-slate-900 font-bold text-sm">Arif Hossain</h4>
                             <p class="text-xs font-mono-custom text-slate-500">Tech BD</p>
@@ -538,9 +793,12 @@
                     </div>
                 </div>
                 <div class="b44-card p-6 md:p-8 rounded-[5px] bg-white border border-slate-200">
-                    <p class="text-sm text-slate-700 leading-relaxed mb-6">"Never got such beautiful motion design work while strictly maintaining the timeline before. Highly recommended!"</p>
+                    <p class="text-sm text-slate-700 leading-relaxed mb-6">"Never got such beautiful motion design work
+                        while strictly maintaining the timeline before. Highly recommended!"</p>
                     <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-full bg-[#E11D48] text-white font-bold flex justify-center items-center text-sm">S</div>
+                        <div
+                            class="w-10 h-10 rounded-full bg-[#E11D48] text-white font-bold flex justify-center items-center text-sm">
+                            S</div>
                         <div>
                             <h4 class="text-slate-900 font-bold text-sm">Sanjida Rahman</h4>
                             <p class="text-xs font-mono-custom text-slate-500">Creative Agency</p>
@@ -548,9 +806,12 @@
                     </div>
                 </div>
                 <div class="b44-card p-6 md:p-8 rounded-[5px] bg-white border border-slate-200">
-                    <p class="text-sm text-slate-700 leading-relaxed mb-6">"His sense of animation is very modern. He gave our brand identity a whole new look."</p>
+                    <p class="text-sm text-slate-700 leading-relaxed mb-6">"His sense of animation is very modern. He
+                        gave our brand identity a whole new look."</p>
                     <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-full bg-[#E11D48] text-white font-bold flex justify-center items-center text-sm">R</div>
+                        <div
+                            class="w-10 h-10 rounded-full bg-[#E11D48] text-white font-bold flex justify-center items-center text-sm">
+                            R</div>
                         <div>
                             <h4 class="text-slate-900 font-bold text-sm">Rafsan Jani</h4>
                             <p class="text-xs font-mono-custom text-slate-500">StartUp Inc.</p>
@@ -566,29 +827,45 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center mb-12 sm:mb-16">
                 <div class="lg:col-span-8">
-                    <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-3">LET'S COLLABORATE</span>
-                    <h2 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 uppercase leading-tight break-words max-w-full">
+                    <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-3">LET'S
+                        COLLABORATE</span>
+                    <h2
+                        class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 uppercase leading-tight break-words max-w-full">
                         Let's Create Something <span class="text-[#E11D48]">Extraordinary</span>
                     </h2>
                 </div>
                 <div class="lg:col-span-4 flex flex-col space-y-4 font-mono-custom text-sm">
-                    <div id="contact-email" class="text-slate-900"><a href="mailto:nralamyt@gmail.com" class="dotted-btn p-1 hover:text-[#E11D48] transition">nralamyt@gmail.com</a></div>
-                    <div id="contact-phone" class="text-slate-600"><a href="tel:+8801867739749" class="dotted-btn p-1 hover:text-[#E11D48] transition">+8801867739749</a></div>
+                    <div id="contact-email" class="text-slate-900"><a href="mailto:nralamyt@gmail.com"
+                            class="dotted-btn p-1 hover:text-[#E11D48] transition">nralamyt@gmail.com</a></div>
+                    <div id="contact-phone" class="text-slate-600"><a href="tel:+8801867739749"
+                            class="dotted-btn p-1 hover:text-[#E11D48] transition">+8801867739749</a></div>
                 </div>
             </div>
 
             <!-- Social Links -->
             <div class="flex flex-wrap items-center gap-3 sm:gap-4 pt-8 border-t border-black/10" id="footer-socials">
-                <a href="https://www.linkedin.com/in/motionoor-alam-/" target="_blank" rel="noopener noreferrer" class="dotted-btn px-4 py-2 bg-white border border-slate-200 rounded-[5px] text-xs font-mono-custom text-slate-700 hover:text-[#E11D48] transition hover-trigger"><i class="fa-brands fa-linkedin-in mr-2"></i>LinkedIn</a>
-                <a href="https://www.youtube.com/@Motionoor" target="_blank" rel="noopener noreferrer" class="dotted-btn px-4 py-2 bg-white border border-slate-200 rounded-[5px] text-xs font-mono-custom text-slate-700 hover:text-[#E11D48] transition hover-trigger"><i class="fa-brands fa-youtube mr-2"></i>YouTube</a>
-                <a href="https://www.facebook.com/Nr.Alm96" target="_blank" rel="noopener noreferrer" class="dotted-btn px-4 py-2 bg-white border border-slate-200 rounded-[5px] text-xs font-mono-custom text-slate-700 hover:text-[#E11D48] transition hover-trigger"><i class="fa-brands fa-facebook-f mr-2"></i>Facebook</a>
-                <a href="https://wa.me/+8801867739749" target="_blank" rel="noopener noreferrer" class="dotted-btn px-4 py-2 bg-white border border-slate-200 rounded-[5px] text-xs font-mono-custom text-slate-700 hover:text-[#E11D48] transition hover-trigger"><i class="fa-brands fa-whatsapp mr-2"></i>WhatsApp</a>
-                <a href="https://t.me/+8801867739749" target="_blank" rel="noopener noreferrer" class="dotted-btn px-4 py-2 bg-white border border-slate-200 rounded-[5px] text-xs font-mono-custom text-slate-700 hover:text-[#E11D48] transition hover-trigger"><i class="fa-brands fa-telegram mr-2"></i>Telegram</a>
+                <a href="https://www.linkedin.com/in/motionoor-alam-/" target="_blank" rel="noopener noreferrer"
+                    class="dotted-btn px-4 py-2 bg-white border border-slate-200 rounded-[5px] text-xs font-mono-custom text-slate-700 hover:text-[#E11D48] transition hover-trigger"><i
+                        class="fa-brands fa-linkedin-in mr-2"></i>LinkedIn</a>
+                <a href="https://www.youtube.com/@Motionoor" target="_blank" rel="noopener noreferrer"
+                    class="dotted-btn px-4 py-2 bg-white border border-slate-200 rounded-[5px] text-xs font-mono-custom text-slate-700 hover:text-[#E11D48] transition hover-trigger"><i
+                        class="fa-brands fa-youtube mr-2"></i>YouTube</a>
+                <a href="https://www.facebook.com/Nr.Alm96" target="_blank" rel="noopener noreferrer"
+                    class="dotted-btn px-4 py-2 bg-white border border-slate-200 rounded-[5px] text-xs font-mono-custom text-slate-700 hover:text-[#E11D48] transition hover-trigger"><i
+                        class="fa-brands fa-facebook-f mr-2"></i>Facebook</a>
+                <a href="https://wa.me/+8801867739749" target="_blank" rel="noopener noreferrer"
+                    class="dotted-btn px-4 py-2 bg-white border border-slate-200 rounded-[5px] text-xs font-mono-custom text-slate-700 hover:text-[#E11D48] transition hover-trigger"><i
+                        class="fa-brands fa-whatsapp mr-2"></i>WhatsApp</a>
+                <a href="https://t.me/+8801867739749" target="_blank" rel="noopener noreferrer"
+                    class="dotted-btn px-4 py-2 bg-white border border-slate-200 rounded-[5px] text-xs font-mono-custom text-slate-700 hover:text-[#E11D48] transition hover-trigger"><i
+                        class="fa-brands fa-telegram mr-2"></i>Telegram</a>
             </div>
 
             <!-- Live Cursor Coordinates & Copyright Bar -->
-            <div class="mt-12 sm:mt-16 pt-8 border-t border-black/10 flex flex-col sm:flex-row justify-between items-center font-mono-custom text-xs text-slate-500 space-y-4 sm:space-y-0 text-center sm:text-left">
-                <span id="footer-logo" class="cursor-pointer select-none">NOOR<span class="text-[#E11D48]">MOTION</span> © 2026</span>
+            <div
+                class="mt-12 sm:mt-16 pt-8 border-t border-black/10 flex flex-col sm:flex-row justify-between items-center font-mono-custom text-xs text-slate-500 space-y-4 sm:space-y-0 text-center sm:text-left">
+                <span id="footer-logo" class="cursor-pointer select-none">NOOR<span class="text-[#E11D48]">MOTION</span>
+                    © 2026</span>
                 <span class="text-slate-600" id="cursor-coords">0001 X 0001 Y</span>
                 <span>DHAKA, BANGLADESH</span>
             </div>
@@ -596,24 +873,33 @@
     </footer>
 
     <!-- Product Modal (5px Corner Radius) -->
-    <div id="product-modal-backdrop" class="fixed inset-0 z-[110] bg-slate-900/80 flex justify-center items-center p-3 sm:p-4 hidden opacity-0 transition-opacity duration-300">
-        <div id="product-modal-content" class="bg-white border border-slate-200 rounded-[5px] max-w-2xl w-full p-4 sm:p-6 md:p-8 transform scale-95 transition-transform duration-300 relative max-h-[92vh] overflow-y-auto">
-            <button onclick="closeProductModal()" class="absolute top-3 right-3 sm:top-4 sm:right-4 text-slate-400 hover:text-slate-900 text-xl p-2 min-w-[44px] min-h-[44px] flex items-center justify-center" title="Close Modal">
+    <div id="product-modal-backdrop"
+        class="fixed inset-0 z-[110] bg-slate-900/80 flex justify-center items-center p-3 sm:p-4 hidden opacity-0 transition-opacity duration-300">
+        <div id="product-modal-content"
+            class="bg-white border border-slate-200 rounded-[5px] max-w-2xl w-full p-4 sm:p-6 md:p-8 transform scale-95 transition-transform duration-300 relative max-h-[92vh] overflow-y-auto">
+            <button onclick="closeProductModal()"
+                class="absolute top-3 right-3 sm:top-4 sm:right-4 text-slate-400 hover:text-slate-900 text-xl p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                title="Close Modal">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
-            <span id="modal-subtitle" class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-wider block mb-1 pr-8"></span>
+            <span id="modal-subtitle"
+                class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-wider block mb-1 pr-8"></span>
             <h3 id="modal-title" class="text-xl sm:text-2xl font-bold text-slate-900 mb-4 pr-8"></h3>
 
-            <div id="modal-media-container" class="aspect-video w-full rounded-[5px] overflow-hidden mb-6 bg-slate-900 relative border border-slate-200"></div>
+            <div id="modal-media-container"
+                class="aspect-video w-full rounded-[5px] overflow-hidden mb-6 bg-slate-900 relative border border-slate-200">
+            </div>
 
             <p id="modal-details" class="text-slate-700 text-sm leading-relaxed mb-6"></p>
 
-            <div class="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center pt-4 border-t border-slate-200">
+            <div
+                class="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center pt-4 border-t border-slate-200">
                 <span id="modal-price" class="text-xl font-bold text-[#E11D48]"></span>
-                
+
                 <div id="gumroad-button-container" class="w-full sm:w-auto">
-                    <a id="gumroad-link" href="#" target="_blank" rel="noopener noreferrer" class="dotted-btn w-full sm:w-auto px-6 py-3 bg-[#E11D48] text-white font-bold text-xs uppercase rounded-[5px] hover:bg-slate-900 transition flex justify-center items-center">
+                    <a id="gumroad-link" href="#" target="_blank" rel="noopener noreferrer"
+                        class="dotted-btn w-full sm:w-auto px-6 py-3 bg-[#E11D48] text-white font-bold text-xs uppercase rounded-[5px] hover:bg-slate-900 transition flex justify-center items-center">
                         Download / Get Tool <i class="fa-solid fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -622,12 +908,17 @@
     </div>
 
     <!-- Video Modal Player (5px Corner Radius) -->
-    <div id="video-modal" class="fixed inset-0 z-[110] bg-slate-900/90 flex justify-center items-center p-3 sm:p-4 hidden opacity-0 transition-opacity duration-300">
-        <div class="relative w-full max-w-4xl aspect-video rounded-[5px] overflow-hidden border border-slate-200 bg-black">
-            <button onclick="closeVideoModal()" class="absolute top-2 right-2 sm:top-4 sm:right-4 z-20 text-white text-xl sm:text-2xl bg-black/60 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex justify-center items-center hover:bg-red-600 transition" title="Close Video">
+    <div id="video-modal"
+        class="fixed inset-0 z-[110] bg-slate-900/90 flex justify-center items-center p-3 sm:p-4 hidden opacity-0 transition-opacity duration-300">
+        <div
+            class="relative w-full max-w-4xl aspect-video rounded-[5px] overflow-hidden border border-slate-200 bg-black">
+            <button onclick="closeVideoModal()"
+                class="absolute top-2 right-2 sm:top-4 sm:right-4 z-20 text-white text-xl sm:text-2xl bg-black/60 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex justify-center items-center hover:bg-red-600 transition"
+                title="Close Video">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <iframe id="video-modal-iframe" class="w-full h-full border-0 rounded-[5px]" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <iframe id="video-modal-iframe" class="w-full h-full border-0 rounded-[5px]"
+                allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
     </div>
 
