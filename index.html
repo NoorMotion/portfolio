@@ -125,11 +125,6 @@
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center relative z-10">
             <div class="lg:col-span-8 flex flex-col items-start space-y-6">
-                <!-- Badge -->
-                <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full border border-black/10 bg-black/5 font-mono-custom text-xs text-slate-700 max-w-full">
-                    <span class="w-2 h-2 rounded-full bg-[#E11D48] animate-pulse flex-shrink-0"></span>
-                    <span id="hero-badge" class="truncate">Professional Motion Designer &amp; AE Toolmaker</span>
-                </div>
 
                 <!-- Hero Kinetic Title (Ultra-Stylish Instrument Serif, Arrow shifted 4px down & Staggered GSAP Character Wiggle for "motion") -->
                 <h1 class="text-3xl xs:text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] text-slate-900 break-words max-w-full">
@@ -163,13 +158,33 @@
                 </div>
             </div>
 
-            <!-- Right: Portrait Badge Container (Fluid Responsive Max-Width prevents mobile 320px overflow) -->
-            <div class="lg:col-span-4 flex justify-center lg:justify-end w-full">
-                <div class="relative w-full max-w-[270px] xs:max-w-[300px] sm:max-w-sm lg:max-w-[420px] aspect-square rounded-[5px] flex justify-center items-center group overflow-hidden bg-transparent border border-black/20 shadow-md p-[5px] pt-[20px] sm:pt-[25px]">
+            <!-- Right: Portrait & Social Link Column (Column of small social icons on the right side of hero) -->
+            <div class="lg:col-span-4 flex flex-row items-center justify-center lg:justify-end gap-3 sm:gap-4 w-full">
+                <!-- Portrait Badge -->
+                <div class="relative flex-1 max-w-[240px] xs:max-w-[270px] sm:max-w-sm lg:max-w-[340px] aspect-square rounded-[5px] flex justify-center items-center group overflow-hidden bg-transparent border border-black/20 shadow-md p-[5px] pt-[20px] sm:pt-[25px]">
                     <img id="hero-portrait-img" 
                          src="https://nooralam.carrd.co/assets/images/image01.png?v=1e1d6b0a" 
                          alt="Noor Motion" 
                          class="w-full h-full object-cover rounded-[5px] transition duration-500 transform group-hover:scale-105">
+                </div>
+
+                <!-- Vertical Social Icon Column -->
+                <div class="flex flex-col items-center justify-center space-y-2.5 sm:space-y-3" id="hero-social-column">
+                    <a href="https://www.linkedin.com/in/motionoor-alam-/" target="_blank" rel="noopener noreferrer" title="LinkedIn" class="dotted-btn w-9 h-9 sm:w-10 sm:h-10 rounded-[5px] bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-110 hover-trigger">
+                        <i class="fa-brands fa-linkedin-in text-sm"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@Motionoor" target="_blank" rel="noopener noreferrer" title="YouTube" class="dotted-btn w-9 h-9 sm:w-10 sm:h-10 rounded-[5px] bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-110 hover-trigger">
+                        <i class="fa-brands fa-youtube text-sm"></i>
+                    </a>
+                    <a href="https://www.facebook.com/Nr.Alm96" target="_blank" rel="noopener noreferrer" title="Facebook" class="dotted-btn w-9 h-9 sm:w-10 sm:h-10 rounded-[5px] bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-110 hover-trigger">
+                        <i class="fa-brands fa-facebook-f text-sm"></i>
+                    </a>
+                    <a href="https://wa.me/+8801867739749" target="_blank" rel="noopener noreferrer" title="WhatsApp" class="dotted-btn w-9 h-9 sm:w-10 sm:h-10 rounded-[5px] bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-110 hover-trigger">
+                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                    </a>
+                    <a href="https://t.me/+8801867739749" target="_blank" rel="noopener noreferrer" title="Telegram" class="dotted-btn w-9 h-9 sm:w-10 sm:h-10 rounded-[5px] bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-110 hover-trigger">
+                        <i class="fa-brands fa-telegram text-sm"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -179,7 +194,7 @@
     <section class="py-16 border-b border-black/10 relative z-10" id="showreel">
         <div class="max-w-5xl mx-auto px-6 lg:px-12">
             <div class="text-center mb-8">
-                <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-2">// FEATURED SHOWREEL</span>
+                <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-2">FEATURED SHOWREEL</span>
                 <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">Motion Reel 2026</h2>
             </div>
 
@@ -207,7 +222,7 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 space-y-4 md:space-y-0">
                 <div>
-                    <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-2">// SELECTED PROJECTS</span>
+                    <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-2">SELECTED PROJECTS</span>
                     <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-slate-900">Featured Motion Works</h2>
                 </div>
                 <span class="font-mono-custom text-xs text-slate-500 uppercase">Click card to play in-place</span>
@@ -359,7 +374,7 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 space-y-4 md:space-y-0">
                 <div>
-                    <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-2">// WORKFLOW TOOLS</span>
+                    <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-2">WORKFLOW TOOLS</span>
                     <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-slate-900">After Effects Scripts &amp; Presets</h2>
                 </div>
                 <span class="font-mono-custom text-xs text-slate-500 uppercase">Free &amp; Open Tools</span>
@@ -464,7 +479,7 @@
     <section class="py-24 border-b border-black/10 relative z-10" id="services">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="mb-16">
-                <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-2">// CAPABILITIES</span>
+                <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-2">CAPABILITIES</span>
                 <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-slate-900">Services &amp; Solutions</h2>
             </div>
 
@@ -506,7 +521,7 @@
     <section class="py-24 border-b border-black/10 relative z-10" id="testimonials">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="mb-16">
-                <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-2">// FEEDBACK</span>
+                <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-2">FEEDBACK</span>
                 <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-slate-900">Client Recommendations</h2>
             </div>
 
@@ -544,14 +559,14 @@
                 </div>
             </div>
         </div>
-    </section>n>
+    </section>
 
     <!-- Contact & Footer Section (haoqi.design Terminal Footer) -->
     <footer class="py-12 sm:py-24 relative z-10" id="contact">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center mb-12 sm:mb-16">
                 <div class="lg:col-span-8">
-                    <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-3">// LET'S COLLABORATE</span>
+                    <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-3">LET'S COLLABORATE</span>
                     <h2 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 uppercase leading-tight break-words max-w-full">
                         Let's Create Something <span class="text-[#E11D48]">Extraordinary</span>
                     </h2>
