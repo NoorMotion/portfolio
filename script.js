@@ -340,13 +340,7 @@ function parseVideoEmbed(url) {
     return { embedUrl: url, rawUrl: url, isDrive: url.includes('drive.google.com') };
 }
 
-// Showreel Single Click Video Player Handler (Clean Frame with 1080p HD Quality Switch & Interactive Seekbar)
-window.showreelIsPlaying = true;
-window.showreelIsMuted = false;
-window.showreelYTPlayer = null;
-window.isSeekingShowreel = false;
-window.showreelProgressInterval = null;
-
+// Showreel Single Click Video Player Handler (Standard YouTube Player with Settings & Controls)
 window.playShowreelVideo = function() {
     const card = document.getElementById('showreel-card');
     const box = document.getElementById('showreel-player-box');
@@ -357,186 +351,20 @@ window.playShowreelVideo = function() {
         card.classList.remove('cursor-pointer');
     }
 
-    window.showreelIsPlaying = true;
-    window.showreelIsMuted = false;
+    if (window.trackAnalyticsEvent) {
+        window.trackAnalyticsEvent('video_play', 'Played Featured Showreel 2026');
+    }
 
     box.innerHTML = `
-        <div class="relative w-full h-full bg-black overflow-hidden rounded-[5px] group video-frame-fadein flex justify-center items-center">
-            <!-- YouTube Iframe Top-Cropped (Enforces 1080p HD default quality, no branding/avatar) -->
-            <div class="absolute inset-0 overflow-hidden rounded-[5px]">
-                <div id="showreel-iframe-container" class="absolute left-[-2%] w-[104%] h-[134%] top-[-17%] pointer-events-auto"></div>
-            </div>
-
-            <!-- Sleek Custom Player Controls Overlay (Seekbar + 1080p Quality Switch + Play/Pause) -->
-            <div id="showreel-custom-controls" class="absolute inset-x-0 bottom-0 p-3 sm:p-4 z-30 flex flex-col justify-end space-y-2 bg-gradient-to-t from-black/95 via-black/60 to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition duration-300 pointer-events-auto">
-                
-                <!-- Interactive Seekbar & Time Counter -->
-                <div class="w-full flex items-center space-x-3 px-1">
-                    <span id="showreel-time" class="text-white font-mono-custom text-[10px] sm:text-xs min-w-[70px] select-none">0:00 / 0:00</span>
-                    <input type="range" id="showreel-seekbar" min="0" max="100" value="0" step="0.1" 
-                           onmousedown="window.isSeekingShowreel = true"
-                           onmouseup="window.isSeekingShowreel = false"
-                           onchange="seekShowreelVideo(this.value)"
-                           oninput="seekShowreelVideo(this.value)"
-                           class="w-full h-1.5 bg-white/30 rounded-lg appearance-none cursor-pointer accent-[#E11D48] hover:h-2 transition-all" />
-                </div>
-
-                <!-- Bottom Control Buttons Bar -->
-                <div class="flex justify-between items-center w-full pt-1">
-                    <!-- Left: Play/Pause & Mute Buttons -->
-                    <div class="flex items-center space-x-2">
-                        <button onclick="event.stopPropagation(); toggleShowreelPlay(this)" 
-                                class="px-3 py-1.5 bg-black/80 backdrop-blur-md text-white font-mono-custom text-xs uppercase rounded-[3px] border border-white/20 hover:bg-[#E11D48] hover:border-[#E11D48] transition flex items-center space-x-1.5 shadow-lg">
-                            <i class="fa-solid fa-pause text-[11px]" id="showreel-play-icon"></i>
-                            <span id="showreel-play-text">Pause</span>
-                        </button>
-                        <button onclick="event.stopPropagation(); toggleShowreelMute(this)" 
-                                class="px-3 py-1.5 bg-black/80 backdrop-blur-md text-white font-mono-custom text-xs uppercase rounded-[3px] border border-white/20 hover:bg-[#E11D48] hover:border-[#E11D48] transition flex items-center space-x-1.5 shadow-lg">
-                            <i class="fa-solid fa-volume-high text-[11px]" id="showreel-mute-icon"></i>
-                        </button>
-                    </div>
-
-                    <!-- Right: Dedicated 1080p HD Quality Switch Button -->
-                    <button onclick="event.stopPropagation(); forceShowreel1080p(this)" 
-                            class="px-3 py-1.5 bg-[#E11D48] text-white font-mono-custom text-xs font-bold uppercase rounded-[3px] border border-white/20 hover:bg-red-600 transition flex items-center space-x-1.5 shadow-lg"
-                            title="Force Convert Video to 1080p Full HD">
-                        <i class="fa-solid fa-gear text-[10px]"></i>
-                        <span id="showreel-quality-text">1080p HD [ON]</span>
-                    </button>
-                </div>
-            </div>
+        <div class="relative w-full h-full bg-black overflow-hidden rounded-[5px] group video-frame-fadein video-player-wrapper"
+             onmouseenter="const iframe = this.querySelector('iframe'); if (iframe) iframe.style.pointerEvents = 'auto';"
+             onmouseleave="const iframe = this.querySelector('iframe'); if (iframe) iframe.style.pointerEvents = 'none';">
+            <iframe class="w-full h-full border-0 rounded-[5px] absolute inset-0 z-10" 
+                    src="https://www.youtube.com/embed/pdp05Yl0Bp4?autoplay=1&vq=hd1080&hd=1&controls=1&autohide=1&rel=0&playsinline=1&enablejsapi=1" 
+                    allow="autoplay; encrypted-media; picture-in-picture" 
+                    allowfullscreen></iframe>
         </div>
     `;
-
-    function initYTPlayer() {
-        if (typeof YT === 'undefined' || !YT.Player) return;
-        window.showreelYTPlayer = new YT.Player('showreel-iframe-container', {
-            videoId: 'pdp05Yl0Bp4',
-            playerVars: {
-                autoplay: 1,
-                controls: 0,
-                modestbranding: 1,
-                rel: 0,
-                showinfo: 0,
-                iv_load_policy: 3,
-                playsinline: 1,
-                enablejsapi: 1,
-                vq: 'hd1080',
-                hd: 1
-            },
-            events: {
-                onReady: function(event) {
-                    try {
-                        event.target.setPlaybackQuality('hd1080');
-                        event.target.setSuggestedQuality('hd1080');
-                        event.target.playVideo();
-                    } catch(e) {}
-                    startShowreelProgressTracker();
-                },
-                onStateChange: function(event) {
-                    try {
-                        if (event.data === YT.PlayerState.PLAYING || event.data === YT.PlayerState.BUFFERING) {
-                            event.target.setPlaybackQuality('hd1080');
-                            event.target.setSuggestedQuality('hd1080');
-                        }
-                    } catch(e) {}
-                }
-            }
-        });
-    }
-
-    if (typeof YT !== 'undefined' && YT.Player) {
-        initYTPlayer();
-    } else {
-        const oldCallback = window.onYouTubeIframeAPIReady;
-        window.onYouTubeIframeAPIReady = function() {
-            if (typeof oldCallback === 'function') oldCallback();
-            initYTPlayer();
-        };
-    }
-};
-
-function startShowreelProgressTracker() {
-    if (window.showreelProgressInterval) clearInterval(window.showreelProgressInterval);
-    window.showreelProgressInterval = setInterval(() => {
-        if (!window.showreelYTPlayer || typeof window.showreelYTPlayer.getCurrentTime !== 'function') return;
-        const currentTime = window.showreelYTPlayer.getCurrentTime() || 0;
-        const duration = window.showreelYTPlayer.getDuration() || 0;
-
-        const seekbar = document.getElementById('showreel-seekbar');
-        const timeDisplay = document.getElementById('showreel-time');
-
-        if (seekbar && duration > 0 && !window.isSeekingShowreel) {
-            seekbar.value = (currentTime / duration) * 100;
-        }
-
-        if (timeDisplay && duration > 0) {
-            const curMin = Math.floor(currentTime / 60);
-            const curSec = Math.floor(currentTime % 60).toString().padStart(2, '0');
-            const durMin = Math.floor(duration / 60);
-            const durSec = Math.floor(duration % 60).toString().padStart(2, '0');
-            timeDisplay.innerText = `${curMin}:${curSec} / ${durMin}:${durSec}`;
-        }
-    }, 250);
-}
-
-window.seekShowreelVideo = function(percent) {
-    if (!window.showreelYTPlayer || typeof window.showreelYTPlayer.getDuration !== 'function') return;
-    const duration = window.showreelYTPlayer.getDuration();
-    if (duration > 0) {
-        const targetTime = (percent / 100) * duration;
-        window.showreelYTPlayer.seekTo(targetTime, true);
-    }
-};
-
-window.forceShowreel1080p = function(btn) {
-    const text = document.getElementById('showreel-quality-text');
-    if (window.showreelYTPlayer && typeof window.showreelYTPlayer.setPlaybackQuality === 'function') {
-        try {
-            window.showreelYTPlayer.setPlaybackQuality('hd1080');
-            window.showreelYTPlayer.setSuggestedQuality('hd1080');
-        } catch(e) {}
-    }
-    if (text) {
-        text.innerText = '1080p [ENFORCED]';
-        setTimeout(() => {
-            if (text) text.innerText = '1080p HD [ON]';
-        }, 1500);
-    }
-};
-
-window.toggleShowreelPlay = function(btn) {
-    const icon = document.getElementById('showreel-play-icon');
-    const text = document.getElementById('showreel-play-text');
-    if (window.showreelYTPlayer && typeof window.showreelYTPlayer.pauseVideo === 'function') {
-        if (window.showreelIsPlaying) {
-            window.showreelYTPlayer.pauseVideo();
-            window.showreelIsPlaying = false;
-            if (icon) icon.className = 'fa-solid fa-play text-[11px]';
-            if (text) text.innerText = 'Play';
-        } else {
-            window.showreelYTPlayer.playVideo();
-            try { window.showreelYTPlayer.setPlaybackQuality('hd1080'); } catch(e) {}
-            window.showreelIsPlaying = true;
-            if (icon) icon.className = 'fa-solid fa-pause text-[11px]';
-            if (text) text.innerText = 'Pause';
-        }
-    }
-};
-
-window.toggleShowreelMute = function(btn) {
-    const icon = document.getElementById('showreel-mute-icon');
-    if (window.showreelYTPlayer && typeof window.showreelYTPlayer.mute === 'function') {
-        if (window.showreelIsMuted) {
-            window.showreelYTPlayer.unMute();
-            window.showreelIsMuted = false;
-            if (icon) icon.className = 'fa-solid fa-volume-high text-[11px]';
-        } else {
-            window.showreelYTPlayer.mute();
-            window.showreelIsMuted = true;
-            if (icon) icon.className = 'fa-solid fa-volume-xmark text-[11px]';
-        }
-    }
 };
 
 // ==========================================
