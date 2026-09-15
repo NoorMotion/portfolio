@@ -299,12 +299,12 @@ const siteData = {
         { name: "Rafsan Jani", company: "StartUp Inc.", review: "His sense of animation is very modern. He gave our brand identity a whole new look." }
     ],
     socials: [
-        { name: "Gumroad", icon: "fa-gumroad", url: "https://nralam.gumroad.com/" },
         { name: "LinkedIn", icon: "fa-linkedin-in", url: "https://www.linkedin.com/in/motionoor-alam-/" },
         { name: "YouTube", icon: "fa-youtube", url: "https://www.youtube.com/@Motionoor" },
         { name: "Facebook", icon: "fa-facebook-f", url: "https://www.facebook.com/Nr.Alm96" },
         { name: "WhatsApp", icon: "fa-whatsapp", url: "https://wa.me/+8801867739749" },
-        { name: "Telegram", icon: "fa-telegram", url: "https://t.me/+8801867739749" }
+        { name: "Telegram", icon: "fa-telegram", url: "https://t.me/+8801867739749" },
+        { name: "Gumroad", icon: "fa-gumroad", url: "https://nralam.gumroad.com/" }
     ]
 };
 
