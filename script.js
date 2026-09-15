@@ -185,8 +185,8 @@ const siteData = {
     },
     services: [
         { icon: "fa-video", title: "SaaS Explainer Videos", desc: "High-end product explainer and SaaS promo animations." },
+        { icon: "fa-layer-group", title: "Technical Product Explainers", desc: "Complex SaaS & WP plugin walkthroughs, UI animations, and visual storytelling." },
         { icon: "fa-film", title: "Brand Commercials", desc: "Cinematic promotional and commercial videos for products." },
-        { icon: "fa-layer-group", title: "Motion Design & UI", desc: "Technical product explainers, complex SaaS & WP plugin walkthroughs, UI animations, and visual storytelling." },
         { icon: "fa-code", title: "AE Scripts & Tools", desc: "Custom workflow automation scripts to speed up After Effects tasks." }
     ],
     portfolio: [
