@@ -648,10 +648,10 @@ function initStackingCardsAnimation() {
         scrollTrigger: {
             trigger: "#services",
             start: "top top+=50", // Pin higher up on screen
-            end: () => isMobile ? "+=650" : "+=900",
+            end: () => isMobile ? "+=1300" : "+=1800", // Requires 2 scrolls per card (1 scroll = half card)
             pin: true,
             pinSpacing: true,
-            scrub: 0.4,
+            scrub: 0.5,
             anticipatePin: 1
         }
     });
