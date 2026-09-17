@@ -732,8 +732,37 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
             document.getElementById(`tab-${tabId}`).classList.remove('hidden');
         }
 
+        function getSupabaseClient() {
+            const url = localStorage.getItem('noormotion_supabase_url');
+            const key = localStorage.getItem('noormotion_supabase_key');
+            if (url && key && window.supabase) {
+                try {
+                    return window.supabase.createClient(url, key);
+                } catch(e) {
+                    console.warn('Supabase client error:', e);
+                }
+            }
+            return null;
+        }
+
         // Init Data & Render
-        function initDashboardData() {
+        async function initDashboardData() {
+            const client = getSupabaseClient();
+            if (client) {
+                try {
+                    const [bRes, vRes, tRes] = await Promise.all([
+                        client.from('blogs').select('*').order('created_at', { ascending: false }),
+                        client.from('videos').select('*').order('created_at', { ascending: false }),
+                        client.from('tools').select('*').order('created_at', { ascending: false })
+                    ]);
+                    if (bRes.data && bRes.data.length > 0) localStorage.setItem(STORAGE_BLOGS, JSON.stringify(bRes.data));
+                    if (vRes.data && vRes.data.length > 0) localStorage.setItem(STORAGE_VIDEOS, JSON.stringify(vRes.data));
+                    if (tRes.data && tRes.data.length > 0) localStorage.setItem(STORAGE_TOOLS, JSON.stringify(tRes.data));
+                } catch(e) {
+                    console.warn('Supabase cloud sync fetch error:', e);
+                }
+            }
+
             const storedVideos = JSON.parse(localStorage.getItem(STORAGE_VIDEOS) || '[]');
             if (storedVideos.length === 0 || storedVideos.some(v => v.client === 'Acme Corp')) {
                 localStorage.setItem(STORAGE_VIDEOS, JSON.stringify(defaultVideos));
@@ -979,7 +1008,7 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
             }
         }
 
-        function saveVideo(e) {
+        async function saveVideo(e) {
             e.preventDefault();
             const videos = JSON.parse(localStorage.getItem(STORAGE_VIDEOS) || '[]');
             const id = document.getElementById('video-id').value;
@@ -995,16 +1024,23 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
 
             if (id) {
                 const idx = videos.findIndex(v => String(v.id) === String(id));
-                if (idx !== -1) {
-                    videos[idx] = videoData;
-                } else {
-                    videos.push(videoData);
-                }
+                if (idx !== -1) videos[idx] = videoData;
+                else videos.push(videoData);
             } else {
                 videos.push(videoData);
             }
 
             localStorage.setItem(STORAGE_VIDEOS, JSON.stringify(videos));
+
+            const client = getSupabaseClient();
+            if (client) {
+                try {
+                    await client.from('videos').upsert([videoData]);
+                } catch(err) {
+                    console.warn('Supabase video sync error:', err);
+                }
+            }
+
             document.getElementById('video-id').value = '';
             document.getElementById('video-thumb').value = '';
             updatePreviewFromInput('video-thumb', 'video-thumb-preview');
@@ -1012,10 +1048,20 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
             renderVideosTable();
         }
 
-        function deleteVideo(id) {
+        async function deleteVideo(id) {
             let videos = JSON.parse(localStorage.getItem(STORAGE_VIDEOS) || '[]');
             videos = videos.filter(v => String(v.id) !== String(id));
             localStorage.setItem(STORAGE_VIDEOS, JSON.stringify(videos));
+
+            const client = getSupabaseClient();
+            if (client) {
+                try {
+                    await client.from('videos').delete().eq('id', id);
+                } catch(err) {
+                    console.warn('Supabase video delete error:', err);
+                }
+            }
+
             renderVideosTable();
         }
 
@@ -1078,7 +1124,7 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
             }
         }
 
-        function saveTool(e) {
+        async function saveTool(e) {
             e.preventDefault();
             const tools = JSON.parse(localStorage.getItem(STORAGE_TOOLS) || '[]');
             const id = document.getElementById('tool-id').value;
@@ -1096,16 +1142,23 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
 
             if (id) {
                 const idx = tools.findIndex(t => String(t.id) === String(id));
-                if (idx !== -1) {
-                    tools[idx] = toolData;
-                } else {
-                    tools.push(toolData);
-                }
+                if (idx !== -1) tools[idx] = toolData;
+                else tools.push(toolData);
             } else {
                 tools.push(toolData);
             }
 
             localStorage.setItem(STORAGE_TOOLS, JSON.stringify(tools));
+
+            const client = getSupabaseClient();
+            if (client) {
+                try {
+                    await client.from('tools').upsert([toolData]);
+                } catch(err) {
+                    console.warn('Supabase tool sync error:', err);
+                }
+            }
+
             document.getElementById('tool-id').value = '';
             document.getElementById('tool-image').value = '';
             updatePreviewFromInput('tool-image', 'tool-image-preview');
@@ -1113,10 +1166,20 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
             renderToolsTable();
         }
 
-        function deleteTool(id) {
+        async function deleteTool(id) {
             let tools = JSON.parse(localStorage.getItem(STORAGE_TOOLS) || '[]');
             tools = tools.filter(t => String(t.id) !== String(id));
             localStorage.setItem(STORAGE_TOOLS, JSON.stringify(tools));
+
+            const client = getSupabaseClient();
+            if (client) {
+                try {
+                    await client.from('tools').delete().eq('id', id);
+                } catch(err) {
+                    console.warn('Supabase tool delete error:', err);
+                }
+            }
+
             renderToolsTable();
         }
 
@@ -1178,7 +1241,7 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
             }
         }
 
-        function saveBlog(e) {
+        async function saveBlog(e) {
             e.preventDefault();
             const blogs = JSON.parse(localStorage.getItem(STORAGE_BLOGS) || '[]');
             const id = document.getElementById('blog-id').value;
@@ -1196,16 +1259,23 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
 
             if (id) {
                 const idx = blogs.findIndex(b => String(b.id) === String(id));
-                if (idx !== -1) {
-                    blogs[idx] = blogData;
-                } else {
-                    blogs.push(blogData);
-                }
+                if (idx !== -1) blogs[idx] = blogData;
+                else blogs.push(blogData);
             } else {
                 blogs.push(blogData);
             }
 
             localStorage.setItem(STORAGE_BLOGS, JSON.stringify(blogs));
+
+            const client = getSupabaseClient();
+            if (client) {
+                try {
+                    await client.from('blogs').upsert([blogData]);
+                } catch(err) {
+                    console.warn('Supabase blog sync error:', err);
+                }
+            }
+
             document.getElementById('blog-id').value = '';
             document.getElementById('blog-cover').value = '';
             updatePreviewFromInput('blog-cover', 'blog-cover-preview');
@@ -1214,10 +1284,20 @@ CREATE POLICY "Allow public insert analytics" ON analytics_events FOR INSERT WIT
             renderAnalytics();
         }
 
-        function deleteBlog(id) {
+        async function deleteBlog(id) {
             let blogs = JSON.parse(localStorage.getItem(STORAGE_BLOGS) || '[]');
             blogs = blogs.filter(b => String(b.id) !== String(id));
             localStorage.setItem(STORAGE_BLOGS, JSON.stringify(blogs));
+
+            const client = getSupabaseClient();
+            if (client) {
+                try {
+                    await client.from('blogs').delete().eq('id', id);
+                } catch(err) {
+                    console.warn('Supabase blog delete error:', err);
+                }
+            }
+
             renderBlogsTable();
             renderAnalytics();
         }
