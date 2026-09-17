@@ -643,26 +643,26 @@ function initStackingCardsAnimation() {
         });
     });
 
-    // Create ScrollTrigger Pin Timeline with fast, responsive scroll distance
+    // Create ScrollTrigger Pin Timeline with fast initial response & smooth decelerating end
     const tl = gsap.timeline({
         scrollTrigger: {
             trigger: "#services",
             start: "top top+=75",
-            end: () => isMobile ? "+=750" : "+=1050", // Fast compact pin distance
+            end: () => isMobile ? "+=750" : "+=1050",
             pin: true,
             pinSpacing: true,
-            scrub: 0.3, // Snappy, ultra-responsive scrub
+            scrub: 0.2, // Ultra-responsive scrub tracking
             anticipatePin: 1
         }
     });
 
-    // Slide each card up over previous cards one by one
+    // Slide each card up over previous cards with immediate initial velocity & smooth landing
     cards.forEach((card, index) => {
         if (index === 0) return;
 
         tl.to(card, {
             yPercent: 0,
-            ease: "none",
+            ease: "power2.out", // Snappy fast entry at start, decelerates smoothly at end
             duration: 1
         }, (index - 1) * 1);
     });
@@ -815,12 +815,13 @@ window.addEventListener('scroll', handleHeaderMorph, { passive: true });
 document.addEventListener('DOMContentLoaded', handleHeaderMorph);
 handleHeaderMorph();
 
-// Fast Lenis Smooth Scroll Engine
+// Fast Lenis Smooth Scroll Engine (Ease-Out Power4 Curve: Immediate Initial Speed -> Silky Smooth End)
 if (typeof Lenis !== 'undefined') {
     const lenis = new Lenis({
-        duration: 0.7, // Fast responsive scroll duration
-        wheelMultiplier: 1.25,
-        touchMultiplier: 1.5,
+        duration: 0.8,
+        easing: (t) => 1 - Math.pow(1 - t, 4), // Immediate high speed at start, decelerates smoothly at end
+        wheelMultiplier: 1.3,
+        touchMultiplier: 1.6,
         direction: 'vertical',
         gestureDirection: 'vertical',
         smooth: true,
