@@ -643,15 +643,15 @@ function initStackingCardsAnimation() {
         });
     });
 
-    // Create ScrollTrigger Pin Timeline
+    // Create ScrollTrigger Pin Timeline with fast, responsive scroll distance
     const tl = gsap.timeline({
         scrollTrigger: {
             trigger: "#services",
             start: "top top+=75",
-            end: () => `+=${(cards.length - 1) * 100}%`,
+            end: () => isMobile ? "+=750" : "+=1050", // Fast compact pin distance
             pin: true,
             pinSpacing: true,
-            scrub: 1,
+            scrub: 0.3, // Snappy, ultra-responsive scrub
             anticipatePin: 1
         }
     });
@@ -815,11 +815,12 @@ window.addEventListener('scroll', handleHeaderMorph, { passive: true });
 document.addEventListener('DOMContentLoaded', handleHeaderMorph);
 handleHeaderMorph();
 
-// Lenis Smooth Scroll Engine
+// Fast Lenis Smooth Scroll Engine
 if (typeof Lenis !== 'undefined') {
     const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        duration: 0.7, // Fast responsive scroll duration
+        wheelMultiplier: 1.25,
+        touchMultiplier: 1.5,
         direction: 'vertical',
         gestureDirection: 'vertical',
         smooth: true,
