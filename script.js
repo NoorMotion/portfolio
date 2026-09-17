@@ -592,8 +592,11 @@ function renderDynamicCMSData() {
     }
 }
 
-// Event Listeners for Masonry Engine
-window.addEventListener('resize', applyPortfolioMasonry);
+// Event Listeners for Masonry Engine & Stacking Cards
+window.addEventListener('resize', () => {
+    applyPortfolioMasonry();
+    initStackingCardsAnimation();
+});
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         renderDynamicCMSData();
@@ -609,7 +612,64 @@ if (document.readyState === 'loading') {
 }
 
 // ==========================================
-// 🚀 GSAP KINETIC ANIMATIONS ENGINE (2 FPS Dynamic Random AE Wiggle)
+// 📌 GSAP SCROLLTRIGGER STACKING CARDS ENGINE
+// ==========================================
+function initStackingCardsAnimation() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const pinWrapper = document.querySelector('.stacking-cards-pin-wrapper');
+    const cards = gsap.utils.toArray('.stacking-card');
+
+    if (!pinWrapper || !cards.length) return;
+
+    // Kill previous triggers for #services on recalculation
+    ScrollTrigger.getAll().forEach(t => {
+        if (t.vars && t.vars.trigger === '#services') t.kill();
+    });
+
+    const isMobile = window.innerWidth < 640;
+    const topStep = isMobile ? 36 : 45;
+
+    // Set initial card states:
+    // Card 0: top = 0, yPercent = 0
+    // Cards 1..N: top = index * topStep, yPercent = 120 (starts off-screen below)
+    cards.forEach((card, index) => {
+        gsap.set(card, {
+            top: `${index * topStep}px`,
+            yPercent: index === 0 ? 0 : 120,
+            scale: 1
+        });
+    });
+
+    // Create ScrollTrigger Pin Timeline
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#services",
+            start: "top top+=75",
+            end: () => `+=${(cards.length - 1) * 100}%`,
+            pin: true,
+            pinSpacing: true,
+            scrub: 1,
+            anticipatePin: 1
+        }
+    });
+
+    // Slide each card up over previous cards one by one
+    cards.forEach((card, index) => {
+        if (index === 0) return;
+
+        tl.to(card, {
+            yPercent: 0,
+            ease: "none",
+            duration: 1
+        }, (index - 1) * 1);
+    });
+}
+
+// ==========================================
+// 🚀 GSAP KINETIC ANIMATIONS ENGINE
 // ==========================================
 function initGSAPAnimations() {
     if (typeof gsap === 'undefined') return;
@@ -629,6 +689,8 @@ function initGSAPAnimations() {
             ease: "steps(1)"        // 2 FPS Stepped Snappy Wiggle
         });
     }
+
+    initStackingCardsAnimation();
 }
 
 // Live Coordinate Tracker & Cursor Logic
@@ -763,7 +825,12 @@ if (typeof Lenis !== 'undefined') {
         smooth: true,
     });
 
-    lenis.on('scroll', handleHeaderMorph);
+    lenis.on('scroll', (e) => {
+        handleHeaderMorph();
+        if (typeof ScrollTrigger !== 'undefined') {
+            ScrollTrigger.update();
+        }
+    });
 
     function raf(time) {
         lenis.raf(time);
