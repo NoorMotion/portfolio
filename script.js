@@ -815,31 +815,13 @@ window.addEventListener('scroll', handleHeaderMorph, { passive: true });
 document.addEventListener('DOMContentLoaded', handleHeaderMorph);
 handleHeaderMorph();
 
-// Strict Linear Lenis Smooth Scroll Engine
-if (typeof Lenis !== 'undefined') {
-    const lenis = new Lenis({
-        duration: 0.6,
-        easing: (t) => t, // Strict Linear Easing (Direct 1:1 Scroll)
-        wheelMultiplier: 1.0,
-        touchMultiplier: 1.0,
-        direction: 'vertical',
-        gestureDirection: 'vertical',
-        smooth: true,
-    });
-
-    lenis.on('scroll', (e) => {
-        handleHeaderMorph();
-        if (typeof ScrollTrigger !== 'undefined') {
-            ScrollTrigger.update();
-        }
-    });
-
-    function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
+// Native 1:1 Linear Scroll Controller (Zero Inertia, Zero Acceleration Delay, 100% Direct Linear Speed)
+window.addEventListener('scroll', () => {
+    handleHeaderMorph();
+    if (typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.update();
     }
-    requestAnimationFrame(raf);
-}
+}, { passive: true });
 
 // Safe Loader Dismissal Function
 function hideLoader() {

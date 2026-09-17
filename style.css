@@ -172,20 +172,7 @@ body.dark-mode #loader-logo {
 }
 
 html {
-    scroll-behavior: smooth;
     font-family: var(--font-sans);
-}
-
-html.lenis {
-    height: auto;
-}
-
-.lenis.lenis-smooth {
-    scroll-behavior: auto;
-}
-
-.lenis.lenis-stopped {
-    overflow: hidden;
 }
 
 html,
