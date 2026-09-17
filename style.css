@@ -594,3 +594,84 @@ body.dark-mode #main-header.header-scrolled {
         padding-right: 1rem !important;
     }
 }
+
+/* ==========================================
+   📌 STACKING CARDS SCROLL SYSTEM (Services & Solutions)
+   ========================================== */
+.stacking-cards-wrapper {
+    position: relative;
+}
+
+.stacking-card {
+    position: sticky;
+    will-change: transform, top;
+    transition: box-shadow 0.4s ease, transform 0.4s ease, border-color 0.4s ease;
+    box-shadow: 0 -8px 25px -4px rgba(0, 0, 0, 0.08), 0 25px 35px -5px rgba(0, 0, 0, 0.12);
+}
+
+.stacking-card-1 {
+    background-color: #CBE5FF;
+}
+
+.stacking-card-2 {
+    background-color: #DCF5B7;
+}
+
+.stacking-card-3 {
+    background-color: #FBCB43;
+}
+
+.stacking-card-4 {
+    background-color: #FFD6DD;
+}
+
+/* Dark Mode Overrides for Stacking Cards System */
+body.dark-mode .stacking-card {
+    box-shadow: 0 -10px 30px -5px rgba(0, 0, 0, 0.5), 0 25px 45px -5px rgba(0, 0, 0, 0.8) !important;
+}
+
+body.dark-mode .stacking-card-1 {
+    background-color: #1E293B !important;
+    border-color: rgba(56, 189, 248, 0.35) !important;
+}
+
+body.dark-mode .stacking-card-2 {
+    background-color: #142E1B !important;
+    border-color: rgba(74, 222, 128, 0.35) !important;
+}
+
+body.dark-mode .stacking-card-3 {
+    background-color: #2D2305 !important;
+    border-color: rgba(250, 204, 21, 0.35) !important;
+}
+
+body.dark-mode .stacking-card-4 {
+    background-color: #2D1219 !important;
+    border-color: rgba(251, 113, 133, 0.35) !important;
+}
+
+body.dark-mode .stacking-card .text-slate-900 {
+    color: #F8FAFC !important;
+}
+
+body.dark-mode .stacking-card .text-slate-800,
+body.dark-mode .stacking-card .text-slate-800\/90 {
+    color: #E2E8F0 !important;
+}
+
+body.dark-mode .stacking-card .text-slate-700 {
+    color: #CBD5E1 !important;
+}
+
+body.dark-mode .stacking-card .text-slate-600 {
+    color: #94A3B8 !important;
+}
+
+body.dark-mode .stacking-card .border-slate-900\/15 {
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+body.dark-mode .stacking-card .bg-white\/95 {
+    background-color: rgba(15, 23, 42, 0.92) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
