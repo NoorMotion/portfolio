@@ -630,7 +630,7 @@ function initStackingCardsAnimation() {
     });
 
     const isMobile = window.innerWidth < 640;
-    const topStep = isMobile ? 30 : 38;
+    const topStep = isMobile ? 32 : 44;
 
     // Set initial card states:
     // Card 0: top = 0, yPercent = 0
