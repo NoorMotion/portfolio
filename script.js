@@ -630,7 +630,7 @@ function initStackingCardsAnimation() {
     });
 
     const isMobile = window.innerWidth < 640;
-    const topStep = isMobile ? 36 : 45;
+    const topStep = isMobile ? 30 : 38;
 
     // Set initial card states:
     // Card 0: top = 0, yPercent = 0
@@ -643,15 +643,15 @@ function initStackingCardsAnimation() {
         });
     });
 
-    // Create ScrollTrigger Pin Timeline with normal initial speed & smooth decelerating finish
+    // Create ScrollTrigger Pin Timeline positioned higher up on screen
     const tl = gsap.timeline({
         scrollTrigger: {
             trigger: "#services",
-            start: "top top+=75",
-            end: () => isMobile ? "+=750" : "+=1050",
+            start: "top top+=50", // Pin higher up on screen
+            end: () => isMobile ? "+=650" : "+=900",
             pin: true,
             pinSpacing: true,
-            scrub: 0.4, // Smooth scrub trailing
+            scrub: 0.4,
             anticipatePin: 1
         }
     });

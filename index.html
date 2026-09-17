@@ -271,74 +271,76 @@
     </section>
 
     <!-- Services & Solutions Section (GSAP ScrollTrigger Pinning Stack) -->
-    <section class="py-20 sm:py-28 border-b border-black/10 relative z-10" id="services">
+    <section class="py-10 sm:py-14 border-b border-black/10 relative z-10" id="services">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <!-- Section Header -->
-            <div class="mb-10 sm:mb-14">
-                <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-2">CAPABILITIES &amp; SOLUTIONS</span>
-                <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white">Services &amp; Solutions</h2>
-                <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base mt-2 max-w-xl">
+            <!-- Section Header (Compact Flex Row) -->
+            <div class="mb-5 sm:mb-6 flex flex-col md:flex-row md:items-end justify-between gap-3 border-b border-black/10 dark:border-white/10 pb-3">
+                <div>
+                    <span class="font-mono-custom text-xs text-[#E11D48] uppercase tracking-widest block mb-1">CAPABILITIES &amp; SOLUTIONS</span>
+                    <h2 class="text-2xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">Services &amp; Solutions</h2>
+                </div>
+                <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm max-w-md">
                     Scroll down to explore how motion design, video storytelling &amp; workflow tools elevate digital products.
                 </p>
             </div>
 
             <!-- Stacking Cards Pin Container -->
-            <div class="stacking-cards-pin-wrapper relative max-w-6xl mx-auto min-h-[620px] xs:min-h-[650px] sm:min-h-[580px] lg:min-h-[520px]">
+            <div class="stacking-cards-pin-wrapper relative max-w-6xl mx-auto min-h-[480px] xs:min-h-[500px] sm:min-h-[460px] lg:min-h-[420px]">
                 
                 <!-- Card 1: SaaS Explainer Videos (Pastel Blue) -->
-                <div class="stacking-card stacking-card-1 absolute inset-x-0 top-0 z-10 rounded-3xl p-6 sm:p-8 lg:p-10 border border-black/10 shadow-2xl overflow-hidden transition-shadow duration-300">
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
+                <div class="stacking-card stacking-card-1 absolute inset-x-0 top-0 z-10 rounded-2xl p-5 sm:p-6 lg:p-7 border border-black/10 shadow-2xl overflow-hidden transition-shadow duration-300">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-center">
                         <!-- Left Content -->
-                        <div class="lg:col-span-6 flex flex-col justify-between space-y-5">
+                        <div class="lg:col-span-6 flex flex-col justify-between space-y-3.5">
                             <div>
-                                <span class="font-serif-italic text-xl sm:text-2xl italic font-semibold text-slate-900 tracking-wide block mb-1.5">
+                                <span class="font-serif-italic text-lg sm:text-xl italic font-semibold text-slate-900 tracking-wide block mb-1">
                                     FMCG &amp; SaaS Explainer
                                 </span>
-                                <h3 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-tight tracking-tight mb-3">
+                                <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 leading-tight tracking-tight mb-2">
                                     High-Impact SaaS Product Explainer Videos
                                 </h3>
-                                <p class="text-slate-800/90 text-sm sm:text-base leading-relaxed mb-5">
+                                <p class="text-slate-800/90 text-xs sm:text-sm leading-relaxed mb-3">
                                     Combining custom 2D/3D motion graphics, smooth UI animations, and persuasive storytelling to showcase your software's value proposition and convert visitors into paying customers.
                                 </p>
                                 
-                                <div class="grid grid-cols-2 gap-4 pt-3 border-t border-slate-900/15 mb-4">
+                                <div class="grid grid-cols-2 gap-3 pt-2.5 border-t border-slate-900/15 mb-3">
                                     <div>
-                                        <span class="block text-xs font-mono-custom uppercase tracking-wider text-slate-700 font-semibold mb-0.5">Scope</span>
-                                        <span class="block text-sm sm:text-base font-bold text-slate-900">Motion Graphics &amp; UI</span>
+                                        <span class="block text-[10px] sm:text-xs font-mono-custom uppercase tracking-wider text-slate-700 font-semibold">Scope</span>
+                                        <span class="block text-xs sm:text-sm font-bold text-slate-900">Motion Graphics &amp; UI</span>
                                     </div>
                                     <div>
-                                        <span class="block text-xs font-mono-custom uppercase tracking-wider text-slate-700 font-semibold mb-0.5">Duration</span>
-                                        <span class="block text-sm sm:text-base font-bold text-slate-900">2 &ndash; 4 Weeks</span>
+                                        <span class="block text-[10px] sm:text-xs font-mono-custom uppercase tracking-wider text-slate-700 font-semibold">Duration</span>
+                                        <span class="block text-xs sm:text-sm font-bold text-slate-900">2 &ndash; 4 Weeks</span>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Founder / Client Badge -->
-                            <div class="bg-white/95 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 flex items-center justify-between border border-black/10 shadow-md">
-                                <div class="flex items-center space-x-3">
-                                    <img src="https://nooralam.carrd.co/assets/images/image01.png?v=1e1d6b0a" alt="Noor Alam" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover border border-slate-300 shadow-sm" />
+                            <div class="bg-white/95 backdrop-blur-md rounded-xl p-2 sm:p-2.5 flex items-center justify-between border border-black/10 shadow-sm">
+                                <div class="flex items-center space-x-2.5">
+                                    <img src="https://nooralam.carrd.co/assets/images/image01.png?v=1e1d6b0a" alt="Noor Alam" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover border border-slate-300 shadow-sm" />
                                     <div>
-                                        <h5 class="text-xs sm:text-sm font-bold text-slate-900">Noor Alam</h5>
-                                        <p class="text-[11px] sm:text-xs text-slate-600 font-medium">Founder &amp; Lead Motion Specialist</p>
+                                        <h5 class="text-xs font-bold text-slate-900">Noor Alam</h5>
+                                        <p class="text-[10px] sm:text-[11px] text-slate-600 font-medium">Founder &amp; Lead Motion Specialist</p>
                                     </div>
                                 </div>
-                                <a href="#contact" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-900 text-white hover:bg-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-105" title="Inquire Service">
-                                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                                <a href="#contact" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-900 text-white hover:bg-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-105" title="Inquire Service">
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
                                 </a>
                             </div>
                         </div>
 
                         <!-- Right Media Frame -->
                         <div class="lg:col-span-6">
-                            <div class="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-slate-900/10 bg-slate-900 aspect-[16/10] group">
+                            <div class="relative rounded-xl overflow-hidden shadow-xl border-2 border-slate-900/10 bg-slate-900 aspect-[16/9] group">
                                 <img src="https://noormotion.carrd.co/assets/videos/video11_thumbnail.jpg?v=86a3e49b" alt="SaaS Explainer Showcase" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent opacity-60"></div>
-                                <div class="absolute bottom-3 left-3 right-3 flex justify-between items-center z-10">
-                                    <span class="px-2.5 py-1 bg-slate-900/80 backdrop-blur-md text-white font-mono-custom text-[10px] sm:text-[11px] uppercase tracking-wider rounded-full border border-white/20">
+                                <div class="absolute bottom-2.5 left-2.5 right-2.5 flex justify-between items-center z-10">
+                                    <span class="px-2 py-0.5 bg-slate-900/80 backdrop-blur-md text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-full border border-white/20">
                                         DrivePhase.ai Explainer
                                     </span>
-                                    <div class="w-9 h-9 rounded-full bg-[#E11D48] text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition duration-300">
-                                        <i class="fa-solid fa-play text-xs ml-0.5"></i>
+                                    <div class="w-8 h-8 rounded-full bg-[#E11D48] text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition duration-300">
+                                        <i class="fa-solid fa-play text-[10px] ml-0.5"></i>
                                     </div>
                                 </div>
                             </div>
@@ -347,59 +349,59 @@
                 </div>
 
                 <!-- Card 2: Technical Product Explainers (Pastel Lime) -->
-                <div class="stacking-card stacking-card-2 absolute inset-x-0 top-0 z-20 rounded-3xl p-6 sm:p-8 lg:p-10 border border-black/10 shadow-2xl overflow-hidden transition-shadow duration-300">
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
+                <div class="stacking-card stacking-card-2 absolute inset-x-0 top-0 z-20 rounded-2xl p-5 sm:p-6 lg:p-7 border border-black/10 shadow-2xl overflow-hidden transition-shadow duration-300">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-center">
                         <!-- Left Content -->
-                        <div class="lg:col-span-6 flex flex-col justify-between space-y-5">
+                        <div class="lg:col-span-6 flex flex-col justify-between space-y-3.5">
                             <div>
-                                <span class="font-serif-italic text-xl sm:text-2xl italic font-semibold text-slate-900 tracking-wide block mb-1.5">
+                                <span class="font-serif-italic text-lg sm:text-xl italic font-semibold text-slate-900 tracking-wide block mb-1">
                                     FinTech &amp; Technical Guides
                                 </span>
-                                <h3 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-tight tracking-tight mb-3">
+                                <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 leading-tight tracking-tight mb-2">
                                     Technical Product Explainers &amp; Walkthroughs
                                 </h3>
-                                <p class="text-slate-800/90 text-sm sm:text-base leading-relaxed mb-5">
+                                <p class="text-slate-800/90 text-xs sm:text-sm leading-relaxed mb-3">
                                     Guiding new users smoothly through complex SaaS platforms and WordPress plugins with crystal-clear onboarding guides, feature highlights, and UI tutorials.
                                 </p>
                                 
-                                <div class="grid grid-cols-2 gap-4 pt-3 border-t border-slate-900/15 mb-4">
+                                <div class="grid grid-cols-2 gap-3 pt-2.5 border-t border-slate-900/15 mb-3">
                                     <div>
-                                        <span class="block text-xs font-mono-custom uppercase tracking-wider text-slate-700 font-semibold mb-0.5">Scope</span>
-                                        <span class="block text-sm sm:text-base font-bold text-slate-900">UI/UX Onboarding Guide</span>
+                                        <span class="block text-[10px] sm:text-xs font-mono-custom uppercase tracking-wider text-slate-700 font-semibold">Scope</span>
+                                        <span class="block text-xs sm:text-sm font-bold text-slate-900">UI/UX Onboarding Guide</span>
                                     </div>
                                     <div>
-                                        <span class="block text-xs font-mono-custom uppercase tracking-wider text-slate-700 font-semibold mb-0.5">Duration</span>
-                                        <span class="block text-sm sm:text-base font-bold text-slate-900">1 &ndash; 3 Weeks</span>
+                                        <span class="block text-[10px] sm:text-xs font-mono-custom uppercase tracking-wider text-slate-700 font-semibold">Duration</span>
+                                        <span class="block text-xs sm:text-sm font-bold text-slate-900">1 &ndash; 3 Weeks</span>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Founder / Client Badge -->
-                            <div class="bg-white/95 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 flex items-center justify-between border border-black/10 shadow-md">
-                                <div class="flex items-center space-x-3">
-                                    <img src="https://nooralam.carrd.co/assets/images/image01.png?v=1e1d6b0a" alt="Noor Alam" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover border border-slate-300 shadow-sm" />
+                            <div class="bg-white/95 backdrop-blur-md rounded-xl p-2 sm:p-2.5 flex items-center justify-between border border-black/10 shadow-sm">
+                                <div class="flex items-center space-x-2.5">
+                                    <img src="https://nooralam.carrd.co/assets/images/image01.png?v=1e1d6b0a" alt="Noor Alam" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover border border-slate-300 shadow-sm" />
                                     <div>
-                                        <h5 class="text-xs sm:text-sm font-bold text-slate-900">Noor Alam</h5>
-                                        <p class="text-[11px] sm:text-xs text-slate-600 font-medium">Technical Product Motion Author</p>
+                                        <h5 class="text-xs font-bold text-slate-900">Noor Alam</h5>
+                                        <p class="text-[10px] sm:text-[11px] text-slate-600 font-medium">Technical Product Motion Author</p>
                                     </div>
                                 </div>
-                                <a href="#contact" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-900 text-white hover:bg-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-105" title="Inquire Service">
-                                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                                <a href="#contact" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-900 text-white hover:bg-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-105" title="Inquire Service">
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
                                 </a>
                             </div>
                         </div>
 
                         <!-- Right Media Frame -->
                         <div class="lg:col-span-6">
-                            <div class="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-slate-900/10 bg-slate-900 aspect-[16/10] group">
+                            <div class="relative rounded-xl overflow-hidden shadow-xl border-2 border-slate-900/10 bg-slate-900 aspect-[16/9] group">
                                 <img src="https://img.youtube.com/vi/yI97ztJJiwA/maxresdefault.jpg" alt="Technical Product Walkthrough" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent opacity-60"></div>
-                                <div class="absolute bottom-3 left-3 right-3 flex justify-between items-center z-10">
-                                    <span class="px-2.5 py-1 bg-slate-900/80 backdrop-blur-md text-white font-mono-custom text-[10px] sm:text-[11px] uppercase tracking-wider rounded-full border border-white/20">
+                                <div class="absolute bottom-2.5 left-2.5 right-2.5 flex justify-between items-center z-10">
+                                    <span class="px-2 py-0.5 bg-slate-900/80 backdrop-blur-md text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-full border border-white/20">
                                         Payrun Setup Guide
                                     </span>
-                                    <div class="w-9 h-9 rounded-full bg-[#E11D48] text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition duration-300">
-                                        <i class="fa-solid fa-play text-xs ml-0.5"></i>
+                                    <div class="w-8 h-8 rounded-full bg-[#E11D48] text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition duration-300">
+                                        <i class="fa-solid fa-play text-[10px] ml-0.5"></i>
                                     </div>
                                 </div>
                             </div>
@@ -408,59 +410,59 @@
                 </div>
 
                 <!-- Card 3: Brand Commercials (Vibrant Warm Yellow) -->
-                <div class="stacking-card stacking-card-3 absolute inset-x-0 top-0 z-30 rounded-3xl p-6 sm:p-8 lg:p-10 border border-black/10 shadow-2xl overflow-hidden transition-shadow duration-300">
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
+                <div class="stacking-card stacking-card-3 absolute inset-x-0 top-0 z-30 rounded-2xl p-5 sm:p-6 lg:p-7 border border-black/10 shadow-2xl overflow-hidden transition-shadow duration-300">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-center">
                         <!-- Left Content -->
-                        <div class="lg:col-span-6 flex flex-col justify-between space-y-5">
+                        <div class="lg:col-span-6 flex flex-col justify-between space-y-3.5">
                             <div>
-                                <span class="font-serif-italic text-xl sm:text-2xl italic font-semibold text-slate-900 tracking-wide block mb-1.5">
+                                <span class="font-serif-italic text-lg sm:text-xl italic font-semibold text-slate-900 tracking-wide block mb-1">
                                     EdTech &amp; Brand Commercials
                                 </span>
-                                <h3 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-tight tracking-tight mb-3">
+                                <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 leading-tight tracking-tight mb-2">
                                     Cinematic Brand Commercials &amp; Motion Ads
                                 </h3>
-                                <p class="text-slate-800/90 text-sm sm:text-base leading-relaxed mb-5">
+                                <p class="text-slate-800/90 text-xs sm:text-sm leading-relaxed mb-3">
                                     Cinematic promotional visuals, high-converting video ad campaigns, and commercial launch trailers engineered to grab instant audience focus across digital platforms.
                                 </p>
                                 
-                                <div class="grid grid-cols-2 gap-4 pt-3 border-t border-slate-900/15 mb-4">
+                                <div class="grid grid-cols-2 gap-3 pt-2.5 border-t border-slate-900/15 mb-3">
                                     <div>
-                                        <span class="block text-xs font-mono-custom uppercase tracking-wider text-slate-700 font-semibold mb-0.5">Scope</span>
-                                        <span class="block text-sm sm:text-base font-bold text-slate-900">Commercial &amp; Promo</span>
+                                        <span class="block text-[10px] sm:text-xs font-mono-custom uppercase tracking-wider text-slate-700 font-semibold">Scope</span>
+                                        <span class="block text-xs sm:text-sm font-bold text-slate-900">Commercial &amp; Promo</span>
                                     </div>
                                     <div>
-                                        <span class="block text-xs font-mono-custom uppercase tracking-wider text-slate-700 font-semibold mb-0.5">Duration</span>
-                                        <span class="block text-sm sm:text-base font-bold text-slate-900">2 &ndash; 3 Weeks</span>
+                                        <span class="block text-[10px] sm:text-xs font-mono-custom uppercase tracking-wider text-slate-700 font-semibold">Duration</span>
+                                        <span class="block text-xs sm:text-sm font-bold text-slate-900">2 &ndash; 3 Weeks</span>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Founder / Client Badge -->
-                            <div class="bg-white/95 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 flex items-center justify-between border border-black/10 shadow-md">
-                                <div class="flex items-center space-x-3">
-                                    <img src="https://nooralam.carrd.co/assets/images/image01.png?v=1e1d6b0a" alt="Noor Alam" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover border border-slate-300 shadow-sm" />
+                            <div class="bg-white/95 backdrop-blur-md rounded-xl p-2 sm:p-2.5 flex items-center justify-between border border-black/10 shadow-sm">
+                                <div class="flex items-center space-x-2.5">
+                                    <img src="https://nooralam.carrd.co/assets/images/image01.png?v=1e1d6b0a" alt="Noor Alam" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover border border-slate-300 shadow-sm" />
                                     <div>
-                                        <h5 class="text-xs sm:text-sm font-bold text-slate-900">Noor Alam</h5>
-                                        <p class="text-[11px] sm:text-xs text-slate-600 font-medium">Commercial Motion Director</p>
+                                        <h5 class="text-xs font-bold text-slate-900">Noor Alam</h5>
+                                        <p class="text-[10px] sm:text-[11px] text-slate-600 font-medium">Commercial Motion Director</p>
                                     </div>
                                 </div>
-                                <a href="#contact" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-900 text-white hover:bg-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-105" title="Inquire Service">
-                                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                                <a href="#contact" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-900 text-white hover:bg-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-105" title="Inquire Service">
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
                                 </a>
                             </div>
                         </div>
 
                         <!-- Right Media Frame -->
                         <div class="lg:col-span-6">
-                            <div class="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-slate-900/10 bg-slate-900 aspect-[16/10] group">
+                            <div class="relative rounded-xl overflow-hidden shadow-xl border-2 border-slate-900/10 bg-slate-900 aspect-[16/9] group">
                                 <img src="https://noormotion.carrd.co/assets/videos/video04_thumbnail.jpg?v=86a3e49b" alt="Brand Commercial Promo" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent opacity-60"></div>
-                                <div class="absolute bottom-3 left-3 right-3 flex justify-between items-center z-10">
-                                    <span class="px-2.5 py-1 bg-slate-900/80 backdrop-blur-md text-white font-mono-custom text-[10px] sm:text-[11px] uppercase tracking-wider rounded-full border border-white/20">
+                                <div class="absolute bottom-2.5 left-2.5 right-2.5 flex justify-between items-center z-10">
+                                    <span class="px-2 py-0.5 bg-slate-900/80 backdrop-blur-md text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-full border border-white/20">
                                         Commercial Promo
                                     </span>
-                                    <div class="w-9 h-9 rounded-full bg-[#E11D48] text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition duration-300">
-                                        <i class="fa-solid fa-play text-xs ml-0.5"></i>
+                                    <div class="w-8 h-8 rounded-full bg-[#E11D48] text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition duration-300">
+                                        <i class="fa-solid fa-play text-[10px] ml-0.5"></i>
                                     </div>
                                 </div>
                             </div>
@@ -469,59 +471,59 @@
                 </div>
 
                 <!-- Card 4: AE Scripts & Tools (Pastel Rose / Pink) -->
-                <div class="stacking-card stacking-card-4 absolute inset-x-0 top-0 z-40 rounded-3xl p-6 sm:p-8 lg:p-10 border border-black/10 shadow-2xl overflow-hidden transition-shadow duration-300">
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
+                <div class="stacking-card stacking-card-4 absolute inset-x-0 top-0 z-40 rounded-2xl p-5 sm:p-6 lg:p-7 border border-black/10 shadow-2xl overflow-hidden transition-shadow duration-300">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-center">
                         <!-- Left Content -->
-                        <div class="lg:col-span-6 flex flex-col justify-between space-y-5">
+                        <div class="lg:col-span-6 flex flex-col justify-between space-y-3.5">
                             <div>
-                                <span class="font-serif-italic text-xl sm:text-2xl italic font-semibold text-slate-900 tracking-wide block mb-1.5">
+                                <span class="font-serif-italic text-lg sm:text-xl italic font-semibold text-slate-900 tracking-wide block mb-1">
                                     Workflow Tooling &amp; Automation
                                 </span>
-                                <h3 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-tight tracking-tight mb-3">
+                                <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 leading-tight tracking-tight mb-2">
                                     Custom After Effects Scripts &amp; Motion Tools
                                 </h3>
-                                <p class="text-slate-800/90 text-sm sm:text-base leading-relaxed mb-5">
+                                <p class="text-slate-800/90 text-xs sm:text-sm leading-relaxed mb-3">
                                     Building custom Adobe After Effects scripts, CEP panels, and typography presets (CompSync, AutoCaption, textEco) that eliminate repetitive animation tasks and boost editing speed.
                                 </p>
                                 
-                                <div class="grid grid-cols-2 gap-4 pt-3 border-t border-slate-900/15 mb-4">
+                                <div class="grid grid-cols-2 gap-3 pt-2.5 border-t border-slate-900/15 mb-3">
                                     <div>
-                                        <span class="block text-xs font-mono-custom uppercase tracking-wider text-slate-700 font-semibold mb-0.5">Scope</span>
-                                        <span class="block text-sm sm:text-base font-bold text-slate-900">Scripting &amp; AE Tooling</span>
+                                        <span class="block text-[10px] sm:text-xs font-mono-custom uppercase tracking-wider text-slate-700 font-semibold">Scope</span>
+                                        <span class="block text-xs sm:text-sm font-bold text-slate-900">Scripting &amp; AE Tooling</span>
                                     </div>
                                     <div>
-                                        <span class="block text-xs font-mono-custom uppercase tracking-wider text-slate-700 font-semibold mb-0.5">Duration</span>
-                                        <span class="block text-sm sm:text-base font-bold text-slate-900">Custom Workflow</span>
+                                        <span class="block text-[10px] sm:text-xs font-mono-custom uppercase tracking-wider text-slate-700 font-semibold">Duration</span>
+                                        <span class="block text-xs sm:text-sm font-bold text-slate-900">Custom Workflow</span>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Founder / Client Badge -->
-                            <div class="bg-white/95 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 flex items-center justify-between border border-black/10 shadow-md">
-                                <div class="flex items-center space-x-3">
-                                    <img src="https://nooralam.carrd.co/assets/images/image01.png?v=1e1d6b0a" alt="Noor Alam" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover border border-slate-300 shadow-sm" />
+                            <div class="bg-white/95 backdrop-blur-md rounded-xl p-2 sm:p-2.5 flex items-center justify-between border border-black/10 shadow-sm">
+                                <div class="flex items-center space-x-2.5">
+                                    <img src="https://nooralam.carrd.co/assets/images/image01.png?v=1e1d6b0a" alt="Noor Alam" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover border border-slate-300 shadow-sm" />
                                     <div>
-                                        <h5 class="text-xs sm:text-sm font-bold text-slate-900">Noor Alam</h5>
-                                        <p class="text-[11px] sm:text-xs text-slate-600 font-medium">AE Script Builder &amp; Developer</p>
+                                        <h5 class="text-xs font-bold text-slate-900">Noor Alam</h5>
+                                        <p class="text-[10px] sm:text-[11px] text-slate-600 font-medium">AE Script Builder &amp; Developer</p>
                                     </div>
                                 </div>
-                                <a href="#contact" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-900 text-white hover:bg-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-105" title="Inquire Service">
-                                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                                <a href="#contact" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-900 text-white hover:bg-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-105" title="Inquire Service">
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
                                 </a>
                             </div>
                         </div>
 
                         <!-- Right Media Frame -->
                         <div class="lg:col-span-6">
-                            <div class="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-slate-900/10 bg-slate-900 aspect-[16/10] group">
+                            <div class="relative rounded-xl overflow-hidden shadow-xl border-2 border-slate-900/10 bg-slate-900 aspect-[16/9] group">
                                 <img src="https://noormotion.carrd.co/assets/images/gallery02/541290cb.jpg?v=86a3e49b" alt="AE Script Automation" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent opacity-60"></div>
-                                <div class="absolute bottom-3 left-3 right-3 flex justify-between items-center z-10">
-                                    <span class="px-2.5 py-1 bg-slate-900/80 backdrop-blur-md text-white font-mono-custom text-[10px] sm:text-[11px] uppercase tracking-wider rounded-full border border-white/20">
+                                <div class="absolute bottom-2.5 left-2.5 right-2.5 flex justify-between items-center z-10">
+                                    <span class="px-2 py-0.5 bg-slate-900/80 backdrop-blur-md text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-full border border-white/20">
                                         CompSync 2.0 AE Tool
                                     </span>
-                                    <div class="w-9 h-9 rounded-full bg-[#E11D48] text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition duration-300">
-                                        <i class="fa-solid fa-code text-xs"></i>
+                                    <div class="w-8 h-8 rounded-full bg-[#E11D48] text-white flex items-center justify-center shadow-lg transform group-hover:scale-110 transition duration-300">
+                                        <i class="fa-solid fa-code text-[10px]"></i>
                                     </div>
                                 </div>
                             </div>
