@@ -643,7 +643,7 @@ function initStackingCardsAnimation() {
         });
     });
 
-    // Create ScrollTrigger Pin Timeline with strict linear 1:1 scroll tracking
+    // Create ScrollTrigger Pin Timeline with normal initial speed & smooth decelerating finish
     const tl = gsap.timeline({
         scrollTrigger: {
             trigger: "#services",
@@ -651,18 +651,18 @@ function initStackingCardsAnimation() {
             end: () => isMobile ? "+=750" : "+=1050",
             pin: true,
             pinSpacing: true,
-            scrub: true, // Direct 1:1 linear scrub
+            scrub: 0.4, // Smooth scrub trailing
             anticipatePin: 1
         }
     });
 
-    // Slide each card up over previous cards with strict linear motion
+    // Slide each card up with normal starting speed and smooth decelerating finish
     cards.forEach((card, index) => {
         if (index === 0) return;
 
         tl.to(card, {
             yPercent: 0,
-            ease: "none", // Strict Linear Easing
+            ease: "power2.out", // Normal fast initial speed -> decelerates smoothly at end
             duration: 1
         }, (index - 1) * 1);
     });
@@ -815,13 +815,31 @@ window.addEventListener('scroll', handleHeaderMorph, { passive: true });
 document.addEventListener('DOMContentLoaded', handleHeaderMorph);
 handleHeaderMorph();
 
-// Native 1:1 Linear Scroll Controller (Zero Inertia, Zero Acceleration Delay, 100% Direct Linear Speed)
-window.addEventListener('scroll', () => {
-    handleHeaderMorph();
-    if (typeof ScrollTrigger !== 'undefined') {
-        ScrollTrigger.update();
+// Ease-Out Smooth Scroll Engine (Normal initial speed -> smooth decelerating finish)
+if (typeof Lenis !== 'undefined') {
+    const lenis = new Lenis({
+        duration: 0.9,
+        easing: (t) => 1 - Math.pow(1 - t, 3), // Cubic Ease-Out: Normal instant initial speed, decelerates smoothly at end
+        wheelMultiplier: 1.2,
+        touchMultiplier: 1.5,
+        direction: 'vertical',
+        gestureDirection: 'vertical',
+        smooth: true,
+    });
+
+    lenis.on('scroll', (e) => {
+        handleHeaderMorph();
+        if (typeof ScrollTrigger !== 'undefined') {
+            ScrollTrigger.update();
+        }
+    });
+
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
     }
-}, { passive: true });
+    requestAnimationFrame(raf);
+}
 
 // Safe Loader Dismissal Function
 function hideLoader() {
