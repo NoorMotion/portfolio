@@ -533,7 +533,7 @@ function renderDynamicCMSData() {
                 <div onclick="expandVideoCard(this, '${v.video_url}')" class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
                     <div class="media-box aspect-[4/3] overflow-hidden relative rounded-t-[5px]">
                         <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">${v.category || 'MOTION PROJECT'}</span>
-                        <img src="${v.thumbnail_url}" alt="${v.title}" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                        <img src="${v.thumbnail_url}" alt="${v.title}" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
                             <div class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
                                 <i class="fa-solid fa-play ml-1"></i>
@@ -570,7 +570,7 @@ function renderDynamicCMSData() {
                     <div>
                         <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200 rounded-t-[5px]">
                             <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">${t.badge || 'AE TOOL'}</span>
-                            <img src="${t.image_url}" alt="${t.title}" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                            <img src="${t.image_url}" alt="${t.title}" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
                         </div>
                         <div class="p-6">
                             <div class="flex justify-between items-center mb-3">
