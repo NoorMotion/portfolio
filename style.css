@@ -671,11 +671,19 @@ body.dark-mode .stacking-card .bg-white\/95 {
 }
 
 /* ==========================================================================
-   HERO TYPOGRAPHY - "eMotion Designer" (Pixelated Mono + Dynamic 'e' + Typing)
+   HERO TYPOGRAPHY - "eMotion Designer" (Massive Top Headline + GSAP Typing)
    ========================================================================== */
 .font-pixel-mono {
     font-family: 'Jersey 25', 'Silkscreen', 'VT323', monospace !important;
-    letter-spacing: 0.08em;
+}
+
+.hero-massive-title {
+    font-size: clamp(2.3rem, 8.4vw, 9rem);
+    line-height: 0.95;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    display: block;
+    width: 100%;
 }
 
 #hero-e-char {
@@ -695,9 +703,9 @@ body.dark-mode .stacking-card .bg-white\/95 {
 #hero-typing-target {
     font-family: 'Jersey 25', 'Silkscreen', 'VT323', monospace !important;
     color: #121212;
-    white-space: pre-wrap;
+    white-space: pre;
     display: inline;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.04em;
 }
 
 #hero-typing-cursor {
