@@ -676,6 +676,7 @@ function initStackingCardsAnimation() {
 // 🕹️ HERO "eMotion Designer" KINETIC ENGINE
 // ==========================================
 const HERO_E_FONTS = [
+    { family: "'Jersey 25', monospace", weight: "400", style: "normal" },
     { family: "'Silkscreen', monospace", weight: "700", style: "normal" },
     { family: "'Instrument Serif', serif", weight: "400", style: "italic" },
     { family: "'Playfair Display', serif", weight: "700", style: "italic" },
