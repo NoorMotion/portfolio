@@ -710,26 +710,46 @@ function initHeroEContinuousCycle() {
 }
 
 function startHeroTypingAnimationOnce() {
-    if (heroTypingStarted) return;
+    if (heroTypingStarted || window._heroTypingDone) return;
     heroTypingStarted = true;
+    window._heroTypingDone = true;
 
     const target = document.getElementById('hero-typing-target');
     if (!target) return;
 
-    const textToType = "Motion Designer ";
+    const fullText = "Motion Designer ";
     target.textContent = "";
-    let i = 0;
-    const typingSpeed = 75; // Snappy typing speed per character (ms)
 
-    function typeChar() {
-        if (i < textToType.length) {
-            target.textContent += textToType.charAt(i);
-            i++;
-            setTimeout(typeChar, typingSpeed);
+    if (typeof gsap !== 'undefined') {
+        if (typeof TextPlugin !== 'undefined') {
+            gsap.registerPlugin(TextPlugin);
+            gsap.to(target, {
+                duration: 1.15,
+                text: { value: fullText },
+                ease: "none"
+            });
+        } else {
+            const textObj = { length: 0 };
+            gsap.to(textObj, {
+                length: fullText.length,
+                duration: 1.15,
+                ease: `steps(${fullText.length})`,
+                onUpdate: () => {
+                    target.textContent = fullText.slice(0, Math.round(textObj.length));
+                }
+            });
         }
+    } else {
+        let i = 0;
+        function typeChar() {
+            if (i < fullText.length) {
+                target.textContent += fullText.charAt(i);
+                i++;
+                setTimeout(typeChar, 75);
+            }
+        }
+        typeChar();
     }
-
-    typeChar();
 }
 
 function initHeroTypography() {

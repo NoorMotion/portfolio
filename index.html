@@ -29,6 +29,7 @@
     <!-- Animation Libraries & APIs (Deferred for instant page render) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js" defer></script>
     <script src="https://www.youtube.com/iframe_api" defer></script>
 
@@ -39,7 +40,7 @@
     <link rel="apple-touch-icon" href="favicon.png">
 
     <!-- Custom Design System Stylesheet -->
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="style.css?v=4">
 </head>
 
 <body class="antialiased selection:bg-[#E11D48] selection:text-white">
@@ -1165,27 +1166,61 @@
                 }, 1000);
             }
 
-            // 2. Typewriter animation for "Motion Designer " (types once on page load)
-            var target = document.getElementById('hero-typing-target');
-            if (target) {
+            // 2. GSAP Typewriter animation for "Motion Designer " (types once on page load)
+            function playHeroGSAPTyping() {
+                if (window._heroTypingDone) return;
+                var target = document.getElementById('hero-typing-target');
+                if (!target) return;
+                window._heroTypingDone = true;
+
                 var fullText = "Motion Designer ";
                 target.textContent = "";
-                var charIndex = 0;
-                function typeNext() {
-                    if (charIndex < fullText.length) {
-                        target.textContent += fullText.charAt(charIndex);
-                        charIndex++;
-                        setTimeout(typeNext, 75);
+
+                if (typeof gsap !== 'undefined') {
+                    if (typeof TextPlugin !== 'undefined') {
+                        gsap.registerPlugin(TextPlugin);
+                        gsap.to(target, {
+                            duration: 1.15,
+                            text: { value: fullText },
+                            ease: "none"
+                        });
+                    } else {
+                        var textObj = { length: 0 };
+                        gsap.to(textObj, {
+                            length: fullText.length,
+                            duration: 1.15,
+                            ease: "steps(" + fullText.length + ")",
+                            onUpdate: function () {
+                                target.textContent = fullText.slice(0, Math.round(textObj.length));
+                            }
+                        });
                     }
+                } else {
+                    var charIndex = 0;
+                    function typeNext() {
+                        if (charIndex < fullText.length) {
+                            target.textContent += fullText.charAt(charIndex);
+                            charIndex++;
+                            setTimeout(typeNext, 75);
+                        }
+                    }
+                    typeNext();
                 }
-                // Start typing shortly after load
-                setTimeout(typeNext, 350);
+            }
+
+            if (document.readyState === 'complete') {
+                setTimeout(playHeroGSAPTyping, 200);
+            } else {
+                window.addEventListener('load', function () {
+                    setTimeout(playHeroGSAPTyping, 200);
+                });
+                setTimeout(playHeroGSAPTyping, 1200);
             }
         })();
     </script>
 
     <!-- Application Controller Logic Script (with Cache Buster) -->
-    <script src="script.js?v=3" defer></script>
+    <script src="script.js?v=4" defer></script>
 </body>
 
 </html>
