@@ -702,19 +702,22 @@ body.dark-mode .stacking-card .bg-white\/95 {
 
 #hero-typing-cursor {
     display: inline-block;
-    color: var(--accent-lime, #E11D48);
-    font-family: 'Jersey 25', 'Silkscreen', 'VT323', monospace !important;
-    font-weight: 700;
-    margin-left: 2px;
-    animation: pixelCursorBlink 0.85s steps(1) infinite;
+    width: 0.45em;
+    height: 0.08em;
+    margin-left: 0.08em;
+    vertical-align: -0.06em;
+    background: var(--accent-lime, #E11D48);
+    animation: pixelCursorBlink 1s steps(1) infinite;
     user-select: none;
 }
 
+#hero-typing-cursor.typing {
+    animation: none !important;
+    opacity: 1 !important;
+}
+
 @keyframes pixelCursorBlink {
-    0%, 49% {
-        opacity: 1;
-    }
-    50%, 100% {
+    50% {
         opacity: 0;
     }
 }
@@ -723,7 +726,10 @@ body.dark-mode #hero-typing-target {
     color: #F8FAFC !important;
 }
 
-body.dark-mode #hero-e-char,
-body.dark-mode #hero-typing-cursor {
+body.dark-mode #hero-e-char {
     color: var(--accent-lime, #FF334B) !important;
+}
+
+body.dark-mode #hero-typing-cursor {
+    background: var(--accent-lime, #FF334B) !important;
 }

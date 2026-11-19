@@ -710,45 +710,56 @@ function initHeroEContinuousCycle() {
 }
 
 function startHeroTypingAnimationOnce() {
-    if (heroTypingStarted || window._heroTypingDone) return;
-    heroTypingStarted = true;
-    window._heroTypingDone = true;
+    if (window._heroTypingActive) return;
+    window._heroTypingActive = true;
 
     const target = document.getElementById('hero-typing-target');
-    if (!target) return;
+    const cur = document.getElementById('hero-typing-cursor');
+    if (!target || !cur) return;
 
-    const fullText = "Motion Designer ";
+    const fullText = "Motion Designer";
     target.textContent = "";
 
     if (typeof gsap !== 'undefined') {
-        if (typeof TextPlugin !== 'undefined') {
-            gsap.registerPlugin(TextPlugin);
-            gsap.to(target, {
-                duration: 1.15,
-                text: { value: fullText },
-                ease: "none"
-            });
-        } else {
-            const textObj = { length: 0 };
-            gsap.to(textObj, {
-                length: fullText.length,
-                duration: 1.15,
-                ease: `steps(${fullText.length})`,
-                onUpdate: () => {
-                    target.textContent = fullText.slice(0, Math.round(textObj.length));
-                }
-            });
+        if (window._heroTypingTL) {
+            window._heroTypingTL.kill();
         }
+        const tl = gsap.timeline({ repeat: -1, repeatDelay: 0.4 });
+        window._heroTypingTL = tl;
+
+        // 1. Initial pause (700ms) with blinking cursor
+        tl.call(() => cur.classList.remove('typing'))
+          .to({}, { duration: 0.7 })
+
+        // 2. Typing phase: solid cursor (.typing)
+          .call(() => cur.classList.add('typing'))
+          .to({ p: 0 }, {
+              p: fullText.length,
+              duration: fullText.length * 0.09,
+              ease: `steps(${fullText.length})`,
+              onUpdate: function () {
+                  const val = Math.round(this.targets()[0].p);
+                  target.textContent = fullText.slice(0, val);
+              }
+          })
+
+        // 3. Typed pause (2.6s): blinking cursor
+          .call(() => cur.classList.remove('typing'))
+          .to({}, { duration: 2.6 })
+
+        // 4. Erase phase: fast erase (45ms/char) with solid cursor (.typing)
+          .call(() => cur.classList.add('typing'))
+          .to({ p: fullText.length }, {
+              p: 0,
+              duration: fullText.length * 0.045,
+              ease: `steps(${fullText.length})`,
+              onUpdate: function () {
+                  const val = Math.round(this.targets()[0].p);
+                  target.textContent = fullText.slice(0, val);
+              }
+          });
     } else {
-        let i = 0;
-        function typeChar() {
-            if (i < fullText.length) {
-                target.textContent += fullText.charAt(i);
-                i++;
-                setTimeout(typeChar, 75);
-            }
-        }
-        typeChar();
+        target.textContent = fullText;
     }
 }
 
