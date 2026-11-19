@@ -675,16 +675,20 @@ body.dark-mode .stacking-card .bg-white\/95 {
    ========================================================================== */
 .font-pixel-mono {
     font-family: 'Jersey 25', 'Silkscreen', 'VT323', monospace !important;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.08em;
 }
 
 #hero-e-char {
     display: inline-block;
     color: var(--accent-lime, #E11D48);
-    min-width: 0.65ch;
+    width: 0.65em;
+    min-width: 0.65em;
+    max-width: 0.65em;
     text-align: center;
     vertical-align: baseline;
-    transition: font-family 0.08s ease, transform 0.08s ease;
+    flex-shrink: 0;
+    overflow: visible;
+    transition: font-family 0.15s ease, transform 0.08s ease;
     will-change: font-family, transform;
 }
 
@@ -693,6 +697,7 @@ body.dark-mode .stacking-card .bg-white\/95 {
     color: #121212;
     white-space: pre-wrap;
     display: inline;
+    letter-spacing: 0.08em;
 }
 
 #hero-typing-cursor {

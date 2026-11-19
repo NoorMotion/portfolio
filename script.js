@@ -706,7 +706,7 @@ function initHeroEContinuousCycle() {
         eEl.style.fontFamily = font.family;
         eEl.style.fontWeight = font.weight;
         eEl.style.fontStyle = font.style;
-    }, 220);
+    }, 1000);
 }
 
 function startHeroTypingAnimationOnce() {
