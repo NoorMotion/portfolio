@@ -683,7 +683,8 @@ body.dark-mode .stacking-card .bg-white\/95 {
 #hero-typing-target {
     font-family: 'Silkscreen', 'VT323', monospace !important;
     color: #121212;
-    white-space: pre;
+    white-space: pre-wrap;
+    display: inline;
 }
 
 #hero-typing-cursor {

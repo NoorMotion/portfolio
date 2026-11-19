@@ -39,7 +39,7 @@
     <link rel="apple-touch-icon" href="favicon.png">
 
     <!-- Custom Design System Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
 </head>
 
 <body class="antialiased selection:bg-[#E11D48] selection:text-white">
@@ -152,7 +152,7 @@
                     class="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-slate-900 break-words max-w-full font-pixel-mono leading-tight"
                     aria-label="eMotion Designer">
                     <span class="inline-flex items-baseline flex-wrap">
-                        <span id="hero-e-char" class="inline-block text-[#E11D48] select-none" style="min-width: 0.65ch; text-align: center;">e</span><span id="hero-typing-target" class="text-slate-900 inline"></span><span id="hero-typing-cursor" class="text-[#E11D48] inline-block font-pixel-mono">_</span>
+                        <span id="hero-e-char" class="inline-block text-[#E11D48] select-none" style="min-width: 0.65ch; text-align: center;">e</span><span id="hero-typing-target" class="text-slate-900 inline">Motion Designer </span><span id="hero-typing-cursor" class="text-[#E11D48] inline-block font-pixel-mono">_</span>
                     </span>
                 </h1>
 
@@ -1133,8 +1133,58 @@
         </div>
     </div>
 
-    <!-- Application Controller Logic Script -->
-    <script src="script.js" defer></script>
+    <!-- Inline Hero Typography Controller (Instant Load, Zero Cache Delay) -->
+    <script>
+        (function () {
+            // 1. Continuous cycling of fonts for the letter 'e'
+            var eFonts = [
+                { f: "'Silkscreen', monospace", w: "700", s: "normal" },
+                { f: "'Instrument Serif', serif", w: "400", s: "italic" },
+                { f: "'Playfair Display', serif", w: "700", s: "italic" },
+                { f: "'JetBrains Mono', monospace", w: "700", s: "normal" },
+                { f: "'Caveat', cursive", w: "700", s: "normal" },
+                { f: "'Syne', sans-serif", w: "800", s: "normal" },
+                { f: "'VT323', monospace", w: "400", s: "normal" },
+                { f: "'Cormorant Garamond', serif", w: "700", s: "italic" },
+                { f: "'Cinzel', serif", w: "700", s: "normal" },
+                { f: "'Courier New', monospace", w: "700", s: "normal" },
+                { f: "Impact, sans-serif", w: "900", s: "normal" },
+                { f: "Georgia, serif", w: "700", s: "italic" },
+                { f: "'Inter', sans-serif", w: "900", s: "normal" }
+            ];
+            var eEl = document.getElementById('hero-e-char');
+            var eIdx = 0;
+            if (eEl) {
+                setInterval(function () {
+                    eIdx = (eIdx + 1) % eFonts.length;
+                    var item = eFonts[eIdx];
+                    eEl.style.fontFamily = item.f;
+                    eEl.style.fontWeight = item.w;
+                    eEl.style.fontStyle = item.s;
+                }, 220);
+            }
+
+            // 2. Typewriter animation for "Motion Designer " (types once on page load)
+            var target = document.getElementById('hero-typing-target');
+            if (target) {
+                var fullText = "Motion Designer ";
+                target.textContent = "";
+                var charIndex = 0;
+                function typeNext() {
+                    if (charIndex < fullText.length) {
+                        target.textContent += fullText.charAt(charIndex);
+                        charIndex++;
+                        setTimeout(typeNext, 75);
+                    }
+                }
+                // Start typing shortly after load
+                setTimeout(typeNext, 350);
+            }
+        })();
+    </script>
+
+    <!-- Application Controller Logic Script (with Cache Buster) -->
+    <script src="script.js?v=2" defer></script>
 </body>
 
 </html>
