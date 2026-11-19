@@ -2,18 +2,20 @@
    NOOR MOTION PORTFOLIO - CONTROLLER & LOGIC SCRIPT
    ========================================================================== */
 
-window.tailwind = window.tailwind || {};
-tailwind.config = {
-    darkMode: 'class',
-    theme: {
-        extend: {
-            colors: {
-                primary: '#E11D48',
-                accentRed: '#FF334B',
+if (typeof window !== 'undefined') {
+    window.tailwind = window.tailwind || {};
+    window.tailwind.config = {
+        darkMode: 'class',
+        theme: {
+            extend: {
+                colors: {
+                    primary: '#E11D48',
+                    accentRed: '#FF334B',
+                }
             }
         }
-    }
-};
+    };
+}
 
 // ==========================================
 // 📊 REAL-TIME UNIVERSAL ANALYTICS TRACKER (Noor Motion)
@@ -599,18 +601,16 @@ window.addEventListener('resize', () => {
 });
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-        renderDynamicCMSData();
-        applyPortfolioMasonry();
-        setTimeout(applyPortfolioMasonry, 500);
-        initGSAPAnimations();
-        initHeroMotionDesignTyping();
+        try { renderDynamicCMSData(); } catch (e) { console.warn(e); }
+        try { applyPortfolioMasonry(); } catch (e) { console.warn(e); }
+        setTimeout(() => { try { applyPortfolioMasonry(); } catch (e) {} }, 500);
+        try { initGSAPAnimations(); } catch (e) { console.warn(e); }
     });
 } else {
-    renderDynamicCMSData();
-    applyPortfolioMasonry();
-    setTimeout(applyPortfolioMasonry, 500);
-    initGSAPAnimations();
-    initHeroMotionDesignTyping();
+    try { renderDynamicCMSData(); } catch (e) { console.warn(e); }
+    try { applyPortfolioMasonry(); } catch (e) { console.warn(e); }
+    setTimeout(() => { try { applyPortfolioMasonry(); } catch (e) {} }, 500);
+    try { initGSAPAnimations(); } catch (e) { console.warn(e); }
 }
 
 // ==========================================
@@ -668,123 +668,6 @@ function initStackingCardsAnimation() {
             duration: 1
         }, (index - 1) * 1);
     });
-}
-
-// ==========================================
-// 🕹️ HERO "Motion Design" TYPING ENGINE (Exact match to Motion Design.html)
-// ==========================================
-let triggerHeroMotionTyping = null;
-
-function initHeroMotionDesignTyping() {
-    var TYPO = "Emotion Designer", FINAL = "Motion Designer";
-    var A = document.getElementById("hero-typing-a");
-    var B = document.getElementById("hero-typing-b");
-    var C = document.getElementById("hero-typing-cur");
-    var H = document.getElementById("hero-main-title");
-    if (!A || !B || !C) return;
-
-    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var txt = "", pos = 0, run = 0;
-
-    function render() {
-        A.textContent = txt.slice(0, pos);
-        B.textContent = txt.slice(pos);
-    }
-    function wait(ms) {
-        return new Promise(function(r) { setTimeout(r, ms); });
-    }
-    function rnd(a, b) {
-        return a + Math.random() * (b - a);
-    }
-    async function w(ms, id) {
-        await wait(ms);
-        return id === run;
-    }
-    function solid(on) {
-        C.classList.toggle("typing", on);
-    }
-
-    async function cycle(id) {
-        txt = ""; pos = 0; render(); solid(false);
-        if (!await w(700, id)) return;
-        solid(true);
-        for (var i = 0; i < TYPO.length; i++) {
-            txt += TYPO[i];
-            pos = txt.length;
-            render();
-            if (!await w(TYPO[i] === " " ? rnd(160, 240) : rnd(70, 150), id)) return;
-        }
-        solid(false);
-        if (!await w(1300, id)) return;
-        solid(true);
-        while (pos > 1) {
-            pos--;
-            render();
-            if (!await w(rnd(55, 95), id)) return;
-        }
-        solid(false);
-        if (!await w(1000, id)) return;
-        solid(true);
-        txt = txt.slice(0, pos - 1) + txt.slice(pos);
-        pos--;
-        render();
-        solid(false);
-        if (!await w(rnd(650, 850), id)) return;
-        solid(true);
-        pos++;
-        render();
-        if (!await w(rnd(380, 480), id)) return;
-        txt = txt.slice(0, pos - 1) + txt.slice(pos);
-        pos--;
-        render();
-        if (!await w(rnd(320, 420), id)) return;
-        txt = txt.slice(0, pos) + "M" + txt.slice(pos);
-        pos++;
-        render();
-        if (!await w(700, id)) return;
-        while (pos < txt.length) {
-            pos++;
-            render();
-            if (!await w(rnd(30, 45), id)) return;
-        }
-        solid(false);
-        if (!await w(2800, id)) return;
-        solid(true);
-        while (pos > 0) {
-            txt = txt.slice(0, pos - 1) + txt.slice(pos);
-            pos--;
-            render();
-            if (!await w(45, id)) return;
-        }
-        solid(false);
-        await w(500, id);
-    }
-
-    async function loop() {
-        var id = ++run;
-        if (reduce) {
-            txt = FINAL;
-            pos = txt.length;
-            render();
-            return;
-        }
-        while (id === run) {
-            await cycle(id);
-        }
-    }
-
-    triggerHeroMotionTyping = loop;
-
-    if (H) {
-        H.addEventListener("click", loop);
-    }
-    document.addEventListener("keydown", function(e) {
-        if ((e.code === "Space" || e.key === "Enter") && (document.activeElement === document.body || document.activeElement === H)) {
-            loop();
-        }
-    });
-
-    loop();
 }
 
 // ==========================================
