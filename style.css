@@ -3,7 +3,7 @@
    Default: Base44 Warm Stone (#EEECEB) Canvas with All-Over Dot Grid Pattern
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@1,6..96,400..800&family=Hind+Siliguri:wght@300;400;500;600;700&family=Instrument+Serif:ital@1&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@1,400;1,600;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@1,6..96,400..800&family=Caveat:wght@700&family=Cinzel:wght@700&family=Hind+Siliguri:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@1,400;1,600;1,700;1,900&family=Silkscreen:wght@400;700&family=Syne:wght@700;800&family=VT323&display=swap');
 
 :root {
     /* BASE44.COM SIGNATURE COLOR PALETTE WITH BRAND RED */
@@ -22,6 +22,7 @@
 
     --font-sans: 'Inter', 'Hind Siliguri', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
+    --font-pixel-mono: 'Silkscreen', 'VT323', monospace;
     --font-serif: 'Instrument Serif', 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
 }
 
@@ -659,4 +660,56 @@ body.dark-mode .stacking-card .border-slate-900\/15 {
 body.dark-mode .stacking-card .bg-white\/95 {
     background-color: rgba(15, 23, 42, 0.92) !important;
     border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* ==========================================================================
+   HERO TYPOGRAPHY - "eMotion Designer" (Pixelated Mono + Dynamic 'e' + Typing)
+   ========================================================================== */
+.font-pixel-mono {
+    font-family: 'Silkscreen', 'VT323', monospace !important;
+    letter-spacing: -0.01em;
+}
+
+#hero-e-char {
+    display: inline-block;
+    color: var(--accent-lime, #E11D48);
+    min-width: 0.65ch;
+    text-align: center;
+    vertical-align: baseline;
+    transition: font-family 0.08s ease, transform 0.08s ease;
+    will-change: font-family, transform;
+}
+
+#hero-typing-target {
+    font-family: 'Silkscreen', 'VT323', monospace !important;
+    color: #121212;
+    white-space: pre;
+}
+
+#hero-typing-cursor {
+    display: inline-block;
+    color: var(--accent-lime, #E11D48);
+    font-family: 'Silkscreen', 'VT323', monospace !important;
+    font-weight: 700;
+    margin-left: 2px;
+    animation: pixelCursorBlink 0.85s steps(1) infinite;
+    user-select: none;
+}
+
+@keyframes pixelCursorBlink {
+    0%, 49% {
+        opacity: 1;
+    }
+    50%, 100% {
+        opacity: 0;
+    }
+}
+
+body.dark-mode #hero-typing-target {
+    color: #F8FAFC !important;
+}
+
+body.dark-mode #hero-e-char,
+body.dark-mode #hero-typing-cursor {
+    color: var(--accent-lime, #FF334B) !important;
 }

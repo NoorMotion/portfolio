@@ -17,7 +17,7 @@
 
     <!-- Fonts -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,600;1,700&family=Hind+Siliguri:wght@300;400;500;600;700&family=Instrument+Serif:ital@1&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@1,400;1,600;1,700;1,900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Cinzel:wght@700&family=Cormorant+Garamond:ital,wght@1,400;1,600;1,700&family=Hind+Siliguri:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@1,400;1,600;1,700;1,900&family=Silkscreen:wght@400;700&family=Syne:wght@700;800&family=VT323&display=swap"
         rel="stylesheet">
 
     <!-- Font Awesome Icons -->
@@ -147,31 +147,12 @@
             class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center relative z-10">
             <div class="lg:col-span-8 flex flex-col items-start space-y-6">
 
-                <!-- Hero Kinetic Title (Ultra-Stylish Instrument Serif, Arrow shifted 4px down & Staggered GSAP Character Wiggle for "motion") -->
+                <!-- Hero Kinetic Title (eMotion Designer - Pixelated Mono with dynamic changing 'e' and typing effect) -->
                 <h1
-                    class="text-3xl xs:text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] text-slate-900 break-words max-w-full">
-                    <span class="block">Your <span
-                            class="font-serif-italic font-normal italic text-[#E11D48] tracking-wide text-[1.08em] sm:text-[1.12em]">digital</span>
-                        product</span>
-                    <span class="block">Moves in <span id="hero-motion-word"
-                            class="font-serif-italic font-normal italic text-slate-900 tracking-wide text-[1.08em] sm:text-[1.12em] inline-block"><span
-                                class="hero-motion-char inline-block">m</span><span
-                                class="hero-motion-char inline-block">o</span><span
-                                class="hero-motion-char inline-block">t</span><span
-                                class="hero-motion-char inline-block">i</span><span
-                                class="hero-motion-char inline-block">o</span><span
-                                class="hero-motion-char inline-block">n</span></span></span>
-
-                    <!-- Line 3: Underline removed, Arrow shifted 4px down after "Sales." -->
-                    <span
-                        class="block text-xl sm:text-4xl lg:text-5xl mt-3 font-semibold text-slate-800 tracking-normal flex flex-wrap items-center">
-                        <span
-                            class="font-serif-italic font-normal italic text-[#E11D48] text-[1.2em] tracking-wide mr-2">Story</span>
-                        <span class="inline-flex items-center flex-wrap">
-                            <span class="mr-2">that Sales.</span>
-                            <i
-                                class="fa-solid fa-arrow-right-long text-[#E11D48] text-[0.85em] inline-block transform translate-y-[2px] sm:translate-y-[4px] hover:translate-x-2 transition duration-300"></i>
-                        </span>
+                    class="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-slate-900 break-words max-w-full font-pixel-mono leading-tight"
+                    aria-label="eMotion Designer">
+                    <span class="inline-flex items-baseline flex-wrap">
+                        <span id="hero-e-char" class="inline-block text-[#E11D48] select-none" style="min-width: 0.65ch; text-align: center;">e</span><span id="hero-typing-target" class="text-slate-900 inline"></span><span id="hero-typing-cursor" class="text-[#E11D48] inline-block font-pixel-mono">_</span>
                     </span>
                 </h1>
 

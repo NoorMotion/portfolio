@@ -603,12 +603,16 @@ if (document.readyState === 'loading') {
         applyPortfolioMasonry();
         setTimeout(applyPortfolioMasonry, 500);
         initGSAPAnimations();
+        initHeroTypography();
+        setTimeout(startHeroTypingAnimationOnce, 1200);
     });
 } else {
     renderDynamicCMSData();
     applyPortfolioMasonry();
     setTimeout(applyPortfolioMasonry, 500);
     initGSAPAnimations();
+    initHeroTypography();
+    setTimeout(startHeroTypingAnimationOnce, 1200);
 }
 
 // ==========================================
@@ -666,6 +670,69 @@ function initStackingCardsAnimation() {
             duration: 1
         }, (index - 1) * 1);
     });
+}
+
+// ==========================================
+// 🕹️ HERO "eMotion Designer" KINETIC ENGINE
+// ==========================================
+const HERO_E_FONTS = [
+    { family: "'Silkscreen', monospace", weight: "700", style: "normal" },
+    { family: "'Instrument Serif', serif", weight: "400", style: "italic" },
+    { family: "'Playfair Display', serif", weight: "700", style: "italic" },
+    { family: "'JetBrains Mono', monospace", weight: "700", style: "normal" },
+    { family: "'Caveat', cursive", weight: "700", style: "normal" },
+    { family: "'Syne', sans-serif", weight: "800", style: "normal" },
+    { family: "'VT323', monospace", weight: "400", style: "normal" },
+    { family: "'Cormorant Garamond', serif", weight: "700", style: "italic" },
+    { family: "'Cinzel', serif", weight: "700", style: "normal" },
+    { family: "'Courier New', monospace", weight: "700", style: "normal" },
+    { family: "Impact, sans-serif", weight: "900", style: "normal" },
+    { family: "Georgia, serif", weight: "700", style: "italic" },
+    { family: "'Bodoni Moda', serif", weight: "700", style: "italic" },
+    { family: "'Inter', sans-serif", weight: "900", style: "normal" }
+];
+
+let heroEFontIndex = 0;
+let heroTypingStarted = false;
+
+function initHeroEContinuousCycle() {
+    const eEl = document.getElementById('hero-e-char');
+    if (!eEl) return;
+
+    setInterval(() => {
+        heroEFontIndex = (heroEFontIndex + 1) % HERO_E_FONTS.length;
+        const font = HERO_E_FONTS[heroEFontIndex];
+        eEl.style.fontFamily = font.family;
+        eEl.style.fontWeight = font.weight;
+        eEl.style.fontStyle = font.style;
+    }, 220);
+}
+
+function startHeroTypingAnimationOnce() {
+    if (heroTypingStarted) return;
+    heroTypingStarted = true;
+
+    const target = document.getElementById('hero-typing-target');
+    if (!target) return;
+
+    const textToType = "Motion Designer ";
+    target.textContent = "";
+    let i = 0;
+    const typingSpeed = 75; // Snappy typing speed per character (ms)
+
+    function typeChar() {
+        if (i < textToType.length) {
+            target.textContent += textToType.charAt(i);
+            i++;
+            setTimeout(typeChar, typingSpeed);
+        }
+    }
+
+    typeChar();
+}
+
+function initHeroTypography() {
+    initHeroEContinuousCycle();
 }
 
 // ==========================================
@@ -844,13 +911,24 @@ if (typeof Lenis !== 'undefined') {
 // Safe Loader Dismissal Function
 function hideLoader() {
     const loader = document.getElementById('loader');
-    if (!loader) return;
+    if (!loader) {
+        startHeroTypingAnimationOnce();
+        return;
+    }
     if (typeof gsap !== 'undefined') {
         const tl = gsap.timeline();
         tl.to("#loader-progress", { width: "100%", duration: 0.8, ease: "power3.inOut" })
-          .to("#loader", { y: "-100%", duration: 0.6, ease: "power4.inOut" });
+          .to("#loader", { 
+              y: "-100%", 
+              duration: 0.6, 
+              ease: "power4.inOut",
+              onStart: () => {
+                  setTimeout(startHeroTypingAnimationOnce, 150);
+              }
+          });
     } else {
         loader.style.display = 'none';
+        startHeroTypingAnimationOnce();
     }
 }
 
