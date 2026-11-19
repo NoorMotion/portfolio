@@ -644,6 +644,7 @@ body.dark-mode .stacking-card .bg-white\/95 {
 
 .hero-massive-title {
     font-family: 'Jersey 25', 'Silkscreen', 'VT323', monospace !important;
+    font-weight: 400 !important;
     font-size: clamp(3rem, 11vw, 10.5rem);
     line-height: 1;
     letter-spacing: 0.02em;
@@ -652,12 +653,15 @@ body.dark-mode .stacking-card .bg-white\/95 {
     width: 100%;
     text-align: left;
     min-height: 1.1em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 #hero-typing-a,
 #hero-typing-b {
     white-space: pre;
     font-family: inherit;
+    font-weight: 400 !important;
     color: #121212;
 }
 
