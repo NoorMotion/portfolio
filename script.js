@@ -603,16 +603,14 @@ if (document.readyState === 'loading') {
         applyPortfolioMasonry();
         setTimeout(applyPortfolioMasonry, 500);
         initGSAPAnimations();
-        initHeroTypography();
-        setTimeout(startHeroTypingAnimationOnce, 1200);
+        initHeroMotionDesignTyping();
     });
 } else {
     renderDynamicCMSData();
     applyPortfolioMasonry();
     setTimeout(applyPortfolioMasonry, 500);
     initGSAPAnimations();
-    initHeroTypography();
-    setTimeout(startHeroTypingAnimationOnce, 1200);
+    initHeroMotionDesignTyping();
 }
 
 // ==========================================
@@ -673,98 +671,120 @@ function initStackingCardsAnimation() {
 }
 
 // ==========================================
-// 🕹️ HERO "eMotion Designer" KINETIC ENGINE
+// 🕹️ HERO "Motion Design" TYPING ENGINE (Exact match to Motion Design.html)
 // ==========================================
-const HERO_E_FONTS = [
-    { family: "'Jersey 25', monospace", weight: "400", style: "normal" },
-    { family: "'Silkscreen', monospace", weight: "700", style: "normal" },
-    { family: "'Instrument Serif', serif", weight: "400", style: "italic" },
-    { family: "'Playfair Display', serif", weight: "700", style: "italic" },
-    { family: "'JetBrains Mono', monospace", weight: "700", style: "normal" },
-    { family: "'Caveat', cursive", weight: "700", style: "normal" },
-    { family: "'Syne', sans-serif", weight: "800", style: "normal" },
-    { family: "'VT323', monospace", weight: "400", style: "normal" },
-    { family: "'Cormorant Garamond', serif", weight: "700", style: "italic" },
-    { family: "'Cinzel', serif", weight: "700", style: "normal" },
-    { family: "'Courier New', monospace", weight: "700", style: "normal" },
-    { family: "Impact, sans-serif", weight: "900", style: "normal" },
-    { family: "Georgia, serif", weight: "700", style: "italic" },
-    { family: "'Bodoni Moda', serif", weight: "700", style: "italic" },
-    { family: "'Inter', sans-serif", weight: "900", style: "normal" }
-];
+let triggerHeroMotionTyping = null;
 
-let heroEFontIndex = 0;
-let heroTypingStarted = false;
+function initHeroMotionDesignTyping() {
+    var TYPO = "Emotion Designer", FINAL = "Motion Designer";
+    var A = document.getElementById("hero-typing-a");
+    var B = document.getElementById("hero-typing-b");
+    var C = document.getElementById("hero-typing-cur");
+    var H = document.getElementById("hero-main-title");
+    if (!A || !B || !C) return;
 
-function initHeroEContinuousCycle() {
-    const eEl = document.getElementById('hero-e-char');
-    if (!eEl) return;
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var txt = "", pos = 0, run = 0;
 
-    setInterval(() => {
-        heroEFontIndex = (heroEFontIndex + 1) % HERO_E_FONTS.length;
-        const font = HERO_E_FONTS[heroEFontIndex];
-        eEl.style.fontFamily = font.family;
-        eEl.style.fontWeight = font.weight;
-        eEl.style.fontStyle = font.style;
-    }, 1000);
-}
-
-function startHeroTypingAnimationOnce() {
-    if (window._heroTypingActive) return;
-    window._heroTypingActive = true;
-
-    const target = document.getElementById('hero-typing-target');
-    const cur = document.getElementById('hero-typing-cursor');
-    if (!target || !cur) return;
-
-    const fullText = "Motion Designer";
-    target.textContent = "";
-
-    if (typeof gsap !== 'undefined') {
-        if (window._heroTypingTL) {
-            window._heroTypingTL.kill();
-        }
-        const tl = gsap.timeline({ repeat: -1, repeatDelay: 0.4 });
-        window._heroTypingTL = tl;
-
-        // 1. Initial pause (700ms) with blinking cursor
-        tl.call(() => cur.classList.remove('typing'))
-          .to({}, { duration: 0.7 })
-
-        // 2. Typing phase: solid cursor (.typing)
-          .call(() => cur.classList.add('typing'))
-          .to({ p: 0 }, {
-              p: fullText.length,
-              duration: fullText.length * 0.09,
-              ease: `steps(${fullText.length})`,
-              onUpdate: function () {
-                  const val = Math.round(this.targets()[0].p);
-                  target.textContent = fullText.slice(0, val);
-              }
-          })
-
-        // 3. Typed pause (2.6s): blinking cursor
-          .call(() => cur.classList.remove('typing'))
-          .to({}, { duration: 2.6 })
-
-        // 4. Erase phase: fast erase (45ms/char) with solid cursor (.typing)
-          .call(() => cur.classList.add('typing'))
-          .to({ p: fullText.length }, {
-              p: 0,
-              duration: fullText.length * 0.045,
-              ease: `steps(${fullText.length})`,
-              onUpdate: function () {
-                  const val = Math.round(this.targets()[0].p);
-                  target.textContent = fullText.slice(0, val);
-              }
-          });
-    } else {
-        target.textContent = fullText;
+    function render() {
+        A.textContent = txt.slice(0, pos);
+        B.textContent = txt.slice(pos);
     }
-}
+    function wait(ms) {
+        return new Promise(function(r) { setTimeout(r, ms); });
+    }
+    function rnd(a, b) {
+        return a + Math.random() * (b - a);
+    }
+    async function w(ms, id) {
+        await wait(ms);
+        return id === run;
+    }
+    function solid(on) {
+        C.classList.toggle("typing", on);
+    }
 
-function initHeroTypography() {
-    initHeroEContinuousCycle();
+    async function cycle(id) {
+        txt = ""; pos = 0; render(); solid(false);
+        if (!await w(700, id)) return;
+        solid(true);
+        for (var i = 0; i < TYPO.length; i++) {
+            txt += TYPO[i];
+            pos = txt.length;
+            render();
+            if (!await w(TYPO[i] === " " ? rnd(160, 240) : rnd(70, 150), id)) return;
+        }
+        solid(false);
+        if (!await w(1300, id)) return;
+        solid(true);
+        while (pos > 1) {
+            pos--;
+            render();
+            if (!await w(rnd(55, 95), id)) return;
+        }
+        solid(false);
+        if (!await w(1000, id)) return;
+        solid(true);
+        txt = txt.slice(0, pos - 1) + txt.slice(pos);
+        pos--;
+        render();
+        solid(false);
+        if (!await w(rnd(650, 850), id)) return;
+        solid(true);
+        pos++;
+        render();
+        if (!await w(rnd(380, 480), id)) return;
+        txt = txt.slice(0, pos - 1) + txt.slice(pos);
+        pos--;
+        render();
+        if (!await w(rnd(320, 420), id)) return;
+        txt = txt.slice(0, pos) + "M" + txt.slice(pos);
+        pos++;
+        render();
+        if (!await w(700, id)) return;
+        while (pos < txt.length) {
+            pos++;
+            render();
+            if (!await w(rnd(30, 45), id)) return;
+        }
+        solid(false);
+        if (!await w(2800, id)) return;
+        solid(true);
+        while (pos > 0) {
+            txt = txt.slice(0, pos - 1) + txt.slice(pos);
+            pos--;
+            render();
+            if (!await w(45, id)) return;
+        }
+        solid(false);
+        await w(500, id);
+    }
+
+    async function loop() {
+        var id = ++run;
+        if (reduce) {
+            txt = FINAL;
+            pos = txt.length;
+            render();
+            return;
+        }
+        while (id === run) {
+            await cycle(id);
+        }
+    }
+
+    triggerHeroMotionTyping = loop;
+
+    if (H) {
+        H.addEventListener("click", loop);
+    }
+    document.addEventListener("keydown", function(e) {
+        if ((e.code === "Space" || e.key === "Enter") && (document.activeElement === document.body || document.activeElement === H)) {
+            loop();
+        }
+    });
+
+    loop();
 }
 
 // ==========================================
@@ -944,7 +964,7 @@ if (typeof Lenis !== 'undefined') {
 function hideLoader() {
     const loader = document.getElementById('loader');
     if (!loader) {
-        startHeroTypingAnimationOnce();
+        if (triggerHeroMotionTyping) triggerHeroMotionTyping();
         return;
     }
     if (typeof gsap !== 'undefined') {
@@ -955,12 +975,12 @@ function hideLoader() {
               duration: 0.6, 
               ease: "power4.inOut",
               onStart: () => {
-                  setTimeout(startHeroTypingAnimationOnce, 150);
+                  if (triggerHeroMotionTyping) triggerHeroMotionTyping();
               }
           });
     } else {
         loader.style.display = 'none';
-        startHeroTypingAnimationOnce();
+        if (triggerHeroMotionTyping) triggerHeroMotionTyping();
     }
 }
 

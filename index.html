@@ -40,7 +40,7 @@
     <link rel="apple-touch-icon" href="favicon.png">
 
     <!-- Custom Design System Stylesheet -->
-    <link rel="stylesheet" href="style.css?v=6">
+    <link rel="stylesheet" href="style.css?v=8">
 </head>
 
 <body class="antialiased selection:bg-[#E11D48] selection:text-white">
@@ -150,11 +150,11 @@
             <!-- Hero Kinetic Title (Massive Top Headline spanning full width) -->
             <div class="w-full mb-8 sm:mb-12 overflow-visible">
                 <h1
-                    class="hero-massive-title font-bold text-slate-900 font-pixel-mono leading-none tracking-normal select-none"
-                    aria-label="eMotion Designer">
-                    <span class="inline-flex items-baseline flex-nowrap">
-                        <span id="hero-e-char" class="inline-block text-[#E11D48] select-none">e</span><span id="hero-typing-target" class="text-slate-900 inline">Motion Designer</span><span id="hero-typing-cursor" class="inline-block" aria-hidden="true"></span>
-                    </span>
+                    id="hero-main-title"
+                    class="hero-massive-title font-bold text-slate-900 font-pixel-mono leading-none tracking-normal select-none cursor-pointer"
+                    aria-label="Motion Designer"
+                    title="Click to replay">
+                    <span id="hero-typing-a" aria-hidden="true">Motion Designer</span><span id="hero-typing-cur" aria-hidden="true"></span><span id="hero-typing-b" aria-hidden="true"></span>
                 </h1>
             </div>
 
@@ -1139,104 +1139,8 @@
         </div>
     </div>
 
-    <!-- Inline Hero Typography Controller (Instant Load, Zero Cache Delay) -->
-    <script>
-        (function () {
-            // 1. Continuous cycling of fonts for the letter 'e'
-            var eFonts = [
-                { f: "'Jersey 25', monospace", w: "400", s: "normal" },
-                { f: "'Silkscreen', monospace", w: "700", s: "normal" },
-                { f: "'Instrument Serif', serif", w: "400", s: "italic" },
-                { f: "'Playfair Display', serif", w: "700", s: "italic" },
-                { f: "'JetBrains Mono', monospace", w: "700", s: "normal" },
-                { f: "'Caveat', cursive", w: "700", s: "normal" },
-                { f: "'Syne', sans-serif", w: "800", s: "normal" },
-                { f: "'VT323', monospace", w: "400", s: "normal" },
-                { f: "'Cormorant Garamond', serif", w: "700", s: "italic" },
-                { f: "'Cinzel', serif", w: "700", s: "normal" },
-                { f: "'Courier New', monospace", w: "700", s: "normal" },
-                { f: "Impact, sans-serif", w: "900", s: "normal" },
-                { f: "Georgia, serif", w: "700", s: "italic" },
-                { f: "'Inter', sans-serif", w: "900", s: "normal" }
-            ];
-            var eEl = document.getElementById('hero-e-char');
-            var eIdx = 0;
-            if (eEl) {
-                setInterval(function () {
-                    eIdx = (eIdx + 1) % eFonts.length;
-                    var item = eFonts[eIdx];
-                    eEl.style.fontFamily = item.f;
-                    eEl.style.fontWeight = item.w;
-                    eEl.style.fontStyle = item.s;
-                }, 1000);
-            }
-
-            // 2. GSAP Typewriter animation (exact Motion Design.html loop: type -> pause 2.6s -> erase -> pause 0.4s)
-            function initHeroGSAPTypingLoop() {
-                var target = document.getElementById('hero-typing-target');
-                var cur = document.getElementById('hero-typing-cursor');
-                if (!target || !cur || window._heroTypingActive) return;
-                window._heroTypingActive = true;
-
-                var fullText = "Motion Designer";
-                target.textContent = "";
-
-                if (typeof gsap !== 'undefined') {
-                    if (window._heroTypingTL) {
-                        window._heroTypingTL.kill();
-                    }
-                    var tl = gsap.timeline({ repeat: -1, repeatDelay: 0.4 });
-                    window._heroTypingTL = tl;
-
-                    // Step 1: Initial pause (700ms) with blinking cursor
-                    tl.call(function () { cur.classList.remove('typing'); })
-                      .to({}, { duration: 0.7 })
-
-                    // Step 2: Type character by character with solid cursor (.typing)
-                      .call(function () { cur.classList.add('typing'); })
-                      .to({ p: 0 }, {
-                          p: fullText.length,
-                          duration: fullText.length * 0.09,
-                          ease: "steps(" + fullText.length + ")",
-                          onUpdate: function () {
-                              var count = Math.round(this.targets()[0].p);
-                              target.textContent = fullText.slice(0, count);
-                          }
-                      })
-
-                    // Step 3: Hold typed text for 2.6s with blinking cursor
-                      .call(function () { cur.classList.remove('typing'); })
-                      .to({}, { duration: 2.6 })
-
-                    // Step 4: Erase character by character fast (45ms per char) with solid cursor (.typing)
-                      .call(function () { cur.classList.add('typing'); })
-                      .to({ p: fullText.length }, {
-                          p: 0,
-                          duration: fullText.length * 0.045,
-                          ease: "steps(" + fullText.length + ")",
-                          onUpdate: function () {
-                              var count = Math.round(this.targets()[0].p);
-                              target.textContent = fullText.slice(0, count);
-                          }
-                      });
-                } else {
-                    target.textContent = fullText;
-                }
-            }
-
-            if (document.readyState === 'complete') {
-                setTimeout(initHeroGSAPTypingLoop, 150);
-            } else {
-                window.addEventListener('load', function () {
-                    setTimeout(initHeroGSAPTypingLoop, 150);
-                });
-                setTimeout(initHeroGSAPTypingLoop, 1200);
-            }
-        })();
-    </script>
-
     <!-- Application Controller Logic Script (with Cache Buster) -->
-    <script src="script.js?v=6" defer></script>
+    <script src="script.js?v=8" defer></script>
 </body>
 
 </html>
