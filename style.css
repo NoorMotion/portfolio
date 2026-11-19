@@ -164,15 +164,6 @@ body.dark-mode #product-modal-content #modal-details {
     color: #CBD5E1 !important;
 }
 
-/* Page Loader in Dark Mode */
-body.dark-mode #loader {
-    background-color: #050505 !important;
-}
-
-body.dark-mode #loader-logo {
-    color: #FFFFFF !important;
-}
-
 /* Base Body Setup with Base44 Dot Grid Matrix */
 * {
     margin: 0;
@@ -452,40 +443,14 @@ body.dark-mode.hover-active .cursor-outline {
     background-color: rgba(192, 254, 4, 0.1);
 }
 
-/* Page Loader */
-#loader {
-    position: fixed;
-    inset: 0;
-    z-index: 10000;
-    background-color: var(--bg-dark);
-    background-image: radial-gradient(rgba(0, 0, 0, 0.12) 1px, transparent 1px);
-    background-size: 24px 24px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.loader-bar {
-    width: 180px;
-    height: 2px;
-    background: #CBD5E1;
-    position: relative;
-    overflow: hidden;
-    margin-top: 16px;
-}
-
-body.dark-mode .loader-bar {
-    background: rgba(255, 255, 255, 0.1);
-}
-
+/* Page Loader (Permanently Disabled for Instant Direct Landing) */
+#loader,
+.loader-bar,
 .loader-progress {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 0%;
-    background-color: var(--accent-lime);
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
 /* Vignette Gradients */

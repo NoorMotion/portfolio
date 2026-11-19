@@ -960,36 +960,14 @@ if (typeof Lenis !== 'undefined') {
     requestAnimationFrame(raf);
 }
 
-// Safe Loader Dismissal Function
-function hideLoader() {
+// Immediate Direct Page Landing (Loader Removed)
+function removeLoaderDirectly() {
     const loader = document.getElementById('loader');
-    if (!loader) {
-        if (triggerHeroMotionTyping) triggerHeroMotionTyping();
-        return;
-    }
-    if (typeof gsap !== 'undefined') {
-        const tl = gsap.timeline();
-        tl.to("#loader-progress", { width: "100%", duration: 0.8, ease: "power3.inOut" })
-          .to("#loader", { 
-              y: "-100%", 
-              duration: 0.6, 
-              ease: "power4.inOut",
-              onStart: () => {
-                  if (triggerHeroMotionTyping) triggerHeroMotionTyping();
-              }
-          });
-    } else {
-        loader.style.display = 'none';
-        if (triggerHeroMotionTyping) triggerHeroMotionTyping();
+    if (loader) {
+        loader.remove();
     }
 }
-
-if (document.readyState === 'complete') {
-    hideLoader();
-} else {
-    window.addEventListener('load', hideLoader);
-    setTimeout(hideLoader, 1500); // 1.5s fallback
-}
+removeLoaderDirectly();
 
 // Modal Handlers
 const modalBackdrop = document.getElementById('product-modal-backdrop');
