@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PREVIEW: Noor Motion | Architectural Design System (ahmadajmal.co style)</title>
+    <title>PREVIEW: Noor Motion | Pure Architectural Grid (ahmadajmal.co style)</title>
     <meta name="description"
-        content="Preview site for Noor Motion portfolio featuring the architectural hairline grid & corner marker design language inspired by ahmadajmal.co.">
+        content="Preview site for Noor Motion portfolio featuring a strict continuous architectural grid system with zero corner radius, inspired by ahmadajmal.co.">
 
     <!-- Preconnect for CDNs & Media -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,42 +39,42 @@
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="apple-touch-icon" href="favicon.png">
 
-    <!-- Stylesheets: Base + Architectural Preview System -->
-    <link rel="stylesheet" href="preview.css?v=1">
+    <!-- Stylesheets: Base + Pure Architectural Grid System (No Radius) -->
+    <link rel="stylesheet" href="preview.css?v=2">
 </head>
 
 <body class="antialiased selection:bg-[#E11D48] selection:text-white bg-[#EEECEB] text-slate-900">
 
     <!-- Floating Preview Badge -->
-    <div class="fixed bottom-4 right-4 z-50 px-3.5 py-2 bg-[#121214] text-white border border-[#E11D48] font-mono-custom text-xs uppercase flex items-center gap-2.5 shadow-2xl rounded-[3px] backdrop-blur-md">
-        <span class="w-2 h-2 rounded-full bg-[#E11D48] animate-ping"></span>
-        <span class="tracking-wider">PREVIEW MODE // ahmadajmal.co style</span>
+    <div class="fixed bottom-4 right-4 z-50 px-3.5 py-2 bg-[#121214] text-white border border-[#E11D48] font-mono-custom text-xs uppercase flex items-center gap-2.5 shadow-2xl backdrop-blur-md">
+        <span class="w-2 h-2 bg-[#E11D48] animate-ping"></span>
+        <span class="tracking-wider">GRID STYLE // ZERO RADIUS PREVIEW</span>
     </div>
 
-    <!-- System Header Navigation Bar -->
+    <!-- System Header Navigation Bar (Sharp Architectural Line) -->
     <header id="main-header"
-        class="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-4 py-3 sm:px-6 lg:px-12 backdrop-blur-md bg-[#EEECEB]/80 border-b border-black/10 font-mono-custom text-xs uppercase">
+        class="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-4 py-3 sm:px-6 lg:px-12 backdrop-blur-md bg-[#EEECEB]/85 border-b border-black/10 font-mono-custom text-xs uppercase">
         <!-- Logo -->
         <a href="#"
             class="dotted-btn p-1.5 font-bold text-sm text-slate-900 tracking-wider hover-trigger flex items-center space-x-2"
             id="nav-logo">
-            <img src="favicon.svg" class="w-6 h-6 rounded-md object-contain" alt="NoorMotion Logo">
+            <img src="favicon.svg" class="w-6 h-6 object-contain" alt="NoorMotion Logo">
             <span>NOOR<span class="text-[#E11D48]">MOTION</span></span>
         </a>
 
         <!-- Desktop Menu Nav -->
         <nav class="hidden md:flex items-center space-x-6 text-slate-600 flex-nowrap whitespace-nowrap">
-            <a href="#showreel" class="dotted-btn p-2 hover:text-[#E11D48] transition hover-trigger">Reel</a>
-            <a href="#services" class="dotted-btn p-2 hover:text-[#E11D48] transition hover-trigger">Services</a>
-            <a href="#portfolio" class="dotted-btn p-2 hover:text-[#E11D48] transition hover-trigger">Work</a>
-            <a href="#products" class="dotted-btn p-2 hover:text-[#E11D48] transition hover-trigger">Tools</a>
+            <a href="#showreel" class="dotted-btn p-2 hover:text-[#E11D48] transition hover-trigger font-medium">[Reel]</a>
+            <a href="#services" class="dotted-btn p-2 hover:text-[#E11D48] transition hover-trigger font-medium">[Services]</a>
+            <a href="#portfolio" class="dotted-btn p-2 hover:text-[#E11D48] transition hover-trigger font-medium">[Work]</a>
+            <a href="#products" class="dotted-btn p-2 hover:text-[#E11D48] transition hover-trigger font-medium">[Tools]</a>
             <a href="#contact"
-                class="dotted-btn p-2 text-[#E11D48] font-bold hover:text-slate-900 transition hover-trigger">Contact</a>
+                class="dotted-btn p-2 text-[#E11D48] font-bold hover:text-slate-900 transition hover-trigger">[Contact]</a>
         </nav>
 
         <!-- System Controls (Clock, Theme) -->
         <div class="flex items-center space-x-2 sm:space-x-4">
-            <span class="hidden sm:inline-block text-slate-600 px-2 py-1 bg-black/5 rounded border border-black/10"
+            <span class="hidden sm:inline-block text-slate-600 px-2 py-1 bg-black/5 border border-black/10"
                 id="live-clock">GMT+6 BD 00:00</span>
 
             <!-- Theme Toggle Button -->
@@ -96,7 +96,7 @@
         class="fixed inset-0 bg-[#EEECEB] z-[100] flex flex-col justify-between items-center p-6 sm:p-8 transform translate-x-full transition-transform duration-500 font-mono-custom">
         <div class="w-full flex justify-between items-center pt-2">
             <div class="flex items-center space-x-2">
-                <img src="favicon.svg" class="w-6 h-6 rounded-md object-contain" alt="NoorMotion Logo">
+                <img src="favicon.svg" class="w-6 h-6 object-contain" alt="NoorMotion Logo">
                 <span class="font-bold text-sm text-slate-900 tracking-wider">NOOR<span
                         class="text-[#E11D48]">MOTION</span></span>
             </div>
@@ -108,32 +108,34 @@
         </div>
 
         <nav class="flex flex-col justify-center items-center space-y-6 text-xl my-auto">
-            <a href="#showreel" class="mobile-link text-slate-900 hover:text-[#E11D48] transition font-bold">Showreel</a>
-            <a href="#services" class="mobile-link text-slate-900 hover:text-[#E11D48] transition font-bold">Services</a>
-            <a href="#portfolio" class="mobile-link text-slate-900 hover:text-[#E11D48] transition font-bold">Work</a>
-            <a href="#products" class="mobile-link text-slate-900 hover:text-[#E11D48] transition font-bold">Tools</a>
-            <a href="#contact" class="mobile-link text-[#E11D48] font-bold">Contact</a>
+            <a href="#showreel" class="mobile-link text-slate-900 hover:text-[#E11D48] transition font-bold">[01 // SHOWREEL]</a>
+            <a href="#services" class="mobile-link text-slate-900 hover:text-[#E11D48] transition font-bold">[02 // SERVICES]</a>
+            <a href="#portfolio" class="mobile-link text-slate-900 hover:text-[#E11D48] transition font-bold">[03 // WORK]</a>
+            <a href="#products" class="mobile-link text-slate-900 hover:text-[#E11D48] transition font-bold">[04 // TOOLS]</a>
+            <a href="#contact" class="mobile-link text-[#E11D48] font-bold">[05 // CONTACT]</a>
         </nav>
 
         <div class="w-full flex flex-col items-center space-y-4 pt-4 border-t border-black/10 text-xs uppercase">
             <div class="flex items-center space-x-3">
                 <button id="theme-toggle-mobile"
-                    class="dotted-btn px-4 py-2 bg-black/5 rounded text-slate-900 font-mono-custom">
+                    class="dotted-btn px-4 py-2 bg-black/5 text-slate-900 font-mono-custom border border-black/10">
                     THEME[<span class="text-[#E11D48]" id="theme-mobile-indicator">L</span>]
                 </button>
             </div>
-            <span class="text-slate-600 px-3 py-1 bg-black/5 rounded border border-black/10"
+            <span class="text-slate-600 px-3 py-1 bg-black/5 border border-black/10"
                 id="live-clock-mobile">GMT+6 BD 00:00</span>
         </div>
     </div>
 
-    <!-- Hero Section with Motion Design Typing Animation -->
+    <!-- =======================================================================
+         HERO SECTION (Centered Kinetic Typing Headline, No Radius)
+         ======================================================================= -->
     <section
         class="relative min-h-screen flex items-center pt-24 pb-12 sm:pt-28 sm:pb-20 overflow-hidden"
         id="hero">
         <div class="absolute inset-0 pointer-events-none overflow-hidden opacity-25">
-            <div class="absolute -top-40 -left-40 w-96 h-96 bg-[#E11D48]/15 rounded-full filter blur-3xl animate-pulse"></div>
-            <div class="absolute top-1/2 -right-40 w-96 h-96 bg-purple-500/10 rounded-full filter blur-3xl"></div>
+            <div class="absolute -top-40 -left-40 w-96 h-96 bg-[#E11D48]/15 filter blur-3xl animate-pulse"></div>
+            <div class="absolute top-1/2 -right-40 w-96 h-96 bg-purple-500/10 filter blur-3xl"></div>
             <div class="video-vignette-vertical"></div>
             <div class="video-vignette-horizontal"></div>
         </div>
@@ -216,7 +218,7 @@
                 })();
             </script>
 
-            <!-- Bio / CTAs and Portrait Grid -->
+            <!-- Bio / CTAs and Portrait Grid (Sharp Boxed Frame) -->
             <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
                 <div class="lg:col-span-7 flex flex-col items-start space-y-6">
                     <p class="text-base sm:text-lg lg:text-xl text-slate-600 max-w-2xl leading-relaxed" id="hero-desc">
@@ -226,53 +228,59 @@
 
                     <div class="flex flex-col sm:flex-row w-full sm:w-auto gap-3 pt-2">
                         <a href="#portfolio"
-                            class="dotted-btn px-6 sm:px-8 py-3.5 sm:py-4 bg-[#E11D48] text-white font-bold text-sm rounded-[2px] hover:bg-slate-900 transition-all text-center justify-center hover-trigger"
+                            class="px-6 sm:px-8 py-3.5 sm:py-4 bg-[#E11D48] text-white font-mono-custom text-xs uppercase tracking-wider hover:bg-slate-900 transition-all text-center justify-center hover-trigger font-bold"
                             id="hero-btn-1">
-                            See Selected Works
+                            [SEE SELECTED WORKS]
                         </a>
                         <a href="#showreel"
-                            class="dotted-btn px-6 sm:px-8 py-3.5 sm:py-4 border border-black/15 bg-black/5 text-slate-900 font-bold text-sm rounded-[2px] hover:bg-black/10 transition-all flex items-center justify-center space-x-3 hover-trigger">
+                            class="px-6 sm:px-8 py-3.5 sm:py-4 border border-black/15 bg-black/5 text-slate-900 font-mono-custom text-xs uppercase tracking-wider hover:bg-black/10 transition-all flex items-center justify-center space-x-3 hover-trigger font-bold">
                             <i class="fa-solid fa-play text-[#E11D48]"></i>
-                            <span>Watch Showreel</span>
+                            <span>[WATCH SHOWREEL]</span>
                         </a>
                     </div>
                 </div>
 
                 <div class="lg:col-span-5 flex flex-row items-center justify-center lg:justify-end gap-3 sm:gap-4 w-full">
+                    <!-- Sharp Portrait Box (Zero Radius) -->
                     <div
-                        class="relative flex-1 max-w-[240px] xs:max-w-[270px] sm:max-w-sm lg:max-w-[340px] aspect-square flex justify-center items-center group overflow-hidden bg-transparent border border-black/20 shadow-md p-[5px] pt-[20px] sm:pt-[25px]">
+                        class="relative flex-1 max-w-[240px] xs:max-w-[270px] sm:max-w-sm lg:max-w-[340px] aspect-square flex justify-center items-center group overflow-hidden bg-transparent border border-black/20 shadow-sm p-[4px]">
+                        <span class="cmk tl"></span>
+                        <span class="cmk tr"></span>
+                        <span class="cmk bl"></span>
+                        <span class="cmk br"></span>
                         <img id="hero-portrait-img" src="https://nooralam.carrd.co/assets/images/image01.png?v=1e1d6b0a"
                             alt="Noor Motion"
                             class="w-full h-full object-cover transition duration-500 transform group-hover:scale-105">
                     </div>
 
-                    <div class="flex flex-col items-center justify-center space-y-2.5 sm:space-y-3" id="hero-social-column">
+                    <!-- Sharp Social Icon Column (No Radius) -->
+                    <div class="flex flex-col items-center justify-center space-y-2 sm:space-y-2.5" id="hero-social-column">
                         <a href="https://www.linkedin.com/in/motionoor-alam-/" target="_blank" rel="noopener noreferrer"
                             title="LinkedIn"
-                            class="dotted-btn w-9 h-9 sm:w-10 sm:h-10 bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-110 hover-trigger">
+                            class="w-9 h-9 sm:w-10 sm:h-10 bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-200 hover-trigger">
                             <i class="fa-brands fa-linkedin-in text-sm"></i>
                         </a>
                         <a href="https://www.youtube.com/@Motionoor" target="_blank" rel="noopener noreferrer"
                             title="YouTube"
-                            class="dotted-btn w-9 h-9 sm:w-10 sm:h-10 bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-110 hover-trigger">
+                            class="w-9 h-9 sm:w-10 sm:h-10 bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-200 hover-trigger">
                             <i class="fa-brands fa-youtube text-sm"></i>
                         </a>
                         <a href="https://www.facebook.com/Nr.Alm96" target="_blank" rel="noopener noreferrer"
                             title="Facebook"
-                            class="dotted-btn w-9 h-9 sm:w-10 sm:h-10 bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-110 hover-trigger">
+                            class="w-9 h-9 sm:w-10 sm:h-10 bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-200 hover-trigger">
                             <i class="fa-brands fa-facebook-f text-sm"></i>
                         </a>
                         <a href="https://wa.me/+8801867739749" target="_blank" rel="noopener noreferrer" title="WhatsApp"
-                            class="dotted-btn w-9 h-9 sm:w-10 sm:h-10 bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-110 hover-trigger">
+                            class="w-9 h-9 sm:w-10 sm:h-10 bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-200 hover-trigger">
                             <i class="fa-brands fa-whatsapp text-sm"></i>
                         </a>
                         <a href="https://t.me/+8801867739749" target="_blank" rel="noopener noreferrer" title="Telegram"
-                            class="dotted-btn w-9 h-9 sm:w-10 sm:h-10 bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-110 hover-trigger">
+                            class="w-9 h-9 sm:w-10 sm:h-10 bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-200 hover-trigger">
                             <i class="fa-brands fa-telegram text-sm"></i>
                         </a>
                         <a href="https://nralam.gumroad.com/" target="_blank" rel="noopener noreferrer"
                             title="Gumroad"
-                            class="dotted-btn w-9 h-9 sm:w-10 sm:h-10 bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-300 shadow-sm hover:scale-110 hover-trigger">
+                            class="w-9 h-9 sm:w-10 sm:h-10 bg-white border border-black/15 text-slate-700 hover:text-[#E11D48] hover:border-[#E11D48] flex items-center justify-center transition duration-200 hover-trigger">
                             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0Zm-.007 5.12c4.48 0 5.995 3.025 6.064 4.744h-3.239c-.069-.962-.897-2.406-2.896-2.406-2.136 0-3.514 1.857-3.514 4.126 0 2.27 1.378 4.125 3.514 4.125 1.93 0 2.758-1.512 3.103-3.025h-3.103v-1.238h6.509v6.327h-2.855v-3.989c-.207 1.444-1.102 4.264-4.617 4.264-3.516 0-5.584-2.82-5.584-6.326 0-3.645 2.276-6.602 6.618-6.602z"/></svg>
                         </a>
                     </div>
@@ -282,18 +290,18 @@
     </section>
 
     <!-- =======================================================================
-         SECTION 01: SHOWREEL (ahmadajmal.co on-ink Cinema Stagebox)
+         SECTION 01: SHOWREEL (ahmadajmal.co #reel on-ink Stagebox, No Radius)
          ======================================================================= -->
     <section class="on-ink arch-frame py-24 sm:py-32 relative overflow-hidden" id="showreel">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-            <!-- Section Header (Architectural Monospace Tag & Title) -->
-            <div class="text-center mb-12 sm:mb-16">
+            <!-- Section Header -->
+            <div class="text-center mb-10 sm:mb-14">
                 <span class="arch-tag block mb-2">[01 // SHOWREEL]</span>
                 <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-white arch-say">Motion Reel 2026</h2>
                 <p class="font-mono-custom text-xs text-slate-400 uppercase tracking-widest mt-2">High-retention visual systems that stop the scroll</p>
             </div>
 
-            <!-- Architectural Stagebox with Extended Hairlines and Corner Marks -->
+            <!-- Architectural Stagebox with Extended Hairlines and Sharp Corner Marks -->
             <div class="arch-stagebox-container">
                 <div class="arch-stagebox relative aspect-video cursor-pointer group" id="showreel-card" onclick="playShowreelVideo()">
                     <!-- Extended Hairline Edge Rules -->
@@ -302,7 +310,7 @@
                     <span class="edge l"></span>
                     <span class="edge r"></span>
 
-                    <!-- Corner Markers (.cmark) -->
+                    <!-- Sharp Corner Markers (.cmark) -->
                     <span class="cmark tl"></span>
                     <span class="cmark tr"></span>
                     <span class="cmark bl"></span>
@@ -314,7 +322,7 @@
                             class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
 
                         <div class="absolute inset-0 bg-black/25 group-hover:bg-black/10 transition duration-300 flex justify-center items-center pointer-events-none">
-                            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-2xl transform scale-90 group-hover:scale-110 transition duration-500 ring-4 ring-white/20">
+                            <div class="arch-play-btn ring-4 ring-white/10">
                                 <i class="fa-solid fa-play text-xl sm:text-2xl ml-1"></i>
                             </div>
                         </div>
@@ -334,15 +342,15 @@
     </section>
 
     <!-- =======================================================================
-         SECTION 02: SERVICES & CAPABILITIES (ahmadajmal.co Production Pipeline)
+         SECTION 02: SERVICES & CAPABILITIES (Continuous Architectural Grid Matrix)
          ======================================================================= -->
-    <section class="arch-frame py-16 sm:py-24 relative z-10" id="services">
+    <section class="arch-frame py-20 sm:py-28 relative z-10" id="services">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-            <!-- Section Header (Architectural Editorial Row) -->
+            <!-- Header Row -->
             <div class="arch-section-header flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
                     <span class="arch-tag block mb-1">[02 // CAPABILITIES &amp; PIPELINE]</span>
-                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">Services &amp; Solutions</h2>
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">Services &amp; Production Pipeline</h2>
                 </div>
                 <div class="flex items-center gap-4">
                     <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm max-w-md">
@@ -352,238 +360,150 @@
                 </div>
             </div>
 
-            <!-- Stacking Cards Pin Container with Architectural Card Treatment -->
-            <div class="stacking-cards-pin-wrapper relative max-w-6xl mx-auto min-h-[580px] xs:min-h-[600px] sm:min-h-[550px] lg:min-h-[500px]">
+            <!-- 2x2 Continuous Architectural Grid Matrix (Shared 1px Borders, Zero Radius) -->
+            <div class="arch-grid-matrix arch-grid-matrix-2col">
                 
-                <!-- Card 1: SaaS Explainer Videos -->
-                <div class="stacking-card stacking-card-1 absolute inset-x-0 top-0 z-10 p-6 sm:p-8 lg:p-10 border border-black/10 shadow-2xl overflow-hidden transition-shadow duration-300">
+                <!-- Discipline 1: SaaS Explainer Videos -->
+                <div class="arch-grid-cell p-6 sm:p-8 lg:p-10 group">
                     <span class="cmk tl"></span>
                     <span class="cmk tr"></span>
-                    <span class="cmk bl"></span>
-                    <span class="cmk br"></span>
-
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-center">
-                        <div class="lg:col-span-6 flex flex-col justify-between space-y-3.5">
-                            <div>
-                                <span class="arch-tag block mb-1">[01 // FMCG &amp; SAAS EXPLAINER]</span>
-                                <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 leading-tight tracking-tight mb-2">
-                                    High-Impact SaaS Product Explainer Videos
-                                </h3>
-                                <p class="text-slate-800/90 text-xs sm:text-sm leading-relaxed mb-3">
-                                    Combining custom 2D/3D motion graphics, smooth UI animations, and persuasive storytelling to showcase software value propositions.
-                                </p>
-                                
-                                <div class="grid grid-cols-2 gap-3 pt-2.5 border-t border-slate-900/15 mb-3 font-mono-custom text-xs">
-                                    <div>
-                                        <span class="block text-[10px] uppercase text-slate-600">Scope</span>
-                                        <span class="block font-bold text-slate-900">Motion Graphics &amp; UI</span>
-                                    </div>
-                                    <div>
-                                        <span class="block text-[10px] uppercase text-slate-600">Duration</span>
-                                        <span class="block font-bold text-slate-900">2 &ndash; 4 Weeks</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="bg-white/95 backdrop-blur-md p-2.5 flex items-center justify-between border border-black/10">
-                                <div class="flex items-center space-x-2.5">
-                                    <img src="https://nooralam.carrd.co/assets/images/image01.png?v=1e1d6b0a" alt="Noor Alam" class="w-8 h-8 rounded-full object-cover border border-slate-300" />
-                                    <div>
-                                        <h5 class="text-xs font-bold text-slate-900">Noor Alam</h5>
-                                        <p class="text-[10px] font-mono-custom text-slate-600">Lead Motion Specialist</p>
-                                    </div>
-                                </div>
-                                <a href="#contact" class="px-3 py-1 bg-slate-900 text-white font-mono-custom text-[11px] uppercase hover:bg-[#E11D48] transition flex items-center gap-1.5">
-                                    Inquire <i class="fa-solid fa-arrow-right text-[9px]"></i>
-                                </a>
-                            </div>
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="arch-tag">[01 // SAAS EXPLAINER]</span>
+                            <span class="arch-chip">2 &ndash; 4 WEEKS</span>
                         </div>
-
-                        <div class="lg:col-span-6">
-                            <div class="relative overflow-hidden shadow-xl border border-slate-900/20 bg-slate-900 aspect-[16/9] group cursor-pointer" onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1p22ilqvf2cyatv4v5cVLOdEq7K0-tfoT/view')">
-                                <img src="https://noormotion.carrd.co/assets/videos/video11_thumbnail.jpg?v=86a3e49b" alt="SaaS Explainer Showcase" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
-                                <div class="absolute bottom-2.5 left-2.5 right-2.5 flex justify-between items-center z-10">
-                                    <span class="arch-chip bg-black/80 text-white border-white/20">[DrivePhase.ai Explainer]</span>
-                                    <div class="w-8 h-8 rounded-full bg-[#E11D48] text-white flex items-center justify-center shadow-lg">
-                                        <i class="fa-solid fa-play text-[10px] ml-0.5"></i>
-                                    </div>
+                        <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-[#E11D48] transition">
+                            High-Impact SaaS Explainer Videos
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+                            Combining custom 2D/3D motion graphics, crisp UI animations, and persuasive storytelling to showcase software value propositions and drive conversions.
+                        </p>
+                        
+                        <!-- Media Preview -->
+                        <div class="aspect-video w-full overflow-hidden relative border border-slate-200 dark:border-white/10 mb-6 bg-slate-900 cursor-pointer" onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1p22ilqvf2cyatv4v5cVLOdEq7K0-tfoT/view')">
+                            <img src="https://noormotion.carrd.co/assets/videos/video11_thumbnail.jpg?v=86a3e49b" alt="SaaS Explainer" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
+                            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition flex justify-center items-center">
+                                <div class="w-10 h-10 bg-[#E11D48] text-white flex items-center justify-center">
+                                    <i class="fa-solid fa-play text-xs ml-0.5"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Meta Strip -->
+                    <div class="pt-4 border-t border-slate-200 dark:border-white/10 flex justify-between items-center font-mono-custom text-xs">
+                        <span class="text-slate-500">SCOPE: 2D/3D &amp; UI</span>
+                        <a href="#contact" class="px-3 py-1 bg-slate-900 text-white uppercase hover:bg-[#E11D48] transition flex items-center gap-1.5 font-bold">
+                            Inquire <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                        </a>
+                    </div>
                 </div>
 
-                <!-- Card 2: Technical Product Guides -->
-                <div class="stacking-card stacking-card-2 absolute inset-x-0 top-0 z-20 p-6 sm:p-8 lg:p-10 border border-black/10 shadow-2xl overflow-hidden transition-shadow duration-300">
+                <!-- Discipline 2: Technical Product Guides -->
+                <div class="arch-grid-cell p-6 sm:p-8 lg:p-10 group">
                     <span class="cmk tl"></span>
                     <span class="cmk tr"></span>
-                    <span class="cmk bl"></span>
-                    <span class="cmk br"></span>
-
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-center">
-                        <div class="lg:col-span-6 flex flex-col justify-between space-y-3.5">
-                            <div>
-                                <span class="arch-tag block mb-1">[02 // FINTECH &amp; TECHNICAL GUIDES]</span>
-                                <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 leading-tight tracking-tight mb-2">
-                                    Technical Product Explainers &amp; Walkthroughs
-                                </h3>
-                                <p class="text-slate-800/90 text-xs sm:text-sm leading-relaxed mb-3">
-                                    Guiding new users smoothly through complex SaaS platforms with crystal-clear onboarding guides, feature highlights, and UI tutorials.
-                                </p>
-                                
-                                <div class="grid grid-cols-2 gap-3 pt-2.5 border-t border-slate-900/15 mb-3 font-mono-custom text-xs">
-                                    <div>
-                                        <span class="block text-[10px] uppercase text-slate-600">Scope</span>
-                                        <span class="block font-bold text-slate-900">UI/UX Onboarding Guide</span>
-                                    </div>
-                                    <div>
-                                        <span class="block text-[10px] uppercase text-slate-600">Duration</span>
-                                        <span class="block font-bold text-slate-900">1 &ndash; 3 Weeks</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="bg-white/95 backdrop-blur-md p-2.5 flex items-center justify-between border border-black/10">
-                                <div class="flex items-center space-x-2.5">
-                                    <img src="https://nooralam.carrd.co/assets/images/image01.png?v=1e1d6b0a" alt="Noor Alam" class="w-8 h-8 rounded-full object-cover border border-slate-300" />
-                                    <div>
-                                        <h5 class="text-xs font-bold text-slate-900">Noor Alam</h5>
-                                        <p class="text-[10px] font-mono-custom text-slate-600">Technical Motion Author</p>
-                                    </div>
-                                </div>
-                                <a href="#contact" class="px-3 py-1 bg-slate-900 text-white font-mono-custom text-[11px] uppercase hover:bg-[#E11D48] transition flex items-center gap-1.5">
-                                    Inquire <i class="fa-solid fa-arrow-right text-[9px]"></i>
-                                </a>
-                            </div>
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="arch-tag">[02 // TECHNICAL GUIDES]</span>
+                            <span class="arch-chip">1 &ndash; 3 WEEKS</span>
                         </div>
-
-                        <div class="lg:col-span-6">
-                            <div class="relative overflow-hidden shadow-xl border border-slate-900/20 bg-slate-900 aspect-[16/9] group cursor-pointer" onclick="expandVideoCard(this, 'https://www.youtube.com/watch?v=yI97ztJJiwA')">
-                                <img src="https://img.youtube.com/vi/yI97ztJJiwA/maxresdefault.jpg" alt="Technical Product Walkthrough" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
-                                <div class="absolute bottom-2.5 left-2.5 right-2.5 flex justify-between items-center z-10">
-                                    <span class="arch-chip bg-black/80 text-white border-white/20">[Payrun Setup Guide]</span>
-                                    <div class="w-8 h-8 rounded-full bg-[#E11D48] text-white flex items-center justify-center shadow-lg">
-                                        <i class="fa-solid fa-play text-[10px] ml-0.5"></i>
-                                    </div>
+                        <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-[#E11D48] transition">
+                            Technical Product Walkthroughs
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+                            Guiding new users smoothly through complex SaaS platforms and enterprise tools with crystal-clear onboarding guides, feature highlights, and UI tutorials.
+                        </p>
+                        
+                        <!-- Media Preview -->
+                        <div class="aspect-video w-full overflow-hidden relative border border-slate-200 dark:border-white/10 mb-6 bg-slate-900 cursor-pointer" onclick="expandVideoCard(this, 'https://www.youtube.com/watch?v=yI97ztJJiwA')">
+                            <img src="https://img.youtube.com/vi/yI97ztJJiwA/maxresdefault.jpg" alt="Technical Walkthrough" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
+                            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition flex justify-center items-center">
+                                <div class="w-10 h-10 bg-[#E11D48] text-white flex items-center justify-center">
+                                    <i class="fa-solid fa-play text-xs ml-0.5"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Meta Strip -->
+                    <div class="pt-4 border-t border-slate-200 dark:border-white/10 flex justify-between items-center font-mono-custom text-xs">
+                        <span class="text-slate-500">SCOPE: ONBOARDING &amp; UX</span>
+                        <a href="#contact" class="px-3 py-1 bg-slate-900 text-white uppercase hover:bg-[#E11D48] transition flex items-center gap-1.5 font-bold">
+                            Inquire <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                        </a>
+                    </div>
                 </div>
 
-                <!-- Card 3: Brand Commercials -->
-                <div class="stacking-card stacking-card-3 absolute inset-x-0 top-0 z-30 p-6 sm:p-8 lg:p-10 border border-black/10 shadow-2xl overflow-hidden transition-shadow duration-300">
+                <!-- Discipline 3: Brand Commercials -->
+                <div class="arch-grid-cell p-6 sm:p-8 lg:p-10 group">
                     <span class="cmk tl"></span>
                     <span class="cmk tr"></span>
-                    <span class="cmk bl"></span>
-                    <span class="cmk br"></span>
-
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-center">
-                        <div class="lg:col-span-6 flex flex-col justify-between space-y-3.5">
-                            <div>
-                                <span class="arch-tag block mb-1">[03 // EDTECH &amp; COMMERCIAL PROMOS]</span>
-                                <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 leading-tight tracking-tight mb-2">
-                                    Cinematic Brand Commercials &amp; Motion Ads
-                                </h3>
-                                <p class="text-slate-800/90 text-xs sm:text-sm leading-relaxed mb-3">
-                                    Cinematic promotional visuals, high-converting video ad campaigns, and commercial launch trailers engineered to grab instant audience focus.
-                                </p>
-                                
-                                <div class="grid grid-cols-2 gap-3 pt-2.5 border-t border-slate-900/15 mb-3 font-mono-custom text-xs">
-                                    <div>
-                                        <span class="block text-[10px] uppercase text-slate-600">Scope</span>
-                                        <span class="block font-bold text-slate-900">Commercial &amp; Promo</span>
-                                    </div>
-                                    <div>
-                                        <span class="block text-[10px] uppercase text-slate-600">Duration</span>
-                                        <span class="block font-bold text-slate-900">2 &ndash; 3 Weeks</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="bg-white/95 backdrop-blur-md p-2.5 flex items-center justify-between border border-black/10">
-                                <div class="flex items-center space-x-2.5">
-                                    <img src="https://nooralam.carrd.co/assets/images/image01.png?v=1e1d6b0a" alt="Noor Alam" class="w-8 h-8 rounded-full object-cover border border-slate-300" />
-                                    <div>
-                                        <h5 class="text-xs font-bold text-slate-900">Noor Alam</h5>
-                                        <p class="text-[10px] font-mono-custom text-slate-600">Commercial Motion Director</p>
-                                    </div>
-                                </div>
-                                <a href="#contact" class="px-3 py-1 bg-slate-900 text-white font-mono-custom text-[11px] uppercase hover:bg-[#E11D48] transition flex items-center gap-1.5">
-                                    Inquire <i class="fa-solid fa-arrow-right text-[9px]"></i>
-                                </a>
-                            </div>
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="arch-tag">[03 // COMMERCIAL PROMO]</span>
+                            <span class="arch-chip">2 &ndash; 3 WEEKS</span>
                         </div>
-
-                        <div class="lg:col-span-6">
-                            <div class="relative overflow-hidden shadow-xl border border-slate-900/20 bg-slate-900 aspect-[16/9] group cursor-pointer" onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1A7NU3RcdVyAI4CL4w2_hnXHDGuPmpLJX/view')">
-                                <img src="https://noormotion.carrd.co/assets/videos/video04_thumbnail.jpg?v=86a3e49b" alt="Brand Commercial Promo" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
-                                <div class="absolute bottom-2.5 left-2.5 right-2.5 flex justify-between items-center z-10">
-                                    <span class="arch-chip bg-black/80 text-white border-white/20">[Commercial Promo]</span>
-                                    <div class="w-8 h-8 rounded-full bg-[#E11D48] text-white flex items-center justify-center shadow-lg">
-                                        <i class="fa-solid fa-play text-[10px] ml-0.5"></i>
-                                    </div>
+                        <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-[#E11D48] transition">
+                            Cinematic Brand Commercials
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+                            Cinematic promotional visuals, high-converting motion ad campaigns, and commercial launch trailers engineered to grab instant audience focus.
+                        </p>
+                        
+                        <!-- Media Preview -->
+                        <div class="aspect-video w-full overflow-hidden relative border border-slate-200 dark:border-white/10 mb-6 bg-slate-900 cursor-pointer" onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1A7NU3RcdVyAI4CL4w2_hnXHDGuPmpLJX/view')">
+                            <img src="https://noormotion.carrd.co/assets/videos/video04_thumbnail.jpg?v=86a3e49b" alt="Brand Commercial" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
+                            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition flex justify-center items-center">
+                                <div class="w-10 h-10 bg-[#E11D48] text-white flex items-center justify-center">
+                                    <i class="fa-solid fa-play text-xs ml-0.5"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Meta Strip -->
+                    <div class="pt-4 border-t border-slate-200 dark:border-white/10 flex justify-between items-center font-mono-custom text-xs">
+                        <span class="text-slate-500">SCOPE: COMMERCIAL &amp; 3D</span>
+                        <a href="#contact" class="px-3 py-1 bg-slate-900 text-white uppercase hover:bg-[#E11D48] transition flex items-center gap-1.5 font-bold">
+                            Inquire <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                        </a>
+                    </div>
                 </div>
 
-                <!-- Card 4: AE Scripts & Automation Tools -->
-                <div class="stacking-card stacking-card-4 absolute inset-x-0 top-0 z-40 p-6 sm:p-8 lg:p-10 border border-black/10 shadow-2xl overflow-hidden transition-shadow duration-300">
+                <!-- Discipline 4: AE Scripts & Automation Tools -->
+                <div class="arch-grid-cell p-6 sm:p-8 lg:p-10 group">
                     <span class="cmk tl"></span>
                     <span class="cmk tr"></span>
-                    <span class="cmk bl"></span>
-                    <span class="cmk br"></span>
-
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-center">
-                        <div class="lg:col-span-6 flex flex-col justify-between space-y-3.5">
-                            <div>
-                                <span class="arch-tag block mb-1">[04 // WORKFLOW TOOLING &amp; AUTOMATION]</span>
-                                <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 leading-tight tracking-tight mb-2">
-                                    Custom After Effects Scripting &amp; Presets
-                                </h3>
-                                <p class="text-slate-800/90 text-xs sm:text-sm leading-relaxed mb-3">
-                                    Building proprietary After Effects scripts, JSX automations, and custom expressions to eliminate repetitive manual keyframing.
-                                </p>
-                                
-                                <div class="grid grid-cols-2 gap-3 pt-2.5 border-t border-slate-900/15 mb-3 font-mono-custom text-xs">
-                                    <div>
-                                        <span class="block text-[10px] uppercase text-slate-600">Scope</span>
-                                        <span class="block font-bold text-slate-900">After Effects Scripting</span>
-                                    </div>
-                                    <div>
-                                        <span class="block text-[10px] uppercase text-slate-600">Delivery</span>
-                                        <span class="block font-bold text-slate-900">Custom JSX / Preset</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="bg-white/95 backdrop-blur-md p-2.5 flex items-center justify-between border border-black/10">
-                                <div class="flex items-center space-x-2.5">
-                                    <img src="https://nooralam.carrd.co/assets/images/image01.png?v=1e1d6b0a" alt="Noor Alam" class="w-8 h-8 rounded-full object-cover border border-slate-300" />
-                                    <div>
-                                        <h5 class="text-xs font-bold text-slate-900">Noor Alam</h5>
-                                        <p class="text-[10px] font-mono-custom text-slate-600">Tool Developer &amp; Animator</p>
-                                    </div>
-                                </div>
-                                <a href="#products" class="px-3 py-1 bg-slate-900 text-white font-mono-custom text-[11px] uppercase hover:bg-[#E11D48] transition flex items-center gap-1.5">
-                                    Explore Tools <i class="fa-solid fa-arrow-right text-[9px]"></i>
-                                </a>
-                            </div>
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="arch-tag">[04 // AE AUTOMATION]</span>
+                            <span class="arch-chip">FREE / OPEN</span>
                         </div>
-
-                        <div class="lg:col-span-6">
-                            <div class="relative overflow-hidden shadow-xl border border-slate-900/20 bg-slate-900 aspect-[16/9] group cursor-pointer" onclick="openProductModal(1)">
-                                <img src="https://noormotion.carrd.co/assets/images/gallery02/541290cb.jpg?v=86a3e49b" alt="CompSync 2.0" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
-                                <div class="absolute bottom-2.5 left-2.5 right-2.5 flex justify-between items-center z-10">
-                                    <span class="arch-chip bg-black/80 text-white border-white/20">[CompSync 2.0 // AE Tool]</span>
-                                    <div class="w-8 h-8 rounded-full bg-[#E11D48] text-white flex items-center justify-center shadow-lg">
-                                        <i class="fa-solid fa-download text-[10px]"></i>
-                                    </div>
+                        <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-[#E11D48] transition">
+                            Custom After Effects Tooling
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+                            Building proprietary After Effects scripts, JSX automations, and custom expressions to eliminate repetitive manual keyframing and accelerate team workflows.
+                        </p>
+                        
+                        <!-- Media Preview -->
+                        <div class="aspect-video w-full overflow-hidden relative border border-slate-200 dark:border-white/10 mb-6 bg-slate-900 cursor-pointer" onclick="openProductModal(1)">
+                            <img src="https://noormotion.carrd.co/assets/images/gallery02/541290cb.jpg?v=86a3e49b" alt="AE Scripting" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
+                            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition flex justify-center items-center">
+                                <div class="w-10 h-10 bg-[#E11D48] text-white flex items-center justify-center">
+                                    <i class="fa-solid fa-download text-xs"></i>
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Meta Strip -->
+                    <div class="pt-4 border-t border-slate-200 dark:border-white/10 flex justify-between items-center font-mono-custom text-xs">
+                        <span class="text-slate-500">FORMAT: JSX / PRESET</span>
+                        <a href="#products" class="px-3 py-1 bg-slate-900 text-white uppercase hover:bg-[#E11D48] transition flex items-center gap-1.5 font-bold">
+                            Tools <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                        </a>
                     </div>
                 </div>
 
@@ -592,9 +512,9 @@
     </section>
 
     <!-- =======================================================================
-         SECTION 03: PORTFOLIO (ahmadajmal.co Selected Commissions Frame)
+         SECTION 03: PORTFOLIO (Continuous Architectural Grid Matrix, No Radius)
          ======================================================================= -->
-    <section class="arch-frame py-24 sm:py-32 relative z-10" id="portfolio">
+    <section class="arch-frame py-20 sm:py-28 relative z-10" id="portfolio">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
             <!-- Architectural Header -->
             <div class="arch-section-header flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
@@ -603,167 +523,167 @@
                     <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-slate-900 dark:text-white arch-say">Brands that outgrew static media</h2>
                 </div>
                 <div class="flex items-center gap-2 flex-wrap">
-                    <span class="arch-chip">[CLICK TO EXPAND IN-PLACE]</span>
-                    <span class="arch-chip">[4K PLAYBACK]</span>
+                    <span class="arch-chip">[CLICK CELL TO PLAY]</span>
+                    <span class="arch-chip">[4K UHD PREVIEW]</span>
                 </div>
             </div>
 
-            <!-- Architectural Project Grid Matrix -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" id="portfolio-grid">
+            <!-- Continuous Architectural Grid Matrix (Shared 1px Borders) -->
+            <div class="arch-grid-matrix arch-grid-matrix-3col" id="portfolio-grid">
                 
                 <!-- Project 1 -->
                 <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1p22ilqvf2cyatv4v5cVLOdEq7K0-tfoT/view')"
-                    class="portfolio-item-card arch-card group cursor-pointer hover-trigger">
+                    class="portfolio-item-card arch-grid-cell group cursor-pointer hover-trigger">
                     <span class="cmk tl"></span>
                     <span class="cmk tr"></span>
                     <div class="media-box aspect-[4/3] overflow-hidden relative">
-                        <span class="absolute top-3 right-3 z-10 arch-chip bg-black/80 text-white border-white/20">[SAAS EXPLAINER]</span>
+                        <span class="absolute top-2.5 right-2.5 z-10 arch-chip bg-black/85 text-white border-white/20">[EXPLAINER]</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video11_thumbnail.jpg?v=86a3e49b"
                             alt="DrivePhase.ai Explainer"
-                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
-                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
-                            <div class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
-                                <i class="fa-solid fa-play ml-1"></i>
+                            class="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-200 flex justify-center items-center">
+                            <div class="w-12 h-12 bg-[#E11D48] text-white flex justify-center items-center shadow-lg">
+                                <i class="fa-solid fa-play ml-1 text-sm"></i>
                             </div>
                         </div>
                     </div>
                     <div class="p-5 border-t border-slate-200 dark:border-white/10">
-                        <div class="arch-card-meta mb-1.5 flex justify-between items-center">
+                        <div class="arch-meta-row mb-1">
                             <span>01 // DRIVEPHASE.AI</span>
                             <span>2026</span>
                         </div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-[#E11D48] transition">DrivePhase.ai Explainer</h4>
+                        <h4 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-[#E11D48] transition">DrivePhase.ai Explainer</h4>
                         <p class="text-xs text-slate-500 font-mono-custom mt-1">Scope: Motion Graphics &amp; UI</p>
                     </div>
                 </div>
 
                 <!-- Project 2 -->
                 <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1A7NU3RcdVyAI4CL4w2_hnXHDGuPmpLJX/view')"
-                    class="portfolio-item-card arch-card group cursor-pointer hover-trigger">
+                    class="portfolio-item-card arch-grid-cell group cursor-pointer hover-trigger">
                     <span class="cmk tl"></span>
                     <span class="cmk tr"></span>
                     <div class="media-box aspect-[4/3] overflow-hidden relative">
-                        <span class="absolute top-3 right-3 z-10 arch-chip bg-black/80 text-white border-white/20">[PRODUCT PROMO]</span>
+                        <span class="absolute top-2.5 right-2.5 z-10 arch-chip bg-black/85 text-white border-white/20">[PROMO]</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video04_thumbnail.jpg?v=86a3e49b"
                             alt="School Management Software"
-                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
-                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
-                            <div class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
-                                <i class="fa-solid fa-play ml-1"></i>
+                            class="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-200 flex justify-center items-center">
+                            <div class="w-12 h-12 bg-[#E11D48] text-white flex justify-center items-center shadow-lg">
+                                <i class="fa-solid fa-play ml-1 text-sm"></i>
                             </div>
                         </div>
                     </div>
                     <div class="p-5 border-t border-slate-200 dark:border-white/10">
-                        <div class="arch-card-meta mb-1.5 flex justify-between items-center">
-                            <span>02 // EDTECH SYSTEM</span>
+                        <div class="arch-meta-row mb-1">
+                            <span>02 // EDTECH</span>
                             <span>2026</span>
                         </div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-[#E11D48] transition">School Management Software</h4>
-                        <p class="text-xs text-slate-500 font-mono-custom mt-1">Scope: Commercial &amp; UI Direction</p>
+                        <h4 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-[#E11D48] transition">School Management Software</h4>
+                        <p class="text-xs text-slate-500 font-mono-custom mt-1">Scope: Commercial &amp; UI</p>
                     </div>
                 </div>
 
                 <!-- Project 3 -->
                 <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1h89xJaYIL_Crq97M6JXh0eWEN1u3d4Xr/view')"
-                    class="portfolio-item-card arch-card group cursor-pointer hover-trigger">
+                    class="portfolio-item-card arch-grid-cell group cursor-pointer hover-trigger">
                     <span class="cmk tl"></span>
                     <span class="cmk tr"></span>
                     <div class="media-box aspect-[4/3] overflow-hidden relative">
-                        <span class="absolute top-3 right-3 z-10 arch-chip bg-black/80 text-white border-white/20">[WP PLUGIN PROMO]</span>
+                        <span class="absolute top-2.5 right-2.5 z-10 arch-chip bg-black/85 text-white border-white/20">[WP PLUGIN]</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video05_thumbnail.jpg?v=86a3e49b"
                             alt="Next Video Review"
-                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
-                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
-                            <div class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
-                                <i class="fa-solid fa-play ml-1"></i>
+                            class="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-200 flex justify-center items-center">
+                            <div class="w-12 h-12 bg-[#E11D48] text-white flex justify-center items-center shadow-lg">
+                                <i class="fa-solid fa-play ml-1 text-sm"></i>
                             </div>
                         </div>
                     </div>
                     <div class="p-5 border-t border-slate-200 dark:border-white/10">
-                        <div class="arch-card-meta mb-1.5 flex justify-between items-center">
+                        <div class="arch-meta-row mb-1">
                             <span>03 // THEMEWINTER</span>
                             <span>2026</span>
                         </div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-[#E11D48] transition">Next Video Review</h4>
-                        <p class="text-xs text-slate-500 font-mono-custom mt-1">Scope: Product Launch Animation</p>
+                        <h4 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-[#E11D48] transition">Next Video Review</h4>
+                        <p class="text-xs text-slate-500 font-mono-custom mt-1">Scope: Launch Motion Reel</p>
                     </div>
                 </div>
 
                 <!-- Project 4 -->
                 <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1lIxJSS9FBU143EQFGamtFwmglblQvbgW/view')"
-                    class="portfolio-item-card arch-card group cursor-pointer hover-trigger">
+                    class="portfolio-item-card arch-grid-cell group cursor-pointer hover-trigger">
                     <span class="cmk tl"></span>
                     <span class="cmk tr"></span>
                     <div class="media-box aspect-[4/3] overflow-hidden relative">
-                        <span class="absolute top-3 right-3 z-10 arch-chip bg-black/80 text-white border-white/20">[PLUGIN EXPLAINER]</span>
+                        <span class="absolute top-2.5 right-2.5 z-10 arch-chip bg-black/85 text-white border-white/20">[EXPLAINER]</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video08_thumbnail.jpg?v=86a3e49b"
                             alt="Washer Service Booking"
-                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
-                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
-                            <div class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
-                                <i class="fa-solid fa-play ml-1"></i>
+                            class="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-200 flex justify-center items-center">
+                            <div class="w-12 h-12 bg-[#E11D48] text-white flex justify-center items-center shadow-lg">
+                                <i class="fa-solid fa-play ml-1 text-sm"></i>
                             </div>
                         </div>
                     </div>
                     <div class="p-5 border-t border-slate-200 dark:border-white/10">
-                        <div class="arch-card-meta mb-1.5 flex justify-between items-center">
-                            <span>04 // BOOKING SYSTEM</span>
+                        <div class="arch-meta-row mb-1">
+                            <span>04 // BOOKING</span>
                             <span>2026</span>
                         </div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-[#E11D48] transition">Washer Service Booking</h4>
+                        <h4 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-[#E11D48] transition">Washer Service Booking</h4>
                         <p class="text-xs text-slate-500 font-mono-custom mt-1">Scope: Interactive UI Motion</p>
                     </div>
                 </div>
 
                 <!-- Project 5 -->
                 <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/1hc2joGAoRFD3e0jqdivD9inTIYIXckZJ/view')"
-                    class="portfolio-item-card arch-card group cursor-pointer hover-trigger">
+                    class="portfolio-item-card arch-grid-cell group cursor-pointer hover-trigger">
                     <span class="cmk tl"></span>
                     <span class="cmk tr"></span>
                     <div class="media-box aspect-[4/3] overflow-hidden relative">
-                        <span class="absolute top-3 right-3 z-10 arch-chip bg-black/80 text-white border-white/20">[WP PLUGIN]</span>
+                        <span class="absolute top-2.5 right-2.5 z-10 arch-chip bg-black/85 text-white border-white/20">[PROMO]</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video06_thumbnail.jpg?v=86a3e49b"
                             alt="Salonly Salon Booking"
-                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
-                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
-                            <div class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
-                                <i class="fa-solid fa-play ml-1"></i>
+                            class="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-200 flex justify-center items-center">
+                            <div class="w-12 h-12 bg-[#E11D48] text-white flex justify-center items-center shadow-lg">
+                                <i class="fa-solid fa-play ml-1 text-sm"></i>
                             </div>
                         </div>
                     </div>
                     <div class="p-5 border-t border-slate-200 dark:border-white/10">
-                        <div class="arch-card-meta mb-1.5 flex justify-between items-center">
+                        <div class="arch-meta-row mb-1">
                             <span>05 // SALONLY</span>
                             <span>2026</span>
                         </div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-[#E11D48] transition">Salonly Salon Booking</h4>
-                        <p class="text-xs text-slate-500 font-mono-custom mt-1">Scope: Feature Announcement Reel</p>
+                        <h4 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-[#E11D48] transition">Salonly Salon Booking</h4>
+                        <p class="text-xs text-slate-500 font-mono-custom mt-1">Scope: Product Announcement</p>
                     </div>
                 </div>
 
                 <!-- Project 6 -->
                 <div onclick="expandVideoCard(this, 'https://drive.google.com/file/d/13WzQi1z3SSCRwcKSTVyWQV6fb5FwYucF/view')"
-                    class="portfolio-item-card arch-card group cursor-pointer hover-trigger">
+                    class="portfolio-item-card arch-grid-cell group cursor-pointer hover-trigger">
                     <span class="cmk tl"></span>
                     <span class="cmk tr"></span>
                     <div class="media-box aspect-[4/3] overflow-hidden relative">
-                        <span class="absolute top-3 right-3 z-10 arch-chip bg-black/80 text-white border-white/20">[PROMO VIDEO]</span>
+                        <span class="absolute top-2.5 right-2.5 z-10 arch-chip bg-black/85 text-white border-white/20">[3D MOTION]</span>
                         <img src="https://noormotion.carrd.co/assets/videos/video09_thumbnail.jpg?v=86a3e49b"
                             alt="Cleanly Booking System"
-                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
-                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
-                            <div class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
-                                <i class="fa-solid fa-play ml-1"></i>
+                            class="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-200 flex justify-center items-center">
+                            <div class="w-12 h-12 bg-[#E11D48] text-white flex justify-center items-center shadow-lg">
+                                <i class="fa-solid fa-play ml-1 text-sm"></i>
                             </div>
                         </div>
                     </div>
                     <div class="p-5 border-t border-slate-200 dark:border-white/10">
-                        <div class="arch-card-meta mb-1.5 flex justify-between items-center">
-                            <span>06 // CLEANLY APP</span>
+                        <div class="arch-meta-row mb-1">
+                            <span>06 // CLEANLY</span>
                             <span>2026</span>
                         </div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-[#E11D48] transition">Cleanly Booking System</h4>
-                        <p class="text-xs text-slate-500 font-mono-custom mt-1">Scope: Commercial Motion &amp; 3D</p>
+                        <h4 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-[#E11D48] transition">Cleanly Booking System</h4>
+                        <p class="text-xs text-slate-500 font-mono-custom mt-1">Scope: Commercial &amp; 3D</p>
                     </div>
                 </div>
 
@@ -772,9 +692,9 @@
     </section>
 
     <!-- =======================================================================
-         SECTION 04: TECHNICAL WALKTHROUGHS (ahmadajmal.co BTS / Module Look)
+         SECTION 04: TECHNICAL WALKTHROUGHS (Continuous Grid Matrix, No Radius)
          ======================================================================= -->
-    <section class="arch-frame py-24 sm:py-32 relative z-10" id="walkthroughs">
+    <section class="arch-frame py-20 sm:py-28 relative z-10" id="walkthroughs">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
             <div class="arch-section-header flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
                 <div>
@@ -785,82 +705,82 @@
                 <span class="arch-chip">[03 MODULE GUIDES]</span>
             </div>
 
-            <!-- Matrix -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" id="walkthroughs-grid">
+            <!-- Continuous Grid Matrix -->
+            <div class="arch-grid-matrix arch-grid-matrix-3col" id="walkthroughs-grid">
                 <!-- Walkthrough 1 -->
                 <div onclick="expandVideoCard(this, 'https://www.youtube.com/watch?v=yI97ztJJiwA')"
-                    class="portfolio-item-card arch-card group cursor-pointer hover-trigger">
+                    class="portfolio-item-card arch-grid-cell group cursor-pointer hover-trigger">
                     <span class="cmk tl"></span>
                     <span class="cmk tr"></span>
                     <div class="media-box aspect-[4/3] overflow-hidden relative">
-                        <span class="absolute top-3 right-3 z-10 arch-chip bg-black/80 text-white border-white/20">[ONBOARDING]</span>
+                        <span class="absolute top-2.5 right-2.5 z-10 arch-chip bg-black/85 text-white border-white/20">[ONBOARDING]</span>
                         <img src="https://img.youtube.com/vi/yI97ztJJiwA/maxresdefault.jpg"
                             alt="Payrun Onboarding Tutorial"
-                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
-                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
-                            <div class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
-                                <i class="fa-solid fa-play ml-1"></i>
+                            class="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-200 flex justify-center items-center">
+                            <div class="w-12 h-12 bg-[#E11D48] text-white flex justify-center items-center shadow-lg">
+                                <i class="fa-solid fa-play ml-1 text-sm"></i>
                             </div>
                         </div>
                     </div>
                     <div class="p-5 border-t border-slate-200 dark:border-white/10">
-                        <div class="arch-card-meta mb-1.5 flex justify-between items-center">
+                        <div class="arch-meta-row mb-1">
                             <span>GUIDE 01</span>
                             <span>PAYRUN</span>
                         </div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-[#E11D48] transition">User Signup &amp; Setup Guide</h4>
+                        <h4 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-[#E11D48] transition">User Signup &amp; Setup Guide</h4>
                         <p class="text-xs text-slate-500 font-mono-custom mt-1">Full walkthrough of initial payroll setup</p>
                     </div>
                 </div>
 
                 <!-- Walkthrough 2 -->
                 <div onclick="expandVideoCard(this, 'https://www.youtube.com/watch?v=vcYG2NTIf7o')"
-                    class="portfolio-item-card arch-card group cursor-pointer hover-trigger">
+                    class="portfolio-item-card arch-grid-cell group cursor-pointer hover-trigger">
                     <span class="cmk tl"></span>
                     <span class="cmk tr"></span>
                     <div class="media-box aspect-[4/3] overflow-hidden relative">
-                        <span class="absolute top-3 right-3 z-10 arch-chip bg-black/80 text-white border-white/20">[ATTENDANCE]</span>
+                        <span class="absolute top-2.5 right-2.5 z-10 arch-chip bg-black/85 text-white border-white/20">[ATTENDANCE]</span>
                         <img src="https://img.youtube.com/vi/vcYG2NTIf7o/maxresdefault.jpg"
                             alt="Payrun Attendance Module Tutorial"
-                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
-                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
-                            <div class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
-                                <i class="fa-solid fa-play ml-1"></i>
+                            class="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-200 flex justify-center items-center">
+                            <div class="w-12 h-12 bg-[#E11D48] text-white flex justify-center items-center shadow-lg">
+                                <i class="fa-solid fa-play ml-1 text-sm"></i>
                             </div>
                         </div>
                     </div>
                     <div class="p-5 border-t border-slate-200 dark:border-white/10">
-                        <div class="arch-card-meta mb-1.5 flex justify-between items-center">
+                        <div class="arch-meta-row mb-1">
                             <span>GUIDE 02</span>
                             <span>PAYRUN</span>
                         </div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-[#E11D48] transition">Time &amp; Shift Management</h4>
+                        <h4 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-[#E11D48] transition">Time &amp; Shift Management</h4>
                         <p class="text-xs text-slate-500 font-mono-custom mt-1">Attendance rules, biometric sync &amp; shifts</p>
                     </div>
                 </div>
 
                 <!-- Walkthrough 3 -->
                 <div onclick="expandVideoCard(this, 'https://www.youtube.com/watch?v=32xnuExV4oM')"
-                    class="portfolio-item-card arch-card group cursor-pointer hover-trigger">
+                    class="portfolio-item-card arch-grid-cell group cursor-pointer hover-trigger">
                     <span class="cmk tl"></span>
                     <span class="cmk tr"></span>
                     <div class="media-box aspect-[4/3] overflow-hidden relative">
-                        <span class="absolute top-3 right-3 z-10 arch-chip bg-black/80 text-white border-white/20">[LEAVE WORKFLOW]</span>
+                        <span class="absolute top-2.5 right-2.5 z-10 arch-chip bg-black/85 text-white border-white/20">[LEAVE WORKFLOW]</span>
                         <img src="https://img.youtube.com/vi/32xnuExV4oM/maxresdefault.jpg"
                             alt="Payrun Leave Module Tutorial"
-                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
-                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-center items-center">
-                            <div class="w-14 h-14 rounded-full bg-[#E11D48] text-white flex justify-center items-center shadow-lg transform scale-75 group-hover:scale-100 transition duration-300">
-                                <i class="fa-solid fa-play ml-1"></i>
+                            class="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-slate-900/30 opacity-0 group-hover:opacity-100 transition duration-200 flex justify-center items-center">
+                            <div class="w-12 h-12 bg-[#E11D48] text-white flex justify-center items-center shadow-lg">
+                                <i class="fa-solid fa-play ml-1 text-sm"></i>
                             </div>
                         </div>
                     </div>
                     <div class="p-5 border-t border-slate-200 dark:border-white/10">
-                        <div class="arch-card-meta mb-1.5 flex justify-between items-center">
+                        <div class="arch-meta-row mb-1">
                             <span>GUIDE 03</span>
                             <span>PAYRUN</span>
                         </div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-[#E11D48] transition">HR &amp; Leave Workflow Guide</h4>
+                        <h4 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-[#E11D48] transition">HR &amp; Leave Workflow Guide</h4>
                         <p class="text-xs text-slate-500 font-mono-custom mt-1">Multi-tier approval workflows &amp; policy engine</p>
                     </div>
                 </div>
@@ -869,9 +789,9 @@
     </section>
 
     <!-- =======================================================================
-         SECTION 05: EXTENSIONS & TOOLS (ahmadajmal.co Tool Engineering Frame)
+         SECTION 05: EXTENSIONS & TOOLS (Continuous Grid Matrix, No Radius)
          ======================================================================= -->
-    <section class="arch-frame py-24 sm:py-32 relative z-10" id="products">
+    <section class="arch-frame py-20 sm:py-28 relative z-10" id="products">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
             <div class="arch-section-header flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
                 <div>
@@ -882,135 +802,127 @@
                 <span class="arch-chip">[FREE &amp; OPEN UTILITIES]</span>
             </div>
 
-            <!-- Product Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8" id="products-grid">
+            <!-- Continuous Grid Matrix (2x2) -->
+            <div class="arch-grid-matrix arch-grid-matrix-2col" id="products-grid">
                 <!-- Product 1 -->
-                <div class="arch-card group flex flex-col justify-between">
+                <div class="arch-grid-cell p-6 sm:p-8 group">
                     <span class="cmk tl"></span>
                     <span class="cmk tr"></span>
                     <div>
-                        <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200 dark:border-white/10">
-                            <span class="absolute top-3 right-3 z-10 arch-chip bg-black/80 text-white border-white/20">[AE SCRIPT // v2.0]</span>
+                        <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200 dark:border-white/10 mb-5">
+                            <span class="absolute top-2.5 right-2.5 z-10 arch-chip bg-black/85 text-white border-white/20">[AE SCRIPT // v2.0]</span>
                             <img src="https://noormotion.carrd.co/assets/images/gallery02/541290cb.jpg?v=86a3e49b"
                                 alt="CompSync 2.0"
-                                class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                                class="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
                         </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-center mb-3">
-                                <span class="arch-tag text-xs">[AE EXTENSION]</span>
-                                <span class="font-mono-custom text-xs font-bold text-slate-900 dark:text-white">Free / Donation</span>
-                            </div>
-                            <h4 class="text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-[#E11D48] transition">CompSync 2.0</h4>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">A powerful After Effects script tool that enables you to save compositions as standalone projects dynamically and build your own motion animation libraries.</p>
-                            
-                            <div class="grid grid-cols-2 gap-2 pt-3 border-t border-slate-200 dark:border-white/10 font-mono-custom text-[11px] text-slate-500">
-                                <div>COMPATIBILITY: AE 2022+</div>
-                                <div>LICENSE: OPEN SOURCE</div>
-                            </div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="arch-tag text-xs">[AE EXTENSION]</span>
+                            <span class="font-mono-custom text-xs font-bold text-slate-900 dark:text-white">Free / Donation</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-[#E11D48] transition">CompSync 2.0</h4>
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">A powerful After Effects script tool that enables you to save compositions as standalone projects dynamically and build your own motion animation libraries.</p>
+                        
+                        <div class="grid grid-cols-2 gap-2 pt-3 border-t border-slate-200 dark:border-white/10 font-mono-custom text-[11px] text-slate-500 mb-6">
+                            <div>COMPATIBILITY: AE 2022+</div>
+                            <div>LICENSE: OPEN SOURCE</div>
                         </div>
                     </div>
-                    <div class="p-6 pt-0">
+                    <div>
                         <button onclick="openProductModal(1)"
-                            class="w-full py-3 bg-slate-900 text-white font-mono-custom text-xs uppercase hover:bg-[#E11D48] transition flex justify-center items-center gap-2">
+                            class="w-full py-3 bg-slate-900 text-white font-mono-custom text-xs uppercase hover:bg-[#E11D48] transition flex justify-center items-center gap-2 font-bold">
                             [VIEW DETAILS &amp; DOWNLOAD] <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </button>
                     </div>
                 </div>
 
                 <!-- Product 2 -->
-                <div class="arch-card group flex flex-col justify-between">
+                <div class="arch-grid-cell p-6 sm:p-8 group">
                     <span class="cmk tl"></span>
                     <span class="cmk tr"></span>
                     <div>
-                        <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200 dark:border-white/10">
-                            <span class="absolute top-3 right-3 z-10 arch-chip bg-black/80 text-white border-white/20">[AE PRESET // v2.0]</span>
+                        <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200 dark:border-white/10 mb-5">
+                            <span class="absolute top-2.5 right-2.5 z-10 arch-chip bg-black/85 text-white border-white/20">[AE PRESET // v2.0]</span>
                             <img src="https://noormotion.carrd.co/assets/images/gallery02/d186352f.jpg?v=86a3e49b"
                                 alt="AutoCaption 2.0"
-                                class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                                class="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
                         </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-center mb-3">
-                                <span class="arch-tag text-xs">[AE PRESET]</span>
-                                <span class="font-mono-custom text-xs font-bold text-slate-900 dark:text-white">Free / Donation</span>
-                            </div>
-                            <h4 class="text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-[#E11D48] transition">AutoCaption 2.0</h4>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">An automated After Effects caption generator designed to convert SRT subtitle files into dynamic animated captions instantly.</p>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="arch-tag text-xs">[AE PRESET]</span>
+                            <span class="font-mono-custom text-xs font-bold text-slate-900 dark:text-white">Free / Donation</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-[#E11D48] transition">AutoCaption 2.0</h4>
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">An automated After Effects caption generator designed to convert SRT subtitle files into dynamic animated captions instantly.</p>
 
-                            <div class="grid grid-cols-2 gap-2 pt-3 border-t border-slate-200 dark:border-white/10 font-mono-custom text-[11px] text-slate-500">
-                                <div>COMPATIBILITY: AE 2022+</div>
-                                <div>LICENSE: OPEN SOURCE</div>
-                            </div>
+                        <div class="grid grid-cols-2 gap-2 pt-3 border-t border-slate-200 dark:border-white/10 font-mono-custom text-[11px] text-slate-500 mb-6">
+                            <div>COMPATIBILITY: AE 2022+</div>
+                            <div>LICENSE: OPEN SOURCE</div>
                         </div>
                     </div>
-                    <div class="p-6 pt-0">
+                    <div>
                         <button onclick="openProductModal(2)"
-                            class="w-full py-3 bg-slate-900 text-white font-mono-custom text-xs uppercase hover:bg-[#E11D48] transition flex justify-center items-center gap-2">
+                            class="w-full py-3 bg-slate-900 text-white font-mono-custom text-xs uppercase hover:bg-[#E11D48] transition flex justify-center items-center gap-2 font-bold">
                             [VIEW DETAILS &amp; DOWNLOAD] <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </button>
                     </div>
                 </div>
 
                 <!-- Product 3 -->
-                <div class="arch-card group flex flex-col justify-between">
+                <div class="arch-grid-cell p-6 sm:p-8 group">
                     <span class="cmk tl"></span>
                     <span class="cmk tr"></span>
                     <div>
-                        <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200 dark:border-white/10">
-                            <span class="absolute top-3 right-3 z-10 arch-chip bg-black/80 text-white border-white/20">[TEXT ANIMATOR]</span>
+                        <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200 dark:border-white/10 mb-5">
+                            <span class="absolute top-2.5 right-2.5 z-10 arch-chip bg-black/85 text-white border-white/20">[TEXT ANIMATOR]</span>
                             <img src="https://noormotion.carrd.co/assets/images/gallery02/b70ecfc2.jpg?v=86a3e49b"
                                 alt="textEco Text Animator"
-                                class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                                class="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
                         </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-center mb-3">
-                                <span class="arch-tag text-xs">[KINETIC TOOL]</span>
-                                <span class="font-mono-custom text-xs font-bold text-slate-900 dark:text-white">Free / Donation</span>
-                            </div>
-                            <h4 class="text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-[#E11D48] transition">textEco Text Animator</h4>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">An all-in-one kinetic text preset allowing creators to build unlimited variations of professional typography animations in seconds.</p>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="arch-tag text-xs">[KINETIC TOOL]</span>
+                            <span class="font-mono-custom text-xs font-bold text-slate-900 dark:text-white">Free / Donation</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-[#E11D48] transition">textEco Text Animator</h4>
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">An all-in-one kinetic text preset allowing creators to build unlimited variations of professional typography animations in seconds.</p>
 
-                            <div class="grid grid-cols-2 gap-2 pt-3 border-t border-slate-200 dark:border-white/10 font-mono-custom text-[11px] text-slate-500">
-                                <div>COMPATIBILITY: AE 2021+</div>
-                                <div>LICENSE: OPEN SOURCE</div>
-                            </div>
+                        <div class="grid grid-cols-2 gap-2 pt-3 border-t border-slate-200 dark:border-white/10 font-mono-custom text-[11px] text-slate-500 mb-6">
+                            <div>COMPATIBILITY: AE 2021+</div>
+                            <div>LICENSE: OPEN SOURCE</div>
                         </div>
                     </div>
-                    <div class="p-6 pt-0">
+                    <div>
                         <button onclick="openProductModal(3)"
-                            class="w-full py-3 bg-slate-900 text-white font-mono-custom text-xs uppercase hover:bg-[#E11D48] transition flex justify-center items-center gap-2">
+                            class="w-full py-3 bg-slate-900 text-white font-mono-custom text-xs uppercase hover:bg-[#E11D48] transition flex justify-center items-center gap-2 font-bold">
                             [VIEW DETAILS &amp; DOWNLOAD] <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </button>
                     </div>
                 </div>
 
                 <!-- Product 4 -->
-                <div class="arch-card group flex flex-col justify-between">
+                <div class="arch-grid-cell p-6 sm:p-8 group">
                     <span class="cmk tl"></span>
                     <span class="cmk tr"></span>
                     <div>
-                        <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200 dark:border-white/10">
-                            <span class="absolute top-3 right-3 z-10 arch-chip bg-black/80 text-white border-white/20">[MASK PRESET]</span>
+                        <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200 dark:border-white/10 mb-5">
+                            <span class="absolute top-2.5 right-2.5 z-10 arch-chip bg-black/85 text-white border-white/20">[MASK PRESET]</span>
                             <img src="https://noormotion.carrd.co/assets/images/gallery02/a65c20db.jpg?v=86a3e49b"
                                 alt="Master Mask"
-                                class="w-full h-full object-cover transition duration-700 group-hover:scale-105" />
+                                class="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
                         </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-center mb-3">
-                                <span class="arch-tag text-xs">[MASK CONTROL]</span>
-                                <span class="font-mono-custom text-xs font-bold text-slate-900 dark:text-white">Free / Donation</span>
-                            </div>
-                            <h4 class="text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-[#E11D48] transition">Master Mask</h4>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">A corner-radius and mask shape control preset for After Effects that lets you handle individual vertex controls, dimensions, and angles.</p>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="arch-tag text-xs">[MASK CONTROL]</span>
+                            <span class="font-mono-custom text-xs font-bold text-slate-900 dark:text-white">Free / Donation</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-[#E11D48] transition">Master Mask</h4>
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">A corner-radius and mask shape control preset for After Effects that lets you handle individual vertex controls, dimensions, and angles.</p>
 
-                            <div class="grid grid-cols-2 gap-2 pt-3 border-t border-slate-200 dark:border-white/10 font-mono-custom text-[11px] text-slate-500">
-                                <div>COMPATIBILITY: AE 2021+</div>
-                                <div>LICENSE: OPEN SOURCE</div>
-                            </div>
+                        <div class="grid grid-cols-2 gap-2 pt-3 border-t border-slate-200 dark:border-white/10 font-mono-custom text-[11px] text-slate-500 mb-6">
+                            <div>COMPATIBILITY: AE 2021+</div>
+                            <div>LICENSE: OPEN SOURCE</div>
                         </div>
                     </div>
-                    <div class="p-6 pt-0">
+                    <div>
                         <button onclick="openProductModal(4)"
-                            class="w-full py-3 bg-slate-900 text-white font-mono-custom text-xs uppercase hover:bg-[#E11D48] transition flex justify-center items-center gap-2">
+                            class="w-full py-3 bg-slate-900 text-white font-mono-custom text-xs uppercase hover:bg-[#E11D48] transition flex justify-center items-center gap-2 font-bold">
                             [VIEW DETAILS &amp; DOWNLOAD] <i class="fa-solid fa-arrow-right text-[10px]"></i>
                         </button>
                     </div>
@@ -1020,22 +932,22 @@
     </section>
 
     <!-- =======================================================================
-         SECTION 06: TESTIMONIALS (ahmadajmal.co Direct Founder Quotes)
+         SECTION 06: TESTIMONIALS (Continuous Grid Matrix, No Radius)
          ======================================================================= -->
-    <section class="arch-frame py-24 sm:py-32 relative z-10" id="testimonials">
+    <section class="arch-frame py-20 sm:py-28 relative z-10" id="testimonials">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
             <div class="arch-section-header">
                 <span class="arch-tag block mb-1">[06 // CLIENT REPUTATION]</span>
                 <h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-slate-900 dark:text-white arch-say">Direct Founder Recommendations</h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8" id="testimonial-grid">
-                <div class="arch-quote-card">
+            <div class="arch-grid-matrix arch-grid-matrix-3col" id="testimonial-grid">
+                <div class="arch-grid-cell p-6 sm:p-8">
                     <span class="cmk tl"></span>
                     <span class="arch-chip block mb-4">[VERIFIED CLIENT // FOUNDER]</span>
                     <p class="arch-quote-text mb-6">"Outstanding work quality! Our product launch explainer video became this successful because of his motion design."</p>
                     <div class="flex items-center space-x-3 pt-4 border-t border-slate-200 dark:border-white/10">
-                        <div class="w-9 h-9 bg-[#E11D48] text-white font-bold flex justify-center items-center text-xs font-mono-custom">01</div>
+                        <div class="w-8 h-8 bg-[#E11D48] text-white font-bold flex justify-center items-center text-xs font-mono-custom">01</div>
                         <div>
                             <h4 class="text-slate-900 dark:text-white font-bold text-sm">Arif Hossain</h4>
                             <p class="text-xs font-mono-custom text-slate-500">Tech BD</p>
@@ -1043,12 +955,12 @@
                     </div>
                 </div>
 
-                <div class="arch-quote-card">
+                <div class="arch-grid-cell p-6 sm:p-8">
                     <span class="cmk tl"></span>
                     <span class="arch-chip block mb-4">[VERIFIED CLIENT // CREATIVE DIR]</span>
                     <p class="arch-quote-text mb-6">"Never got such beautiful motion design work while strictly maintaining the timeline before. Highly recommended!"</p>
                     <div class="flex items-center space-x-3 pt-4 border-t border-slate-200 dark:border-white/10">
-                        <div class="w-9 h-9 bg-[#E11D48] text-white font-bold flex justify-center items-center text-xs font-mono-custom">02</div>
+                        <div class="w-8 h-8 bg-[#E11D48] text-white font-bold flex justify-center items-center text-xs font-mono-custom">02</div>
                         <div>
                             <h4 class="text-slate-900 dark:text-white font-bold text-sm">Sanjida Rahman</h4>
                             <p class="text-xs font-mono-custom text-slate-500">Creative Agency</p>
@@ -1056,12 +968,12 @@
                     </div>
                 </div>
 
-                <div class="arch-quote-card">
+                <div class="arch-grid-cell p-6 sm:p-8">
                     <span class="cmk tl"></span>
                     <span class="arch-chip block mb-4">[VERIFIED CLIENT // PRODUCT LEAD]</span>
                     <p class="arch-quote-text mb-6">"His sense of animation is very modern. He gave our brand identity a whole new look."</p>
                     <div class="flex items-center space-x-3 pt-4 border-t border-slate-200 dark:border-white/10">
-                        <div class="w-9 h-9 bg-[#E11D48] text-white font-bold flex justify-center items-center text-xs font-mono-custom">03</div>
+                        <div class="w-8 h-8 bg-[#E11D48] text-white font-bold flex justify-center items-center text-xs font-mono-custom">03</div>
                         <div>
                             <h4 class="text-slate-900 dark:text-white font-bold text-sm">Rafsan Jani</h4>
                             <p class="text-xs font-mono-custom text-slate-500">StartUp Inc.</p>
@@ -1073,7 +985,7 @@
     </section>
 
     <!-- =======================================================================
-         SECTION 07: CONTACT & FOOTER (ahmadajmal.co on-ink Terminal Finale)
+         SECTION 07: CONTACT & FOOTER (ahmadajmal.co on-ink Terminal Finale, No Radius)
          ======================================================================= -->
     <footer class="on-ink arch-frame py-20 sm:py-32 relative z-10" id="contact">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
@@ -1108,7 +1020,7 @@
                 </div>
             </div>
 
-            <!-- Social Links Matrix in Monospace Brackets -->
+            <!-- Social Links Matrix in Monospace Brackets (Zero Radius) -->
             <div class="pt-8 border-t border-slate-800 flex flex-wrap items-center gap-3" id="footer-socials">
                 <a href="https://www.linkedin.com/in/motionoor-alam-/" target="_blank" rel="noopener noreferrer"
                     class="arch-chip hover:text-[#E11D48] hover:border-[#E11D48] transition"><i class="fa-brands fa-linkedin-in mr-1.5"></i>[LINKEDIN]</a>
@@ -1136,11 +1048,11 @@
         </div>
     </footer>
 
-    <!-- Product Modal -->
+    <!-- Product Modal (Zero Radius) -->
     <div id="product-modal-backdrop"
         class="fixed inset-0 z-[110] bg-slate-900/80 flex justify-center items-center p-3 sm:p-4 hidden opacity-0 transition-opacity duration-300">
         <div id="product-modal-content"
-            class="bg-white border border-slate-200 rounded-[2px] max-w-2xl w-full p-4 sm:p-6 md:p-8 transform scale-95 transition-transform duration-300 relative max-h-[92vh] overflow-y-auto">
+            class="bg-white border border-slate-200 max-w-2xl w-full p-4 sm:p-6 md:p-8 transform scale-95 transition-transform duration-300 relative max-h-[92vh] overflow-y-auto">
             <button onclick="closeProductModal()"
                 class="absolute top-3 right-3 sm:top-4 sm:right-4 text-slate-400 hover:text-slate-900 text-xl p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
                 title="Close Modal">
@@ -1163,21 +1075,21 @@
 
                 <div id="gumroad-button-container" class="w-full sm:w-auto">
                     <a id="gumroad-link" href="#" target="_blank" rel="noopener noreferrer"
-                        class="dotted-btn w-full sm:w-auto px-6 py-3 bg-[#E11D48] text-white font-bold text-xs uppercase hover:bg-slate-900 transition flex justify-center items-center">
-                        Download / Get Tool <i class="fa-solid fa-arrow-right ml-2"></i>
+                        class="px-6 py-3 bg-[#E11D48] text-white font-bold text-xs uppercase hover:bg-slate-900 transition flex justify-center items-center font-mono-custom">
+                        [DOWNLOAD / GET TOOL] <i class="fa-solid fa-arrow-right ml-2"></i>
                     </a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Video Modal Player -->
+    <!-- Video Modal Player (Zero Radius) -->
     <div id="video-modal"
         class="fixed inset-0 z-[110] bg-slate-900/90 flex justify-center items-center p-3 sm:p-4 hidden opacity-0 transition-opacity duration-300">
         <div
             class="relative w-full max-w-4xl aspect-video overflow-hidden border border-slate-700 bg-black">
             <button onclick="closeVideoModal()"
-                class="absolute top-2 right-2 sm:top-4 sm:right-4 z-20 text-white text-xl sm:text-2xl bg-black/60 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex justify-center items-center hover:bg-red-600 transition"
+                class="absolute top-2 right-2 sm:top-4 sm:right-4 z-20 text-white text-xl sm:text-2xl bg-black/60 w-9 h-9 sm:w-10 sm:h-10 flex justify-center items-center hover:bg-red-600 transition"
                 title="Close Video">
                 <i class="fa-solid fa-xmark"></i>
             </button>
@@ -1187,7 +1099,7 @@
     </div>
 
     <!-- Application Controller Logic Script -->
-    <script src="script.js?v=11" defer></script>
+    <script src="script.js?v=12" defer></script>
 </body>
 
 </html>

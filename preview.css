@@ -1,40 +1,77 @@
 /* ==========================================================================
-   NOOR MOTION - ARCHITECTURAL DESIGN SYSTEM (AHMADAJMAL.CO STYLE)
-   Separate Preview Stylesheet
+   NOOR MOTION - ARCHITECTURAL GRID DESIGN SYSTEM (AHMADAJMAL.CO STYLE)
+   Strict Architectural Hairline Grid with ZERO Corner Radius
    ========================================================================== */
 
 @import url('style.css');
 
 /* ==========================================================================
-   ARCHITECTURAL VARIABLES & BASE PALETTE
+   1. STRICT ZERO-RADIUS ENFORCEMENT ACROSS ALL ELEMENTS
+   ========================================================================== */
+*, *::before, *::after,
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, button, input, select, textarea,
+.b44-card, .stacking-card, .arch-card, .arch-chip, .dotted-btn,
+#main-header, #main-header.header-scrolled, #mobile-menu,
+#product-modal-content, #video-modal > div,
+.cursor-dot, .cursor-outline, .media-box, .arch-stagebox,
+.portfolio-item-card, .badge, .tag, .chip {
+    border-radius: 0 !important;
+}
+
+/* ==========================================================================
+   2. ARCHITECTURAL VARIABLES & COLOR PALETTE
    ========================================================================== */
 :root {
     --paper: #EEECEB;
     --paper-card: #FFFFFF;
     --paper-card-subtle: #F6F5F4;
     --ink: #121214;
-    --ink-card: #19191C;
-    --ink-subtle: #222226;
-    --rule-on-paper: #DBDCDE;
-    --rule-on-ink: #2E2F32;
+    --ink-card: #161618;
+    --ink-subtle: #1C1C1F;
+    --rule-on-paper: #D8D6D4;
+    --rule-on-ink: #2A2A2D;
     --mute-on-paper: #64748B;
     --mute-on-ink: #94A3B8;
     --brand-red: #E11D48;
-    --brand-red-glow: rgba(225, 29, 72, 0.2);
-    --marker-size: 6px;
+    --brand-red-hover: #BE123C;
+    --marker-size: 5px;
 }
 
 body.dark-mode {
     --paper: #0D0D0E;
     --paper-card: #141416;
-    --paper-card-subtle: #19191C;
+    --paper-card-subtle: #18181B;
     --rule-on-paper: #27272A;
     --mute-on-paper: #94A3B8;
     --brand-red: #FF334B;
+    --brand-red-hover: #FF4D63;
+}
+
+/* Base Body Styles */
+body {
+    background-color: var(--paper);
+    color: #121214;
+    overflow-x: hidden;
+}
+
+body.dark-mode {
+    color: #F8FAFC;
 }
 
 /* ==========================================================================
-   ARCHITECTURAL FRAMING & HAIRLINE RULES
+   3. ARCHITECTURAL FRAMING & HAIRLINE RULES
    ========================================================================== */
 .arch-frame {
     position: relative;
@@ -48,76 +85,111 @@ body.dark-mode {
     position: relative;
 }
 
-.on-ink .arch-frame,
-.on-ink.arch-frame {
+.on-ink.arch-frame,
+.on-ink .arch-frame {
     border-color: var(--rule-on-ink) !important;
 }
 
-.arch-rule-h {
-    height: 1px;
-    background-color: var(--rule-on-paper);
-    width: 100%;
+/* ==========================================================================
+   4. CONTINUOUS ARCHITECTURAL GRID MATRICES (SHARED 1PX BORDERS)
+   ========================================================================== */
+.arch-grid-matrix {
+    display: grid;
+    border-top: 1px solid var(--rule-on-paper);
+    border-left: 1px solid var(--rule-on-paper);
+    position: relative;
 }
 
-.on-ink .arch-rule-h {
-    background-color: var(--rule-on-ink);
+.on-ink .arch-grid-matrix {
+    border-color: var(--rule-on-ink);
 }
 
-.arch-rule-v {
-    width: 1px;
-    background-color: var(--rule-on-paper);
-    height: 100%;
+.arch-grid-matrix-2col {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
-.on-ink .arch-rule-v {
-    background-color: var(--rule-on-ink);
+@media (min-width: 768px) {
+    .arch-grid-matrix-2col {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.arch-grid-matrix-3col {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+    .arch-grid-matrix-3col {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .arch-grid-matrix-3col {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+/* Grid Cell inside Matrix */
+.arch-grid-cell {
+    position: relative;
+    border-right: 1px solid var(--rule-on-paper);
+    border-bottom: 1px solid var(--rule-on-paper);
+    background: var(--paper-card);
+    transition: background 0.25s ease, border-color 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.arch-grid-cell:hover {
+    background: #FFFFFF;
+}
+
+body.dark-mode .arch-grid-cell {
+    background: var(--paper-card);
+    border-color: var(--rule-on-paper);
+}
+
+body.dark-mode .arch-grid-cell:hover {
+    background: #1A1A1D;
+}
+
+.on-ink .arch-grid-cell {
+    background: var(--ink-card);
+    border-color: var(--rule-on-ink);
+}
+
+.on-ink .arch-grid-cell:hover {
+    background: var(--ink-subtle);
 }
 
 /* ==========================================================================
-   CORNER MARKS & CROSSHAIR INTERSECTIONS (.cmk, .mk, .plus-mk)
+   5. CORNER MARKS & CROSSHAIR INTERSECTIONS (.cmk, .mk, .plus-mk)
    ========================================================================== */
 .cmk {
     position: absolute;
     width: var(--marker-size);
     height: var(--marker-size);
     background-color: var(--brand-red);
-    z-index: 15;
+    z-index: 20;
     pointer-events: none;
 }
 
-.cmk.tl {
-    top: 0;
-    left: 0;
-    transform: translate(-50%, -50%);
-}
-
-.cmk.tr {
-    top: 0;
-    right: 0;
-    transform: translate(50%, -50%);
-}
-
-.cmk.bl {
-    bottom: 0;
-    left: 0;
-    transform: translate(-50%, 50%);
-}
-
-.cmk.br {
-    bottom: 0;
-    right: 0;
-    transform: translate(50%, 50%);
-}
+.cmk.tl { top: 0; left: 0; transform: translate(-50%, -50%); }
+.cmk.tr { top: 0; right: 0; transform: translate(50%, -50%); }
+.cmk.bl { bottom: 0; left: 0; transform: translate(-50%, 50%); }
+.cmk.br { bottom: 0; right: 0; transform: translate(50%, 50%); }
 
 .plus-mk {
     position: absolute;
     color: var(--mute-on-paper);
     font-family: var(--font-mono);
-    font-size: 13px;
+    font-size: 11px;
     line-height: 1;
     user-select: none;
     pointer-events: none;
-    z-index: 15;
+    z-index: 20;
 }
 
 .on-ink .plus-mk {
@@ -130,12 +202,12 @@ body.dark-mode {
 .plus-mk.br { bottom: -6px; right: -6px; }
 
 /* ==========================================================================
-   BRACKETED MONOSPACE TAGS & CHIPS (.arch-tag, .arch-chip)
+   6. MONOSPACE BRACKET TAGS & CHIPS (.arch-tag, .arch-chip)
    ========================================================================== */
 .arch-tag {
     font-family: var(--font-mono);
     font-size: 0.72rem;
-    letter-spacing: 0.09em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--brand-red);
     display: inline-flex;
@@ -149,26 +221,25 @@ body.dark-mode {
     font-size: 0.65rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 0.2rem 0.55rem;
+    padding: 0.25rem 0.6rem;
     border: 1px solid var(--rule-on-paper);
-    background: rgba(255, 255, 255, 0.65);
-    color: var(--text-primary);
-    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.75);
+    color: #121214;
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    backdrop-filter: blur(4px);
+    font-weight: 500;
 }
 
 .on-ink .arch-chip {
     border-color: var(--rule-on-ink);
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.05);
     color: #EFF0F1;
 }
 
 body.dark-mode .arch-chip {
     border-color: var(--rule-on-paper);
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.5);
     color: #F8FAFC;
 }
 
@@ -179,21 +250,21 @@ body.dark-mode .arch-chip {
 }
 
 /* ==========================================================================
-   CINEMATIC STAGEBOX (AHMADAJMAL.CO #REEL STYLE)
+   7. SHOWREEL CINEMATIC STAGEBOX (AHMADAJMAL.CO #REEL STYLE)
    ========================================================================== */
 .arch-stagebox-container {
     position: relative;
     overflow: hidden;
-    padding: 3rem 0;
+    padding: 2.5rem 0;
 }
 
 .arch-stagebox {
     position: relative;
-    max-width: 860px;
+    max-width: 920px;
     margin: 0 auto;
     background: #000000;
     border: 1px solid var(--rule-on-ink);
-    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.7), 0 18px 36px -18px rgba(0, 0, 0, 0.9);
+    box-shadow: 0 35px 70px -15px rgba(0, 0, 0, 0.8);
 }
 
 .arch-stagebox .edge {
@@ -236,7 +307,7 @@ body.dark-mode .arch-chip {
     width: var(--marker-size);
     height: var(--marker-size);
     background-color: var(--brand-red);
-    z-index: 20;
+    z-index: 25;
     pointer-events: none;
 }
 
@@ -245,61 +316,31 @@ body.dark-mode .arch-chip {
 .arch-stagebox .cmark.bl { bottom: 0; left: 0; transform: translate(-50%, 50%); }
 .arch-stagebox .cmark.br { bottom: 0; right: 0; transform: translate(50%, 50%); }
 
-/* ==========================================================================
-   ARCHITECTURAL PROJECT & FEATURE CARDS (.arch-card)
-   ========================================================================== */
-.arch-card {
-    position: relative;
-    background: var(--paper-card);
-    border: 1px solid var(--rule-on-paper);
-    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    border-radius: 0px !important;
+/* Squared Play Button (No Radius) */
+.arch-play-btn {
+    width: 4rem;
+    height: 4rem;
+    background-color: var(--brand-red);
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
 }
 
-.arch-card:hover {
-    border-color: var(--brand-red);
-    box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.08);
-}
-
-body.dark-mode .arch-card {
-    background: var(--paper-card);
-    border-color: var(--rule-on-paper);
-}
-
-body.dark-mode .arch-card:hover {
-    border-color: var(--brand-red);
-    box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.6);
-}
-
-.on-ink .arch-card {
-    background: var(--ink-card);
-    border-color: var(--rule-on-ink);
-}
-
-.on-ink .arch-card:hover {
-    border-color: var(--brand-red);
-}
-
-/* Card Caption Metadata Row */
-.arch-card-meta {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--mute-on-paper);
-}
-
-.on-ink .arch-card-meta {
-    color: var(--mute-on-ink);
+.group:hover .arch-play-btn {
+    transform: scale(1.1);
+    background-color: #BE123C;
 }
 
 /* ==========================================================================
-   EDITORIAL SECTION HEADERS (AHMADAJMAL.CO STYLE)
+   8. EDITORIAL SECTION HEADERS & SAY STATEMENTS
    ========================================================================== */
 .arch-section-header {
     position: relative;
     padding-bottom: 1.5rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     border-bottom: 1px solid var(--rule-on-paper);
 }
 
@@ -307,92 +348,71 @@ body.dark-mode .arch-card:hover {
     border-color: var(--rule-on-ink);
 }
 
-.arch-title-massive {
-    font-family: var(--font-sans);
-    font-weight: 700;
-    letter-spacing: -0.035em;
-    line-height: 1.08;
-}
-
 .arch-say {
     font-family: var(--font-sans);
-    font-weight: 500;
-    font-size: clamp(1.25rem, 2.8vw, 2.2rem);
-    line-height: 1.2;
-    letter-spacing: -0.025em;
-    color: var(--text-primary);
+    font-weight: 600;
+    font-size: clamp(1.4rem, 3.2vw, 2.5rem);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: #121214;
+}
+
+body.dark-mode .arch-say {
+    color: #FFFFFF;
 }
 
 .on-ink .arch-say {
-    color: #EFF0F1;
+    color: #FFFFFF !important;
 }
 
-/* ==========================================================================
-   SERVICES REFINEMENT (AHMADAJMAL.CO PIPELINE LOOK)
-   ========================================================================== */
-.arch-service-row {
-    position: relative;
-    border-bottom: 1px solid var(--rule-on-paper);
-    padding: 2rem 0;
-    transition: background 0.25s ease;
-}
-
-.arch-service-row:hover {
-    background: rgba(0, 0, 0, 0.015);
-}
-
-body.dark-mode .arch-service-row:hover {
-    background: rgba(255, 255, 255, 0.02);
-}
-
-.arch-step-num {
+/* Metadata Rows */
+.arch-meta-row {
     font-family: var(--font-mono);
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--brand-red);
+    font-size: 0.68rem;
     letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--mute-on-paper);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.on-ink .arch-meta-row {
+    color: var(--mute-on-ink);
 }
 
 /* ==========================================================================
-   TESTIMONIAL ARCHITECTURAL GRID
+   9. TESTIMONIAL GRID CELLS
    ========================================================================== */
-.arch-quote-card {
-    position: relative;
-    padding: 2rem;
-    border: 1px solid var(--rule-on-paper);
-    background: var(--paper-card);
-}
-
-body.dark-mode .arch-quote-card {
-    background: var(--paper-card);
-    border-color: var(--rule-on-paper);
-}
-
 .arch-quote-text {
     font-family: var(--font-sans);
     font-size: 0.95rem;
     line-height: 1.6;
-    color: var(--text-primary);
+    color: #121214;
+}
+
+body.dark-mode .arch-quote-text {
+    color: #E2E8F0;
 }
 
 /* ==========================================================================
-   CONTACT TERMINAL FOOTER (.on-ink AHMADAJMAL.CO STYLE)
+   10. CONTACT TERMINAL FOOTER (.on-ink AHMADAJMAL.CO STYLE)
    ========================================================================== */
 .arch-contact-huge {
     font-family: var(--font-sans);
     font-weight: 700;
-    font-size: clamp(2.2rem, 5.5vw, 4.8rem);
-    line-height: 1.05;
-    letter-spacing: -0.035em;
+    font-size: clamp(2.4rem, 6vw, 5.2rem);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
     color: #FFFFFF;
 }
 
 .arch-email-link {
     font-family: var(--font-mono);
-    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-size: clamp(1.1rem, 2.4vw, 1.8rem);
     color: #EFF0F1;
     border-bottom: 1px solid var(--rule-on-ink);
-    padding-bottom: 0.35rem;
+    padding-bottom: 0.4rem;
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
