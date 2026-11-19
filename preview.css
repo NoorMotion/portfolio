@@ -1,0 +1,406 @@
+/* ==========================================================================
+   NOOR MOTION - ARCHITECTURAL DESIGN SYSTEM (AHMADAJMAL.CO STYLE)
+   Separate Preview Stylesheet
+   ========================================================================== */
+
+@import url('style.css');
+
+/* ==========================================================================
+   ARCHITECTURAL VARIABLES & BASE PALETTE
+   ========================================================================== */
+:root {
+    --paper: #EEECEB;
+    --paper-card: #FFFFFF;
+    --paper-card-subtle: #F6F5F4;
+    --ink: #121214;
+    --ink-card: #19191C;
+    --ink-subtle: #222226;
+    --rule-on-paper: #DBDCDE;
+    --rule-on-ink: #2E2F32;
+    --mute-on-paper: #64748B;
+    --mute-on-ink: #94A3B8;
+    --brand-red: #E11D48;
+    --brand-red-glow: rgba(225, 29, 72, 0.2);
+    --marker-size: 6px;
+}
+
+body.dark-mode {
+    --paper: #0D0D0E;
+    --paper-card: #141416;
+    --paper-card-subtle: #19191C;
+    --rule-on-paper: #27272A;
+    --mute-on-paper: #94A3B8;
+    --brand-red: #FF334B;
+}
+
+/* ==========================================================================
+   ARCHITECTURAL FRAMING & HAIRLINE RULES
+   ========================================================================== */
+.arch-frame {
+    position: relative;
+    border-top: 1px solid var(--rule-on-paper);
+    border-bottom: 1px solid var(--rule-on-paper);
+}
+
+.on-ink {
+    background-color: var(--ink) !important;
+    color: #EFF0F1 !important;
+    position: relative;
+}
+
+.on-ink .arch-frame,
+.on-ink.arch-frame {
+    border-color: var(--rule-on-ink) !important;
+}
+
+.arch-rule-h {
+    height: 1px;
+    background-color: var(--rule-on-paper);
+    width: 100%;
+}
+
+.on-ink .arch-rule-h {
+    background-color: var(--rule-on-ink);
+}
+
+.arch-rule-v {
+    width: 1px;
+    background-color: var(--rule-on-paper);
+    height: 100%;
+}
+
+.on-ink .arch-rule-v {
+    background-color: var(--rule-on-ink);
+}
+
+/* ==========================================================================
+   CORNER MARKS & CROSSHAIR INTERSECTIONS (.cmk, .mk, .plus-mk)
+   ========================================================================== */
+.cmk {
+    position: absolute;
+    width: var(--marker-size);
+    height: var(--marker-size);
+    background-color: var(--brand-red);
+    z-index: 15;
+    pointer-events: none;
+}
+
+.cmk.tl {
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+}
+
+.cmk.tr {
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+}
+
+.cmk.bl {
+    bottom: 0;
+    left: 0;
+    transform: translate(-50%, 50%);
+}
+
+.cmk.br {
+    bottom: 0;
+    right: 0;
+    transform: translate(50%, 50%);
+}
+
+.plus-mk {
+    position: absolute;
+    color: var(--mute-on-paper);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+    z-index: 15;
+}
+
+.on-ink .plus-mk {
+    color: var(--mute-on-ink);
+}
+
+.plus-mk.tl { top: -6px; left: -6px; }
+.plus-mk.tr { top: -6px; right: -6px; }
+.plus-mk.bl { bottom: -6px; left: -6px; }
+.plus-mk.br { bottom: -6px; right: -6px; }
+
+/* ==========================================================================
+   BRACKETED MONOSPACE TAGS & CHIPS (.arch-tag, .arch-chip)
+   ========================================================================== */
+.arch-tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--brand-red);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 600;
+}
+
+.arch-chip {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.55rem;
+    border: 1px solid var(--rule-on-paper);
+    background: rgba(255, 255, 255, 0.65);
+    color: var(--text-primary);
+    border-radius: 2px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    backdrop-filter: blur(4px);
+}
+
+.on-ink .arch-chip {
+    border-color: var(--rule-on-ink);
+    background: rgba(255, 255, 255, 0.06);
+    color: #EFF0F1;
+}
+
+body.dark-mode .arch-chip {
+    border-color: var(--rule-on-paper);
+    background: rgba(0, 0, 0, 0.4);
+    color: #F8FAFC;
+}
+
+.arch-chip.active,
+.arch-chip:hover {
+    border-color: var(--brand-red) !important;
+    color: var(--brand-red) !important;
+}
+
+/* ==========================================================================
+   CINEMATIC STAGEBOX (AHMADAJMAL.CO #REEL STYLE)
+   ========================================================================== */
+.arch-stagebox-container {
+    position: relative;
+    overflow: hidden;
+    padding: 3rem 0;
+}
+
+.arch-stagebox {
+    position: relative;
+    max-width: 860px;
+    margin: 0 auto;
+    background: #000000;
+    border: 1px solid var(--rule-on-ink);
+    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.7), 0 18px 36px -18px rgba(0, 0, 0, 0.9);
+}
+
+.arch-stagebox .edge {
+    position: absolute;
+    background: var(--rule-on-ink);
+    pointer-events: none;
+    z-index: 10;
+}
+
+.arch-stagebox .edge.t {
+    left: -100vw;
+    right: -100vw;
+    top: 0;
+    height: 1px;
+}
+
+.arch-stagebox .edge.b {
+    left: -100vw;
+    right: -100vw;
+    bottom: 0;
+    height: 1px;
+}
+
+.arch-stagebox .edge.l {
+    top: -100vh;
+    bottom: -100vh;
+    left: 0;
+    width: 1px;
+}
+
+.arch-stagebox .edge.r {
+    top: -100vh;
+    bottom: -100vh;
+    right: 0;
+    width: 1px;
+}
+
+.arch-stagebox .cmark {
+    position: absolute;
+    width: var(--marker-size);
+    height: var(--marker-size);
+    background-color: var(--brand-red);
+    z-index: 20;
+    pointer-events: none;
+}
+
+.arch-stagebox .cmark.tl { top: 0; left: 0; transform: translate(-50%, -50%); }
+.arch-stagebox .cmark.tr { top: 0; right: 0; transform: translate(50%, -50%); }
+.arch-stagebox .cmark.bl { bottom: 0; left: 0; transform: translate(-50%, 50%); }
+.arch-stagebox .cmark.br { bottom: 0; right: 0; transform: translate(50%, 50%); }
+
+/* ==========================================================================
+   ARCHITECTURAL PROJECT & FEATURE CARDS (.arch-card)
+   ========================================================================== */
+.arch-card {
+    position: relative;
+    background: var(--paper-card);
+    border: 1px solid var(--rule-on-paper);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 0px !important;
+}
+
+.arch-card:hover {
+    border-color: var(--brand-red);
+    box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.08);
+}
+
+body.dark-mode .arch-card {
+    background: var(--paper-card);
+    border-color: var(--rule-on-paper);
+}
+
+body.dark-mode .arch-card:hover {
+    border-color: var(--brand-red);
+    box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.6);
+}
+
+.on-ink .arch-card {
+    background: var(--ink-card);
+    border-color: var(--rule-on-ink);
+}
+
+.on-ink .arch-card:hover {
+    border-color: var(--brand-red);
+}
+
+/* Card Caption Metadata Row */
+.arch-card-meta {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--mute-on-paper);
+}
+
+.on-ink .arch-card-meta {
+    color: var(--mute-on-ink);
+}
+
+/* ==========================================================================
+   EDITORIAL SECTION HEADERS (AHMADAJMAL.CO STYLE)
+   ========================================================================== */
+.arch-section-header {
+    position: relative;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--rule-on-paper);
+}
+
+.on-ink .arch-section-header {
+    border-color: var(--rule-on-ink);
+}
+
+.arch-title-massive {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+}
+
+.arch-say {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(1.25rem, 2.8vw, 2.2rem);
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    color: var(--text-primary);
+}
+
+.on-ink .arch-say {
+    color: #EFF0F1;
+}
+
+/* ==========================================================================
+   SERVICES REFINEMENT (AHMADAJMAL.CO PIPELINE LOOK)
+   ========================================================================== */
+.arch-service-row {
+    position: relative;
+    border-bottom: 1px solid var(--rule-on-paper);
+    padding: 2rem 0;
+    transition: background 0.25s ease;
+}
+
+.arch-service-row:hover {
+    background: rgba(0, 0, 0, 0.015);
+}
+
+body.dark-mode .arch-service-row:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.arch-step-num {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--brand-red);
+    letter-spacing: 0.06em;
+}
+
+/* ==========================================================================
+   TESTIMONIAL ARCHITECTURAL GRID
+   ========================================================================== */
+.arch-quote-card {
+    position: relative;
+    padding: 2rem;
+    border: 1px solid var(--rule-on-paper);
+    background: var(--paper-card);
+}
+
+body.dark-mode .arch-quote-card {
+    background: var(--paper-card);
+    border-color: var(--rule-on-paper);
+}
+
+.arch-quote-text {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+/* ==========================================================================
+   CONTACT TERMINAL FOOTER (.on-ink AHMADAJMAL.CO STYLE)
+   ========================================================================== */
+.arch-contact-huge {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: clamp(2.2rem, 5.5vw, 4.8rem);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    color: #FFFFFF;
+}
+
+.arch-email-link {
+    font-family: var(--font-mono);
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    color: #EFF0F1;
+    border-bottom: 1px solid var(--rule-on-ink);
+    padding-bottom: 0.35rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.arch-email-link:hover {
+    color: var(--brand-red);
+    border-color: var(--brand-red);
+    transform: translateX(4px);
+}
