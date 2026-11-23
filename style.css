@@ -679,8 +679,8 @@ body.dark-mode .stacking-card .bg-white\/95 {
     display: inline-block;
     position: relative;
     width: 0;
-    height: 0.82em;
-    vertical-align: -0.06em;
+    height: 0.80em;
+    vertical-align: -0.15em;
     animation: blinkCur 1s ease-in-out infinite;
 }
 
