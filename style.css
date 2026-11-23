@@ -692,7 +692,7 @@ body.dark-mode .stacking-card .bg-white\/95 {
     left: 0;
     width: clamp(2.5px, 0.03em, 5px);
     transform: translateX(-50%);
-    background: #FFFFFF;
+    background: #470000;
 }
 
 #hero-typing-cur.typing {
@@ -718,7 +718,7 @@ body.dark-mode #hero-typing-b {
 }
 
 body.dark-mode #hero-typing-cur::after {
-    background: #FFFFFF !important;
+    background: #470000 !important;
 }
 
 /* ==========================================================================
@@ -847,7 +847,7 @@ body.dark-mode #hero #hero-typing-b {
 
 #hero #hero-typing-cur::after,
 body.dark-mode #hero #hero-typing-cur::after {
-    background: #FFFFFF !important;
+    background: #470000 !important;
 }
 
 @media (max-width: 639px) {
