@@ -722,13 +722,29 @@ body.dark-mode #hero-typing-cur::after {
     background: var(--accent-lime, #FF334B) !important;
 }
 
-/* Hero portrait: black and white by default, colour on hover, keyboard focus or tap */
+/* ==========================================================================
+   HERO STAGE - portrait with the title in a fixed bounding box over the body
+   ========================================================================== */
+:root {
+    --hero-red: #ED0024;
+}
+
+/* isolation: the title's multiply blend only mixes with the photo inside this stage,
+   so over the empty background the text stays pure red in both themes. */
+.hero-stage {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 24px;
+}
+
 .hero-me {
+    position: relative;
     margin: 0;
-    width: min(100%, 420px);
-    max-height: 58vh;
+    height: min(80vh, calc(96vw * 1104 / 1079));
     aspect-ratio: 1079 / 1104;
-    outline: none;
     cursor: pointer;
 }
 
@@ -737,22 +753,102 @@ body.dark-mode #hero-typing-cur::after {
     width: 100%;
     height: 100%;
     object-fit: contain;
+}
+
+/* Red outline: a copy of the photo behind it, haloed in red. It fades out above the
+   photo's soft bottom edge so the faded body doesn't turn red. */
+.hero-me .hero-me-outline {
+    position: absolute;
+    inset: 0;
+    filter: drop-shadow(0 0 1px var(--hero-red))
+        drop-shadow(0 0 1px var(--hero-red))
+        drop-shadow(0 0 6px rgba(237, 0, 36, 0.5));
+    -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent 70%);
+    mask-image: linear-gradient(to bottom, #000 50%, transparent 70%);
+}
+
+.hero-me .hero-me-photo {
+    position: relative;
     filter: grayscale(1);
-    transition: filter 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: filter 0.6s ease;
 }
 
-.hero-me:hover img,
-.hero-me:focus-visible img,
-.hero-me.is-colour img {
+.hero-me:hover .hero-me-photo,
+.hero-me.is-colour .hero-me-photo {
     filter: grayscale(0);
-    transform: scale(1.02);
 }
 
-.hero-me:focus-visible {
-    outline: 2px solid #E11D48;
-    outline-offset: 4px;
+/* No z-index or transform here: either would cut the title off from the photo
+   and stop the blend. Pointer passes through so hovering the body colours it. */
+.hero-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 64%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    pointer-events: none;
+}
+
+.hero-socials {
+    pointer-events: auto;
+}
+
+/* The bounding box is always shown, like a selected text layer */
+.hero-title-box {
+    position: relative;
+    width: 100%;
+    padding: 0.12em 0.14em;
+    font-size: clamp(2.5rem, 12.3vw, 15rem);
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04);
+}
+
+.hero-handle {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    margin: -11px 0 0 -11px;
+    background: var(--hero-red);
+    border: 4px solid #FFFFFF;
+}
+
+.hero-handle.tl { left: 0; top: 0; }
+.hero-handle.tc { left: 50%; top: 0; }
+.hero-handle.tr { left: 100%; top: 0; }
+.hero-handle.ml { left: 0; top: 50%; }
+.hero-handle.mr { left: 100%; top: 50%; }
+.hero-handle.bl { left: 0; top: 100%; }
+.hero-handle.bc { left: 50%; top: 100%; }
+.hero-handle.br { left: 100%; top: 100%; }
+
+#hero .hero-massive-title {
+    font-size: 1em;
+    text-align: left;
+    width: 100%;
+    mix-blend-mode: multiply;
+}
+
+#hero #hero-typing-a,
+#hero #hero-typing-b,
+body.dark-mode #hero #hero-typing-a,
+body.dark-mode #hero #hero-typing-b {
+    color: var(--hero-red) !important;
+}
+
+@media (max-width: 639px) {
+    .hero-handle {
+        width: 14px;
+        height: 14px;
+        margin: -7px 0 0 -7px;
+        border-width: 3px;
+    }
+    .hero-title-box { border-width: 1.5px; }
+    .hero-overlay { gap: 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .hero-me img { transition: none; }
+    .hero-me .hero-me-photo { transition: none; }
 }
