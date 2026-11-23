@@ -754,16 +754,8 @@ body.dark-mode #hero-typing-cur::after {
     object-fit: contain;
 }
 
-/* Red outline: a copy of the photo behind it, haloed in red. It fades out above the
-   photo's soft bottom edge so the faded body doesn't turn red. */
 .hero-me .hero-me-outline {
-    position: absolute;
-    inset: 0;
-    filter: drop-shadow(0 0 1px var(--hero-red))
-        drop-shadow(0 0 1px var(--hero-red))
-        drop-shadow(0 0 6px rgba(237, 0, 36, 0.5));
-    -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent 70%);
-    mask-image: linear-gradient(to bottom, #000 50%, transparent 70%);
+    display: none !important;
 }
 
 .hero-me .hero-me-photo {
