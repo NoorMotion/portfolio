@@ -796,11 +796,14 @@ body.dark-mode #hero-typing-cur::after {
     pointer-events: auto;
 }
 
-/* The bounding box is always shown, like a selected text layer */
+/* The bounding box is always shown, like a selected text layer. It hugs the text,
+   so it grows and shrinks with the typing, and stays centred in the hero. */
 .hero-title-box {
     position: relative;
-    width: 100%;
-    padding: 0.12em 0.14em;
+    width: auto;
+    min-width: 0.6em; /* keeps the handles apart while the text is empty between loops */
+    max-width: 100%;
+    padding: 0 0.07em;
     font-size: clamp(2.5rem, 12.3vw, 15rem);
     border: 2px solid #FFFFFF;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04);
@@ -824,10 +827,15 @@ body.dark-mode #hero-typing-cur::after {
 .hero-handle.bc { left: 50%; top: 100%; }
 .hero-handle.br { left: 100%; top: 100%; }
 
+/* Jersey 25 leaves 0.19em above the capitals and 0.05em below the descenders inside
+   a 1em line. The margins trim that so the box sits about 0.07em from the ink. */
 #hero .hero-massive-title {
     font-size: 1em;
+    line-height: 1;
+    min-height: 0;
+    width: auto;
     text-align: left;
-    width: 100%;
+    margin: -0.12em 0 0.016em;
     mix-blend-mode: multiply;
 }
 
