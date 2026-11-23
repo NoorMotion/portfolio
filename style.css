@@ -345,10 +345,12 @@ body.dark-mode .b44-card:hover {
     z-index: 10 !important;
 }
 
-@media (max-width: 639px) {
+/* Phones and touch screens: Drive lays its player out differently, so a fixed pixel
+   crop cut the video and pushed the play control off-centre. Show the whole frame. */
+@media (max-width: 767px), (hover: none) {
     .gdrive-iframe {
-        top: -52px !important;
-        height: calc(100% + 54px) !important;
+        top: 0 !important;
+        height: 100% !important;
     }
 }
 
