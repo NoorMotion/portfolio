@@ -742,8 +742,8 @@ body.dark-mode #hero-typing-cur::after {
 .hero-me {
     position: relative;
     margin: 0;
-    height: min(80vh, calc(96vw * 1104 / 1079));
-    aspect-ratio: 1079 / 1104;
+    height: min(88vh, calc(96vw * 4557 / 5230));
+    aspect-ratio: 5230 / 4557;
     cursor: pointer;
 }
 
