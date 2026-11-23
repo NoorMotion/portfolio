@@ -494,19 +494,6 @@ window.expandVideoCard = function(element, rawVideoUrl) {
         </div>
     `;
 
-    // 6b. Drive's embedded player is unreliable on some phones, so offer the file itself
-    if (videoData.isDrive && !element.querySelector('.video-open-link')) {
-        const openLink = document.createElement('a');
-        openLink.className = 'video-open-link';
-        openLink.href = videoData.rawUrl;
-        openLink.target = '_blank';
-        openLink.rel = 'noopener noreferrer';
-        openLink.innerHTML = '<span>Video not loading? Open in Google Drive</span><i class="fa-solid fa-arrow-up-right-from-square"></i>';
-        // Keep the tap from bubbling to the card, which would collapse it
-        openLink.addEventListener('click', (e) => e.stopPropagation());
-        mediaBox.insertAdjacentElement('afterend', openLink);
-    }
-
     // 7. Recalculate Masonry Layout so neighboring cards move UP cleanly
     applyPortfolioMasonry();
     setTimeout(applyPortfolioMasonry, 100);
@@ -528,9 +515,6 @@ window.collapseVideoCard = function(element) {
         infoBox.classList.remove('hidden');
     }
 
-    const openLink = element.querySelector('.video-open-link');
-    if (openLink) openLink.remove();
-
     const mediaBox = element.querySelector('.media-box');
     if (mediaBox && element.dataset.originalMedia) {
         mediaBox.classList.remove('aspect-video', 'min-h-[260px]', 'xs:min-h-[290px]', 'sm:min-h-0', 'flex', 'flex-col');
@@ -547,7 +531,7 @@ function renderDynamicCMSData() {
     if (grid) {
         const storedVideos = JSON.parse(localStorage.getItem('noormotion_cms_videos') || '[]');
         if (storedVideos.length > 0) {
-            grid.innerHTML = storedVideos.map(v => window.portfolioCardTemplate ? window.portfolioCardTemplate(v) : `
+            grid.innerHTML = storedVideos.map(v => `
                 <div onclick="expandVideoCard(this, '${v.video_url}')" class="portfolio-item-card b44-card rounded-[5px] overflow-hidden group cursor-pointer hover-trigger bg-white border border-slate-200 transition-all duration-500">
                     <div class="media-box aspect-[4/3] overflow-hidden relative rounded-t-[5px]">
                         <span class="absolute top-3 right-3 z-10 px-2 py-0.5 bg-slate-900/90 text-white font-mono-custom text-[10px] uppercase tracking-wider rounded-[3px]">${v.category || 'MOTION PROJECT'}</span>
@@ -583,7 +567,7 @@ function renderDynamicCMSData() {
                 gumroadUrl: t.gumroad_url
             }));
 
-            productsGrid.innerHTML = storedTools.map(t => window.productCardTemplate ? window.productCardTemplate(t) : `
+            productsGrid.innerHTML = storedTools.map(t => `
                 <div class="b44-card rounded-[5px] overflow-hidden group hover-trigger bg-white border border-slate-200 flex flex-col justify-between">
                     <div>
                         <div class="aspect-[16/9] overflow-hidden relative border-b border-slate-200 rounded-t-[5px]">
@@ -884,12 +868,12 @@ window.openProductModal = function (productId) {
     const mediaContainer = document.getElementById('modal-media-container');
     if (product.youtubeUrl && product.youtubeUrl !== "") {
         mediaContainer.innerHTML = `
-            <div class="relative w-full h-full overflow-hidden rounded-[5px]" style="position:relative;width:100%;height:100%;overflow:hidden">
-                <iframe class="absolute left-[-2%] w-[104%] h-[134%] top-[-17%] border-0 rounded-[5px]" style="position:absolute;left:-2%;top:-17%;width:104%;height:134%;border:0" src="${product.youtubeUrl}?autoplay=1&mute=1&vq=hd1080&hd=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1&enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="relative w-full h-full overflow-hidden rounded-[5px]">
+                <iframe class="absolute left-[-2%] w-[104%] h-[134%] top-[-17%] border-0 rounded-[5px]" src="${product.youtubeUrl}?autoplay=1&mute=1&vq=hd1080&hd=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1&enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         `;
     } else {
-        mediaContainer.innerHTML = `<img src="${product.image}" class="w-full h-full object-cover rounded-[5px]" style="width:100%;height:100%;object-fit:cover" alt="${product.title}" />`;
+        mediaContainer.innerHTML = `<img src="${product.image}" class="w-full h-full object-cover rounded-[5px]" alt="${product.title}" />`;
     }
 
     const gumroadLink = document.getElementById('gumroad-link');
