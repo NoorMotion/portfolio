@@ -72,6 +72,11 @@
         <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15a.6.6 0 0 0 .9.5l12.2-7.5a.6.6 0 0 0 0-1L7.9 4a.6.6 0 0 0-.9.5Z"/></symbol>
         <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
         <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></symbol>
+        <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+        <symbol id="i-explainer" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M10.5 8.5v4l3.5-2-3.5-2ZM8 21h8"/></symbol>
+        <symbol id="i-walkthrough" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="m11 9 6 2.2-2.6.9-.9 2.6L11 9ZM8 21h8"/></symbol>
+        <symbol id="i-promo" viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h2l6 4V5L7 9H5a1 1 0 0 0-1 1ZM17 9a4 4 0 0 1 0 6M19.5 6.5a7.5 7.5 0 0 1 0 11"/></symbol>
+        <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></symbol>
         <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></symbol>
         <symbol id="i-youtube" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></symbol>
         <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></symbol>
@@ -413,8 +418,285 @@
             </div>
         </section>
 
-        <!-- Sections 5–11 (stats, what I do, process, tools, testimonials, about, FAQ)
-             are built in the next pass, after the hero / work / CTA review. -->
+        <!-- ============================== 5. STATS (DARK) ============================== -->
+        <section class="band band--dark section" id="numbers" aria-labelledby="numbers-title">
+            <div class="wrap wrap--guides">
+                <div class="sec-head">
+                    <p class="layer-label mono"><span class="kf" aria-hidden="true"></span><span class="idx">[02]</span> In numbers<span class="caret" aria-hidden="true">_</span></p>
+                </div>
+                <div class="ruler" aria-hidden="true"></div>
+
+                <div class="grid lg:grid-cols-12 gap-14 lg:gap-6 mt-12 lg:mt-16 items-end">
+                    <h2 class="t-display t-display--md lg:col-span-6" id="numbers-title" data-reveal>Complex products. Clear motion.</h2>
+                    <!-- Numbers ship as final text (no-JS / reduced motion); script.js counts up to data-count. -->
+                    <dl class="stats lg:col-span-6">
+                        <div class="stat" data-reveal><dt class="mono t-muted">Years in motion</dt><dd class="stat-num"><span data-count="5">5</span>+</dd></div>
+                        <div class="stat" data-reveal><dt class="mono t-muted">Videos delivered</dt><dd class="stat-num"><span data-count="150">150</span>+</dd></div>
+                        <div class="stat" data-reveal><dt class="mono t-muted">Brands in the work above</dt><dd class="stat-num"><span data-count="9">9</span></dd></div>
+                        <div class="stat" data-reveal><dt class="mono t-muted">Free AE tools released</dt><dd class="stat-num"><span data-count="4">4</span></dd></div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================== 6. WHAT I DO ============================== -->
+        <section class="section" id="services" aria-labelledby="services-title">
+            <div class="wrap wrap--guides">
+                <div class="sec-head">
+                    <p class="layer-label mono"><span class="kf" aria-hidden="true"></span><span class="idx">[03]</span> What I do<span class="caret" aria-hidden="true">_</span></p>
+                    <p class="mono t-muted">4 services</p>
+                </div>
+                <div class="ruler" aria-hidden="true"></div>
+
+                <h2 class="t-h1 mt-10 lg:mt-14 mb-10 lg:mb-14 max-w-[18ch]" id="services-title" data-reveal>Four things, done properly.</h2>
+
+                <ul class="services">
+                    <li class="service" data-reveal>
+                        <svg class="icon icon--stroke service-icon" aria-hidden="true"><use href="#i-explainer"/></svg>
+                        <h3 class="service-title">SaaS Explainer Videos</h3>
+                        <p class="t-muted">What your product does and why it matters, in about ninety seconds.</p>
+                        <p class="mono service-time"><span class="kf kf--hollow" aria-hidden="true"></span>2–4 weeks</p>
+                        <a href="#contact" class="service-link" data-project-type="SaaS explainer video">Start a project <svg class="icon icon--stroke" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+                    </li>
+                    <li class="service" data-reveal>
+                        <svg class="icon icon--stroke service-icon" aria-hidden="true"><use href="#i-walkthrough"/></svg>
+                        <h3 class="service-title">Product Walkthroughs &amp; Onboarding</h3>
+                        <p class="t-muted">Feature tours and setup guides that cut support tickets and help new users get going.</p>
+                        <p class="mono service-time"><span class="kf kf--hollow" aria-hidden="true"></span>1–3 weeks</p>
+                        <a href="#contact" class="service-link" data-project-type="Product walkthrough / onboarding">Start a project <svg class="icon icon--stroke" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+                    </li>
+                    <li class="service" data-reveal>
+                        <svg class="icon icon--stroke service-icon" aria-hidden="true"><use href="#i-promo"/></svg>
+                        <h3 class="service-title">Promo &amp; Launch Videos</h3>
+                        <p class="t-muted">Short, punchy cuts for launches, landing pages, ads and plugin listings.</p>
+                        <p class="mono service-time"><span class="kf kf--hollow" aria-hidden="true"></span>2–3 weeks</p>
+                        <a href="#contact" class="service-link" data-project-type="Promo / launch video">Start a project <svg class="icon icon--stroke" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+                    </li>
+                    <li class="service" data-reveal>
+                        <svg class="icon icon--stroke service-icon" aria-hidden="true"><use href="#i-code"/></svg>
+                        <h3 class="service-title">Custom AE Scripts &amp; Tools</h3>
+                        <p class="t-muted">Scripts, presets and panels that take the repetitive work out of your team's After Effects pipeline.</p>
+                        <p class="mono service-time"><span class="kf kf--hollow" aria-hidden="true"></span>Custom scope</p>
+                        <a href="#contact" class="service-link" data-project-type="Custom After Effects tool">Start a project <svg class="icon icon--stroke" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ============================== 7. PROCESS ============================== -->
+        <section class="section !pt-0" id="process" aria-labelledby="process-title">
+            <div class="wrap wrap--guides pt-6">
+                <div class="sec-head">
+                    <p class="layer-label mono"><span class="kf" aria-hidden="true"></span><span class="idx">[04]</span> Process<span class="caret" aria-hidden="true">_</span></p>
+                    <p class="mono t-muted">5 steps</p>
+                </div>
+                <div class="ruler" aria-hidden="true"></div>
+
+                <h2 class="t-h1 mt-10 lg:mt-14 mb-10 lg:mb-14 max-w-[18ch]" id="process-title" data-reveal>From brief to final render.</h2>
+
+                <div class="proc" id="proc" data-reveal>
+                    <!-- Tabs double as AE layer bars; the playhead moves to the active one. -->
+                    <div class="proc-scroll">
+                        <div class="proc-tabs" role="tablist" aria-label="Production steps">
+                            <span class="proc-playhead" aria-hidden="true"></span>
+                            <button type="button" class="proc-tab" role="tab" id="proc-tab-1" aria-controls="proc-panel-1" aria-selected="true"><span class="mono">01</span><span class="proc-name">Brief &amp; Discovery</span><span class="proc-bar" aria-hidden="true"></span></button>
+                            <button type="button" class="proc-tab" role="tab" id="proc-tab-2" aria-controls="proc-panel-2" aria-selected="false" tabindex="-1"><span class="mono">02</span><span class="proc-name">Script &amp; Voiceover</span><span class="proc-bar" aria-hidden="true"></span></button>
+                            <button type="button" class="proc-tab" role="tab" id="proc-tab-3" aria-controls="proc-panel-3" aria-selected="false" tabindex="-1"><span class="mono">03</span><span class="proc-name">Storyboard &amp; Style Frames</span><span class="proc-bar" aria-hidden="true"></span></button>
+                            <button type="button" class="proc-tab" role="tab" id="proc-tab-4" aria-controls="proc-panel-4" aria-selected="false" tabindex="-1"><span class="mono">04</span><span class="proc-name">Animation &amp; Sound</span><span class="proc-bar" aria-hidden="true"></span></button>
+                            <button type="button" class="proc-tab" role="tab" id="proc-tab-5" aria-controls="proc-panel-5" aria-selected="false" tabindex="-1"><span class="mono">05</span><span class="proc-name">Revisions &amp; Delivery</span><span class="proc-bar" aria-hidden="true"></span></button>
+                        </div>
+                    </div>
+
+                    <div class="proc-panel" role="tabpanel" id="proc-panel-1" aria-labelledby="proc-tab-1" tabindex="0">
+                        <div><h3 class="t-h2">Brief &amp; Discovery</h3><p class="t-muted">A short call to understand the product, the audience and where the video will live. I'll use the product myself before writing anything.</p></div>
+                        <div><p class="mono t-muted mb-3">You get</p><ul class="kf-list"><li>Project scope, timeline and fixed quote</li><li>A one-page creative brief to sign off</li></ul></div>
+                    </div>
+                    <div class="proc-panel" role="tabpanel" id="proc-panel-2" aria-labelledby="proc-tab-2" tabindex="0" hidden>
+                        <div><h3 class="t-h2">Script &amp; Voiceover</h3><p class="t-muted">I turn features into a story: problem, product, payoff. Once the script is approved, the voiceover is recorded and becomes the timing for everything else.</p></div>
+                        <div><p class="mono t-muted mb-3">You get</p><ul class="kf-list"><li>Script draft with revisions</li><li>Voiceover options and the final recording</li></ul></div>
+                    </div>
+                    <div class="proc-panel" role="tabpanel" id="proc-panel-3" aria-labelledby="proc-tab-3" tabindex="0" hidden>
+                        <div><h3 class="t-h2">Storyboard &amp; Style Frames</h3><p class="t-muted">Every scene sketched against the script, plus a few fully designed frames in your brand, so you see the look before any animation starts.</p></div>
+                        <div><p class="mono t-muted mb-3">You get</p><ul class="kf-list"><li>Scene-by-scene storyboard</li><li>2–3 styled key frames for sign-off</li></ul></div>
+                    </div>
+                    <div class="proc-panel" role="tabpanel" id="proc-panel-4" aria-labelledby="proc-tab-4" tabindex="0" hidden>
+                        <div><h3 class="t-h2">Animation &amp; Sound</h3><p class="t-muted">The approved frames come to life in After Effects, with UI animation that matches your real product, plus music and sound design.</p></div>
+                        <div><p class="mono t-muted mb-3">You get</p><ul class="kf-list"><li>A full first cut to review</li><li>Music and sound effects mixed with the voiceover</li></ul></div>
+                    </div>
+                    <div class="proc-panel" role="tabpanel" id="proc-panel-5" aria-labelledby="proc-tab-5" tabindex="0" hidden>
+                        <div><h3 class="t-h2">Revisions &amp; Delivery</h3><p class="t-muted">Feedback rounds on the cut, then final renders for every place the video needs to run.</p></div>
+                        <div><p class="mono t-muted mb-3">You get</p><ul class="kf-list"><li>Revision rounds as agreed in the quote</li><li>Final MP4 renders in the formats you need</li></ul></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================== 8. TOOLS I BUILT (DARK) ============================== -->
+        <section class="band band--dark section" id="tools" aria-labelledby="tools-title">
+            <div class="wrap wrap--guides">
+                <div class="sec-head">
+                    <p class="layer-label mono"><span class="kf" aria-hidden="true"></span><span class="idx">[05]</span> Tools I built<span class="caret" aria-hidden="true">_</span></p>
+                    <a class="mono t-muted hover:text-[color:var(--fg)]" href="https://nralam.gumroad.com/" target="_blank" rel="noopener noreferrer">All on Gumroad ↗</a>
+                </div>
+                <div class="ruler" aria-hidden="true"></div>
+
+                <div class="grid lg:grid-cols-12 gap-6 items-end mt-10 lg:mt-14 mb-10 lg:mb-14">
+                    <h2 class="t-h1 lg:col-span-8" id="tools-title" data-reveal>I don't just use After Effects. I extend it.</h2>
+                    <p class="t-muted lg:col-span-3 lg:col-start-10" data-reveal>Free scripts and presets I built for my own work, now used by other motion designers. Pay what you want.</p>
+                </div>
+
+                <ul class="tools">
+                    <li class="tool" data-reveal>
+                        <div class="tool-media"><img src="Assets/img/tools/compsync-480.webp" srcset="Assets/img/tools/compsync-480.webp 480w, Assets/img/tools/compsync-896.webp 896w" sizes="(min-width: 1024px) 300px, (min-width: 640px) 50vw, 100vw" width="896" height="504" loading="lazy" decoding="async" alt="CompSync panel listing saved compositions"></div>
+                        <p class="mono tool-kind">AE Script</p>
+                        <h3 class="tool-name">CompSync 2.0</h3>
+                        <p class="t-muted">Save any comp as its own project and build a reusable animation library.</p>
+                        <div class="tool-foot">
+                            <span class="mono">Free / Donation</span>
+                            <span class="tool-actions">
+                                <button type="button" class="link text-[14px]" data-tool-demo="compsync">Demo</button>
+                                <a class="link text-[14px]" href="https://nralam.gumroad.com/l/CompSync?layout=profile" target="_blank" rel="noopener noreferrer">Get it ↗</a>
+                            </span>
+                        </div>
+                    </li>
+                    <li class="tool" data-reveal>
+                        <div class="tool-media"><img src="Assets/img/tools/autocaption-480.webp" srcset="Assets/img/tools/autocaption-480.webp 480w, Assets/img/tools/autocaption-896.webp 896w" sizes="(min-width: 1024px) 300px, (min-width: 640px) 50vw, 100vw" width="896" height="504" loading="lazy" decoding="async" alt="AutoCaption panel loading an SRT file"></div>
+                        <p class="mono tool-kind">AE Script</p>
+                        <h3 class="tool-name">AutoCaption 2.0</h3>
+                        <p class="t-muted">Turns an SRT subtitle file into animated captions in one click.</p>
+                        <div class="tool-foot">
+                            <span class="mono">Free / Donation</span>
+                            <span class="tool-actions">
+                                <button type="button" class="link text-[14px]" data-tool-demo="autocaption">Demo</button>
+                                <a class="link text-[14px]" href="https://nralam.gumroad.com/l/nrautocap?layout=profile" target="_blank" rel="noopener noreferrer">Get it ↗</a>
+                            </span>
+                        </div>
+                    </li>
+                    <li class="tool" data-reveal>
+                        <div class="tool-media"><img src="Assets/img/tools/texteco-480.webp" srcset="Assets/img/tools/texteco-480.webp 480w, Assets/img/tools/texteco-896.webp 896w" sizes="(min-width: 1024px) 300px, (min-width: 640px) 50vw, 100vw" width="896" height="504" loading="lazy" decoding="async" alt="textEco preset animating text without keyframes"></div>
+                        <p class="mono tool-kind">AE Text Preset</p>
+                        <h3 class="tool-name">textEco Text Animator</h3>
+                        <p class="t-muted">One preset, endless text animations, no keyframes needed.</p>
+                        <div class="tool-foot">
+                            <span class="mono">Free / Donation</span>
+                            <span class="tool-actions">
+                                <button type="button" class="link text-[14px]" data-tool-demo="texteco">Demo</button>
+                                <a class="link text-[14px]" href="https://nralam.gumroad.com/l/textEco?layout=profile" target="_blank" rel="noopener noreferrer">Get it ↗</a>
+                            </span>
+                        </div>
+                    </li>
+                    <li class="tool" data-reveal>
+                        <div class="tool-media"><img src="Assets/img/tools/mastermask-480.webp" srcset="Assets/img/tools/mastermask-480.webp 480w, Assets/img/tools/mastermask-896.webp 896w" sizes="(min-width: 1024px) 300px, (min-width: 640px) 50vw, 100vw" width="896" height="504" loading="lazy" decoding="async" alt="Master Mask controls for corner radius and vertex handles"></div>
+                        <p class="mono tool-kind">AE Mask Preset</p>
+                        <h3 class="tool-name">Master Mask</h3>
+                        <p class="t-muted">Per-corner radius, size and rotation controls for any mask.</p>
+                        <div class="tool-foot">
+                            <span class="mono">Free / Donation</span>
+                            <span class="tool-actions">
+                                <a class="link text-[14px]" href="https://nralam.gumroad.com/l/mastermask?layout=profile" target="_blank" rel="noopener noreferrer">Get it ↗</a>
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ============================== 9. TESTIMONIAL ============================== -->
+        <!-- Fewer than 3 real testimonials → one large featured quote (brief). Replace every [bracket] before shipping. -->
+        <section class="section" id="testimonials" aria-labelledby="testimonials-title">
+            <div class="wrap wrap--guides">
+                <div class="sec-head">
+                    <p class="layer-label mono" id="testimonials-title"><span class="kf" aria-hidden="true"></span><span class="idx">[06]</span> Client words<span class="caret" aria-hidden="true">_</span></p>
+                </div>
+                <div class="ruler" aria-hidden="true"></div>
+
+                <figure class="quote mt-12 lg:mt-16" data-reveal>
+                    <blockquote class="quote-text">
+                        <p>“[Real quote from a client: one or two sentences, ideally naming a concrete result such as fewer support tickets or a higher trial conversion.]”</p>
+                    </blockquote>
+                    <figcaption class="quote-by">
+                        <span class="quote-avatar" aria-hidden="true"></span>
+                        <span>
+                            <span class="block font-bold">[Client name]</span>
+                            <span class="block t-muted text-[14px]">[Role], [Company]</span>
+                        </span>
+                        <a class="quote-li" href="#" aria-label="[Client name] on LinkedIn"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg></a>
+                        <span class="quote-result mono"><span class="kf" aria-hidden="true"></span>[Result, e.g. "Explainer now on the pricing page"]</span>
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- ============================== 10. ABOUT ============================== -->
+        <section class="section !pt-0" id="about" aria-labelledby="about-title">
+            <div class="wrap wrap--guides pt-6">
+                <div class="sec-head">
+                    <p class="layer-label mono"><span class="kf" aria-hidden="true"></span><span class="idx">[07]</span> About<span class="caret" aria-hidden="true">_</span></p>
+                </div>
+                <div class="ruler" aria-hidden="true"></div>
+
+                <div class="grid md:grid-cols-12 gap-10 lg:gap-6 mt-12 lg:mt-16 items-start">
+                    <picture class="about-photo md:col-span-5 lg:col-span-4" data-reveal>
+                        <source type="image/avif" srcset="Assets/img/about-480.avif 480w, Assets/img/about-800.avif 800w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 40vw, 100vw">
+                        <img src="Assets/img/about-480.webp" srcset="Assets/img/about-480.webp 480w, Assets/img/about-800.webp 800w" sizes="(min-width: 1024px) 400px, (min-width: 768px) 40vw, 100vw" width="800" height="800" loading="lazy" decoding="async" alt="Noor Alam, head and shoulders">
+                    </picture>
+                    <div class="md:col-span-7 lg:col-start-6" data-reveal>
+                        <h2 class="t-h1 mb-8" id="about-title">Hi, I'm Noor.</h2>
+                        <div class="grid gap-5 t-lead !font-normal max-w-[40ch]">
+                            <p>I'm a motion designer in Dhaka, Bangladesh, and I've spent my career inside After Effects.</p>
+                            <p>I focus on one thing: making software easy to understand, through explainers, walkthroughs and launch videos for SaaS and WordPress plugin teams.</p>
+                            <p>I work remotely with product and marketing teams, with written briefs, clear milestones and calls when your team is online.</p>
+                        </div>
+                        <dl class="about-facts mt-10">
+                            <div><dt class="mono t-muted">Based in</dt><dd>Dhaka, Bangladesh</dd></div>
+                            <div><dt class="mono t-muted">Languages</dt><dd>English, Bangla</dd></div>
+                            <div><dt class="mono t-muted">Timezone</dt><dd>GMT+6</dd></div>
+                            <div><dt class="mono t-muted">Call hours</dt><dd>[13:00–22:00 GMT+6: EU mornings, US East mornings]</dd></div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================== 11. FAQ ============================== -->
+        <section class="section !pt-0" id="faq" aria-labelledby="faq-title">
+            <div class="wrap wrap--guides pt-6">
+                <div class="sec-head">
+                    <p class="layer-label mono"><span class="kf" aria-hidden="true"></span><span class="idx">[08]</span> FAQ<span class="caret" aria-hidden="true">_</span></p>
+                </div>
+                <div class="ruler" aria-hidden="true"></div>
+
+                <div class="grid lg:grid-cols-12 gap-10 lg:gap-6 mt-12 lg:mt-16">
+                    <h2 class="t-h1 lg:col-span-4" id="faq-title" data-reveal>Questions, answered.</h2>
+                    <div class="faq lg:col-span-7 lg:col-start-6" data-reveal>
+                        <details name="faq">
+                            <summary>What does a project usually cost?<svg class="icon icon--stroke" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+                            <p>[Your typical range, e.g. "Most explainers land between $X and $Y depending on length and style."] Every project gets a fixed quote after the brief, so there are no surprises.</p>
+                        </details>
+                        <details name="faq">
+                            <summary>How long does it take?<svg class="icon icon--stroke" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+                            <p>Explainers take 2–4 weeks, walkthroughs 1–3 weeks and promos 2–3 weeks from approved brief to final render. Tight deadline? Ask; sometimes it's possible.</p>
+                        </details>
+                        <details name="faq">
+                            <summary>How many revisions are included?<svg class="icon icon--stroke" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+                            <p>[Number] rounds at each stage: script, storyboard and animation. Sign-off at each stage keeps late changes small.</p>
+                        </details>
+                        <details name="faq">
+                            <summary>What files do I get?<svg class="icon icon--stroke" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+                            <p>[Final MP4 in 16:9 plus the cut-downs and aspect ratios you need. Say whether project files are included.]</p>
+                        </details>
+                        <details name="faq">
+                            <summary>Do you write the script and handle the voiceover?<svg class="icon icon--stroke" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+                            <p>[Yes / with a partner / you provide it. Say how voice artists are chosen and whether their fee is in the quote.]</p>
+                        </details>
+                        <details name="faq">
+                            <summary>How does payment work?<svg class="icon icon--stroke" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+                            <p>[e.g. "50% to start, 50% on delivery, via Payoneer, Wise or bank transfer."]</p>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- ============================== 12. CLOSING CTA ============================== -->
         <section class="band band--dark section" id="contact" aria-labelledby="contact-title">

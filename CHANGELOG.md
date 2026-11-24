@@ -31,5 +31,14 @@
 ### Compatibility
 - Old `style.css`/`script.js` kept as `legacy.css`/`legacy.js`; `blog.html` and `preview.html` now point at those (one line each).
 
-### Still to build (pass 2)
-Stats band, What I do, Process, Tools I built, Testimonials, About, FAQ. Nav links to About / Tools / Process point at sections that don't exist yet.
+## Pass 2 (sections 5–11)
+
+### Added
+- **Stats band (dark):** "Complex products. Clear motion." with 4 count-up stats (final numbers ship in the HTML).
+- **What I do:** 4 hairline columns replacing the pinned pastel cards. Each "Start a project" link jumps to the form with that project type pre-selected.
+- **Process:** 5 tabs drawn as AE layer bars with a moving playhead. Full keyboard support (arrows / Home / End), auto-steps while on screen until touched, scrolls horizontally on phones.
+- **Tools I built (dark):** CompSync, AutoCaption, textEco, Master Mask, with Gumroad links; demos open in the shared video modal.
+- **Client words:** single featured-quote layout (placeholder until real testimonials arrive).
+- **About:** cropped portrait, 3 sentences, location / languages / timezone / call hours.
+- **FAQ:** native `<details>` accordion, one open at a time.
+- Section rhythm now: paper → paper → DARK (stats) → paper → paper → DARK (tools) → paper → DARK (contact + footer).

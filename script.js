@@ -43,6 +43,13 @@
 
     const REEL = { client: "Noor Motion", title: "SaaS Explainer Showreel 2026", category: "Showreel", video: { type: "youtube", id: "pdp05Yl0Bp4" } };
 
+    // Demo videos for the After Effects tools (Master Mask has no demo yet).
+    const TOOL_DEMOS = {
+        compsync: { client: "CompSync 2.0", title: "CompSync 2.0 demo", category: "AE Script", video: { type: "youtube", id: "K5yyQGnau20" } },
+        autocaption: { client: "AutoCaption 2.0", title: "AutoCaption 2.0 demo", category: "AE Script", video: { type: "youtube", id: "Ru0QRRxmgQc" } },
+        texteco: { client: "textEco", title: "textEco Text Animator demo", category: "AE Text Preset", video: { type: "youtube", id: "YTG3v_D5ekc" } },
+    };
+
     /**
      * Builds the player element for a video source. Kept in one place so the
      * modal, the reel and any future hover previews agree on embed parameters.
@@ -370,6 +377,86 @@
             showProject(REEL, "reel");
             openDialog(modal, () => player.replaceChildren());
         }));
+
+        $$("[data-tool-demo]").forEach((btn) => btn.addEventListener("click", () => {
+            const demo = TOOL_DEMOS[btn.dataset.toolDemo];
+            if (!demo) return;
+            showProject(demo, btn.dataset.toolDemo);
+            openDialog(modal, () => player.replaceChildren());
+        }));
+    }
+
+    /* ----------------------------------------------------------------------
+       Stats: count up from 0 to the number already in the HTML
+       ---------------------------------------------------------------------- */
+    if (hasGSAP && !reduceMotion.matches) {
+        $$("[data-count]").forEach((el) => {
+            const target = Number(el.dataset.count);
+            const counter = { v: 0 };
+            el.textContent = "0";
+            ScrollTrigger.create({
+                trigger: el,
+                start: "top 88%",
+                once: true,
+                onEnter: () => gsap.to(counter, {
+                    v: target,
+                    duration: 1.4,
+                    ease: "power3.out",
+                    onUpdate: () => { el.textContent = String(Math.round(counter.v)); },
+                }),
+            });
+        });
+    }
+
+    /* ----------------------------------------------------------------------
+       Process tabs (WAI-ARIA tabs pattern). While on screen and untouched,
+       the playhead steps through the stages on its own.
+       ---------------------------------------------------------------------- */
+    const procTabs = $(".proc-tabs");
+    if (procTabs) {
+        const tabs = $$('[role="tab"]', procTabs);
+        let current = 0;
+        let timer = null;
+        let touched = false;
+
+        /** Activates step i; moveFocus is true for keyboard navigation only. */
+        const select = (i, moveFocus = false) => {
+            current = (i + tabs.length) % tabs.length;
+            tabs.forEach((tab, n) => {
+                const on = n === current;
+                tab.setAttribute("aria-selected", String(on));
+                tab.tabIndex = on ? 0 : -1;
+                $("#" + tab.getAttribute("aria-controls")).hidden = !on;
+            });
+            procTabs.style.setProperty("--i", String(current));
+            const tab = tabs[current];
+            if (moveFocus) tab.focus();
+            // Keep the active step visible inside the horizontal scroller on phones.
+            const scroller = procTabs.parentElement;
+            const left = tab.offsetLeft - (scroller.clientWidth - tab.offsetWidth) / 2;
+            scroller.scrollTo({ left, behavior: reduceMotion.matches ? "auto" : "smooth" });
+        };
+
+        const stopAuto = () => { touched = true; clearInterval(timer); timer = null; };
+
+        tabs.forEach((tab, n) => {
+            tab.addEventListener("click", () => { stopAuto(); select(n); });
+            tab.addEventListener("keydown", (e) => {
+                const keys = { ArrowRight: current + 1, ArrowLeft: current - 1, Home: 0, End: tabs.length - 1 };
+                if (!(e.key in keys)) return;
+                e.preventDefault();
+                stopAuto();
+                select(keys[e.key], true);
+            });
+        });
+
+        if (!reduceMotion.matches && "IntersectionObserver" in window) {
+            new IntersectionObserver(([entry]) => {
+                if (touched) return;
+                if (entry.isIntersecting && !timer) timer = setInterval(() => select(current + 1), 5000);
+                else if (!entry.isIntersecting) { clearInterval(timer); timer = null; }
+            }, { threshold: 0.5 }).observe(procTabs);
+        }
     }
 
     /* ----------------------------------------------------------------------
@@ -475,6 +562,12 @@
 
     const form = $("#contact-form");
     const status = $("#form-status");
+
+    // "Start a project" on a service pre-selects that project type in the form.
+    $$("[data-project-type]").forEach((link) => link.addEventListener("click", () => {
+        const select = $("#f-type");
+        if (select) select.value = link.dataset.projectType;
+    }));
 
     /** Shows a form message; kind is "ok", "error" or "" (neutral). */
     function setStatus(msg, kind = "") {
