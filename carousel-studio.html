@@ -1407,28 +1407,6 @@
           </div>
         </div>
 
-        <div class="control-section">
-          <div class="section-title">
-            <span>Color palette</span>
-            <select id="palettePreset" class="preset-select sm">
-              <option value="original">AE Original</option>
-              <option value="cyberpunk">Cyber Neon</option>
-              <option value="sunset">Sunset Warm</option>
-              <option value="ocean">Ocean Tech</option>
-              <option value="monochrome">Dark Luxury</option>
-              <option value="pastel">Candy Pastel</option>
-              <option value="editorial">Editorial Warm</option>
-              <option value="fresh">Fresh Photo</option>
-              <option value="noir">Noir Gallery</option>
-              <option value="aurora">Aurora Glass</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <span class="form-label">Gradient fill (photo-like placeholders)</span>
-            <input type="checkbox" id="checkGradientFill">
-          </div>
-          <div class="color-swatch-list" id="colorSwatchList"></div>
-        </div>
       </div>
 
       <!-- TAB 2: ORBIT & 3D GEOMETRY -->
@@ -1507,6 +1485,22 @@
             <div class="slider-group">
               <input type="range" id="orbitArc" min="90" max="360" value="360">
               <input type="number" id="orbitArcNum" class="num-input" value="360">
+            </div>
+          </div>
+
+          <div class="form-row" data-layouts="orbit">
+            <span class="form-label">Depth scale</span>
+            <div class="slider-group">
+              <input type="range" id="depthScale" min="0" max="0.7" step="0.05" value="0.30">
+              <input type="number" id="depthScaleNum" class="num-input" step="0.05" value="0.30">
+            </div>
+          </div>
+
+          <div class="form-row" data-layouts="orbit">
+            <span class="form-label">Stack launch angle</span>
+            <div class="slider-group">
+              <input type="range" id="launchAngle" min="-180" max="180" value="-56">
+              <input type="number" id="launchAngleNum" class="num-input" value="-56">
             </div>
           </div>
         </div>
@@ -1637,30 +1631,22 @@
         </div>
 
         <div class="control-section">
-          <div class="section-title">Depth shading</div>
-          <div class="form-row" data-layouts="orbit">
-            <span class="form-label">Depth scale diff</span>
-            <div class="slider-group">
-              <input type="range" id="depthScale" min="0" max="0.7" step="0.05" value="0.30">
-              <input type="number" id="depthScaleNum" class="num-input" step="0.05" value="0.30">
-            </div>
-          </div>
-
+          <div class="section-title">Camera blur</div>
           <div class="form-row">
-            <span class="form-label">Depth fade (back dim)</span>
+            <span class="form-label">Blur level (px)</span>
             <div class="slider-group">
-              <input type="range" id="depthFade" min="0" max="0.8" step="0.05" value="0.22">
-              <input type="number" id="depthFadeNum" class="num-input" step="0.05" value="0.22">
+              <input type="range" id="camBlur" min="0" max="40" step="0.5" value="0">
+              <input type="number" id="camBlurNum" class="num-input" step="0.5" value="0">
             </div>
           </div>
-
-          <div class="form-row" data-layouts="orbit">
-            <span class="form-label">Stack launch angle</span>
+          <div class="form-row">
+            <span class="form-label">Focus (front to back)</span>
             <div class="slider-group">
-              <input type="range" id="launchAngle" min="-180" max="180" value="-56">
-              <input type="number" id="launchAngleNum" class="num-input" value="-56">
+              <input type="range" id="camFocus" min="0" max="1" step="0.01" value="0">
+              <input type="number" id="camFocusNum" class="num-input" step="0.01" value="0">
             </div>
           </div>
+          <p class="hint">Like an After Effects camera with depth of field: cards at the focus depth stay sharp, the further a card sits from it the more it blurs.</p>
         </div>
       </div>
 
@@ -1912,7 +1898,9 @@ const SCENE_DEFAULTS = {
   gradientFill: false,
   stageBgColor: '#000000',
   shadowBlur: 46,
-  shadowOpacity: 0.22
+  shadowOpacity: 0.22,
+  camBlur: 0,  // camera depth-of-field blur at the far end, in card pixels
+  camFocus: 0  // depth that stays sharp: 0 = front cards, 1 = back cards
 };
 
 // Precisely calibrated presets that comfortably fit the frame with generous margins
@@ -1920,42 +1908,42 @@ const PRESETS = {
   'ae-original': {
     cardCount: 7, cardWidth: 460, cardHeight: 260, cardScale: 0.70, cardRadius: 22,
     orbitRx: 450, orbitRy: 200, orbitCx: 960, orbitCy: 540, orbitTilt: 0, orbitArc: 360,
-    depthScale: 0.30, depthFade: 0.22, launchAngle: -56,
+    depthScale: 0.30, camBlur: 3.5, launchAngle: -56,
     animMode: 'burst', animDuration: 3.65, revolutions: 1.0, staggerGap: 45,
     bezier: [0.05, 0.90, 0.10, 1.00], palette: 'original', stageWidth: 1920, stageHeight: 1080
   },
   'infinite-loop': {
     cardCount: 8, cardWidth: 420, cardHeight: 240, cardScale: 0.75, cardRadius: 20,
     orbitRx: 460, orbitRy: 180, orbitCx: 960, orbitCy: 540, orbitTilt: -6, orbitArc: 360,
-    depthScale: 0.30, depthFade: 0.25, launchAngle: 0,
+    depthScale: 0.30, camBlur: 4, launchAngle: 0,
     animMode: 'loop', animDuration: 6.0, revolutions: 1.0, staggerGap: 0,
     bezier: [0.0, 0.0, 1.0, 1.0], palette: 'cyberpunk', stageWidth: 1920, stageHeight: 1080
   },
   'cyber-spin': {
     cardCount: 10, cardWidth: 360, cardHeight: 210, cardScale: 0.70, cardRadius: 18,
     orbitRx: 460, orbitRy: 170, orbitCx: 960, orbitCy: 540, orbitTilt: 8, orbitArc: 360,
-    depthScale: 0.30, depthFade: 0.25, launchAngle: 0,
+    depthScale: 0.30, camBlur: 4, launchAngle: 0,
     animMode: 'loop', animDuration: 5.0, revolutions: 1.0, staggerGap: 0,
     bezier: [0.0, 0.0, 1.0, 1.0], palette: 'cyberpunk', stageWidth: 1920, stageHeight: 1080
   },
   'reels-vertical': {
     cardCount: 6, cardWidth: 360, cardHeight: 220, cardScale: 0.80, cardRadius: 24,
     orbitRx: 260, orbitRy: 380, orbitCx: 540, orbitCy: 960, orbitTilt: 10, orbitArc: 360,
-    depthScale: 0.30, depthFade: 0.25, launchAngle: -90,
+    depthScale: 0.30, camBlur: 4, launchAngle: -90,
     animMode: 'burst', animDuration: 3.5, revolutions: 1.0, staggerGap: 50,
     bezier: [0.16, 1.0, 0.3, 1.0], palette: 'sunset', stageWidth: 1080, stageHeight: 1920
   },
   'wide-showcase': {
     cardCount: 5, cardWidth: 500, cardHeight: 280, cardScale: 0.75, cardRadius: 24,
     orbitRx: 500, orbitRy: 160, orbitCx: 960, orbitCy: 540, orbitTilt: 0, orbitArc: 240,
-    depthScale: 0.30, depthFade: 0.30, launchAngle: -120,
+    depthScale: 0.30, camBlur: 4.8, launchAngle: -120,
     animMode: 'burst', animDuration: 4.0, revolutions: 0.75, staggerGap: 60,
     bezier: [0.05, 0.90, 0.10, 1.00], palette: 'ocean', stageWidth: 1920, stageHeight: 1080
   },
   'compact-deck': {
     cardCount: 6, cardWidth: 360, cardHeight: 220, cardScale: 0.80, cardRadius: 18,
     orbitRx: 380, orbitRy: 160, orbitCx: 960, orbitCy: 540, orbitTilt: -4, orbitArc: 360,
-    depthScale: 0.25, depthFade: 0.20, launchAngle: -45,
+    depthScale: 0.25, camBlur: 3.2, launchAngle: -45,
     animMode: 'burst', animDuration: 3.0, revolutions: 1.0, staggerGap: 40,
     bezier: [0.2, 1.2, 0.2, 1.0], palette: 'monochrome', stageWidth: 1920, stageHeight: 1080
   },
@@ -1963,7 +1951,7 @@ const PRESETS = {
   /* ---------- 3D LAYOUT PRESETS ---------- */
   'curved-wall': {
     layout: 'wall', cardCount: 14, cardWidth: 270, cardHeight: 400, cardScale: 1, cardRadius: 10,
-    radius: 1300, angleStep: 13.5, cardYaw: 0, edgeFade: 0.2, depthFade: 0,
+    radius: 1300, angleStep: 13.5, cardYaw: 0, edgeFade: 0.2, camBlur: 0,
     perspective: 650, camZ: -1150, sceneScale: 1, orbitCx: 960, orbitCy: 540,
     animMode: 'loop', animDuration: 28, revolutions: 1, staggerGap: 0, bezier: [0.65, 0, 0.35, 1],
     palette: 'editorial', gradientFill: true, stageBgColor: '#e7e7e4',
@@ -1971,7 +1959,7 @@ const PRESETS = {
   },
   'arc-gallery': {
     layout: 'wall', cardCount: 14, cardWidth: 250, cardHeight: 340, cardScale: 1, cardRadius: 28,
-    radius: 1000, angleStep: 16, cardYaw: 0, edgeFade: 0.25, depthFade: 0,
+    radius: 1000, angleStep: 16, cardYaw: 0, edgeFade: 0.25, camBlur: 0,
     perspective: 850, camZ: -1100, sceneScale: 1, orbitCx: 960, orbitCy: 560,
     animMode: 'loop', animDuration: 20, revolutions: 1, staggerGap: 0, bezier: [0.65, 0, 0.35, 1],
     palette: 'fresh', gradientFill: true, stageBgColor: '#ffffff',
@@ -1979,7 +1967,7 @@ const PRESETS = {
   },
   'coverflow': {
     layout: 'coverflow', cardCount: 9, cardWidth: 520, cardHeight: 560, cardScale: 0.9, cardRadius: 24,
-    gap: 300, stepZ: 160, falloff: 0.12, cardYaw: 0, edgeFade: 0.35, depthFade: 0,
+    gap: 300, stepZ: 160, falloff: 0.12, cardYaw: 0, edgeFade: 0.35, camBlur: 0,
     perspective: 1600, camZ: 0, sceneScale: 1, orbitCx: 960, orbitCy: 540,
     animMode: 'step', animDuration: 18, holdRatio: 0.55, revolutions: 1, staggerGap: 0,
     bezier: [0.65, 0, 0.35, 1], palette: 'ocean', gradientFill: true, stageBgColor: '#f4f5f9',
@@ -1987,7 +1975,7 @@ const PRESETS = {
   },
   'helix': {
     layout: 'helix', cardCount: 80, cardWidth: 280, cardHeight: 180, cardScale: 1, cardRadius: 6,
-    radius: 560, angleStep: 7, stepY: 11, cardYaw: 62, edgeFade: 0.15, depthFade: 0,
+    radius: 560, angleStep: 7, stepY: 11, cardYaw: 62, edgeFade: 0.15, camBlur: 0,
     perspective: 1800, camTiltX: -6, camZ: -1060, sceneScale: 1.25, orbitCx: 960, orbitCy: 540,
     animMode: 'loop', animDuration: 36, revolutions: 1, staggerGap: 0, bezier: [0.65, 0, 0.35, 1],
     palette: 'noir', gradientFill: true, stageBgColor: '#e9e9e9',
@@ -1995,7 +1983,7 @@ const PRESETS = {
   },
   'depth-stack': {
     layout: 'stack', cardCount: 14, cardWidth: 560, cardHeight: 380, cardScale: 1, cardRadius: 4,
-    gap: 170, stepY: -95, stepZ: 300, cardYaw: -32, edgeFade: 0.3, depthFade: 0,
+    gap: 170, stepY: -95, stepZ: 300, cardYaw: -32, edgeFade: 0.3, camBlur: 0,
     perspective: 1500, camZ: 0, sceneScale: 1, orbitCx: 960, orbitCy: 540, reverse: true,
     animMode: 'loop', animDuration: 16, revolutions: 1, staggerGap: 0, bezier: [0.65, 0, 0.35, 1],
     palette: 'aurora', gradientFill: true, stageBgColor: '#f3f3f3',
@@ -2003,7 +1991,7 @@ const PRESETS = {
   },
   'particle-ring': {
     layout: 'ring', cardCount: 110, cardWidth: 46, cardHeight: 46, cardScale: 1, cardRadius: 2,
-    radius: 440, scatter: 0.6, depthFade: 0.2,
+    radius: 440, scatter: 0.6, camBlur: 3.2,
     perspective: 1400, camZ: 0, sceneScale: 1, orbitCx: 960, orbitCy: 540,
     animMode: 'loop', animDuration: 40, revolutions: 1, staggerGap: 0, bezier: [0.65, 0, 0.35, 1],
     palette: 'noir', gradientFill: true, stageBgColor: '#ffffff',
@@ -2011,7 +1999,7 @@ const PRESETS = {
   },
   'sphere': {
     layout: 'sphere', cardCount: 90, cardWidth: 120, cardHeight: 120, cardScale: 1, cardRadius: 14,
-    radius: 440, scatter: 0, cardYaw: 0, depthFade: 0.65,
+    radius: 440, scatter: 0, cardYaw: 0, camBlur: 10.4,
     perspective: 1600, camTiltX: -12, camZ: -440, sceneScale: 1, orbitCx: 960, orbitCy: 540,
     animMode: 'loop', animDuration: 30, revolutions: 1, staggerGap: 0, bezier: [0.65, 0, 0.35, 1],
     palette: 'cyberpunk', gradientFill: true, stageBgColor: '#07070c',
@@ -2019,7 +2007,7 @@ const PRESETS = {
   },
   'cylinder': {
     layout: 'cylinder', cardCount: 10, cardWidth: 320, cardHeight: 420, cardScale: 1, cardRadius: 20,
-    radius: 700, cardYaw: 0, depthFade: 0.55,
+    radius: 700, cardYaw: 0, camBlur: 8.8,
     perspective: 1700, camTiltX: -12, camZ: -1000, sceneScale: 1.34, orbitCx: 960, orbitCy: 540,
     animMode: 'loop', animDuration: 14, revolutions: 1, staggerGap: 0, bezier: [0.65, 0, 0.35, 1],
     palette: 'sunset', gradientFill: true, stageBgColor: '#0b0b12',
@@ -2031,7 +2019,7 @@ const PRESETS = {
 const GEOMETRY_KEYS = [
   'layout', 'cardCount', 'cardWidth', 'cardHeight', 'cardScale', 'cardRadius',
   'radius', 'angleStep', 'gap', 'stepY', 'stepZ', 'cardYaw', 'falloff', 'scatter', 'edgeFade',
-  'perspective', 'camTiltX', 'camYawY', 'camZ', 'sceneScale', 'depthFade',
+  'perspective', 'camTiltX', 'camYawY', 'camZ', 'sceneScale', 'camBlur', 'camFocus',
   'animMode', 'animDuration', 'holdRatio', 'revolutions', 'staggerGap', 'bezier', 'reverse',
   'orbitRx', 'orbitRy', 'orbitTilt', 'orbitArc', 'depthScale', 'launchAngle',
   'shadowBlur', 'shadowOpacity'
@@ -2287,7 +2275,8 @@ function getOrbitTransform(cardIndex, totalCards, t) {
   return {
     x, y, z: 0, rotY: 0, rotX: 0, rotZ: 0, flip: 0,
     scale: state.cardScale * (1 + state.depthScale * depth),
-    opacity: 1 - state.depthFade * ((1 - depth) / 2),
+    opacity: 1,
+    blur: cameraBlur((1 - depth) / 2),
     zIndex: Math.round(100 + 60 * depth),
     key: 0
   };
@@ -2407,6 +2396,16 @@ const LAYOUT_FNS = {
 };
 
 /**
+ * Camera depth of field: blur grows with the distance between a card's depth (0 front, 1 back)
+ * and the focus depth, reaching Blur level at the far end of the scene.
+ */
+function cameraBlur(depthNorm) {
+  if (!state.camBlur) return 0;
+  const f = clamp01(state.camFocus);
+  return state.camBlur * Math.abs(depthNorm - f) / Math.max(0.001, f, 1 - f);
+}
+
+/**
  * Pose of card i at time t — the single source of truth for preview and export.
  * `key` changes whenever the pose jumps discontinuously (path wrap or back-face flip);
  * the exporter uses it to place hard cuts instead of interpolating across the jump.
@@ -2420,7 +2419,8 @@ function getCardPose(i, N, t, scene = prepareFrame(t)) {
     x: L.x, y: L.y, z: L.z,
     rotY: L.rotY, rotX: L.rotX, rotZ: L.rotZ, flip: 0,
     scale: state.cardScale * L.scale,
-    opacity: L.opacity * (1 - state.depthFade * L.depthNorm) * clamp01(intro * 5),
+    opacity: L.opacity * clamp01(intro * 5),
+    blur: cameraBlur(L.depthNorm),
     zIndex: 0, key: L.wrap * 2
   };
 
@@ -2935,6 +2935,7 @@ function renderCards(time) {
     card.style.boxShadow = `0 10px ${state.shadowBlur}px rgba(0,0,0,${state.shadowOpacity})`;
     card.style.zIndex = pose.zIndex;
     card.style.opacity = pose.opacity;
+    card.style.filter = pose.blur > 0.05 ? `blur(${pose.blur.toFixed(2)}px)` : '';
     card.style.visibility = pose.opacity < 0.003 ? 'hidden' : 'visible';
     card.style.transform = poseToTransform(pose);
 
@@ -3159,7 +3160,7 @@ function syncBezierInputs() {
 const NUMERIC_CONTROLS = [
   'cardCount', 'cardWidth', 'cardHeight', 'cardScale', 'cardRadius',
   'shadowBlur', 'shadowOpacity', 'orbitRx', 'orbitRy', 'orbitCx', 'orbitCy',
-  'orbitTilt', 'orbitArc', 'depthScale', 'depthFade', 'launchAngle',
+  'orbitTilt', 'orbitArc', 'depthScale', 'launchAngle', 'camBlur', 'camFocus',
   'animDuration', 'revolutions', 'staggerGap', 'stageWidth', 'stageHeight',
   'radius', 'angleStep', 'gap', 'stepY', 'stepZ', 'cardYaw', 'falloff', 'scatter', 'edgeFade',
   'perspective', 'camTiltX', 'camYawY', 'camZ', 'sceneScale', 'holdRatio', 'scrollShift'
@@ -3194,7 +3195,6 @@ function syncInputsFromState() {
   document.getElementById('stageBgColor').value = state.stageBgColor;
   document.getElementById('checkReverse').checked = !!state.reverse;
   document.getElementById('checkAutoFlip').checked = !!state.autoFlip;
-  document.getElementById('checkGradientFill').checked = !!state.gradientFill;
   document.getElementById('checkShowNumbers').checked = !!state.showNumbers;
   syncBezierInputs();
 
@@ -3206,6 +3206,7 @@ function syncInputsFromState() {
 
 function renderColorSwatches() {
   const container = document.getElementById('colorSwatchList');
+  if (!container) { paintMediaSlots(); return; } // palette colours now show on the media slots
   container.innerHTML = '';
   for (let i = 0; i < state.cardCount; i++) {
     const color = cardColor(i);
@@ -3318,7 +3319,6 @@ function applyPreset(key) {
   Object.assign(state, SCENE_DEFAULTS, p, { bezier: [...p.bezier] });
   if (p.palette && PALETTES[p.palette]) {
     state.customColors = [...PALETTES[p.palette]];
-    document.getElementById('palettePreset').value = p.palette;
   }
   ensureColorCount();
   state.currentTime = 0;
@@ -3378,11 +3378,12 @@ function readAsDataUrl(item) {
 }
 
 // Per-card sampled values: the card pose plus camera values (any of which may be keyframed).
-// [x, y, z, rotY, rotX, rotZ, flipDeg, scale, opacity, zIndex, cx, cy, camZ, sceneScale, camTiltX, camYawY]
-const KF_TOL = [0.5, 0.5, 1, 0.3, 0.3, 0.3, 0, 0.002, 0.01, 2, 0.5, 0.5, 1, 0.002, 0.1, 0.1];
+// [x, y, z, rotY, rotX, rotZ, flipDeg, scale, opacity, zIndex, cx, cy, camZ, sceneScale, camTiltX, camYawY, blur]
+const KF_TOL = [0.5, 0.5, 1, 0.3, 0.3, 0.3, 0, 0.002, 0.01, 2, 0.5, 0.5, 1, 0.002, 0.1, 0.1, 0.1];
 const poseVals = (p) => [
   p.x, p.y, p.z, p.rotY, p.rotX, p.rotZ, p.flip * 180, p.scale, p.opacity, p.zIndex,
-  state.orbitCx, state.orbitCy, state.layout === 'orbit' ? 0 : state.camZ, state.sceneScale, state.camTiltX, state.camYawY
+  state.orbitCx, state.orbitCy, state.layout === 'orbit' ? 0 : state.camZ, state.sceneScale, state.camTiltX, state.camYawY,
+  p.blur || 0
 ];
 
 /**
@@ -3513,7 +3514,7 @@ async function generateStandaloneHtml({ forDisplay = false } = {}) {
   let keyframeCss = '';
   for (let i = 0; i < N; i++) {
     const kfs = sampleCardKeyframes(i, N);
-    const used = { z: false, rotY: false, rotX: false, rotZ: false, flip: false, zoom: false, camX: false, camY: false };
+    const used = { z: false, rotY: false, rotX: false, rotZ: false, flip: false, zoom: false, camX: false, camY: false, blur: false };
     kfs.forEach(k => {
       if (Math.abs(k.v[2]) > 0.05) used.z = true;
       if (Math.abs(k.v[3]) > 0.01) used.rotY = true;
@@ -3523,9 +3524,11 @@ async function generateStandaloneHtml({ forDisplay = false } = {}) {
       if (Math.abs(k.v[13] - 1) > 1e-4) used.zoom = true;
       if (Math.abs(k.v[14]) > 0.001) used.camX = true;
       if (Math.abs(k.v[15]) > 0.001) used.camY = true;
+      if (k.v[16] > 0.05) used.blur = true;
     });
     keyframeCss += keyframesBlock(`carousel-card-${i + 1}`, kfs,
-      v => `transform: ${exportTransform(v, used)}; opacity: ${fmt(clamp01(v[8]), 3)}; z-index: ${Math.round(v[9])};`);
+      v => `transform: ${exportTransform(v, used)}; opacity: ${fmt(clamp01(v[8]), 3)}; z-index: ${Math.round(v[9])};` +
+        (used.blur ? ` filter: blur(${fmt(Math.max(0, v[16]), 2)}px);` : ''));
   }
 
   // --- Keyframed parameters that are not part of the card transform ---
@@ -3794,15 +3797,20 @@ function setupEventListeners() {
     updatePlayBtn();
   });
 
+  // Space plays or pauses whatever has focus (sliders, buttons, menus, checkboxes), except while typing text.
+  const typingIn = (el) => el && (el.isContentEditable || el.tagName === 'TEXTAREA' ||
+    (el.tagName === 'INPUT' && ['text', 'search', 'email', 'url', 'password', 'tel'].includes(el.type)));
   window.addEventListener('keydown', (e) => {
-    const tag = e.target.tagName;
-    if (e.code === 'Space' && tag !== 'INPUT' && tag !== 'TEXTAREA' && tag !== 'SELECT') {
-      e.preventDefault();
-      if (e.repeat) return;
-      state.isPlaying = !state.isPlaying;
-      updatePlayBtn();
-    }
-  });
+    if (e.code !== 'Space' || typingIn(e.target)) return;
+    e.preventDefault();
+    if (e.repeat) return;
+    state.isPlaying = !state.isPlaying;
+    updatePlayBtn();
+  }, true);
+  // Buttons and checkboxes activate on Space release, so swallow that too.
+  window.addEventListener('keyup', (e) => {
+    if (e.code === 'Space' && !typingIn(e.target)) e.preventDefault();
+  }, true);
 
   // Replay
   document.getElementById('btnReplay').addEventListener('click', () => {
@@ -3849,22 +3857,6 @@ function setupEventListeners() {
   // Spacing Mode selector
   document.getElementById('spacingMode').addEventListener('change', (e) => {
     state.spacingMode = e.target.value;
-    renderCards(state.currentTime);
-  });
-
-  // Palette Preset Selector
-  document.getElementById('palettePreset').addEventListener('change', (e) => {
-    const pal = PALETTES[e.target.value];
-    if (pal) {
-      state.customColors = [...pal];
-      ensureColorCount();
-      renderColorSwatches();
-      renderCards(state.currentTime);
-    }
-  });
-
-  document.getElementById('checkGradientFill').addEventListener('change', (e) => {
-    state.gradientFill = e.target.checked;
     renderCards(state.currentTime);
   });
 
@@ -4227,7 +4219,8 @@ function aeControllerSpec(layout, mode, nest) {
     L('coverflow') ? { name: 'Side Falloff', id: 'falloff' } : null,
     L('ring', 'sphere') ? { name: 'Scatter', id: 'scatter' } : null,
     linear ? { name: 'Edge Fade', id: 'edgeFade' } : null,
-    { name: 'Depth Fade', id: 'depthFade' },
+    { name: 'Camera Blur', id: 'camBlur' },
+    { name: 'Blur Focus (%)', id: 'camFocus', conv: pct },
     flipable ? { name: 'Keep Media Readable', id: 'autoFlip', kind: 'check' } : null,
     is3d ? { name: 'Perspective', id: 'perspective' } : null,
     is3d ? { name: 'Scene Depth', id: 'camZ' } : null,
@@ -4285,6 +4278,8 @@ function aeExpressionLib(layout, mode) {
     'function v(n) { return C.effect(n)(1).value; }',
     'function clamp01(a) { return a < 0 ? 0 : (a > 1 ? 1 : a); }',
     'function rand(i, k) { var r = Math.sin(i * 12.9898 + k * 78.233) * 43758.5453; return r - Math.floor(r); }',
+    '// Camera depth of field (same as the studio): depth d is 0 at the front, 1 at the back.',
+    'function dof(d) { var f = clamp01(v("Blur Focus (%)") / 100), b = v("Camera Blur"); return b * Math.abs(d - f) / Math.max(0.001, Math.max(f, 1 - f)); }',
     'var D2R = Math.PI / 180;',
     'var i = effect("Card #")(1).value - 1;',
     'var N = Math.max(1, Math.round(v("Cards")));'
@@ -4314,7 +4309,8 @@ function aeExpressionLib(layout, mode) {
       'var mr = Math.sqrt((Rx * sn) * (Rx * sn) + (Ry * ct) * (Ry * ct));',
       'var dep = Math.max(-1, Math.min(1, oy / Math.max(1, mr)));',
       'var sc = v("Card Scale (%)") / 100 * (1 + v("Depth Scale") * dep);',
-      'var op = 1 - v("Depth Fade") * ((1 - dep) / 2);',
+      'var op = 1;',
+      'var bl = dof((1 - dep) / 2);',
       'var zi = Math.round(100 + 60 * dep);',
       '// Stacking order: a tiny step straight toward the lens (undoing tilt, yaw and zoom) so it never shifts the card on screen.',
       'var lz = (zi - 100) * 0.1, ta = v("Camera Tilt") * D2R, ya = v("Camera Yaw") * D2R, zz = Math.max(0.0001, v("Scene Zoom (%)") / 100);',
@@ -4378,7 +4374,8 @@ function aeExpressionLib(layout, mode) {
   const flipable = !BILLBOARD_LAYOUTS.includes(layout);
   const finish = [
     'var P = v("Perspective");',
-    'var op = L.opacity * (1 - v("Depth Fade") * L.depthNorm) * clamp01(intro * 5);',
+    'var op = L.opacity * clamp01(intro * 5);',
+    'var bl = dof(L.depthNorm);',
     'var sc = v("Card Scale (%)") / 100 * L.scale;',
     '// Where the card sits in front of the lens (same maths as the studio, scene centre at the origin).',
     'function mm(a, b) { var o = [], r, c; for (r = 0; r < 4; r++) { for (c = 0; c < 4; c++) { o[r * 4 + c] = a[r * 4] * b[c] + a[r * 4 + 1] * b[4 + c] + a[r * 4 + 2] * b[8 + c] + a[r * 4 + 3] * b[12 + c]; } } return o; }',
@@ -4405,7 +4402,8 @@ function aeExpressionResults(layout) {
   const r = {
     pos: { head: `// Card position on the carousel path. ${ctl}`, ret: '[L.x, L.y, -L.z]' },
     scale: { head: `// Card size (Card Scale and depth falloff). ${ctl}`, ret: '[sc * 100, sc * 100, 100]' },
-    opacity: { head: `// Card fade (edge, depth, entrance and near-lens fades). ${ctl}`, ret: 'op * 100' }
+    opacity: { head: `// Card fade (edge, entrance and near-lens fades). ${ctl}`, ret: 'op * 100' },
+    blur: { head: `// Camera depth-of-field blur: sharp at Blur Focus, Camera Blur px at the far end. ${ctl}`, ret: 'bl' }
   };
   if (layout === 'orbit') r.pos.ret = '[L.x, L.y, L.z]';
   if (layout === 'sphere') {
@@ -4893,6 +4891,10 @@ const AE_JSX_RUNTIME = String.raw`// Carousel Motion Studio -> After Effects bui
     setExpr(prop(xf(holder), 'ADBE Position'), cardExpr('pos'));
     setExpr(prop(t, 'ADBE Scale'), cardExpr('scale'));
     setExpr(prop(t, 'ADBE Opacity'), cardExpr('opacity'));
+
+    // Camera blur first, so the drop shadow is cast by the softened card.
+    var bfx = L.property('ADBE Effect Parade').addProperty('ADBE Gaussian Blur 2');
+    setExpr(prop(bfx, 'ADBE Gaussian Blur 2-0001'), cardExpr('blur'));
 
     var ref = ctrlRef();
     var fx = addDropShadow(L, null, 180, 10, null);
@@ -7120,7 +7122,7 @@ async function downloadTextAeBuild() {
 // loop duration) rebuild the DOM or redefine the timeline itself, so they stay static.
 const KEYFRAMEABLE = [
   'cardWidth', 'cardHeight', 'cardScale', 'cardRadius', 'shadowBlur', 'shadowOpacity',
-  'orbitRx', 'orbitRy', 'orbitCx', 'orbitCy', 'orbitTilt', 'orbitArc', 'depthScale', 'depthFade', 'launchAngle',
+  'orbitRx', 'orbitRy', 'orbitCx', 'orbitCy', 'orbitTilt', 'orbitArc', 'depthScale', 'launchAngle', 'camBlur', 'camFocus',
   'radius', 'angleStep', 'gap', 'stepY', 'stepZ', 'cardYaw', 'falloff', 'scatter', 'edgeFade',
   'perspective', 'camTiltX', 'camYawY', 'camZ', 'sceneScale',
   'scrollShift', 'revolutions', 'staggerGap', 'holdRatio',
@@ -7130,7 +7132,7 @@ const COLOR_PARAMS = new Set(['stageBgColor']);
 
 // Overshoot eases can push a value past its keys; these keep it physically meaningful.
 const PARAM_LIMITS = {
-  shadowOpacity: [0, 1], depthFade: [0, 1], edgeFade: [0, 1], scatter: [0, 1], falloff: [0, 1], holdRatio: [0, 0.95],
+  shadowOpacity: [0, 1], camBlur: [0, Infinity], camFocus: [0, 1], edgeFade: [0, 1], scatter: [0, 1], falloff: [0, 1], holdRatio: [0, 0.95],
   cardWidth: [1, Infinity], cardHeight: [1, Infinity], cardScale: [0.01, Infinity], cardRadius: [0, Infinity],
   shadowBlur: [0, Infinity], perspective: [50, Infinity], sceneScale: [0.01, Infinity], staggerGap: [0, Infinity]
 };
