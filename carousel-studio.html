@@ -12,23 +12,59 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <style>
+  /* Noor Motion brand tokens (match style.css on nralam.com): warm stone light by default,
+     near-black dark via body.dark-mode, which the site's THEME toggle stores as motionTheme. */
   :root {
-    --bg-dark: #0a0e17;
-    --panel-bg: #111827;
-    --panel-border: #1f293d;
-    --panel-header: #151e32;
-    --accent: #6366f1;
-    --accent-hover: #4f46e5;
-    --accent-glow: rgba(99, 102, 241, 0.25);
-    --text-primary: #f3f4f6;
-    --text-secondary: #9ca3af;
-    --text-muted: #6b7280;
-    --control-bg: #1a2235;
-    --control-border: #28354f;
-    --control-hover: #222d45;
-    --track-bg: #222e47;
-    --thumb-color: #818cf8;
+    --bg-dark: #EEECEB;
+    --panel-bg: #FFFFFF;
+    --panel-header: #FFFFFF;
+    --panel-border: rgba(18, 18, 18, 0.09);
+    --sunken: #F6F5F4;
+    --accent: #E11D48;
+    --accent-fill: #E11D48;
+    --accent-hover: #BE123C;
+    --accent-soft: rgba(225, 29, 72, 0.08);
+    --text-primary: #121212;
+    --text-secondary: #555555;
+    --text-muted: #737373;
+    --control-bg: #F4F3F2;
+    --control-border: rgba(18, 18, 18, 0.10);
+    --control-hover: #EAE8E6;
+    --track-bg: #DCD9D7;
+    --thumb-color: #121212;
+    --dot: rgba(0, 0, 0, 0.12);
+    --scrim: rgba(238, 236, 235, 0.92);
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --key: var(--accent);
+    --key-soft: var(--accent-soft);
+    --kf-label-w: 208px;
+  }
+
+  body.dark-mode {
+    --bg-dark: #050505;
+    --panel-bg: #111111;
+    --panel-header: #111111;
+    --panel-border: rgba(255, 255, 255, 0.08);
+    --sunken: #0B0B0B;
+    --accent: #FF334B;
+    --accent-hover: #F43F5E;
+    --accent-soft: rgba(255, 51, 75, 0.12);
+    --text-primary: #F5F5F5;
+    --text-secondary: #A3A3A3;
+    --text-muted: #858585;
+    --control-bg: #1A1A1A;
+    --control-border: rgba(255, 255, 255, 0.09);
+    --control-hover: #222222;
+    --track-bg: #2A2A2A;
+    --thumb-color: #F5F5F5;
+    --dot: rgba(255, 255, 255, 0.07);
+    --scrim: rgba(5, 5, 5, 0.92);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -36,23 +72,33 @@
   body {
     background-color: var(--bg-dark);
     color: var(--text-primary);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: var(--font-sans);
     font-size: 13px;
+    line-height: 1.4;
     height: 100vh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    accent-color: var(--accent);
+    -webkit-font-smoothing: antialiased;
   }
+
+  button, select, input, textarea { font-family: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  input[type="checkbox"] { width: 14px; height: 14px; cursor: pointer; }
+  .num, .time-readout, .num-input, .kf-tick, .kf-row-val { font-variant-numeric: tabular-nums; }
+
+  .icon { width: 16px; height: 16px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 
   /* TOP HEADER */
   header {
-    height: 52px;
+    height: 56px;
     background: var(--panel-header);
     border-bottom: 1px solid var(--panel-border);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 18px;
+    padding: 0 16px;
     flex-shrink: 0;
     z-index: 20;
   }
@@ -60,88 +106,101 @@
   .logo-group {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
   }
 
-  .logo-icon {
-    width: 28px;
-    height: 28px;
-    background: linear-gradient(135deg, #6366f1, #a855f7);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
+  .logo-icon { width: 24px; height: 24px; border-radius: 6px; display: block; }
+
+  .logo-wordmark {
+    font-family: var(--font-mono);
+    font-size: 13px;
     font-weight: 700;
-    box-shadow: 0 2px 8px var(--accent-glow);
+    letter-spacing: 0.06em;
+    color: var(--text-primary);
   }
+  .logo-wordmark span { color: var(--accent); }
 
   .logo-title {
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: -0.3px;
-    color: #fff;
-  }
-
-  .logo-badge {
-    font-size: 10px;
-    background: rgba(99, 102, 241, 0.18);
-    color: #a5b4fc;
-    border: 1px solid rgba(99, 102, 241, 0.35);
-    padding: 2px 6px;
-    border-radius: 999px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    padding-left: 12px;
+    border-left: 1px solid var(--panel-border);
   }
 
   .header-actions {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
   }
+
+  .header-sep { width: 1px; height: 20px; background: var(--panel-border); margin: 0 4px; }
+  .field-label { color: var(--text-muted); font-size: 12px; }
 
   .btn {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    justify-content: center;
+    gap: 8px;
+    height: 32px;
     background: var(--control-bg);
     border: 1px solid var(--control-border);
     color: var(--text-primary);
-    padding: 7px 14px;
-    border-radius: 6px;
-    font-size: 12.5px;
+    padding: 0 12px;
+    border-radius: 8px;
+    font-size: 13px;
     font-weight: 500;
+    white-space: nowrap;
+    text-decoration: none;
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: background-color 150ms var(--ease), border-color 150ms var(--ease), color 150ms var(--ease), transform 150ms var(--ease);
   }
 
-  .btn:hover {
-    background: var(--control-hover);
-    border-color: #3b4b6e;
-  }
+  .btn:hover { background: var(--control-hover); }
+  .btn:active { transform: scale(0.98); }
+  .btn-icon { width: 32px; padding: 0; }
 
   .btn-primary {
-    background: linear-gradient(135deg, #6366f1, #4f46e5);
-    border-color: #4f46e5;
-    color: #fff;
-    box-shadow: 0 2px 10px var(--accent-glow);
+    background: var(--accent-fill);
+    border-color: var(--accent-fill);
+    color: #FFFFFF;
   }
+  .btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
 
-  .btn-primary:hover {
-    background: linear-gradient(135deg, #4f46e5, #4338ca);
-    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
-    transform: translateY(-1px);
+  /* Paired primary exports: one red block split by a hairline */
+  .btn-group { display: inline-flex; }
+  .btn-group .btn { border-radius: 0; }
+  .btn-group .btn:first-child { border-radius: 8px 0 0 8px; }
+  .btn-group .btn:last-child { border-radius: 0 8px 8px 0; border-left-color: rgba(255, 255, 255, 0.28); }
+
+  .theme-toggle {
+    background: none;
+    border: none;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-primary);
+    padding: 0 4px;
+    height: 32px;
+    cursor: pointer;
   }
+  .theme-toggle span { color: var(--accent); }
 
   .preset-select {
+    height: 32px;
     background: var(--control-bg);
     border: 1px solid var(--control-border);
     color: var(--text-primary);
-    padding: 6px 12px;
-    border-radius: 6px;
+    padding: 0 8px;
+    border-radius: 8px;
     font-size: 12px;
     cursor: pointer;
     outline: none;
+    transition: border-color 150ms var(--ease);
   }
+  .preset-select:hover { border-color: var(--track-bg); }
+  .preset-select.sm { height: 28px; border-radius: 6px; padding: 0 4px; }
+  #presetSelect, #txPresetSelect { max-width: 240px; }
 
   /* WORKSPACE */
   .workspace {
@@ -151,26 +210,27 @@
     position: relative;
   }
 
-  /* LEFT / CENTER VIEWPORT */
   .viewport-area {
     flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    background: #060911;
+    background-color: var(--bg-dark);
+    background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+    background-size: 24px 24px;
     position: relative;
     overflow: hidden;
   }
 
   .viewport-toolbar {
-    height: 42px;
-    background: rgba(17, 24, 39, 0.85);
-    backdrop-filter: blur(8px);
+    height: 44px;
+    background: var(--panel-bg);
     border-bottom: 1px solid var(--panel-border);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 16px;
-    font-size: 11.5px;
+    font-size: 12px;
     color: var(--text-secondary);
     z-index: 10;
   }
@@ -180,35 +240,39 @@
     align-items: center;
     gap: 8px;
   }
+  .toolbar-group label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
 
   .tool-pill {
-    padding: 4px 10px;
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 28px;
+    padding: 0 10px;
+    border-radius: 6px;
+    background: transparent;
+    border: 1px solid var(--control-border);
     color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 500;
     cursor: pointer;
     user-select: none;
-    transition: all 0.15s ease;
-    font-size: 11.5px;
+    transition: background-color 150ms var(--ease), border-color 150ms var(--ease), color 150ms var(--ease);
   }
+  .tool-pill .icon { width: 14px; height: 14px; }
+  .tool-pill:hover { background: var(--control-bg); color: var(--text-primary); }
+  .tool-pill.active {
+    background: var(--control-bg);
+    border-color: var(--track-bg);
+    color: var(--text-primary);
+  }
+  .tool-pill .num { color: var(--text-muted); font-family: var(--font-mono); font-size: 11px; }
 
-  .tool-pill:hover, .tool-pill.active {
-    background: rgba(99, 102, 241, 0.2);
-    border-color: var(--accent);
-    color: #fff;
-  }
+  /* Ratio picker reads as one segmented control */
+  .segmented { display: inline-flex; padding: 2px; gap: 2px; background: var(--control-bg); border: 1px solid var(--control-border); border-radius: 8px; }
+  .segmented .tool-pill { height: 24px; border-color: transparent; border-radius: 6px; font-family: var(--font-mono); font-size: 11px; }
+  .segmented .tool-pill.active { background: var(--panel-bg); border-color: var(--control-border); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06); }
 
-  .btn-autofit {
-    background: rgba(99, 102, 241, 0.18) !important;
-    border-color: var(--accent) !important;
-    color: #c7d2fe !important;
-    font-weight: 600 !important;
-  }
-  .btn-autofit:hover {
-    background: rgba(99, 102, 241, 0.35) !important;
-    color: #fff !important;
-  }
+  .btn-autofit { color: var(--text-primary); }
 
   /* PREVIEW CANVAS CONTAINER */
   .canvas-stage-wrapper {
@@ -224,19 +288,33 @@
   .canvas-stage {
     position: relative;
     background: #000;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.65);
-    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     overflow: hidden;
     transform-origin: center center;
     flex-shrink: 0;
-    transition: transform 0.1s ease, width 0.15s, height 0.15s;
   }
 
-  .canvas-stage.unclipped {
-    overflow: visible !important;
-    outline: 2px dashed rgba(99, 102, 241, 0.6) !important;
-    outline-offset: -1px;
+  .canvas-stage.unclipped { overflow: visible !important; }
+
+  /* Signature: the nralam selection frame with square handles, drawn at screen size around the scaled comp */
+  .stage-frame {
+    position: absolute;
+    pointer-events: none;
+    border: 1px solid var(--accent);
+    z-index: 55;
   }
+  .stage-frame.dashed { border-style: dashed; }
+  .stage-frame i {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--panel-bg);
+    border: 1px solid var(--accent);
+  }
+  .stage-frame i:nth-child(1) { left: -4px; top: -4px; }
+  .stage-frame i:nth-child(2) { right: -4px; top: -4px; }
+  .stage-frame i:nth-child(3) { left: -4px; bottom: -4px; }
+  .stage-frame i:nth-child(4) { right: -4px; bottom: -4px; }
 
   .guide-overlay {
     position: absolute;
@@ -247,41 +325,39 @@
     width: 100%;
     height: 100%;
   }
-
   .guide-overlay.visible { display: block; }
+  .guide-overlay .g-line { stroke: #FF334B; fill: none; }
+  .guide-overlay .g-dot { fill: #FF334B; }
+  .guide-overlay .g-text { fill: #FF334B; font-family: 'JetBrains Mono', monospace; }
 
   /* TIMELINE / CONTROLS AT BOTTOM OF VIEWPORT */
   .timeline-bar {
-    height: 64px;
-    background: var(--panel-header);
+    height: 56px;
+    background: var(--panel-bg);
     border-top: 1px solid var(--panel-border);
     display: flex;
     align-items: center;
-    padding: 0 20px;
-    gap: 16px;
+    padding: 0 16px;
+    gap: 12px;
     z-index: 10;
   }
 
   .play-btn {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: var(--accent);
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--text-primary);
     border: none;
-    color: #fff;
+    color: var(--panel-bg);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 2px 8px var(--accent-glow);
-    transition: all 0.15s ease;
+    transition: opacity 150ms var(--ease), transform 150ms var(--ease);
     flex-shrink: 0;
   }
-
-  .play-btn:hover {
-    background: var(--accent-hover);
-    transform: scale(1.05);
-  }
+  .play-btn:hover { opacity: 0.88; }
+  .play-btn:active { transform: scale(0.96); }
 
   .scrub-track {
     flex: 1;
@@ -294,9 +370,9 @@
 
   .scrub-line {
     width: 100%;
-    height: 6px;
+    height: 4px;
     background: var(--track-bg);
-    border-radius: 3px;
+    border-radius: 2px;
     position: relative;
     overflow: hidden;
   }
@@ -304,34 +380,33 @@
   .scrub-progress {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, #6366f1, #a855f7);
-    border-radius: 3px;
+    background: var(--accent);
+    border-radius: 2px;
   }
 
   .scrub-handle {
     position: absolute;
     top: 50%;
     left: 0%;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: #fff;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.4);
+    width: 4px;
+    height: 16px;
+    border-radius: 2px;
+    background: var(--accent);
     transform: translate(-50%, -50%);
     pointer-events: none;
   }
 
   .time-readout {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-family: var(--font-mono);
     font-size: 12px;
     color: var(--text-secondary);
-    min-width: 90px;
+    min-width: 104px;
     text-align: right;
   }
 
   /* RIGHT SIDEBAR / INSPECTOR */
   .sidebar {
-    width: 410px;
+    width: 400px;
     background: var(--panel-bg);
     border-left: 1px solid var(--panel-border);
     display: flex;
@@ -342,70 +417,65 @@
 
   .tab-bar {
     display: flex;
-    background: var(--panel-header);
+    height: 44px;
+    padding: 0 8px;
+    gap: 4px;
     border-bottom: 1px solid var(--panel-border);
   }
 
   .tab-btn {
     flex: 1;
-    padding: 12px 6px;
+    padding: 0 4px;
     background: none;
     border: none;
-    color: var(--text-secondary);
-    font-size: 11.5px;
+    color: var(--text-muted);
+    font-size: 12px;
     font-weight: 500;
     cursor: pointer;
     text-align: center;
     border-bottom: 2px solid transparent;
-    transition: all 0.15s ease;
+    margin-bottom: -1px;
+    transition: color 150ms var(--ease), border-color 150ms var(--ease);
   }
-
   .tab-btn:hover { color: var(--text-primary); }
-
-  .tab-btn.active {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
-    background: rgba(99, 102, 241, 0.06);
-  }
+  .tab-btn.active { color: var(--text-primary); border-bottom-color: var(--accent); }
 
   .tab-content {
     flex: 1;
     overflow-y: auto;
-    padding: 16px;
+    padding: 0 16px 24px;
     display: none;
   }
-
   .tab-content.active { display: block; }
 
-  /* FORM CONTROLS */
+  /* FORM CONTROLS: sections are separated by hairlines, not boxed */
   .control-section {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--panel-border);
-    border-radius: 8px;
-    padding: 14px;
-    margin-bottom: 14px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--panel-border);
   }
+  .control-section:last-child { border-bottom: none; }
 
   .section-title {
-    font-size: 11.5px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    color: var(--text-muted);
-    margin-bottom: 12px;
+    min-height: 28px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 8px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 8px;
   }
+  .section-meta { font-family: var(--font-mono); font-size: 11px; font-weight: 400; color: var(--text-muted); }
 
   .form-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 10px;
+    min-height: 28px;
+    margin-bottom: 8px;
     gap: 12px;
   }
-
   .form-row:last-child { margin-bottom: 0; }
 
   .form-label {
@@ -413,6 +483,7 @@
     color: var(--text-secondary);
     flex: 1;
   }
+  .row-label { color: var(--text-muted); font-size: 11px; font-family: var(--font-mono); }
 
   .slider-group {
     display: flex;
@@ -425,59 +496,64 @@
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
-    height: 5px;
+    height: 4px;
     background: var(--track-bg);
-    border-radius: 3px;
+    border-radius: 2px;
     outline: none;
+    cursor: pointer;
   }
-
   input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     background: var(--thumb-color);
+    border: 2px solid var(--panel-bg);
+    box-shadow: 0 0 0 1px var(--thumb-color);
     cursor: pointer;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-    transition: transform 0.1s;
   }
-
-  input[type="range"]::-webkit-slider-thumb:hover {
-    transform: scale(1.2);
+  input[type="range"]::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--thumb-color);
+    border: 2px solid var(--panel-bg);
+    cursor: pointer;
   }
+  input[type="range"]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 2px var(--accent); }
 
   .num-input {
-    width: 58px;
-    background: var(--control-bg);
+    width: 64px;
+    height: 28px;
+    background: var(--sunken);
     border: 1px solid var(--control-border);
     color: var(--text-primary);
-    padding: 4px 6px;
-    border-radius: 4px;
-    font-size: 11.5px;
+    padding: 0 8px;
+    border-radius: 6px;
+    font-size: 12px;
     text-align: right;
     outline: none;
-    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    font-family: var(--font-mono);
+    transition: border-color 150ms var(--ease);
   }
+  .num-input:focus { border-color: var(--accent); }
 
-  .num-input:focus {
-    border-color: var(--accent);
-  }
+  input[type="color"] { border-radius: 6px; background: none; }
 
   .color-swatch-list {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
+    gap: 8px;
     margin-top: 8px;
   }
 
   .color-swatch-item {
     aspect-ratio: 1;
     border-radius: 6px;
-    border: 2px solid transparent;
+    border: 1px solid var(--control-border);
     cursor: pointer;
     position: relative;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
   }
 
   .color-swatch-item input[type="color"] {
@@ -489,13 +565,13 @@
     height: 100%;
   }
 
-  /* BEZIER SPEED GRAPH */
+  /* BEZIER SPEED GRAPH: ink value curve, red speed line, mono-quiet grid */
   .bezier-container {
     width: 100%;
-    height: 170px;
-    background: var(--control-bg);
+    height: 168px;
+    background: var(--sunken);
     border: 1px solid var(--control-border);
-    border-radius: 6px;
+    border-radius: 8px;
     position: relative;
     margin: 8px 0 12px 0;
     overflow: hidden;
@@ -506,19 +582,28 @@
     height: 100%;
     display: block;
   }
+  .bezier-svg .bz-frame { fill: none; stroke: var(--panel-border); }
+  .bezier-svg .bz-band { fill: var(--control-bg); }
+  .bezier-svg .bz-grid { stroke: var(--panel-border); }
+  .bezier-svg .bz-curve { stroke: var(--text-primary); fill: none; }
+  .bezier-svg .bz-arm { stroke: var(--text-muted); }
+  .bezier-svg .bz-speed { stroke: var(--accent); fill: none; }
+  .bezier-svg .bz-speed-fill { fill: var(--accent-soft); }
+  .bezier-svg .bz-unit { stroke: var(--accent); opacity: 0.4; }
+  .bezier-svg .bz-handle { fill: var(--panel-bg); stroke: var(--text-primary); }
+  .bezier-svg .bz-handle.out { fill: var(--text-primary); }
+  .bezier-svg .bz-text { fill: var(--text-muted); font-family: var(--font-sans); }
 
   /* MODAL */
   .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(4px);
+    background: rgba(0, 0, 0, 0.4);
     display: none;
     align-items: center;
     justify-content: center;
     z-index: 100;
   }
-
   .modal-overlay.open { display: flex; }
 
   .modal-box {
@@ -527,19 +612,20 @@
     max-height: 85vh;
     background: var(--panel-bg);
     border: 1px solid var(--panel-border);
-    border-radius: 10px;
+    border-radius: 16px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   }
 
   .modal-header {
-    padding: 14px 18px;
+    padding: 12px 16px 12px 20px;
     border-bottom: 1px solid var(--panel-border);
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
+  .modal-header h3 { font-size: 14px; font-weight: 500; }
 
   .modal-body {
     flex: 1;
@@ -550,12 +636,13 @@
   .code-preview {
     width: 100%;
     height: 380px;
-    background: #060911;
-    border: 1px solid var(--panel-border);
-    border-radius: 6px;
-    color: #cbd5e1;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    background: var(--sunken);
+    border: 1px solid var(--control-border);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
     font-size: 11px;
+    line-height: 1.6;
     padding: 12px;
     resize: none;
     outline: none;
@@ -563,81 +650,76 @@
   }
 
   .modal-footer {
-    padding: 12px 18px;
+    padding: 12px 16px;
     border-top: 1px solid var(--panel-border);
     display: flex;
     justify-content: flex-end;
-    gap: 10px;
+    gap: 8px;
   }
 
   /* TOAST */
   .toast {
     position: fixed;
-    bottom: 24px;
+    bottom: 72px;
     left: 50%;
-    transform: translateX(-50%) translateY(80px);
-    background: #1e293b;
-    border: 1px solid var(--accent);
-    color: #fff;
-    padding: 10px 20px;
+    max-width: 560px;
+    transform: translateX(-50%) translateY(8px);
+    background: var(--text-primary);
+    color: var(--panel-bg);
+    padding: 10px 16px;
     border-radius: 8px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
-    font-size: 12.5px;
-    font-weight: 500;
-    transition: transform 0.25s ease, opacity 0.25s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    font-size: 13px;
+    line-height: 1.45;
+    transition: transform 200ms var(--ease), opacity 200ms var(--ease);
     opacity: 0;
     pointer-events: none;
     z-index: 200;
   }
-
-  .toast.show {
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
-  }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
   /* LAYOUT PICKER */
   .layout-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
+    gap: 8px;
   }
 
   .layout-btn {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
-    padding: 8px 3px 7px;
-    background: var(--control-bg);
+    gap: 4px;
+    padding: 8px 4px;
+    background: var(--panel-bg);
     border: 1px solid var(--control-border);
-    border-radius: 6px;
-    color: var(--text-secondary);
-    font-size: 10.5px;
-    line-height: 1.15;
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-size: 11px;
+    line-height: 1.2;
     text-align: center;
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: background-color 150ms var(--ease), border-color 150ms var(--ease), color 150ms var(--ease);
   }
-
   .layout-btn svg { width: 36px; height: 22px; }
-  .layout-btn:hover { border-color: #3b4b6e; color: var(--text-primary); }
+  .layout-btn:hover { background: var(--control-bg); color: var(--text-primary); }
   .layout-btn.active {
     border-color: var(--accent);
-    background: rgba(99, 102, 241, 0.16);
-    color: #fff;
-    box-shadow: inset 0 0 0 1px var(--accent);
+    background: var(--accent-soft);
+    color: var(--text-primary);
   }
+  .layout-btn.active svg { color: var(--accent); }
 
   /* CARD MEDIA */
-  .media-actions { display: flex; gap: 8px; margin-bottom: 10px; }
-  .btn-sm { padding: 5px 10px; font-size: 11.5px; }
+  .media-actions { display: flex; gap: 8px; margin-bottom: 12px; }
+  .btn-sm { height: 28px; padding: 0 10px; font-size: 12px; border-radius: 6px; gap: 4px; }
 
   .media-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 6px;
+    gap: 8px;
     margin-bottom: 12px;
-    max-height: 262px;
+    max-height: 264px;
     overflow-y: auto;
     padding: 2px;
   }
@@ -645,9 +727,9 @@
   .media-slot {
     position: relative;
     aspect-ratio: 1;
-    border-radius: 6px;
-    border: 1px dashed var(--control-border);
-    background: var(--control-bg);
+    border-radius: 8px;
+    border: 1px dashed var(--track-bg);
+    background: var(--sunken);
     overflow: hidden;
     cursor: pointer;
     display: flex;
@@ -655,10 +737,9 @@
     justify-content: center;
     color: var(--text-muted);
     font-size: 16px;
-    transition: border-color 0.15s ease;
+    transition: border-color 150ms var(--ease), color 150ms var(--ease);
   }
-
-  .media-slot:hover, .media-slot.drag-over { border-color: var(--accent); border-style: solid; color: #fff; }
+  .media-slot:hover, .media-slot.drag-over { border-color: var(--accent); border-style: solid; color: var(--accent); }
   .media-slot img, .media-slot video {
     position: absolute; inset: 0; width: 100%; height: 100%;
     object-fit: cover; pointer-events: none;
@@ -667,51 +748,53 @@
 
   .slot-num, .slot-type {
     position: absolute;
-    font-size: 9.5px;
-    font-weight: 600;
-    background: rgba(0, 0, 0, 0.65);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 16px;
+    background: rgba(0, 0, 0, 0.6);
     color: #fff;
-    padding: 1px 4px;
-    border-radius: 3px;
+    padding: 0 4px;
+    border-radius: 4px;
     z-index: 1;
     pointer-events: none;
   }
-  .slot-num { left: 3px; top: 3px; }
-  .slot-type { right: 3px; bottom: 3px; }
+  .slot-num { left: 4px; top: 4px; }
+  .slot-type { right: 4px; bottom: 4px; }
 
   .slot-remove {
     position: absolute;
-    right: 3px;
-    top: 3px;
-    width: 17px;
-    height: 17px;
-    border-radius: 50%;
+    right: 4px;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
     border: none;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.7);
     color: #fff;
     font-size: 12px;
-    line-height: 17px;
+    line-height: 16px;
     cursor: pointer;
     z-index: 2;
     display: none;
   }
   .media-slot.has-media:hover .slot-remove { display: block; }
 
-  .hint { font-size: 11px; color: var(--text-muted); line-height: 1.5; margin-top: 8px; }
+  .hint { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-top: 8px; }
+  .hint b { color: var(--text-secondary); font-weight: 500; }
 
   .canvas-stage-wrapper.drop-active::after {
     content: 'Drop images or videos to place them on the cards';
     position: absolute;
     inset: 12px;
-    border: 2px dashed var(--accent);
-    border-radius: 10px;
-    background: rgba(99, 102, 241, 0.12);
+    border: 1px dashed var(--accent);
+    border-radius: 12px;
+    background: var(--accent-soft);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #c7d2fe;
-    font-size: 15px;
-    font-weight: 600;
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 500;
     z-index: 60;
     pointer-events: none;
   }
@@ -722,13 +805,15 @@
   /* ================= STUDIO MODES (carousel / text) ================= */
   body.mode-text .carousel-only { display: none !important; }
   body:not(.mode-text) .text-only { display: none !important; }
-  .mode-switch { display: inline-flex; background: var(--control-bg); border: 1px solid var(--control-border); border-radius: 8px; padding: 2px; gap: 2px; }
-  .mode-switch button { background: transparent; border: none; color: var(--text-secondary); font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 6px; cursor: pointer; }
-  .mode-switch button.active { background: var(--accent); color: #fff; }
+  .mode-switch { display: inline-flex; height: 32px; background: var(--control-bg); border: 1px solid var(--control-border); border-radius: 8px; padding: 2px; gap: 2px; }
+  .mode-switch button { background: transparent; border: 1px solid transparent; color: var(--text-secondary); font-size: 12px; font-weight: 500; padding: 0 12px; border-radius: 6px; cursor: pointer; transition: background-color 150ms var(--ease), color 150ms var(--ease); }
+  .mode-switch button:hover { color: var(--text-primary); }
+  .mode-switch button.active { background: var(--panel-bg); border-color: var(--control-border); color: var(--text-primary); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06); }
   #textMount { position: absolute; left: 0; top: 0; }
-  .tx-textarea { width: 100%; background: var(--control-bg); border: 1px solid var(--control-border); color: var(--text-primary); border-radius: 6px; padding: 8px; font: 13px/1.4 ui-monospace, Menlo, monospace; resize: vertical; }
-  .tx-card { border: 1px solid var(--control-border); border-radius: 8px; padding: 8px 10px; margin-bottom: 10px; background: rgba(255,255,255,0.015); }
-  .tx-card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 11.5px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; cursor: default; }
+  .tx-textarea { width: 100%; background: var(--sunken); border: 1px solid var(--control-border); color: var(--text-primary); border-radius: 8px; padding: 8px; font: 13px/1.5 var(--font-mono); resize: vertical; }
+  .tx-textarea:focus { outline: none; border-color: var(--accent); }
+  .tx-card { border: 1px solid var(--control-border); border-radius: 12px; padding: 8px 12px; margin-bottom: 12px; background: var(--panel-bg); }
+  .tx-card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 28px; font-size: 12px; font-weight: 500; color: var(--text-primary); margin-bottom: 8px; cursor: default; }
   details.tx-card > summary { list-style: none; cursor: pointer; }
   .tx-ease-nums input { -moz-appearance: textfield; appearance: textfield; }
   .tx-ease-nums input::-webkit-inner-spin-button, .tx-ease-nums input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
@@ -741,43 +826,39 @@
   .studio-card-inner { position: relative; z-index: 1; }
 
   /* ================= KEYFRAMES ================= */
-  :root {
-    --key: #f5b342;
-    --key-soft: rgba(245, 179, 66, 0.18);
-    --kf-label-w: 210px;
-  }
 
   /* Per-parameter keyframe toggle (stopwatch) */
   .kf-btn {
-    width: 18px;
-    height: 18px;
-    flex: 0 0 18px;
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     background: none;
     border: none;
     padding: 0;
-    margin-right: -6px;
-    color: #4b5563;
+    margin-right: -4px;
+    color: var(--text-muted);
     cursor: pointer;
     border-radius: 4px;
+    transition: color 150ms var(--ease), background-color 150ms var(--ease);
   }
-  .kf-btn svg { width: 11px; height: 11px; }
-  .kf-btn path { fill: none; stroke: currentColor; stroke-width: 1.6; }
-  .kf-btn:hover { color: #e5e7eb; background: rgba(255, 255, 255, 0.06); }
+  .kf-btn svg { width: 12px; height: 12px; }
+  .kf-btn path { fill: none; stroke: currentColor; stroke-width: 1.5; }
+  .kf-btn:hover { color: var(--text-primary); background: var(--control-bg); }
   .kf-btn.animated { color: var(--key); }
   .kf-btn.on-key path { fill: currentColor; }
-  .form-row.is-animated .form-label { color: #fcd34d; }
-  .form-row.is-animated .num-input { border-color: rgba(245, 179, 66, 0.55); }
+  .form-row.is-animated .form-label { color: var(--text-primary); }
+  .form-row.is-animated .num-input { border-color: var(--accent); color: var(--accent); }
 
   /* Keyframe panel */
   .kf-panel {
-    height: 236px;
+    height: 240px;
     display: flex;
     flex-shrink: 0;
     border-top: 1px solid var(--panel-border);
-    background: #0b0f1a;
+    background: var(--panel-bg);
     z-index: 10;
   }
   .kf-panel.collapsed { display: none; }
@@ -786,9 +867,8 @@
 
   .kf-head {
     display: flex;
-    height: 28px;
+    height: 32px;
     flex-shrink: 0;
-    background: var(--panel-header);
     border-bottom: 1px solid var(--panel-border);
   }
   .kf-head-left {
@@ -797,63 +877,69 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    padding: 0 6px 0 10px;
+    padding: 0 8px 0 12px;
     border-right: 1px solid var(--panel-border);
-    font-size: 10.5px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-primary);
   }
   .kf-head-left .grow { flex: 1; }
   .kf-mini-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
     background: none;
     border: 1px solid transparent;
-    color: var(--text-secondary);
-    font-size: 10.5px;
-    padding: 2px 5px;
-    border-radius: 4px;
+    color: var(--text-muted);
+    padding: 0;
+    border-radius: 6px;
     cursor: pointer;
+    transition: color 150ms var(--ease), background-color 150ms var(--ease);
   }
-  .kf-mini-btn:hover { border-color: var(--control-border); color: #fff; background: var(--control-bg); }
+  .kf-mini-btn .icon { width: 14px; height: 14px; }
+  .kf-mini-btn:hover { color: var(--text-primary); background: var(--control-bg); }
 
-  .kf-ruler { flex: 1; position: relative; cursor: ew-resize; overflow: hidden; }
+  .kf-ruler { flex: 1; position: relative; cursor: ew-resize; overflow: hidden; background: var(--sunken); }
   .kf-tick {
     position: absolute;
     top: 0;
     bottom: 0;
-    border-left: 1px solid rgba(255, 255, 255, 0.12);
-    padding: 7px 0 0 3px;
-    font-size: 9.5px;
+    border-left: 1px solid var(--panel-border);
+    padding: 8px 0 0 4px;
+    font-size: 10px;
     color: var(--text-muted);
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-family: var(--font-mono);
     pointer-events: none;
   }
 
   .kf-rows { flex: 1; overflow-y: auto; scrollbar-width: none; }
   .kf-rows::-webkit-scrollbar { display: none; }
 
-  .kf-row { display: flex; height: 26px; border-bottom: 1px solid rgba(255, 255, 255, 0.04); }
-  .kf-row:hover { background: rgba(255, 255, 255, 0.02); }
+  .kf-row { display: flex; height: 28px; border-bottom: 1px solid var(--panel-border); }
+  .kf-row:hover { background: var(--sunken); }
   .kf-row-label {
     width: var(--kf-label-w);
     flex-shrink: 0;
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 0 6px 0 10px;
+    gap: 8px;
+    padding: 0 8px 0 12px;
     border-right: 1px solid var(--panel-border);
-    font-size: 11px;
+    font-size: 12px;
     color: var(--text-secondary);
   }
   .kf-row-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .kf-row-val { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 10.5px; color: #fcd34d; }
-  .kf-row-x { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 13px; padding: 0 2px; }
-  .kf-row-x:hover { color: #f87171; }
+  .kf-row-val { font-family: var(--font-mono); font-size: 11px; color: var(--accent); }
+  .kf-row-x { display: inline-flex; background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0; border-radius: 4px; }
+  .kf-row-x .icon { width: 14px; height: 14px; }
+  .kf-row-x:hover { color: var(--accent); }
 
   .kf-track { flex: 1; position: relative; overflow: hidden; cursor: default; }
   .kf-track svg { position: absolute; left: 8px; right: 8px; top: 4px; bottom: 4px; width: calc(100% - 16px); height: calc(100% - 8px); }
-  .kf-track .kf-color-strip { position: absolute; left: 8px; right: 8px; top: 9px; bottom: 9px; border-radius: 3px; opacity: 0.8; }
+  .kf-track svg path { stroke: var(--accent); opacity: 0.35; }
+  .kf-track .kf-color-strip { position: absolute; left: 8px; right: 8px; top: 10px; bottom: 10px; border-radius: 4px; }
 
   .kf-key {
     position: absolute;
@@ -862,14 +948,14 @@
     height: 10px;
     margin: -5px 0 0 -5px;
     background: var(--key);
-    border: 1px solid #0b0f1a;
+    border: 1px solid var(--panel-bg);
     transform: rotate(45deg);
     cursor: grab;
     z-index: 2;
   }
   .kf-key.eased { border-radius: 50%; transform: none; }
-  .kf-key.hold { border-radius: 1px; transform: none; }
-  .kf-key.selected { background: #fff; box-shadow: 0 0 0 2px var(--key); }
+  .kf-key.hold { border-radius: 2px; transform: none; }
+  .kf-key.selected { background: var(--panel-bg); box-shadow: 0 0 0 2px var(--key); }
 
   .kf-overlay { position: absolute; left: var(--kf-label-w); right: 0; top: 0; bottom: 0; pointer-events: none; }
   .kf-playhead {
@@ -877,48 +963,49 @@
     top: 0;
     bottom: 0;
     width: 0;
-    border-left: 1.5px solid #f43f5e;
+    border-left: 1px solid var(--accent);
     left: calc(8px + (100% - 16px) * var(--f, 0));
   }
   .kf-playhead::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: -6px;
-    border: 5px solid transparent;
-    border-top: 7px solid #f43f5e;
+    top: 8px;
+    left: -4px;
+    width: 8px;
+    height: 8px;
+    background: var(--panel-bg);
+    border: 1px solid var(--accent);
   }
 
-  .kf-empty { padding: 28px 24px; color: var(--text-muted); font-size: 12px; line-height: 1.6; text-align: center; }
-  .kf-empty b { color: var(--key); }
+  .kf-empty { padding: 32px 24px; color: var(--text-muted); font-size: 12px; line-height: 1.6; text-align: center; }
+  .kf-empty b { color: var(--key); font-weight: 500; }
 
   .kf-graph {
-    width: 310px;
+    width: 312px;
     flex-shrink: 0;
     border-left: 1px solid var(--panel-border);
-    padding: 8px 12px 10px;
+    padding: 8px 12px 12px;
     overflow-y: auto;
     background: var(--panel-bg);
   }
   .kf-graph-title {
-    font-size: 10.5px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 6px;
+    min-height: 28px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 4px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 6px;
+    gap: 8px;
   }
-  .kf-info { font-size: 11px; color: var(--text-secondary); margin-bottom: 6px; line-height: 1.45; }
-  .kf-info b { color: #fcd34d; font-weight: 600; }
+  .kf-info { font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; line-height: 1.45; }
+  .kf-info b { color: var(--accent); font-weight: 500; }
   .kf-graph .bezier-container { height: 132px; margin: 4px 0 8px; }
-  .kf-graph .form-row { margin-bottom: 7px; gap: 6px; }
+  .kf-graph .form-row { margin-bottom: 8px; gap: 8px; }
   .kf-graph .num-input { width: 52px; }
-  .kf-legend { display: flex; gap: 10px; font-size: 10px; color: var(--text-muted); margin-top: -4px; margin-bottom: 6px; }
-  .kf-legend i { display: inline-block; width: 10px; height: 3px; border-radius: 2px; vertical-align: middle; margin-right: 4px; }
+  .kf-legend { display: flex; gap: 12px; font-size: 11px; color: var(--text-muted); margin-bottom: 8px; }
+  .kf-legend i { display: inline-block; width: 12px; height: 2px; border-radius: 1px; vertical-align: middle; margin-right: 4px; }
 
   /* Public page: logo links home, and small screens get a heads-up since the editor is desktop-only */
   a.logo-group { color: inherit; text-decoration: none; }
@@ -927,23 +1014,27 @@
     position: fixed;
     inset: 0;
     z-index: 1000;
-    background: rgba(10, 14, 23, 0.96);
+    background: var(--scrim);
     align-items: center;
     justify-content: center;
     padding: 24px;
     text-align: center;
   }
   .small-screen-notice .box { max-width: 340px; }
-  .small-screen-notice h2 { font-size: 18px; margin-bottom: 10px; }
-  .small-screen-notice p { color: var(--text-secondary); line-height: 1.5; margin-bottom: 18px; }
+  .small-screen-notice h2 { font-size: 20px; font-weight: 500; margin-bottom: 8px; }
+  .small-screen-notice p { color: var(--text-secondary); line-height: 1.5; margin-bottom: 20px; }
   .small-screen-notice .actions { display: flex; gap: 8px; justify-content: center; }
   @media (max-width: 900px) {
     .small-screen-notice { display: flex; }
     .small-screen-notice.dismissed { display: none; }
   }
+  @media (max-width: 1360px) {
+    .logo-title { display: none; }
+  }
 </style>
 </head>
 <body>
+<script>try { if (localStorage.getItem('motionTheme') === 'dark') document.body.classList.add('dark-mode'); } catch (e) {}</script>
 
   <!-- SMALL SCREEN NOTICE -->
   <div class="small-screen-notice" id="smallScreenNotice">
@@ -960,9 +1051,9 @@
   <!-- HEADER -->
   <header>
     <a class="logo-group" href="index.html" title="Back to nralam.com">
-      <div class="logo-icon">&#x27F3;</div>
-      <div class="logo-title">Carousel Motion Studio</div>
-      <div class="logo-badge">Pro Studio</div>
+      <img class="logo-icon" src="favicon.svg" alt="">
+      <span class="logo-wordmark">NOOR<span>MOTION</span></span>
+      <span class="logo-title">Carousel Motion Studio</span>
     </a>
 
     <div class="header-actions">
@@ -970,7 +1061,7 @@
         <button data-mode="carousel" class="active">Carousel</button>
         <button data-mode="text">Text</button>
       </div>
-      <label style="color: var(--text-secondary); font-size: 12px;">Preset:</label>
+      <label class="field-label" for="presetSelect">Preset</label>
       <select id="txPresetSelect" class="preset-select text-only"></select>
       <select id="presetSelect" class="preset-select carousel-only">
         <optgroup label="Classic Orbit">
@@ -993,25 +1084,17 @@
         </optgroup>
       </select>
 
-      <button id="btnViewCode" class="btn">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
-        View Code
-      </button>
+      <span class="header-sep"></span>
 
-      <button id="btnCopyHtml" class="btn">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-        Copy HTML
-      </button>
+      <button id="btnViewCode" class="btn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>View code</button>
+      <button id="btnCopyHtml" class="btn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy HTML</button>
 
-      <button id="btnExportHtml" class="btn btn-primary">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-        Export HTML
-      </button>
+      <div class="btn-group">
+        <button id="btnExportHtml" class="btn btn-primary"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Export HTML</button>
+        <button id="btnExportAe" class="btn btn-primary" title="Download an After Effects script (.jsx) that rebuilds this carousel as editable 3D layers, camera and keyframes"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7.5 16l3-8 3 8M8.6 13.2h3.8M15.5 16v-5M15.5 11.5c.6-.6 1.4-.8 2.3-.6"/></svg>Export to AE</button>
+      </div>
 
-      <button id="btnExportAe" class="btn" title="Download an After Effects script (.jsx) that rebuilds this carousel as editable 3D layers, camera and keyframes">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7.5 16l3-8 3 8M8.6 13.2h3.8M15.5 16v-5M15.5 11.5c.6-.6 1.4-.8 2.3-.6"/></svg>
-        Export to AE
-      </button>
+      <button id="btnThemeToggle" class="theme-toggle" title="Switch light or dark theme">THEME[<span id="themeLetter">L</span>]</button>
     </div>
   </header>
 
@@ -1022,31 +1105,31 @@
     <div class="viewport-area">
       <div class="viewport-toolbar">
         <div class="toolbar-group">
-          <span>Canvas:</span>
-          <div class="tool-pill active" data-ratio="16:9">16:9</div>
-          <div class="tool-pill" data-ratio="9:16">9:16 (Reel)</div>
-          <div class="tool-pill" data-ratio="1:1">1:1</div>
-          <button id="btnAutoFitFrame" class="tool-pill btn-autofit carousel-only" title="Automatically center and scale orbit to fit inside canvas without clipping">
-            ⚡ Auto-Fit Frame
-          </button>
+          <span>Canvas</span>
+          <div class="segmented">
+            <div class="tool-pill active" data-ratio="16:9">16:9</div>
+            <div class="tool-pill" data-ratio="9:16" title="Reel">9:16</div>
+            <div class="tool-pill" data-ratio="1:1">1:1</div>
+          </div>
+          <button id="btnAutoFitFrame" class="tool-pill btn-autofit carousel-only" title="Automatically center and scale orbit to fit inside canvas without clipping"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><rect x="8" y="8" width="8" height="8" rx="1"/></svg>Auto-fit frame</button>
         </div>
 
         <div class="toolbar-group">
-          <button class="tool-pill active" id="btnClipToggle" title="Toggle canvas edge clipping">Clip: ON</button>
-          <label class="carousel-only" style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+          <button class="tool-pill active" id="btnClipToggle" title="Toggle canvas edge clipping" aria-pressed="true">Clip edges</button>
+          <label class="carousel-only">
             <input type="checkbox" id="checkSafeAreas">
-            <span>Safe Areas</span>
+            <span>Safe areas</span>
           </label>
-          <label class="carousel-only" style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+          <label class="carousel-only">
             <input type="checkbox" id="checkOrbitGuides">
             <span>Wireframe</span>
           </label>
-          <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+          <label>
             <input type="checkbox" id="checkTransparentBg">
             <span>Transparent</span>
           </label>
-          <select id="zoomSelect" class="preset-select" style="padding: 2px 6px; font-size: 11px;">
-            <option value="fit" selected>Zoom: Fit</option>
+          <select id="zoomSelect" class="preset-select sm">
+            <option value="fit" selected>Fit</option>
             <option value="0.5">50%</option>
             <option value="0.75">75%</option>
             <option value="1">100%</option>
@@ -1056,6 +1139,7 @@
 
       <!-- CANVAS STAGE WRAPPER -->
       <div class="canvas-stage-wrapper" id="canvasWrapper">
+        <div class="stage-frame" id="stageFrame"><i></i><i></i><i></i><i></i></div>
         <div class="canvas-stage" id="canvasStage">
           <!-- Live SVG orbit guides & safe areas -->
           <svg class="guide-overlay carousel-only" id="guideOverlay" viewBox="0 0 1920 1080"></svg>
@@ -1072,8 +1156,8 @@
           <div class="kf-head">
             <div class="kf-head-left">
               <span class="grow">Keyframes</span>
-              <button class="kf-mini-btn" id="btnPrevKey" title="Previous keyframe (J)">&#9664;&#9670;</button>
-              <button class="kf-mini-btn" id="btnNextKey" title="Next keyframe (K)">&#9670;&#9654;</button>
+              <button class="kf-mini-btn" id="btnPrevKey" title="Previous keyframe (J)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+              <button class="kf-mini-btn" id="btnNextKey" title="Next keyframe (K)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
             </div>
             <div class="kf-ruler" id="kfRuler" title="Drag to scrub"></div>
           </div>
@@ -1083,8 +1167,8 @@
 
         <div class="kf-graph" id="kfGraph">
           <div class="kf-graph-title">
-            <span>Keyframe Speed Graph</span>
-            <select id="kfEasePreset" class="preset-select" style="padding: 2px 4px; font-size: 10.5px; text-transform: none; letter-spacing: 0;">
+            <span>Speed graph</span>
+            <select id="kfEasePreset" class="preset-select sm">
               <option value="">Apply preset…</option>
               <option value="linear">Linear</option>
               <option value="easy">Easy Ease (AE 33%)</option>
@@ -1102,28 +1186,28 @@
           <div id="kfGraphBody" style="display: none;">
             <div class="kf-info" id="kfInfo"></div>
             <div class="bezier-container"><svg class="bezier-svg" id="kfBezierSvg" viewBox="0 0 280 132"></svg></div>
-            <div class="kf-legend"><span><i style="background:#fff"></i>Value</span><span><i style="background:var(--key)"></i>Speed</span><span id="kfPeak"></span></div>
-            <div class="form-row" style="font-size: 11px;">
-              <span style="color: var(--text-muted);">Out</span>
+            <div class="kf-legend"><span><i style="background: var(--text-primary)"></i>Value</span><span><i style="background:var(--key)"></i>Speed</span><span id="kfPeak"></span></div>
+            <div class="form-row">
+              <span class="row-label">Out</span>
               <input type="number" id="kfX1" class="num-input" step="0.01" min="0" max="1">
               <input type="number" id="kfY1" class="num-input" step="0.01">
-              <span style="color: var(--text-muted);">In</span>
+              <span class="row-label">In</span>
               <input type="number" id="kfX2" class="num-input" step="0.01" min="0" max="1">
               <input type="number" id="kfY2" class="num-input" step="0.01">
             </div>
-            <div class="form-row" style="font-size: 11px;">
-              <span style="color: var(--text-muted);">Time (s)</span>
+            <div class="form-row">
+              <span class="row-label">Time</span>
               <input type="number" id="kfTime" class="num-input" step="0.01" min="0">
-              <span style="color: var(--text-muted);">Value</span>
+              <span class="row-label">Value</span>
               <input type="number" id="kfValue" class="num-input" step="0.01" style="width: 66px;">
               <input type="color" id="kfValueColor" style="width: 40px; height: 22px; border: none; display: none;">
             </div>
-            <div class="form-row" style="font-size: 11px;">
-              <label style="display: flex; align-items: center; gap: 5px; cursor: pointer; color: var(--text-secondary);">
+            <div class="form-row">
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--text-secondary);">
                 <input type="checkbox" id="kfHold"> Hold
               </label>
               <span style="flex: 1;"></span>
-              <button class="btn btn-sm" id="btnKfEasy" title="Easy ease both sides of the selected keys (F9)">Easy Ease</button>
+              <button class="btn btn-sm" id="btnKfEasy" title="Easy ease both sides of the selected keys (F9)">Easy ease</button>
               <button class="btn btn-sm" id="btnKfDelete" title="Delete selected keys (Delete)">Delete</button>
             </div>
           </div>
@@ -1133,11 +1217,11 @@
       <!-- TIMELINE / PLAYBACK -->
       <div class="timeline-bar">
         <button class="play-btn" id="btnPlayPause" title="Play/Pause (Space)">
-          <svg id="playIcon" width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+          <svg id="playIcon" width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></svg>
         </button>
 
-        <button class="btn" id="btnReplay" style="padding: 7px 10px;" title="Replay from start">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 4v6h6M23 20v-6h-6M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+        <button class="btn btn-icon" id="btnReplay" title="Replay from start">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
         </button>
 
         <div class="scrub-track" id="scrubTrack">
@@ -1150,9 +1234,9 @@
         <div class="time-readout" id="timeReadout">0.00s / 3.65s</div>
 
         <div class="toolbar-group">
-          <button class="tool-pill active carousel-only" id="btnKfToggle" title="Show/hide the keyframe timeline">&#9670; Keyframes <span id="kfCount">0</span></button>
-          <button class="tool-pill active" id="btnLoopToggle">Loop: ON</button>
-          <select id="playbackSpeed" class="preset-select" style="padding: 4px 8px;">
+          <button class="tool-pill active carousel-only" id="btnKfToggle" title="Show/hide the keyframe timeline"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 9-9 9-9-9z"/></svg>Keyframes <span class="num" id="kfCount">0</span></button>
+          <button class="tool-pill active" id="btnLoopToggle" aria-pressed="true">Loop</button>
+          <select id="playbackSpeed" class="preset-select sm">
             <option value="0.25">0.25x</option>
             <option value="0.5">0.5x</option>
             <option value="1" selected>1.0x</option>
@@ -1165,9 +1249,9 @@
     <!-- SIDEBAR INSPECTOR -->
     <div class="sidebar">
       <div class="tab-bar carousel-only">
-        <button class="tab-btn active" data-tab="tab-cards">Cards & Colors</button>
+        <button class="tab-btn active" data-tab="tab-cards">Cards & colors</button>
         <button class="tab-btn" data-tab="tab-orbit">Layout & 3D</button>
-        <button class="tab-btn" data-tab="tab-timing">Speed & Time</button>
+        <button class="tab-btn" data-tab="tab-timing">Speed & time</button>
         <button class="tab-btn" data-tab="tab-stage">Canvas</button>
       </div>
       <div class="tab-bar text-only">
@@ -1187,11 +1271,11 @@
       <div class="tab-content active carousel-only" id="tab-cards">
         <div class="control-section">
           <div class="section-title">
-            <span>Card Media</span>
-            <span id="mediaCount" style="text-transform: none; letter-spacing: 0; font-weight: 500;">0 placed</span>
+            <span>Card media</span>
+            <span id="mediaCount" class="section-meta">0 placed</span>
           </div>
           <div class="media-actions">
-            <button class="btn btn-sm btn-primary" id="btnBulkUpload">+ Add images / videos</button>
+            <button class="btn btn-sm btn-primary" id="btnBulkUpload"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Add images or videos</button>
             <button class="btn btn-sm" id="btnClearMedia">Clear all</button>
           </div>
           <input type="file" id="bulkFileInput" accept="image/*,video/*" multiple hidden>
@@ -1199,7 +1283,7 @@
           <div class="media-grid" id="mediaGrid"></div>
 
           <div class="form-row">
-            <span class="form-label">Media Fit</span>
+            <span class="form-label">Media fit</span>
             <select id="mediaFit" class="preset-select" style="flex: 1.3;">
               <option value="cover" selected>Cover (fill card)</option>
               <option value="contain">Contain (show whole)</option>
@@ -1213,10 +1297,10 @@
         </div>
 
         <div class="control-section">
-          <div class="section-title">Card Geometry</div>
+          <div class="section-title">Card geometry</div>
 
           <div class="form-row">
-            <span class="form-label">Number of Cards</span>
+            <span class="form-label">Number of cards</span>
             <div class="slider-group">
               <input type="range" id="cardCount" min="2" max="120" value="7">
               <input type="number" id="cardCountNum" class="num-input" min="2" max="120" value="7">
@@ -1224,7 +1308,7 @@
           </div>
 
           <div class="form-row">
-            <span class="form-label">Card Width</span>
+            <span class="form-label">Card width</span>
             <div class="slider-group">
               <input type="range" id="cardWidth" min="40" max="1000" value="460">
               <input type="number" id="cardWidthNum" class="num-input" value="460">
@@ -1232,7 +1316,7 @@
           </div>
 
           <div class="form-row">
-            <span class="form-label">Card Height</span>
+            <span class="form-label">Card height</span>
             <div class="slider-group">
               <input type="range" id="cardHeight" min="40" max="1000" value="260">
               <input type="number" id="cardHeightNum" class="num-input" value="260">
@@ -1240,7 +1324,7 @@
           </div>
 
           <div class="form-row">
-            <span class="form-label">Card Scale</span>
+            <span class="form-label">Card scale</span>
             <div class="slider-group">
               <input type="range" id="cardScale" min="0.3" max="1.5" step="0.01" value="0.70">
               <input type="number" id="cardScaleNum" class="num-input" step="0.01" value="0.70">
@@ -1248,7 +1332,7 @@
           </div>
 
           <div class="form-row">
-            <span class="form-label">Border Radius</span>
+            <span class="form-label">Border radius</span>
             <div class="slider-group">
               <input type="range" id="cardRadius" min="0" max="60" value="22">
               <input type="number" id="cardRadiusNum" class="num-input" value="22">
@@ -1257,16 +1341,16 @@
         </div>
 
         <div class="control-section">
-          <div class="section-title">Drop Shadow</div>
+          <div class="section-title">Drop shadow</div>
           <div class="form-row">
-            <span class="form-label">Shadow Blur</span>
+            <span class="form-label">Shadow blur</span>
             <div class="slider-group">
               <input type="range" id="shadowBlur" min="0" max="100" value="46">
               <input type="number" id="shadowBlurNum" class="num-input" value="46">
             </div>
           </div>
           <div class="form-row">
-            <span class="form-label">Shadow Opacity</span>
+            <span class="form-label">Shadow opacity</span>
             <div class="slider-group">
               <input type="range" id="shadowOpacity" min="0" max="1" step="0.01" value="0.22">
               <input type="number" id="shadowOpacityNum" class="num-input" step="0.01" value="0.22">
@@ -1276,8 +1360,8 @@
 
         <div class="control-section">
           <div class="section-title">
-            <span>Color Palette</span>
-            <select id="palettePreset" class="preset-select" style="padding: 2px 6px; font-size: 11px;">
+            <span>Color palette</span>
+            <select id="palettePreset" class="preset-select sm">
               <option value="original">AE Original</option>
               <option value="cyberpunk">Cyber Neon</option>
               <option value="sunset">Sunset Warm</option>
@@ -1301,7 +1385,7 @@
       <!-- TAB 2: ORBIT & 3D GEOMETRY -->
       <div class="tab-content carousel-only" id="tab-orbit">
         <div class="control-section">
-          <div class="section-title">Layout Style</div>
+          <div class="section-title">Layout style</div>
           <div class="layout-grid" id="layoutGrid">
             <button class="layout-btn" data-layout="orbit"><svg viewBox="0 0 36 22" fill="none" stroke="currentColor" stroke-width="1.4"><ellipse cx="18" cy="11" rx="15" ry="7"/><rect x="14" y="13" width="8" height="5" rx="1" fill="currentColor"/><rect x="2" y="8" width="5" height="3.5" rx="1"/><rect x="29" y="8" width="5" height="3.5" rx="1"/></svg>Orbit</button>
             <button class="layout-btn" data-layout="wall"><svg viewBox="0 0 36 22" fill="currentColor"><path d="M1 2l6 2v14l-6 2z"/><path d="M8 5l4 1.4v9.2L8 17z" opacity=".75"/><rect x="13" y="8" width="10" height="6" opacity=".5"/><path d="M28 4l-4 1.4v9.2l4 1.4z" opacity=".75"/><path d="M35 2l-6 2v14l6 2z"/></svg>Curved Wall</button>
@@ -1317,12 +1401,12 @@
 
         <div class="control-section">
           <div class="section-title">
-            <span>Path & Framing</span>
-            <button id="btnSideAutoFit" class="tool-pill btn-autofit" style="font-size: 11px; padding: 2px 8px;">⚡ Auto-Fit</button>
+            <span>Path & framing</span>
+            <button id="btnSideAutoFit" class="tool-pill btn-autofit"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><rect x="8" y="8" width="8" height="8" rx="1"/></svg>Auto-fit</button>
           </div>
 
           <div class="form-row" data-layouts="orbit">
-            <span class="form-label">Spacing Mode</span>
+            <span class="form-label">Spacing mode</span>
             <select id="spacingMode" class="preset-select" style="flex: 1.3;">
               <option value="uniform" selected>Uniform (Equal Perimeter)</option>
               <option value="parametric">Parametric (Classic AE)</option>
@@ -1330,7 +1414,7 @@
           </div>
 
           <div class="form-row" data-layouts="orbit">
-            <span class="form-label">Radius X (Width)</span>
+            <span class="form-label">Radius X (width)</span>
             <div class="slider-group">
               <input type="range" id="orbitRx" min="80" max="950" value="450">
               <input type="number" id="orbitRxNum" class="num-input" value="450">
@@ -1338,7 +1422,7 @@
           </div>
 
           <div class="form-row" data-layouts="orbit">
-            <span class="form-label">Radius Y (Height)</span>
+            <span class="form-label">Radius Y (height)</span>
             <div class="slider-group">
               <input type="range" id="orbitRy" min="40" max="650" value="200">
               <input type="number" id="orbitRyNum" class="num-input" value="200">
@@ -1362,7 +1446,7 @@
           </div>
 
           <div class="form-row" data-layouts="orbit">
-            <span class="form-label">Tilt Angle (&deg;)</span>
+            <span class="form-label">Tilt angle (&deg;)</span>
             <div class="slider-group">
               <input type="range" id="orbitTilt" min="-90" max="90" value="0">
               <input type="number" id="orbitTiltNum" class="num-input" value="0">
@@ -1370,7 +1454,7 @@
           </div>
 
           <div class="form-row" data-layouts="orbit">
-            <span class="form-label">Arc Spacing (&deg;)</span>
+            <span class="form-label">Arc spacing (&deg;)</span>
             <div class="slider-group">
               <input type="range" id="orbitArc" min="90" max="360" value="360">
               <input type="number" id="orbitArcNum" class="num-input" value="360">
@@ -1379,7 +1463,7 @@
         </div>
 
         <div class="control-section" data-layouts="3d">
-          <div class="section-title">3D Layout Geometry</div>
+          <div class="section-title">3D layout geometry</div>
 
           <div class="form-row" data-layouts="wall cylinder helix ring sphere">
             <span class="form-label">Radius</span>
@@ -1390,7 +1474,7 @@
           </div>
 
           <div class="form-row" data-layouts="wall helix">
-            <span class="form-label">Angle per Card (&deg;)</span>
+            <span class="form-label">Angle per card (&deg;)</span>
             <div class="slider-group">
               <input type="range" id="angleStep" min="1" max="45" step="0.5" value="12">
               <input type="number" id="angleStepNum" class="num-input" step="0.5" value="12">
@@ -1414,7 +1498,7 @@
           </div>
 
           <div class="form-row" data-layouts="coverflow stack">
-            <span class="form-label">Step Depth Z (px)</span>
+            <span class="form-label">Step depth Z (px)</span>
             <div class="slider-group">
               <input type="range" id="stepZ" min="0" max="1200" step="5" value="200">
               <input type="number" id="stepZNum" class="num-input" value="200">
@@ -1422,7 +1506,7 @@
           </div>
 
           <div class="form-row" data-layouts="wall coverflow helix stack cylinder sphere">
-            <span class="form-label">Card Yaw Twist (&deg;)</span>
+            <span class="form-label">Card yaw twist (&deg;)</span>
             <div class="slider-group">
               <input type="range" id="cardYaw" min="-180" max="180" value="0">
               <input type="number" id="cardYawNum" class="num-input" value="0">
@@ -1430,7 +1514,7 @@
           </div>
 
           <div class="form-row" data-layouts="coverflow">
-            <span class="form-label">Side Scale Falloff</span>
+            <span class="form-label">Side scale falloff</span>
             <div class="slider-group">
               <input type="range" id="falloff" min="0" max="0.5" step="0.01" value="0.12">
               <input type="number" id="falloffNum" class="num-input" step="0.01" value="0.12">
@@ -1438,7 +1522,7 @@
           </div>
 
           <div class="form-row" data-layouts="ring sphere">
-            <span class="form-label">Scatter / Jitter</span>
+            <span class="form-label">Scatter / jitter</span>
             <div class="slider-group">
               <input type="range" id="scatter" min="0" max="1" step="0.01" value="0">
               <input type="number" id="scatterNum" class="num-input" step="0.01" value="0">
@@ -1446,7 +1530,7 @@
           </div>
 
           <div class="form-row" data-layouts="wall coverflow helix stack">
-            <span class="form-label">Edge Fade</span>
+            <span class="form-label">Edge fade</span>
             <div class="slider-group">
               <input type="range" id="edgeFade" min="0" max="1" step="0.05" value="0.35">
               <input type="number" id="edgeFadeNum" class="num-input" step="0.05" value="0.35">
@@ -1471,7 +1555,7 @@
           </div>
 
           <div class="form-row">
-            <span class="form-label">Camera Tilt X (&deg;)</span>
+            <span class="form-label">Camera tilt X (&deg;)</span>
             <div class="slider-group">
               <input type="range" id="camTiltX" min="-80" max="80" value="0">
               <input type="number" id="camTiltXNum" class="num-input" value="0">
@@ -1479,7 +1563,7 @@
           </div>
 
           <div class="form-row">
-            <span class="form-label">Camera Yaw Y (&deg;)</span>
+            <span class="form-label">Camera yaw Y (&deg;)</span>
             <div class="slider-group">
               <input type="range" id="camYawY" min="-80" max="80" value="0">
               <input type="number" id="camYawYNum" class="num-input" value="0">
@@ -1487,7 +1571,7 @@
           </div>
 
           <div class="form-row" data-layouts="3d">
-            <span class="form-label">Scene Depth Offset</span>
+            <span class="form-label">Scene depth offset</span>
             <div class="slider-group">
               <input type="range" id="camZ" min="-4000" max="1500" step="10" value="0">
               <input type="number" id="camZNum" class="num-input" value="0">
@@ -1495,7 +1579,7 @@
           </div>
 
           <div class="form-row">
-            <span class="form-label">Scene Zoom</span>
+            <span class="form-label">Scene zoom</span>
             <div class="slider-group">
               <input type="range" id="sceneScale" min="0.1" max="3" step="0.01" value="1">
               <input type="number" id="sceneScaleNum" class="num-input" step="0.01" value="1">
@@ -1504,9 +1588,9 @@
         </div>
 
         <div class="control-section">
-          <div class="section-title">Depth Shading</div>
+          <div class="section-title">Depth shading</div>
           <div class="form-row" data-layouts="orbit">
-            <span class="form-label">Depth Scale Diff</span>
+            <span class="form-label">Depth scale diff</span>
             <div class="slider-group">
               <input type="range" id="depthScale" min="0" max="0.7" step="0.05" value="0.30">
               <input type="number" id="depthScaleNum" class="num-input" step="0.05" value="0.30">
@@ -1514,7 +1598,7 @@
           </div>
 
           <div class="form-row">
-            <span class="form-label">Depth Fade (Back Dim)</span>
+            <span class="form-label">Depth fade (back dim)</span>
             <div class="slider-group">
               <input type="range" id="depthFade" min="0" max="0.8" step="0.05" value="0.22">
               <input type="number" id="depthFadeNum" class="num-input" step="0.05" value="0.22">
@@ -1522,7 +1606,7 @@
           </div>
 
           <div class="form-row" data-layouts="orbit">
-            <span class="form-label">Stack Launch Angle</span>
+            <span class="form-label">Stack launch angle</span>
             <div class="slider-group">
               <input type="range" id="launchAngle" min="-180" max="180" value="-56">
               <input type="number" id="launchAngleNum" class="num-input" value="-56">
@@ -1534,7 +1618,7 @@
       <!-- TAB 3: SPEED GRAPH & TIMING -->
       <div class="tab-content carousel-only" id="tab-timing">
         <div class="control-section">
-          <div class="section-title">Animation Mode & Time</div>
+          <div class="section-title">Animation mode & time</div>
           
           <div class="form-row">
             <span class="form-label">Mode</span>
@@ -1547,7 +1631,7 @@
           </div>
 
           <div class="form-row">
-            <span class="form-label">Scroll Offset (cards)</span>
+            <span class="form-label">Scroll offset (cards)</span>
             <div class="slider-group">
               <input type="range" id="scrollShift" min="-60" max="60" step="0.01" value="0">
               <input type="number" id="scrollShiftNum" class="num-input" step="0.01" value="0">
@@ -1555,7 +1639,7 @@
           </div>
 
           <div class="form-row" id="rowHold">
-            <span class="form-label">Hold per Step</span>
+            <span class="form-label">Hold per step</span>
             <div class="slider-group">
               <input type="range" id="holdRatio" min="0" max="0.95" step="0.05" value="0.55">
               <input type="number" id="holdRatioNum" class="num-input" step="0.05" value="0.55">
@@ -1563,14 +1647,14 @@
           </div>
 
           <div class="form-row">
-            <span class="form-label">Reverse Direction</span>
+            <span class="form-label">Reverse direction</span>
             <input type="checkbox" id="checkReverse">
           </div>
 
           <p class="hint" id="timingHint" style="margin: -2px 0 10px;"></p>
 
           <div class="form-row">
-            <span class="form-label">Duration (Seconds)</span>
+            <span class="form-label">Duration (seconds)</span>
             <div class="slider-group">
               <input type="range" id="animDuration" min="1.0" max="15.0" step="0.1" value="3.65">
               <input type="number" id="animDurationNum" class="num-input" step="0.1" value="3.65">
@@ -1578,7 +1662,7 @@
           </div>
 
           <div class="form-row" id="rowRevolutions">
-            <span class="form-label">Revolutions Before Settle</span>
+            <span class="form-label">Revolutions before settle</span>
             <div class="slider-group">
               <input type="range" id="revolutions" min="0.5" max="4.0" step="0.25" value="1.0">
               <input type="number" id="revolutionsNum" class="num-input" step="0.25" value="1.0">
@@ -1586,7 +1670,7 @@
           </div>
 
           <div class="form-row" id="rowStagger">
-            <span class="form-label">Card Stagger Gap (ms)</span>
+            <span class="form-label">Card stagger gap (ms)</span>
             <div class="slider-group">
               <input type="range" id="staggerGap" min="0" max="300" step="5" value="45">
               <input type="number" id="staggerGapNum" class="num-input" value="45">
@@ -1596,8 +1680,8 @@
 
         <div class="control-section">
           <div class="section-title">
-            <span>Speed Graph (Cubic-Bezier)</span>
-            <select id="bezierPreset" class="preset-select" style="padding: 2px 6px; font-size: 11px;">
+            <span title="Cubic-bezier">Speed graph</span>
+            <select id="bezierPreset" class="preset-select sm" style="max-width: 200px;">
               <option value="ae-decel">AE Classic Decel (0.05, 0.9, 0.1, 1.0)</option>
               <option value="smooth-out">Smooth Ease Out (0.16, 1, 0.3, 1)</option>
               <option value="linear">Linear (0, 0, 1, 1)</option>
@@ -1610,11 +1694,11 @@
             <svg class="bezier-svg" id="bezierSvg" viewBox="0 0 350 170"></svg>
           </div>
 
-          <div class="form-row" style="font-size: 11px;">
-            <span style="color: var(--text-muted);">P1:</span>
+          <div class="form-row">
+            <span class="row-label">P1</span>
             <input type="number" id="bezierX1" class="num-input" step="0.01" min="0" max="1" value="0.05">
             <input type="number" id="bezierY1" class="num-input" step="0.01" min="-0.5" max="1.5" value="0.90">
-            <span style="color: var(--text-muted); margin-left: 8px;">P2:</span>
+            <span class="row-label" style="margin-left: 8px;">P2</span>
             <input type="number" id="bezierX2" class="num-input" step="0.01" min="0" max="1" value="0.10">
             <input type="number" id="bezierY2" class="num-input" step="0.01" min="-0.5" max="1.5" value="1.00">
           </div>
@@ -1624,10 +1708,10 @@
       <!-- TAB 4: CANVAS & STAGE -->
       <div class="tab-content" id="tab-stage">
         <div class="control-section">
-          <div class="section-title">Canvas Dimensions</div>
+          <div class="section-title">Canvas dimensions</div>
           
           <div class="form-row">
-            <span class="form-label">Canvas Width</span>
+            <span class="form-label">Canvas width</span>
             <div class="slider-group">
               <input type="range" id="stageWidth" min="400" max="3840" step="10" value="1920">
               <input type="number" id="stageWidthNum" class="num-input" value="1920">
@@ -1635,7 +1719,7 @@
           </div>
 
           <div class="form-row">
-            <span class="form-label">Canvas Height</span>
+            <span class="form-label">Canvas height</span>
             <div class="slider-group">
               <input type="range" id="stageHeight" min="400" max="2160" step="10" value="1080">
               <input type="number" id="stageHeightNum" class="num-input" value="1080">
@@ -1643,20 +1727,20 @@
           </div>
 
           <div class="form-row carousel-only">
-            <span class="form-label">Background Color</span>
-            <input type="color" id="stageBgColor" value="#000000" style="width: 40px; height: 26px; border: none; cursor: pointer; border-radius: 4px;">
+            <span class="form-label">Background color</span>
+            <input type="color" id="stageBgColor" value="#000000" style="width: 40px; height: 28px; border: none; cursor: pointer;">
           </div>
         </div>
 
         <div class="control-section carousel-only">
-          <div class="section-title">Card Content & Labels</div>
+          <div class="section-title">Card content & labels</div>
           <div class="form-row">
-            <span class="form-label">Show Card Numbers</span>
+            <span class="form-label">Show card numbers</span>
             <input type="checkbox" id="checkShowNumbers" checked>
           </div>
           <div class="form-row">
-            <span class="form-label">Card Text Template</span>
-            <input type="text" id="cardLabelPrefix" value="Card" class="num-input" style="width: 110px; text-align: left;">
+            <span class="form-label">Card text template</span>
+            <input type="text" id="cardLabelPrefix" value="Card" class="num-input" style="width: 112px; text-align: left;">
           </div>
         </div>
 
@@ -1691,22 +1775,22 @@
   <div class="modal-overlay" id="codeModal">
     <div class="modal-box">
       <div class="modal-header">
-        <h3 style="font-size: 14px; font-weight: 600;">Generated Standalone HTML</h3>
-        <button class="btn" id="btnCloseModal" style="padding: 4px 8px;">&times;</button>
+        <h3>Generated standalone HTML</h3>
+        <button class="btn btn-icon" id="btnCloseModal" title="Close"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
       </div>
       <div class="modal-body">
         <textarea class="code-preview" id="codePreviewText" readonly></textarea>
       </div>
       <div class="modal-footer">
-        <button class="btn" id="btnModalCopyCss">Copy CSS Only</button>
-        <button class="btn" id="btnModalCopyHtml">Copy Full HTML</button>
-        <button class="btn btn-primary" id="btnModalDownload">Download .HTML</button>
+        <button class="btn" id="btnModalCopyCss">Copy CSS only</button>
+        <button class="btn" id="btnModalCopyHtml">Copy full HTML</button>
+        <button class="btn btn-primary" id="btnModalDownload">Download HTML</button>
       </div>
     </div>
   </div>
 
   <!-- TOAST NOTIFICATION -->
-  <div class="toast" id="toastMessage">Code copied to clipboard!</div>
+  <div class="toast" id="toastMessage" role="status" aria-live="polite"></div>
 
 <script>
 /**
@@ -2523,7 +2607,7 @@ function renderMediaGrid() {
       if (res.item.type === 'video') {
         const badge = document.createElement('span');
         badge.className = 'slot-type';
-        badge.textContent = '▶';
+        badge.textContent = 'Video';
         slot.appendChild(badge);
       }
     } else {
@@ -2539,7 +2623,7 @@ function renderMediaGrid() {
       const rm = document.createElement('button');
       rm.className = 'slot-remove';
       rm.title = 'Remove media from this card';
-      rm.textContent = '×';
+      rm.innerHTML = '<svg class="icon" style="width: 12px; height: 12px; vertical-align: middle;" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>';
       rm.addEventListener('click', (e) => { e.stopPropagation(); clearCardMedia(i); });
       slot.appendChild(rm);
     }
@@ -2620,7 +2704,7 @@ function autoFit3D(silent) {
     if (Math.abs(factor - 1) < 0.01) break;
   }
   syncInputsFromState();
-  if (!silent) showToast('Animation auto-fitted to canvas frame!');
+  if (!silent) showToast('Fitted to the canvas frame');
 }
 
 /**
@@ -2680,7 +2764,7 @@ function autoFitOrbit(silent) {
   }
 
   syncInputsFromState();
-  if (!silent) showToast('Animation auto-fitted to canvas frame!');
+  if (!silent) showToast('Fitted to the canvas frame');
 }
 
 /* =========================================================================
@@ -2801,27 +2885,27 @@ function drawOrbitGuide() {
     const aSafeX = w * 0.05, aSafeY = h * 0.05, aSafeW = w * 0.9, aSafeH = h * 0.9;
     const tSafeX = w * 0.10, tSafeY = h * 0.10, tSafeW = w * 0.8, tSafeH = h * 0.8;
     html += `
-      <rect x="${aSafeX}" y="${aSafeY}" width="${aSafeW}" height="${aSafeH}" fill="none" stroke="rgba(244, 63, 94, 0.45)" stroke-width="1.5" stroke-dasharray="8 8" />
-      <text x="${aSafeX + 10}" y="${aSafeY + 22}" fill="rgba(244, 63, 94, 0.6)" font-size="14" font-weight="600">Action Safe (90%)</text>
-      <rect x="${tSafeX}" y="${tSafeY}" width="${tSafeW}" height="${tSafeH}" fill="none" stroke="rgba(56, 189, 248, 0.45)" stroke-width="1.5" stroke-dasharray="6 6" />
-      <text x="${tSafeX + 10}" y="${tSafeY + 22}" fill="rgba(56, 189, 248, 0.6)" font-size="14" font-weight="600">Title Safe (80%)</text>
+      <rect class="g-line" x="${aSafeX}" y="${aSafeY}" width="${aSafeW}" height="${aSafeH}" stroke-opacity="0.6" stroke-width="1.5" stroke-dasharray="8 8" />
+      <text class="g-text" x="${aSafeX + 12}" y="${aSafeY + 24}" fill-opacity="0.8" font-size="14">Action safe 90%</text>
+      <rect class="g-line" x="${tSafeX}" y="${tSafeY}" width="${tSafeW}" height="${tSafeH}" stroke-opacity="0.4" stroke-width="1.5" stroke-dasharray="2 6" />
+      <text class="g-text" x="${tSafeX + 12}" y="${tSafeY + 24}" fill-opacity="0.6" font-size="14">Title safe 80%</text>
     `;
   }
 
   if (state.showGuides) {
     const cx = state.orbitCx, cy = state.orbitCy;
     html += `
-      <circle cx="${cx}" cy="${cy}" r="5" fill="#6366f1" />
-      <line x1="${cx - 24}" y1="${cy}" x2="${cx + 24}" y2="${cy}" stroke="#6366f1" stroke-width="2" />
-      <line x1="${cx}" y1="${cy - 24}" x2="${cx}" y2="${cy + 24}" stroke="#6366f1" stroke-width="2" />`;
+      <circle class="g-dot" cx="${cx}" cy="${cy}" r="4" />
+      <line class="g-line" x1="${cx - 24}" y1="${cy}" x2="${cx + 24}" y2="${cy}" stroke-width="2" />
+      <line class="g-line" x1="${cx}" y1="${cy - 24}" x2="${cx}" y2="${cy + 24}" stroke-width="2" />`;
 
     if (state.layout === 'orbit') {
       html += `<ellipse cx="${cx}" cy="${cy}" rx="${state.orbitRx}" ry="${state.orbitRy}"
-        fill="none" stroke="rgba(99, 102, 241, 0.5)" stroke-width="2.5" stroke-dasharray="8 8"
+        class="g-line" stroke-opacity="0.6" stroke-width="2" stroke-dasharray="8 8"
         transform="rotate(${state.orbitTilt} ${cx} ${cy})" />`;
       for (let i = 0; i < state.cardCount; i++) {
         const p = getCardPose(i, state.cardCount, state.currentTime);
-        html += `<circle cx="${cx + p.x}" cy="${cy + p.y}" r="5" fill="#a855f7" stroke="#fff" stroke-width="1.5" />`;
+        html += `<circle class="g-dot" cx="${cx + p.x}" cy="${cy + p.y}" r="5" stroke="#fff" stroke-width="1.5" />`;
       }
     } else {
       // Projected outline of every card, so the 3D path is visible even with media on the cards.
@@ -2833,9 +2917,9 @@ function drawOrbitGuide() {
         const pts = [[-hw, -hh, 0], [hw, -hh, 0], [hw, hh, 0], [-hw, hh, 0]].map(c => projectPoint(M4.apply(m, c)));
         if (pts.some(p => !p)) continue;
         const alpha = 0.25 + 0.6 * pose.opacity;
-        html += `<polygon points="${pts.map(p => p.map(v => v.toFixed(1)).join(',')).join(' ')}" fill="none" stroke="rgba(168, 85, 247, ${alpha.toFixed(2)})" stroke-width="2" />`;
+        html += `<polygon points="${pts.map(p => p.map(v => v.toFixed(1)).join(',')).join(' ')}" class="g-line" stroke-opacity="${alpha.toFixed(2)}" stroke-width="2" />`;
         const c = projectPoint(M4.apply(m, [0, 0, 0]));
-        if (c) html += `<circle cx="${c[0].toFixed(1)}" cy="${c[1].toFixed(1)}" r="3.5" fill="#a855f7" />`;
+        if (c) html += `<circle class="g-dot" cx="${c[0].toFixed(1)}" cy="${c[1].toFixed(1)}" r="3.5" />`;
       }
     }
   }
@@ -2917,15 +3001,15 @@ function createBezierEditor({ svg, get, set, hold = () => false }) {
     const X = (x) => PAD + x * gw;
     const Y = (y) => (H - PAD) - ((y - yMin) / (yMax - yMin)) * gh;
     const grid = `
-      <rect x="${PAD}" y="${PAD}" width="${gw}" height="${gh}" fill="rgba(0,0,0,0.3)" stroke="rgba(255,255,255,0.08)" />
-      ${yMin < 0 || yMax > 1 ? `<rect x="${PAD}" y="${Y(1)}" width="${gw}" height="${Y(0) - Y(1)}" fill="rgba(255,255,255,0.03)" />` : ''}
-      <line x1="${PAD}" y1="${PAD + gh / 2}" x2="${PAD + gw}" y2="${PAD + gh / 2}" stroke="rgba(255,255,255,0.05)" stroke-dasharray="3 3" />
-      <line x1="${PAD + gw / 2}" y1="${PAD}" x2="${PAD + gw / 2}" y2="${PAD + gh}" stroke="rgba(255,255,255,0.05)" stroke-dasharray="3 3" />`;
+      <rect class="bz-frame" x="${PAD}" y="${PAD}" width="${gw}" height="${gh}" />
+      ${yMin < 0 || yMax > 1 ? `<rect class="bz-band" x="${PAD}" y="${Y(1)}" width="${gw}" height="${Y(0) - Y(1)}" />` : ''}
+      <line class="bz-grid" x1="${PAD}" y1="${PAD + gh / 2}" x2="${PAD + gw}" y2="${PAD + gh / 2}" stroke-dasharray="3 3" />
+      <line class="bz-grid" x1="${PAD + gw / 2}" y1="${PAD}" x2="${PAD + gw / 2}" y2="${PAD + gh}" stroke-dasharray="3 3" />`;
 
     if (hold()) {
       svg.innerHTML = grid + `
-        <path d="M ${X(0)} ${Y(0)} H ${X(1)} V ${Y(1)}" fill="none" stroke="#fff" stroke-width="2.5" />
-        <text x="${W / 2}" y="${PAD + 16}" text-anchor="middle" fill="#9ca3af" font-size="11">Hold — value jumps at the next key</text>`;
+        <path class="bz-curve" d="M ${X(0)} ${Y(0)} H ${X(1)} V ${Y(1)}" stroke-width="2" />
+        <text class="bz-text" x="${W / 2}" y="${PAD + 16}" text-anchor="middle" font-size="11">Hold — value jumps at the next key</text>`;
       return;
     }
 
@@ -2936,14 +3020,14 @@ function createBezierEditor({ svg, get, set, hold = () => false }) {
     const speedPath = prof.map((p, k) => `${k ? 'L' : 'M'} ${X(p[0]).toFixed(1)} ${SY(p[1]).toFixed(1)}`).join(' ');
 
     svg.innerHTML = grid + `
-      <path d="${speedPath} L ${X(1)} ${H - PAD} L ${X(0)} ${H - PAD} Z" fill="rgba(245,179,66,0.16)" />
-      <path d="${speedPath}" fill="none" stroke="#f5b342" stroke-width="1.6" />
-      <line x1="${PAD}" y1="${SY(1)}" x2="${PAD + gw}" y2="${SY(1)}" stroke="rgba(245,179,66,0.35)" stroke-dasharray="2 4" />
-      <line x1="${X(0)}" y1="${Y(0)}" x2="${X(x1)}" y2="${Y(y1)}" stroke="#6366f1" stroke-width="1.5" />
-      <line x1="${X(1)}" y1="${Y(1)}" x2="${X(x2)}" y2="${Y(y2)}" stroke="#ec4899" stroke-width="1.5" />
-      <path d="M ${X(0)} ${Y(0)} C ${X(x1)} ${Y(y1)}, ${X(x2)} ${Y(y2)}, ${X(1)} ${Y(1)}" fill="none" stroke="#fff" stroke-width="2.5" />
-      <circle data-handle="1" cx="${X(x1)}" cy="${Y(y1)}" r="6" fill="#818cf8" stroke="#fff" stroke-width="1.5" style="cursor: move;" />
-      <circle data-handle="2" cx="${X(x2)}" cy="${Y(y2)}" r="6" fill="#f472b6" stroke="#fff" stroke-width="1.5" style="cursor: move;" />`;
+      <path class="bz-speed-fill" d="${speedPath} L ${X(1)} ${H - PAD} L ${X(0)} ${H - PAD} Z" />
+      <path class="bz-speed" d="${speedPath}" stroke-width="1.5" />
+      <line class="bz-unit" x1="${PAD}" y1="${SY(1)}" x2="${PAD + gw}" y2="${SY(1)}" stroke-dasharray="2 4" />
+      <line class="bz-arm" x1="${X(0)}" y1="${Y(0)}" x2="${X(x1)}" y2="${Y(y1)}" stroke-width="1" />
+      <line class="bz-arm" x1="${X(1)}" y1="${Y(1)}" x2="${X(x2)}" y2="${Y(y2)}" stroke-width="1" />
+      <path class="bz-curve" d="M ${X(0)} ${Y(0)} C ${X(x1)} ${Y(y1)}, ${X(x2)} ${Y(y2)}, ${X(1)} ${Y(1)}" stroke-width="2" />
+      <circle class="bz-handle out" data-handle="1" cx="${X(x1)}" cy="${Y(y1)}" r="5" stroke-width="1.5" style="cursor: move;" />
+      <circle class="bz-handle" data-handle="2" cx="${X(x2)}" cy="${Y(y2)}" r="5" stroke-width="1.5" style="cursor: move;" />`;
     svg.dataset.peak = peak.toFixed(2);
   }
 
@@ -3081,7 +3165,7 @@ function updateCanvasSize() {
   stage.style.height = `${h}px`;
   const bgColor = state.studioMode === 'text' ? state.text.bg : state.stageBgColor;
   stage.style.backgroundColor = state.transparentBg ? 'transparent' : bgColor;
-  stage.style.backgroundImage = state.transparentBg ? 'radial-gradient(#333 1px, transparent 1px)' : 'none';
+  stage.style.backgroundImage = state.transparentBg ? 'radial-gradient(rgba(128, 128, 128, 0.45) 1px, transparent 1px)' : 'none';
   stage.style.backgroundSize = state.transparentBg ? '16px 16px' : '';
   stage.classList.toggle('unclipped', !state.clipEdges);
 
@@ -3094,6 +3178,17 @@ function updateCanvasSize() {
     scale = parseFloat(state.zoomLevel);
   }
   stage.style.transform = `scale(${scale})`;
+  positionStageFrame(stage, wrapper, w * scale, h * scale);
+}
+
+/** Draws the nralam selection frame at screen size around the comp, so the handles never scale with zoom. */
+function positionStageFrame(stage, wrapper, sw, sh) {
+  const frame = document.getElementById('stageFrame');
+  if (!frame) return;
+  const left = stage.offsetLeft + (stage.offsetWidth - sw) / 2;
+  const top = stage.offsetTop + (stage.offsetHeight - sh) / 2;
+  frame.style.cssText = `left:${left}px;top:${top}px;width:${sw}px;height:${sh}px;`;
+  frame.classList.toggle('dashed', !state.clipEdges);
 }
 
 /** Presets overwrite the parameters keyframes drive, so ask before discarding keyframes. */
@@ -3529,7 +3624,7 @@ function setupEventListeners() {
   const clipBtn = document.getElementById('btnClipToggle');
   clipBtn.addEventListener('click', () => {
     state.clipEdges = !state.clipEdges;
-    clipBtn.textContent = state.clipEdges ? 'Clip: ON' : 'Clip: OFF';
+    clipBtn.setAttribute('aria-pressed', state.clipEdges);
     clipBtn.classList.toggle('active', state.clipEdges);
     updateCanvasSize();
   });
@@ -3574,7 +3669,7 @@ function setupEventListeners() {
   const loopBtn = document.getElementById('btnLoopToggle');
   loopBtn.addEventListener('click', () => {
     state.loop = !state.loop;
-    loopBtn.textContent = state.loop ? 'Loop: ON' : 'Loop: OFF';
+    loopBtn.setAttribute('aria-pressed', state.loop);
     loopBtn.classList.toggle('active', state.loop);
   });
 
@@ -3798,7 +3893,7 @@ function setupEventListeners() {
     try {
       const html = state.studioMode === 'text' ? await generateTextHtml() : await generateStandaloneHtml();
       await navigator.clipboard.writeText(html);
-      showToast('Standalone HTML copied to clipboard!');
+      showToast('Standalone HTML copied');
     } catch (err) {
       showToast('Copy failed — try Export HTML instead.');
     }
@@ -3810,7 +3905,7 @@ function setupEventListeners() {
     const html = state.studioMode === 'text' ? await generateTextHtml() : await generateStandaloneHtml();
     const cssMatch = html.match(/<style>([\s\S]*?)<\/style>/);
     if (cssMatch) {
-      navigator.clipboard.writeText(cssMatch[1].trim()).then(() => showToast('CSS copied to clipboard!'));
+      navigator.clipboard.writeText(cssMatch[1].trim()).then(() => showToast('CSS copied'));
     }
   });
 
@@ -3828,7 +3923,7 @@ function setupEventListeners() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
     const note = state.exportMediaMode === 'files' && placedMediaCount() ? ' Keep the media files next to it.' : '';
-    showToast(`Downloaded HTML file!${note}`);
+    showToast(`HTML downloaded${note}`);
   }
   document.getElementById('btnExportHtml').addEventListener('click', downloadHtml);
   document.getElementById('btnModalDownload').addEventListener('click', downloadHtml);
@@ -7116,7 +7211,7 @@ function trackCurveHtml(id) {
   const lo = Math.min(...vals), hi = Math.max(...vals);
   const span = hi - lo || 1;
   const d = vals.map((v, k) => `${k ? 'L' : 'M'}${(k / SAMPLES * 1000).toFixed(1)} ${hi === lo ? 50 : (92 - ((v - lo) / span) * 84).toFixed(1)}`).join(' ');
-  return `<svg viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="${d}" fill="none" stroke="rgba(245,179,66,0.45)" stroke-width="1.5" vector-effect="non-scaling-stroke"/></svg>`;
+  return `<svg viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="${d}" fill="none" stroke-width="1.5" vector-effect="non-scaling-stroke"/></svg>`;
 }
 
 function renderRuler() {
@@ -7153,7 +7248,7 @@ function renderKeyframePanel() {
         <div class="kf-row-label">
           <span class="kf-row-name" title="${escapeHtml(m.label)}">${escapeHtml(m.label)}</span>
           <span class="kf-row-val" data-param="${id}"></span>
-          <button class="kf-row-x" data-remove="${id}" title="Remove all ${escapeHtml(m.label)} keyframes">×</button>
+          <button class="kf-row-x" data-remove="${id}" title="Remove all ${escapeHtml(m.label)} keyframes"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
         </div>
         <div class="kf-track" data-param="${id}" title="Double-click to add a key">${trackCurveHtml(id)}${keys}</div>
       </div>`;
@@ -7482,8 +7577,24 @@ function showToast(msg) {
   toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
 }
 
+/** Same switch and storage key as nralam.com, so the studio and the site share one theme. */
+function setupThemeToggle() {
+  const btn = document.getElementById('btnThemeToggle');
+  const letter = document.getElementById('themeLetter');
+  const sync = () => { letter.textContent = document.body.classList.contains('dark-mode') ? 'D' : 'L'; };
+  btn.addEventListener('click', () => {
+    const dark = document.body.classList.toggle('dark-mode');
+    try { localStorage.setItem('motionTheme', dark ? 'dark' : 'light'); } catch (e) {}
+    sync();
+  });
+  sync();
+}
+
 // INITIALIZATION
 window.addEventListener('DOMContentLoaded', () => {
+  setupThemeToggle();
+  // Refit when the viewport itself resizes (panels toggling, fonts settling), not only on window resize.
+  if (window.ResizeObserver) new ResizeObserver(() => updateCanvasSize()).observe(document.getElementById('canvasWrapper'));
   state.studioMode = 'carousel';
   state.text = txDeepMerge(TEXT_DEFAULTS, TEXT_PRESETS.composer.T);
   state.text.preset = 'composer';
