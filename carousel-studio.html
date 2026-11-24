@@ -3357,6 +3357,15 @@ function confirmDropKeyframes(action) {
 }
 
 /** Apply a full preset (layout, timing, colors, canvas). Media placements are kept. */
+/**
+ * Values a double-click on a slider resets to: whatever the last preset (or layout switch) set,
+ * so a reset returns to the look you started from rather than a bare default.
+ */
+let sliderBase = {};
+function snapshotSliderBase(keys = NUMERIC_CONTROLS) {
+  keys.forEach(k => { if (typeof state[k] === 'number') sliderBase[k] = state[k]; });
+}
+
 function applyPreset(key) {
   const p = PRESETS[key];
   if (!p) return false;
@@ -3369,6 +3378,7 @@ function applyPreset(key) {
   state.currentTime = 0;
   syncRatioPills();
   syncInputsFromState();
+  snapshotSliderBase();
   renderMediaGrid();
   return true;
 }
@@ -3391,6 +3401,7 @@ function applyLayout(layout) {
     state.orbitCy = merged.orbitCy ?? 540;
   }
   syncInputsFromState();
+  snapshotSliderBase([...GEOMETRY_KEYS, 'orbitCx', 'orbitCy']);
   renderMediaGrid();
   showToast(`Layout: ${LAYOUTS[layout].name}`);
 }
@@ -3947,6 +3958,17 @@ function setupEventListeners() {
   NUMERIC_CONTROLS.forEach(id => {
     const slider = document.getElementById(id);
     const num = document.getElementById(id + 'Num');
+    // Double-click a slider to reset it (goes through updateVal, so animated params get a key).
+    if (slider) {
+      slider.title = slider.title || 'Double-click to reset';
+      slider.addEventListener('dblclick', () => {
+        const base = sliderBase[id] ?? parseFloat(slider.defaultValue);
+        if (Number.isNaN(base)) return;
+        slider.value = base;
+        if (num) num.value = base;
+        slider.dispatchEvent(new Event('input', { bubbles: true }));
+      });
+    }
 
     function updateVal(val) {
       let parsed = parseFloat(val);
@@ -5999,6 +6021,7 @@ function applyTextPreset(key) {
   if (!p) return;
   state.text = txDeepMerge(TEXT_DEFAULTS, p.T);
   state.text.preset = key;
+  txSnapshotBase();
   if (p.stage) {
     state.stageWidth = p.stage[0];
     state.stageHeight = p.stage[1];
@@ -6015,6 +6038,11 @@ function applyTextPreset(key) {
 /* ---------- sidebar UI (built from a schema so every control binds to state.text the same way) ---------- */
 
 const txGet = (path) => path.split('.').reduce((o, k) => (o == null ? o : o[k]), state.text);
+const txPathIn = (obj, path) => path.split('.').reduce((o, k) => (o == null ? o : o[k]), obj);
+
+/** Text-mode values a slider double-click resets to: the loaded text preset (TEXT_DEFAULTS for anything added later). */
+let txBase = null;
+function txSnapshotBase() { txBase = JSON.parse(JSON.stringify(state.text)); }
 function txSet(path, v) {
   const keys = path.split('.');
   let o = state.text;
@@ -6149,6 +6177,11 @@ function txControl(f, onChange) {
     const set = (x) => { const val = parseFloat(x); if (Number.isNaN(val)) return; txSet(f.path, val); r.value = val; n.value = val; changed(); };
     r.addEventListener('input', () => set(r.value));
     n.addEventListener('change', () => set(n.value));
+    r.title = 'Double-click to reset';
+    r.addEventListener('dblclick', () => {
+      const base = txPathIn(txBase, f.path) ?? txPathIn(TEXT_DEFAULTS, f.path);
+      if (typeof base === 'number') set(base);
+    });
     g.appendChild(r); g.appendChild(n);
     row = txRow(f.label, g);
   } else if (f.type === 'select') {
@@ -8153,6 +8186,8 @@ window.addEventListener('DOMContentLoaded', () => {
   state.text.preset = 'composer';
   ensureColorCount();
   syncInputsFromState();
+  snapshotSliderBase();
+  txSnapshotBase();
   setupEventListeners();
   buildKeyframeUi();
   renderMediaGrid();
