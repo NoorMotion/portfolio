@@ -42,3 +42,8 @@
 - **About:** cropped portrait, 3 sentences, location / languages / timezone / call hours.
 - **FAQ:** native `<details>` accordion, one open at a time.
 - Section rhythm now: paper → paper → DARK (stats) → paper → paper → DARK (tools) → paper → DARK (contact + footer).
+
+## Tweaks
+- Section labels larger (16–22px) without [NN] numbering.
+- Client words (testimonial) section removed.
+- Work filter chips larger (14px, 46px tall).

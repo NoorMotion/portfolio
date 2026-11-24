@@ -276,11 +276,14 @@
     .layer-label {
         display: inline-flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
+        font-size: clamp(16px, 1.6vw, 22px);
+        letter-spacing: 0.02em;
         color: var(--fg);
     }
 
-    .layer-label .idx { color: var(--accent-ink); }
+    .layer-label .kf { width: 9px; height: 9px; }
+
 
     .layer-label .caret { animation: caret 1.1s steps(1) infinite; }
 
@@ -345,9 +348,10 @@
     .chip {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        min-height: 40px;
-        padding: 0 14px;
+        gap: 10px;
+        min-height: 46px;
+        padding: 0 18px;
+        font-size: 14px;
         border: 1px solid var(--rule);
         border-radius: var(--radius);
         color: var(--fg-muted);
@@ -1269,46 +1273,6 @@
 
     .tool-actions { display: flex; gap: 16px; }
     .tool-actions .link { min-height: 32px; display: inline-flex; align-items: center; }
-
-    /* ----------------------------------------------------------------------
-       Featured testimonial
-       ---------------------------------------------------------------------- */
-    .quote { display: grid; gap: 40px; max-width: 1040px; }
-
-    .quote-text {
-        font-size: clamp(28px, 3.6vw, 48px);
-        font-weight: 500;
-        line-height: 1.15;
-        letter-spacing: -0.03em;
-        text-wrap: balance;
-    }
-
-    .quote-by { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 20px; }
-
-    .quote-avatar {
-        width: 56px;
-        height: 56px;
-        border-radius: 50%;
-        background: var(--rule) center / cover no-repeat;
-        border: 1px solid var(--rule);
-    }
-
-    .quote-li { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid var(--rule); border-radius: var(--radius); color: var(--fg-muted); }
-    .quote-li:hover { color: var(--fg); border-color: var(--fg); }
-    .quote-li .icon { width: 16px; height: 16px; }
-
-    .quote-result {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 14px;
-        border: 1px solid var(--rule);
-        border-radius: var(--radius);
-    }
-
-    @media (min-width: 768px) {
-        .quote-result { margin-left: auto; }
-    }
 
     /* ----------------------------------------------------------------------
        About
