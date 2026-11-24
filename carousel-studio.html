@@ -282,8 +282,10 @@
     justify-content: center;
     padding: 24px;
     position: relative;
-    overflow: auto;
+    overflow: hidden;
   }
+  .canvas-stage-wrapper.hand { cursor: grab; }
+  .canvas-stage-wrapper.panning { cursor: grabbing; }
 
   .canvas-stage {
     position: relative;
@@ -396,7 +398,11 @@
     pointer-events: none;
   }
 
+  /* With the keyframe timeline open its ruler is the scrubber, so the progress bar steps aside */
+  body:not(.mode-text):has(#kfPanel:not(.collapsed)) .scrub-track { display: none; }
+
   .time-readout {
+    margin-left: auto;
     font-family: var(--font-mono);
     font-size: 12px;
     color: var(--text-secondary);
@@ -1160,11 +1166,14 @@
             <input type="checkbox" id="checkTransparentBg">
             <span>Transparent</span>
           </label>
-          <select id="zoomSelect" class="preset-select sm">
+          <select id="zoomSelect" class="preset-select sm" title="Scroll over the comp to zoom · Shift+scroll, middle-drag or Space+drag to pan · double-click beside the comp to fit">
             <option value="fit" selected>Fit</option>
+            <option value="0.25">25%</option>
             <option value="0.5">50%</option>
             <option value="0.75">75%</option>
             <option value="1">100%</option>
+            <option value="2">200%</option>
+            <option value="custom" id="zoomCustom" hidden></option>
           </select>
         </div>
       </div>
@@ -2044,6 +2053,7 @@ const state = {
   cardLabelPrefix: 'Card',
   aspectRatio: '16:9',
   zoomLevel: 'fit',
+  viewPan: { x: 0, y: 0 }, // comp viewer pan in screen px (reset on Fit)
   // Media
   cardMedia: [],          // sparse: card index -> media item
   mediaFit: 'cover',
@@ -3206,24 +3216,58 @@ function updateCanvasSize() {
   stage.style.backgroundSize = state.transparentBg ? '16px 16px' : '';
   stage.classList.toggle('unclipped', !state.clipEdges);
 
-  let scale = 1;
-  if (state.zoomLevel === 'fit') {
-    const wrapW = wrapper.clientWidth - 48;
-    const wrapH = wrapper.clientHeight - 48;
-    scale = Math.min(wrapW / w, wrapH / h, 1);
-  } else {
-    scale = parseFloat(state.zoomLevel);
-  }
-  stage.style.transform = `scale(${scale})`;
+  const scale = viewerScale();
+  if (state.zoomLevel === 'fit') state.viewPan = { x: 0, y: 0 };
+  const { x, y } = state.viewPan;
+  stage.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
   positionStageFrame(stage, wrapper, w * scale, h * scale);
+  syncZoomSelect(scale);
+}
+
+/** Current comp viewer scale: "fit" shrinks the comp to the free space, never past 100%. */
+function viewerScale() {
+  if (state.zoomLevel !== 'fit') return parseFloat(state.zoomLevel);
+  const wrapper = document.getElementById('canvasWrapper');
+  return Math.min((wrapper.clientWidth - 48) / state.stageWidth, (wrapper.clientHeight - 48) / state.stageHeight, 1);
+}
+
+/** Show the live zoom in the picker, adding a custom percentage when it matches none of the presets. */
+function syncZoomSelect(scale) {
+  const sel = document.getElementById('zoomSelect');
+  const custom = document.getElementById('zoomCustom');
+  if (!sel || !custom) return;
+  if (state.zoomLevel === 'fit') { sel.value = 'fit'; custom.hidden = true; return; }
+  const match = [...sel.options].find(o => o !== custom && o.value !== 'fit' && Math.abs(parseFloat(o.value) - scale) < 0.001);
+  custom.hidden = !!match;
+  if (match) sel.value = match.value;
+  else { custom.textContent = `${Math.round(scale * 100)}%`; sel.value = 'custom'; }
+}
+
+/** Zoom the comp viewer by `factor`, keeping the comp point under (clientX, clientY) in place, like After Effects. */
+function zoomViewerAt(factor, clientX, clientY) {
+  const wrapper = document.getElementById('canvasWrapper');
+  const r = wrapper.getBoundingClientRect();
+  const s = viewerScale();
+  const next = clamp(s * factor, 0.05, 8);
+  const cx = clientX - (r.left + r.width / 2), cy = clientY - (r.top + r.height / 2);
+  const { x, y } = state.viewPan;
+  state.viewPan = { x: cx - ((cx - x) / s) * next, y: cy - ((cy - y) / s) * next };
+  state.zoomLevel = String(next);
+  updateCanvasSize();
+}
+
+function panViewer(dx, dy) {
+  if (state.zoomLevel === 'fit') state.zoomLevel = String(viewerScale());
+  state.viewPan = { x: state.viewPan.x + dx, y: state.viewPan.y + dy };
+  updateCanvasSize();
 }
 
 /** Draws the nralam selection frame at screen size around the comp, so the handles never scale with zoom. */
 function positionStageFrame(stage, wrapper, sw, sh) {
   const frame = document.getElementById('stageFrame');
   if (!frame) return;
-  const left = stage.offsetLeft + (stage.offsetWidth - sw) / 2;
-  const top = stage.offsetTop + (stage.offsetHeight - sh) / 2;
+  const left = stage.offsetLeft + (stage.offsetWidth - sw) / 2 + state.viewPan.x;
+  const top = stage.offsetTop + (stage.offsetHeight - sh) / 2 + state.viewPan.y;
   frame.style.cssText = `left:${left}px;top:${top}px;width:${sw}px;height:${sh}px;`;
   frame.classList.toggle('dashed', !state.clipEdges);
 }
@@ -3676,7 +3720,43 @@ function setupEventListeners() {
 
   // Zoom select
   document.getElementById('zoomSelect').addEventListener('change', (e) => {
+    if (e.target.value === 'custom') return;
     state.zoomLevel = e.target.value;
+    state.viewPan = { x: 0, y: 0 };
+    updateCanvasSize();
+  });
+
+  // Comp viewer: scroll (or pinch) zooms around the cursor; Shift+scroll or a sideways swipe pans.
+  const viewer = document.getElementById('canvasWrapper');
+  viewer.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 240 : 1;
+    const dx = e.deltaX * unit, dy = e.deltaY * unit;
+    if (e.shiftKey || Math.abs(dx) > Math.abs(dy)) {
+      panViewer(-(e.shiftKey && !dx ? dy : dx), e.shiftKey ? 0 : -dy);
+      return;
+    }
+    zoomViewerAt(Math.exp(-clamp(dy, -200, 200) * (e.ctrlKey ? 0.01 : 0.002)), e.clientX, e.clientY);
+  }, { passive: false });
+
+  // Hand tool: hold Space (a quick tap still plays) or use the middle button, then drag.
+  let spaceHeld = false, handPan = null;
+  viewer.addEventListener('mousedown', (e) => {
+    if (!(e.button === 1 || (e.button === 0 && spaceHeld))) return;
+    e.preventDefault();
+    handPan = { x: e.clientX, y: e.clientY };
+    if (spaceHeld) spaceHeld = 'used';
+    viewer.classList.add('panning');
+  });
+  window.addEventListener('mousemove', (e) => {
+    if (!handPan) return;
+    panViewer(e.clientX - handPan.x, e.clientY - handPan.y);
+    handPan = { x: e.clientX, y: e.clientY };
+  });
+  window.addEventListener('mouseup', () => { handPan = null; viewer.classList.remove('panning'); });
+  viewer.addEventListener('dblclick', (e) => {
+    if (e.target !== viewer) return;
+    state.zoomLevel = 'fit';
     updateCanvasSize();
   });
 
@@ -3690,9 +3770,15 @@ function setupEventListeners() {
     const tag = e.target.tagName;
     if (e.code === 'Space' && tag !== 'INPUT' && tag !== 'TEXTAREA' && tag !== 'SELECT') {
       e.preventDefault();
-      state.isPlaying = !state.isPlaying;
-      updatePlayBtn();
+      if (!e.repeat && !spaceHeld) { spaceHeld = true; viewer.classList.add('hand'); }
     }
+  });
+  window.addEventListener('keyup', (e) => {
+    if (e.code !== 'Space' || !spaceHeld) return;
+    // Space toggles playback on release, unless it was held to pan the comp.
+    if (spaceHeld !== 'used') { state.isPlaying = !state.isPlaying; updatePlayBtn(); }
+    spaceHeld = false;
+    viewer.classList.remove('hand');
   });
 
   // Replay
