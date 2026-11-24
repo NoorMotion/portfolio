@@ -1587,6 +1587,32 @@
         </div>
 
         <div class="control-section">
+          <div class="section-title">Card twist</div>
+          <div class="form-row">
+            <span class="form-label">Twist X (&deg;)</span>
+            <div class="slider-group">
+              <input type="range" id="cardTwistX" min="-180" max="180" step="1" value="0">
+              <input type="number" id="cardTwistXNum" class="num-input" step="1" value="0">
+            </div>
+          </div>
+          <div class="form-row">
+            <span class="form-label">Twist Y (&deg;)</span>
+            <div class="slider-group">
+              <input type="range" id="cardTwistY" min="-180" max="180" step="1" value="0">
+              <input type="number" id="cardTwistYNum" class="num-input" step="1" value="0">
+            </div>
+          </div>
+          <div class="form-row">
+            <span class="form-label">Twist Z (&deg;)</span>
+            <div class="slider-group">
+              <input type="range" id="cardTwistZ" min="-180" max="180" step="1" value="0">
+              <input type="number" id="cardTwistZNum" class="num-input" step="1" value="0">
+            </div>
+          </div>
+          <p class="hint">Turns every card around its own axes, on top of the layout. Works in every layout and can be keyframed.</p>
+        </div>
+
+        <div class="control-section">
           <div class="section-title">Camera</div>
 
           <div class="form-row" data-layouts="3d">
@@ -1899,6 +1925,9 @@ const SCENE_DEFAULTS = {
   stageBgColor: '#000000',
   shadowBlur: 46,
   shadowOpacity: 0.22,
+  cardTwistX: 0, // extra rotation of every card around its own axes, in degrees
+  cardTwistY: 0,
+  cardTwistZ: 0,
   camBlur: 0,  // camera depth-of-field blur at the far end, in card pixels
   camFocus: 0  // depth that stays sharp: 0 = front cards, 1 = back cards
 };
@@ -2129,7 +2158,16 @@ function poseMatrix(pose, scene = sceneMatrix()) {
   m = M4.mul(m, M4.rotY(pose.rotY));
   m = M4.mul(m, M4.rotX(pose.rotX));
   m = M4.mul(m, M4.rotZ(pose.rotZ));
+  m = twistMatrix(m, pose);
   return M4.mul(m, M4.scale(pose.scale, pose.scale, 1));
+}
+
+/** Card twist inside the layout pose, X then Y then Z (the order After Effects applies a layer's rotations). */
+function twistMatrix(m, pose) {
+  if (pose.twX) m = M4.mul(m, M4.rotX(pose.twX));
+  if (pose.twY) m = M4.mul(m, M4.rotY(pose.twY));
+  if (pose.twZ) m = M4.mul(m, M4.rotZ(pose.twZ));
+  return m;
 }
 
 /** Perspective-project a stage-space point exactly like CSS `perspective` + `perspective-origin`. */
@@ -2395,6 +2433,9 @@ const LAYOUT_FNS = {
   }
 };
 
+/** Card twist: every card's extra rotation around its own X, Y and Z axes (applied inside the layout pose). */
+const cardTwist = () => ({ twX: state.cardTwistX || 0, twY: state.cardTwistY || 0, twZ: state.cardTwistZ || 0 });
+
 /**
  * Camera depth of field: blur grows with the distance between a card's depth (0 front, 1 back)
  * and the focus depth, reaching Blur level at the far end of the scene.
@@ -2411,7 +2452,7 @@ function cameraBlur(depthNorm) {
  * the exporter uses it to place hard cuts instead of interpolating across the jump.
  */
 function getCardPose(i, N, t, scene = prepareFrame(t)) {
-  if (state.layout === 'orbit') return getOrbitTransform(i, N, t);
+  if (state.layout === 'orbit') return Object.assign(getOrbitTransform(i, N, t), cardTwist());
 
   const { offset, intro } = getScrollOffset(i, N, t);
   const L = LAYOUT_FNS[state.layout](i, N, i - offset);
@@ -2421,7 +2462,8 @@ function getCardPose(i, N, t, scene = prepareFrame(t)) {
     scale: state.cardScale * L.scale,
     opacity: L.opacity * clamp01(intro * 5),
     blur: cameraBlur(L.depthNorm),
-    zIndex: 0, key: L.wrap * 2
+    zIndex: 0, key: L.wrap * 2,
+    ...cardTwist()
   };
 
   const m = poseMatrix(pose, scene);
@@ -2452,7 +2494,9 @@ function poseToTransform(pose) {
   if (state.camTiltX) parts.push(`rotateX(${state.camTiltX}deg)`);
   if (state.camYawY) parts.push(`rotateY(${state.camYawY}deg)`);
   parts.push(`translate3d(${pose.x}px, ${pose.y}px, ${pose.z}px)`);
-  parts.push(`rotateY(${pose.rotY}deg) rotateX(${pose.rotX}deg) rotateZ(${pose.rotZ}deg) rotateY(${pose.flip * 180}deg)`);
+  parts.push(`rotateY(${pose.rotY}deg) rotateX(${pose.rotX}deg) rotateZ(${pose.rotZ}deg)`);
+  if (pose.twX || pose.twY || pose.twZ) parts.push(`rotateX(${pose.twX || 0}deg) rotateY(${pose.twY || 0}deg) rotateZ(${pose.twZ || 0}deg)`);
+  parts.push(`rotateY(${pose.flip * 180}deg)`);
   parts.push(`scale(${pose.scale})`);
   return parts.join(' ');
 }
@@ -3161,6 +3205,7 @@ const NUMERIC_CONTROLS = [
   'cardCount', 'cardWidth', 'cardHeight', 'cardScale', 'cardRadius',
   'shadowBlur', 'shadowOpacity', 'orbitRx', 'orbitRy', 'orbitCx', 'orbitCy',
   'orbitTilt', 'orbitArc', 'depthScale', 'launchAngle', 'camBlur', 'camFocus',
+  'cardTwistX', 'cardTwistY', 'cardTwistZ',
   'animDuration', 'revolutions', 'staggerGap', 'stageWidth', 'stageHeight',
   'radius', 'angleStep', 'gap', 'stepY', 'stepZ', 'cardYaw', 'falloff', 'scatter', 'edgeFade',
   'perspective', 'camTiltX', 'camYawY', 'camZ', 'sceneScale', 'holdRatio', 'scrollShift'
@@ -3378,12 +3423,12 @@ function readAsDataUrl(item) {
 }
 
 // Per-card sampled values: the card pose plus camera values (any of which may be keyframed).
-// [x, y, z, rotY, rotX, rotZ, flipDeg, scale, opacity, zIndex, cx, cy, camZ, sceneScale, camTiltX, camYawY, blur]
-const KF_TOL = [0.5, 0.5, 1, 0.3, 0.3, 0.3, 0, 0.002, 0.01, 2, 0.5, 0.5, 1, 0.002, 0.1, 0.1, 0.1];
+// [x, y, z, rotY, rotX, rotZ, flipDeg, scale, opacity, zIndex, cx, cy, camZ, sceneScale, camTiltX, camYawY, blur, twX, twY, twZ]
+const KF_TOL = [0.5, 0.5, 1, 0.3, 0.3, 0.3, 0, 0.002, 0.01, 2, 0.5, 0.5, 1, 0.002, 0.1, 0.1, 0.1, 0.3, 0.3, 0.3];
 const poseVals = (p) => [
   p.x, p.y, p.z, p.rotY, p.rotX, p.rotZ, p.flip * 180, p.scale, p.opacity, p.zIndex,
   state.orbitCx, state.orbitCy, state.layout === 'orbit' ? 0 : state.camZ, state.sceneScale, state.camTiltX, state.camYawY,
-  p.blur || 0
+  p.blur || 0, p.twX || 0, p.twY || 0, p.twZ || 0
 ];
 
 /**
@@ -3465,6 +3510,7 @@ function exportTransform(v, used) {
   if (used.rotY) parts.push(`rotateY(${fmt(v[3], 2)}deg)`);
   if (used.rotX) parts.push(`rotateX(${fmt(v[4], 2)}deg)`);
   if (used.rotZ) parts.push(`rotateZ(${fmt(v[5], 2)}deg)`);
+  if (used.twist) parts.push(`rotateX(${fmt(v[17], 2)}deg) rotateY(${fmt(v[18], 2)}deg) rotateZ(${fmt(v[19], 2)}deg)`);
   if (used.flip) parts.push(`rotateY(${fmt(v[6], 0)}deg)`);
   parts.push(`scale(${fmt(v[7], 4)})`);
   return parts.join(' ');
@@ -3514,7 +3560,7 @@ async function generateStandaloneHtml({ forDisplay = false } = {}) {
   let keyframeCss = '';
   for (let i = 0; i < N; i++) {
     const kfs = sampleCardKeyframes(i, N);
-    const used = { z: false, rotY: false, rotX: false, rotZ: false, flip: false, zoom: false, camX: false, camY: false, blur: false };
+    const used = { z: false, rotY: false, rotX: false, rotZ: false, flip: false, zoom: false, camX: false, camY: false, blur: false, twist: false };
     kfs.forEach(k => {
       if (Math.abs(k.v[2]) > 0.05) used.z = true;
       if (Math.abs(k.v[3]) > 0.01) used.rotY = true;
@@ -3525,6 +3571,7 @@ async function generateStandaloneHtml({ forDisplay = false } = {}) {
       if (Math.abs(k.v[14]) > 0.001) used.camX = true;
       if (Math.abs(k.v[15]) > 0.001) used.camY = true;
       if (k.v[16] > 0.05) used.blur = true;
+      if (Math.abs(k.v[17]) > 0.01 || Math.abs(k.v[18]) > 0.01 || Math.abs(k.v[19]) > 0.01) used.twist = true;
     });
     keyframeCss += keyframesBlock(`carousel-card-${i + 1}`, kfs,
       v => `transform: ${exportTransform(v, used)}; opacity: ${fmt(clamp01(v[8]), 3)}; z-index: ${Math.round(v[9])};` +
@@ -4124,6 +4171,7 @@ function aeCardMatrix(pose, scene) {
   m = M4.mul(m, M4.rotY(pose.rotY));
   m = M4.mul(m, M4.rotX(pose.rotX));
   m = M4.mul(m, M4.rotZ(pose.rotZ));
+  m = twistMatrix(m, pose);
   m = M4.mul(m, M4.rotY(pose.flip * 180));
   return M4.mul(m, M4.scale(pose.scale, pose.scale, 1));
 }
@@ -4208,6 +4256,9 @@ function aeAnimKeys(id, conv) {
  * Controller settings, in the order they appear in Effect Controls.
  * `when` limits a control to the layouts/modes where the studio uses it.
  */
+/** Card twist goes into the After Effects rig only when it is set or keyframed, to keep simple exports lean. */
+const aeTwistUsed = () => ['cardTwistX', 'cardTwistY', 'cardTwistZ'].some(id => state[id] || isAnimated(id));
+
 function aeControllerSpec(layout, mode, nest) {
   const is3d = layout !== 'orbit';
   const linear = ['wall', 'coverflow', 'helix', 'stack'].includes(layout);
@@ -4239,6 +4290,9 @@ function aeControllerSpec(layout, mode, nest) {
     L('coverflow') ? { name: 'Side Falloff', id: 'falloff' } : null,
     L('ring', 'sphere') ? { name: 'Scatter', id: 'scatter' } : null,
     linear ? { name: 'Edge Fade', id: 'edgeFade' } : null,
+    aeTwistUsed() ? { name: 'Twist X', id: 'cardTwistX' } : null,
+    aeTwistUsed() ? { name: 'Twist Y', id: 'cardTwistY' } : null,
+    aeTwistUsed() ? { name: 'Twist Z', id: 'cardTwistZ' } : null,
     { name: 'Camera Blur', id: 'camBlur' },
     { name: 'Blur Focus (%)', id: 'camFocus', conv: pct },
     flipable ? { name: 'Keep Media Readable', id: 'autoFlip', kind: 'check' } : null,
@@ -4433,6 +4487,16 @@ function aeExpressionResults(layout) {
   } else if (!['orbit', 'ring'].includes(layout)) {
     r.cardY = { head: `// Card rotation along the path (plus the readable-media flip). ${ctl}`, ret: '%KY% * (L.rotY + flip * 180)' };
   }
+  if (aeTwistUsed()) {
+    // The layout's own turn moves to a parent null so the card layer can twist on all three axes.
+    // A 180° flip before Z equals Z mirrored after it, which keeps the readable-media flip exact.
+    if (!['orbit', 'ring', 'sphere'].includes(layout)) {
+      r.pivotY = { head: `// Card rotation along the path. ${ctl}`, ret: '%KY% * L.rotY' };
+    }
+    r.cardX = { head: `// Card twist X. ${ctl}`, ret: '%KX% * v("Twist X")' };
+    r.cardY = { head: `// Card twist Y (plus the readable-media flip). ${ctl}`, ret: '%KY% * (v("Twist Y") + flip * 180)' };
+    r.cardZ = { head: `// Card twist Z. ${ctl}`, ret: '(flip ? -1 : 1) * v("Twist Z")' };
+  }
   return r;
 }
 
@@ -4541,6 +4605,11 @@ function buildAeData(fps, checkCount = 12) {
   const structure = layout === 'sphere'
     ? { pivots: [{ axis: 'Y', expr: 'pivotY' }, { axis: 'X', expr: 'pivotX' }], card: { axis: 'Y', expr: 'cardY' } }
     : { pivots: [], card: ['orbit', 'ring'].includes(layout) ? null : { axis: 'Y', expr: 'cardY' } };
+  if (aeTwistUsed()) {
+    if (!['orbit', 'ring', 'sphere'].includes(layout)) structure.pivots = [{ axis: 'Y', expr: 'pivotY' }];
+    structure.card = { axis: 'Y', expr: 'cardY' };
+    structure.extra = [{ axis: 'X', expr: 'cardX' }, { axis: 'Z', expr: 'cardZ' }];
+  }
 
   return {
     data: {
@@ -4907,6 +4976,7 @@ const AE_JSX_RUNTIME = String.raw`// Carousel Motion Studio -> After Effects bui
     prop(t, 'ADBE Anchor Point').setValue([comp.width / 2, comp.height / 2, 0]);
     addCardIndex(L, index + 1);
     if (st.card) { setExpr(prop(t, 'ADBE Rotate ' + st.card.axis), cardExpr(st.card.expr)); }
+    if (st.extra) { for (k = 0; k < st.extra.length; k++) { setExpr(prop(t, 'ADBE Rotate ' + st.extra[k].axis), cardExpr(st.extra[k].expr)); } }
     if (!holder) { holder = L; }
     setExpr(prop(xf(holder), 'ADBE Position'), cardExpr('pos'));
     setExpr(prop(t, 'ADBE Scale'), cardExpr('scale'));
@@ -7143,6 +7213,7 @@ async function downloadTextAeBuild() {
 const KEYFRAMEABLE = [
   'cardWidth', 'cardHeight', 'cardScale', 'cardRadius', 'shadowBlur', 'shadowOpacity',
   'orbitRx', 'orbitRy', 'orbitCx', 'orbitCy', 'orbitTilt', 'orbitArc', 'depthScale', 'launchAngle', 'camBlur', 'camFocus',
+  'cardTwistX', 'cardTwistY', 'cardTwistZ',
   'radius', 'angleStep', 'gap', 'stepY', 'stepZ', 'cardYaw', 'falloff', 'scatter', 'edgeFade',
   'perspective', 'camTiltX', 'camYawY', 'camZ', 'sceneScale',
   'scrollShift', 'revolutions', 'staggerGap', 'holdRatio',
@@ -7312,7 +7383,8 @@ function selectedKeys() {
 
 /** Apply a speed curve to every selected key (each key's curve shapes the move into the next key). */
 function applyEaseToSelected(ease, hold = false) {
-  selectedKeys().forEach(k => { k.ease = [...ease]; k.hold = hold; });
+  const segs = graphSegments();
+  (segs.length ? segs : selectedKeys()).forEach(k => { k.ease = [...ease]; k.hold = hold; });
   renderKeyframePanel();
   renderCards(state.currentTime);
 }
@@ -7557,9 +7629,38 @@ function primaryKey() {
   return k && kfUi.selected.has(k.id) ? k : null;
 }
 
+/**
+ * Keys whose outgoing curve the speed graph edits. Two or more selected keys on one property
+ * cover every segment between the first and the last of them; a lone selected key covers the
+ * move out of it (After Effects-style).
+ */
+function graphSegments() {
+  const byParam = {};
+  selectedKeys().forEach(k => (byParam[k.param] = byParam[k.param] || []).push(k));
+  const out = [];
+  for (const id in byParam) {
+    const list = state.anim[id];
+    const idx = byParam[id].map(k => list.indexOf(k)).sort((a, b) => a - b);
+    if (idx.length >= 2) {
+      for (let j = idx[0]; j < idx[idx.length - 1]; j++) out.push(list[j]);
+    } else if (list[idx[0] + 1]) {
+      out.push(list[idx[0]]);
+    }
+  }
+  return out.sort((a, b) => a.t - b.t);
+}
+
+/** The key the graph panel shows: the clicked key if its segment is being edited, else the first edited segment. */
+function graphKey() {
+  const p = primaryKey();
+  const segs = graphSegments();
+  if (p && segs.includes(p)) return p;
+  return segs[0] || p;
+}
+
 /** Speed graph panel for the selected key (the curve of the move from that key to the next). */
 function renderKeyGraph() {
-  const k = primaryKey();
+  const k = graphKey();
   document.getElementById('kfGraphEmpty').style.display = k ? 'none' : '';
   document.getElementById('kfGraphBody').style.display = k ? '' : 'none';
   if (!k) return;
@@ -7570,10 +7671,15 @@ function renderKeyGraph() {
   const idx = list.indexOf(k);
   const next = list[idx + 1] || null;
   const isColor = COLOR_PARAMS.has(id);
-  const multi = kfUi.selected.size > 1 ? `<br>${kfUi.selected.size} keys selected: curve edits apply to all of them.` : '';
+  const segs = graphSegments();
+  const sameRow = segs.filter(s => s.param === id);
+  const last = sameRow.length > 1 ? list[list.indexOf(sameRow[sameRow.length - 1]) + 1] : next;
+  const multi = segs.length > 1 ? `<br>Curve edits apply to ${segs.length} segments between the selected keys.` : '';
 
   let info;
-  if (next) {
+  if (next && sameRow.length > 1) {
+    info = `<b>${escapeHtml(m.label)}</b> · keys ${list.indexOf(sameRow[0]) + 1} → ${list.indexOf(last) + 1}<br>${fmt(sameRow[0].t, 2)}s → ${fmt(last.t, 2)}s · ${fmtVal(id, sameRow[0].v)} → ${fmtVal(id, last.v)}`;
+  } else if (next) {
     info = `<b>${escapeHtml(m.label)}</b> · key ${idx + 1} → ${idx + 2}<br>${fmt(k.t, 2)}s → ${fmt(next.t, 2)}s · ${fmtVal(id, k.v)} → ${fmtVal(id, next.v)}`;
   } else {
     info = `<b>${escapeHtml(m.label)}</b> · last key (${fmt(k.t, 2)}s)<br>Add a later key to shape the move out of this one.`;
@@ -7702,11 +7808,11 @@ function buildKeyframeUi() {
   kfUi.editor = createBezierEditor({
     svg: document.getElementById('kfBezierSvg'),
     get: () => {
-      const k = primaryKey();
+      const k = graphKey();
       return k && neighbourKey(k, 1) ? k.ease : null;
     },
     set: (b) => applyEaseToSelected(b, false),
-    hold: () => !!primaryKey()?.hold
+    hold: () => !!graphKey()?.hold
   });
 
   // Panel toggle
@@ -7921,7 +8027,7 @@ function buildKeyframeUi() {
     const v = e.target.value;
     e.target.value = '';
     if (!kfUi.selected.size || !v) return;
-    if (v === 'hold') applyEaseToSelected(primaryKey()?.ease || EASE_PRESETS.linear, true);
+    if (v === 'hold') applyEaseToSelected(graphKey()?.ease || EASE_PRESETS.linear, true);
     else applyEaseToSelected(EASE_PRESETS[v], false);
   });
 
@@ -7935,13 +8041,14 @@ function buildKeyframeUi() {
   });
 
   document.getElementById('kfHold').addEventListener('change', (e) => {
-    selectedKeys().forEach(k => { k.hold = e.target.checked; });
+    const segs = graphSegments();
+    (segs.length ? segs : selectedKeys()).forEach(k => { k.hold = e.target.checked; });
     renderKeyframePanel();
     renderCards(state.currentTime);
   });
 
   document.getElementById('kfTime').addEventListener('change', (e) => {
-    const k = primaryKey();
+    const k = graphKey();
     const t = parseFloat(e.target.value);
     if (!k || Number.isNaN(t)) return;
     k.t = clamp(t, 0, state.animDuration);
@@ -7951,7 +8058,7 @@ function buildKeyframeUi() {
   });
 
   document.getElementById('kfValue').addEventListener('change', (e) => {
-    const k = primaryKey();
+    const k = graphKey();
     const v = parseFloat(e.target.value);
     if (!k || Number.isNaN(v)) return;
     k.v = v;
@@ -7960,7 +8067,7 @@ function buildKeyframeUi() {
   });
 
   document.getElementById('kfValueColor').addEventListener('input', (e) => {
-    const k = primaryKey();
+    const k = graphKey();
     if (!k) return;
     k.v = e.target.value;
     renderKeyframePanel();
