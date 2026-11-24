@@ -1107,7 +1107,6 @@
       <select id="txPresetSelect" class="preset-select text-only"></select>
       <select id="presetSelect" class="preset-select carousel-only">
         <optgroup label="Classic Orbit">
-          <option value="ae-original">After Effects Classic (7 Cards)</option>
           <option value="infinite-loop">Smooth 3D Infinite Loop (8 Cards)</option>
           <option value="cyber-spin">Cyberpunk Speed Spin (10 Cards)</option>
           <option value="reels-vertical">Instagram/TikTok Reel (9:16)</option>
@@ -1423,7 +1422,6 @@
             <button class="layout-btn" data-layout="ring"><svg viewBox="0 0 36 22" fill="currentColor"><rect x="16" y="0.5" width="3" height="3"/><rect x="23" y="2" width="3" height="3"/><rect x="26.5" y="8" width="3" height="3"/><rect x="23" y="15" width="3" height="3"/><rect x="16" y="18" width="3" height="3"/><rect x="9" y="15" width="3" height="3"/><rect x="6.5" y="8" width="3" height="3"/><rect x="9" y="2" width="3" height="3"/><rect x="17" y="10" width="1.5" height="1.5" opacity=".5"/></svg>Ring</button>
             <button class="layout-btn" data-layout="sphere"><svg viewBox="0 0 36 22" fill="currentColor"><circle cx="18" cy="11" r="9.5" fill="none" stroke="currentColor" stroke-width=".8" opacity=".4"/><rect x="15.5" y="8.5" width="5" height="5"/><rect x="9" y="9" width="3.5" height="4" opacity=".7"/><rect x="23.5" y="9" width="3.5" height="4" opacity=".7"/><rect x="15.5" y="2.5" width="5" height="3" opacity=".7"/><rect x="15.5" y="16.5" width="5" height="3" opacity=".7"/><rect x="10" y="3.5" width="3" height="3" opacity=".45"/><rect x="23" y="15.5" width="3" height="3" opacity=".45"/></svg>Sphere</button>
           </div>
-          <p class="hint">Switching layout loads tuned geometry, camera and timing for that style. Colors and media stay.</p>
         </div>
 
         <div class="control-section">
@@ -1609,7 +1607,6 @@
               <input type="number" id="cardTwistZNum" class="num-input" step="1" value="0">
             </div>
           </div>
-          <p class="hint">Turns every card around its own axes, on top of the layout. Works in every layout and can be keyframed.</p>
         </div>
 
         <div class="control-section">
@@ -1672,7 +1669,6 @@
               <input type="number" id="camFocusNum" class="num-input" step="0.01" value="0">
             </div>
           </div>
-          <p class="hint">Like an After Effects camera with depth of field: cards at the focus depth stay sharp, the further a card sits from it the more it blurs.</p>
         </div>
       </div>
 
@@ -1712,7 +1708,6 @@
             <input type="checkbox" id="checkReverse">
           </div>
 
-          <p class="hint" id="timingHint" style="margin: -2px 0 10px;"></p>
 
           <div class="form-row">
             <span class="form-label">Duration (seconds)</span>
@@ -1825,7 +1820,6 @@
               <option value="60">60 fps</option>
             </select>
           </div>
-          <p class="hint">"Export to AE" downloads a .jsx script (zipped with a media folder when cards use images or videos). In After Effects run it with File &gt; Scripts &gt; Run Script File to get native 3D layers, a matching camera and keyframes.</p>
         </div>
       </div>
 
@@ -1885,7 +1879,7 @@ const PALETTES = {
  * kind 'periodic' — cards sit on a closed path (circle/sphere) so motion never wraps.
  */
 const LAYOUTS = {
-  orbit:     { name: 'Classic Orbit', kind: 'legacy',   preset: 'ae-original' },
+  orbit:     { name: 'Classic Orbit', kind: 'legacy',   preset: 'infinite-loop' },
   wall:      { name: 'Curved Wall',   kind: 'linear',   preset: 'curved-wall' },
   coverflow: { name: 'Coverflow',     kind: 'linear',   preset: 'coverflow' },
   helix:     { name: 'Helix',         kind: 'linear',   preset: 'helix' },
@@ -1934,13 +1928,6 @@ const SCENE_DEFAULTS = {
 
 // Precisely calibrated presets that comfortably fit the frame with generous margins
 const PRESETS = {
-  'ae-original': {
-    cardCount: 7, cardWidth: 460, cardHeight: 260, cardScale: 0.70, cardRadius: 22,
-    orbitRx: 450, orbitRy: 200, orbitCx: 960, orbitCy: 540, orbitTilt: 0, orbitArc: 360,
-    depthScale: 0.30, camBlur: 3.5, launchAngle: -56,
-    animMode: 'burst', animDuration: 3.65, revolutions: 1.0, staggerGap: 45,
-    bezier: [0.05, 0.90, 0.10, 1.00], palette: 'original', stageWidth: 1920, stageHeight: 1080
-  },
   'infinite-loop': {
     cardCount: 8, cardWidth: 420, cardHeight: 240, cardScale: 0.75, cardRadius: 20,
     orbitRx: 460, orbitRy: 180, orbitCx: 960, orbitCy: 540, orbitTilt: -6, orbitArc: 360,
@@ -2057,9 +2044,9 @@ const GEOMETRY_KEYS = [
 // Application State
 const state = {
   ...SCENE_DEFAULTS,
-  ...PRESETS['ae-original'],
-  bezier: [...PRESETS['ae-original'].bezier],
-  customColors: [...PALETTES.original],
+  ...PRESETS['infinite-loop'],
+  bezier: [...PRESETS['infinite-loop'].bezier],
+  customColors: [...PALETTES[PRESETS['infinite-loop'].palette]],
   isPlaying: true,
   currentTime: 0,
   loop: true,
@@ -3067,6 +3054,7 @@ function updatePlayBtn() {
 
 function updateTimingHint() {
   const hint = document.getElementById('timingHint');
+  if (!hint) return;
   const N = state.cardCount;
   if (state.animMode === 'step') {
     hint.textContent = `${N} steps per loop · ${(state.animDuration / N).toFixed(2)}s per card (${Math.round(state.holdRatio * 100)}% hold). The speed graph shapes each move.`;
