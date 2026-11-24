@@ -43,13 +43,6 @@
 
     const REEL = { client: "Noor Motion", title: "SaaS Explainer Showreel 2026", category: "Showreel", video: { type: "youtube", id: "pdp05Yl0Bp4" } };
 
-    // Demo videos for the After Effects tools (Master Mask has no demo yet).
-    const TOOL_DEMOS = {
-        compsync: { client: "CompSync 2.0", title: "CompSync 2.0 demo", category: "AE Script", video: { type: "youtube", id: "K5yyQGnau20" } },
-        autocaption: { client: "AutoCaption 2.0", title: "AutoCaption 2.0 demo", category: "AE Script", video: { type: "youtube", id: "Ru0QRRxmgQc" } },
-        texteco: { client: "textEco", title: "textEco Text Animator demo", category: "AE Text Preset", video: { type: "youtube", id: "YTG3v_D5ekc" } },
-    };
-
     /**
      * Builds the player element for a video source. Kept in one place so the
      * modal, the reel and any future hover previews agree on embed parameters.
@@ -375,13 +368,6 @@
 
         $$("[data-open-reel]").forEach((btn) => btn.addEventListener("click", () => {
             showProject(REEL, "reel");
-            openDialog(modal, () => player.replaceChildren());
-        }));
-
-        $$("[data-tool-demo]").forEach((btn) => btn.addEventListener("click", () => {
-            const demo = TOOL_DEMOS[btn.dataset.toolDemo];
-            if (!demo) return;
-            showProject(demo, btn.dataset.toolDemo);
             openDialog(modal, () => player.replaceChildren());
         }));
     }

@@ -1302,13 +1302,12 @@
     .tool-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s var(--ease-out); }
     .tool:hover .tool-media { border-color: var(--accent); }
     .tool:hover .tool-media img { transform: scale(1.03); }
-    .tool-kind { color: var(--accent-ink); }
     .tool-name { font-size: 20px; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
 
     .tool-foot {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-start;
         gap: 12px;
         margin-top: auto;
         padding-top: 14px;
