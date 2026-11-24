@@ -1,0 +1,858 @@
+/* ==========================================================================
+   NOOR MOTION PORTFOLIO - DESIGN SYSTEM & STYLESHEET
+   Default: Base44 Warm Stone (#EEECEB) Canvas with All-Over Dot Grid Pattern
+   ========================================================================== */
+
+@font-face {
+    font-family: 'Jersey 25';
+    src: url('400.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@1,6..96,400..800&family=Caveat:wght@700&family=Cinzel:wght@700&family=Hind+Siliguri:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Jersey+25&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@1,400;1,600;1,700;1,900&family=Silkscreen:wght@400;700&family=Syne:wght@700;800&family=VT323&display=swap');
+
+:root {
+    /* BASE44.COM SIGNATURE COLOR PALETTE WITH BRAND RED */
+    --bg-dark: #EEECEB;
+    --bg-dark-rgb: 238, 236, 235;
+    --bg-card: #FFFFFF;
+    --bg-card-hover: #FFFFFF;
+    --border-subtle: #DCD9D7;
+    --border-hover: #E11D48;
+
+    --accent-lime: #e11d48;
+    --accent-blue: #F43F5E;
+    --text-primary: #121212;
+    --text-muted: #555555;
+    --text-dim: #888888;
+
+    --font-sans: 'Inter', 'Hind Siliguri', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-pixel-mono: 'Jersey 25', 'Silkscreen', 'VT323', monospace;
+    --font-serif: 'Instrument Serif', 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+}
+
+/* DARK THEME OVERRIDES (Comprehensive Brand Red Palette Engine) */
+body.dark-mode {
+    --bg-dark: #050505;
+    --bg-dark-rgb: 5, 5, 5;
+    --bg-card: #111111;
+    --bg-card-hover: #181818;
+    --border-subtle: rgba(255, 255, 255, 0.1);
+    --border-hover: #FF334B;
+
+    --accent-lime: #FF334B;
+    --accent-blue: #FF5268;
+    --text-primary: #F8FAFC;
+    --text-muted: #94A3B8;
+    --text-dim: #64748B;
+}
+
+/* Global Text Colors in Dark Mode */
+body.dark-mode,
+body.dark-mode .text-slate-900 {
+    color: #F8FAFC !important;
+}
+
+body.dark-mode .text-slate-800 {
+    color: #F1F5F9 !important;
+}
+
+body.dark-mode .text-slate-700 {
+    color: #E2E8F0 !important;
+}
+
+body.dark-mode .text-slate-600 {
+    color: #CBD5E1 !important;
+}
+
+body.dark-mode .text-slate-500 {
+    color: #94A3B8 !important;
+}
+
+/* Brand Red Accent Color Overrides in Dark Mode */
+body.dark-mode .text-\[\#2563EB\],
+body.dark-mode .text-\[\#E11D48\] {
+    color: #FF334B !important;
+}
+
+body.dark-mode .bg-\[\#2563EB\],
+body.dark-mode .bg-\[\#E11D48\] {
+    background-color: #FF334B !important;
+    color: #FFFFFF !important;
+}
+
+body.dark-mode .bg-\[\#2563EB\]\/10,
+body.dark-mode .bg-\[\#E11D48\]\/10 {
+    background-color: rgba(255, 51, 75, 0.18) !important;
+}
+
+body.dark-mode .border-\[\#2563EB\],
+body.dark-mode .border-\[\#E11D48\] {
+    border-color: #FF334B !important;
+}
+
+body.dark-mode .border-\[\#2563EB\]\/20,
+body.dark-mode .border-\[\#E11D48\]\/20 {
+    border-color: rgba(255, 51, 75, 0.35) !important;
+}
+
+/* Background & Card Overrides in Dark Mode */
+body.dark-mode .b44-card,
+body.dark-mode .bg-white {
+    background-color: #111111 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: #F8FAFC !important;
+}
+
+body.dark-mode .b44-card:hover {
+    background-color: #181818 !important;
+    border-color: #FF334B !important;
+}
+
+body.dark-mode .bg-slate-100 {
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    color: #F8FAFC !important;
+}
+
+body.dark-mode .bg-black\/5 {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+body.dark-mode .bg-black\/10 {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Borders in Dark Mode */
+body.dark-mode .border-slate-200,
+body.dark-mode .border-black\/10,
+body.dark-mode .border-black\/15,
+body.dark-mode .border-black\/20 {
+    border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Header & Mobile Menu in Dark Mode */
+body.dark-mode header,
+body.dark-mode #main-header {
+    background-color: rgba(10, 10, 10, 0.85) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+body.dark-mode #mobile-menu {
+    background-color: #0A0A0A !important;
+    color: #F8FAFC !important;
+}
+
+/* Product Modal & Video Modal in Dark Mode */
+body.dark-mode #product-modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.85) !important;
+}
+
+body.dark-mode #product-modal-content {
+    background-color: #121212 !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    color: #F8FAFC !important;
+}
+
+body.dark-mode #product-modal-content #modal-title {
+    color: #FFFFFF !important;
+}
+
+body.dark-mode #product-modal-content #modal-details {
+    color: #CBD5E1 !important;
+}
+
+/* Base Body Setup with Base44 Dot Grid Matrix */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: var(--font-sans);
+}
+
+html,
+body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+}
+
+body {
+    background-color: var(--bg-dark);
+    background-image: radial-gradient(rgba(0, 0, 0, 0.12) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: 0 0;
+    color: var(--text-primary);
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Standard Normal Mouse Cursor */
+body {
+    cursor: auto !important;
+}
+
+.cursor-dot, .cursor-outline {
+    display: none !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a {
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+body.dark-mode {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+}
+
+/* Ultra-Stylish Luxury Editorial Italic Serif Typography (Bodoni Moda & Instrument Serif) */
+.font-serif-italic {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+/* Monospace Utility Typography */
+.font-mono-custom {
+    font-family: var(--font-mono);
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #BBB7B5;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-lime);
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background: #222222;
+}
+
+/* Dotted Border Hover Effect (haoqi.design signature) */
+.dotted-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+}
+
+.dotted-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px dotted transparent;
+    pointer-events: none;
+    transition: border-color 0.2s ease;
+}
+
+.dotted-btn:hover::before {
+    border-color: var(--accent-lime);
+}
+
+/* Base44 Crisp White Elevated Cards (5px Corner Radius Globally) */
+.b44-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 5px !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.4s ease,
+        background-color 0.4s ease;
+}
+
+.b44-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.08);
+}
+
+body.dark-mode .b44-card {
+    box-shadow: none;
+}
+
+body.dark-mode .b44-card:hover {
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5);
+}
+
+/* Portfolio Dense Packing Grid (Fills Empty Spaces) */
+#portfolio-grid {
+    grid-auto-flow: dense;
+    align-items: start;
+}
+
+/* Smooth Card Expansion & Morphing Player (Strict 5px Corner Radius Mask) */
+.portfolio-item-card {
+    border-radius: 5px !important;
+    overflow: hidden !important;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, width, height;
+}
+
+.portfolio-item-card .media-box {
+    border-radius: 5px !important;
+    overflow: hidden !important;
+    position: relative !important;
+}
+
+.portfolio-item-card iframe:not(.gdrive-iframe) {
+    width: 100% !important;
+    height: 100% !important;
+    border: 0 !important;
+    border-radius: 5px !important;
+    overflow: hidden !important;
+    transform: none !important;
+}
+
+/* Google Drive Video Framing Engine (Completely crops GDrive top header bar & pop-out icon, aligns video edge-to-edge) */
+.gdrive-iframe {
+    position: absolute !important;
+    left: 0 !important;
+    width: 100% !important;
+    top: -58px !important;
+    height: calc(100% + 60px) !important;
+    border: 0 !important;
+    border-radius: 5px !important;
+    transform: none !important;
+    z-index: 10 !important;
+}
+
+@media (max-width: 639px) {
+    .gdrive-iframe {
+        top: -52px !important;
+        height: calc(100% + 54px) !important;
+    }
+}
+
+/* Phones and touch screens: Drive lays its player out differently there, so the fixed
+   pixel crop above cut off the video and pushed the play control off-centre.
+   Show the whole Drive frame instead. */
+@media (max-width: 767px), (hover: none) {
+    .gdrive-iframe {
+        top: 0 !important;
+        height: 100% !important;
+    }
+}
+
+/* Expanded Portfolio Video Frame (Strict 16:9 Aspect Ratio matching exact video dimensions) */
+.portfolio-card-expanded .media-box {
+    aspect-ratio: 16 / 9 !important;
+    min-height: auto !important;
+}
+
+@media (min-width: 640px) {
+    .portfolio-card-expanded .media-box {
+        aspect-ratio: 16 / 9 !important;
+        min-height: auto !important;
+    }
+}
+
+.portfolio-card-expanded {
+    transform: scale(1.01);
+    z-index: 20;
+    box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.15) !important;
+}
+
+@media (max-width: 767px) {
+    .portfolio-card-expanded {
+        transform: none !important;
+    }
+}
+
+.video-frame-fadein {
+    animation: fadeInVideo 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.video-player-wrapper iframe {
+    transition: pointer-events 0.15s ease;
+}
+
+@keyframes fadeInVideo {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Interactive Cursor */
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-lime);
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+.cursor-outline {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--accent-lime);
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    z-index: 9998;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
+    opacity: 0.6;
+}
+
+body.hover-active .cursor-dot {
+    width: 0;
+    height: 0;
+}
+
+body.hover-active .cursor-outline {
+    width: 48px;
+    height: 48px;
+    background-color: rgba(37, 99, 235, 0.08);
+    border-color: var(--accent-lime);
+}
+
+body.dark-mode.hover-active .cursor-outline {
+    background-color: rgba(192, 254, 4, 0.1);
+}
+
+/* Page Loader (Permanently Disabled for Instant Direct Landing) */
+#loader,
+.loader-bar,
+.loader-progress {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Vignette Gradients */
+.video-vignette-vertical {
+    background: linear-gradient(to top, var(--bg-dark) 0%, transparent 20%, transparent 80%, var(--bg-dark) 100%);
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.video-vignette-horizontal {
+    background: linear-gradient(to right, var(--bg-dark) 0%, transparent 15%, transparent 85%, var(--bg-dark) 100%);
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+/* Modal Backdrops */
+#product-modal-backdrop,
+#video-modal {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+/* Mobile Responsiveness Fine-tuning */
+@media (max-width: 639px) {
+    .b44-card {
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.03);
+    }
+
+    #product-modal-content {
+        max-height: 92vh;
+        margin: 1rem;
+    }
+
+    /* Ensure minimum touch target sizes */
+    .dotted-btn,
+    button,
+    a.mobile-link {
+        min-height: 44px;
+    }
+
+    /* Mobile Video Frame Optimization (Strict Unscaled 16:9 for Phone Screens) */
+    .portfolio-item-card.portfolio-card-expanded .media-box {
+        aspect-ratio: 16 / 9 !important;
+        min-height: auto !important;
+        height: auto !important;
+    }
+
+    #video-modal > div {
+        min-height: 260px !important;
+        max-height: 80vh !important;
+    }
+
+    #modal-media-container {
+        min-height: 240px !important;
+    }
+
+    #showreel-player-box {
+        min-height: 240px !important;
+    }
+}
+
+/* Morphing Navigation Header (Floating Pill Shape on Scroll) */
+#main-header {
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: top, max-width, border-radius, box-shadow, margin, padding;
+}
+
+#main-header.header-scrolled {
+    top: 1rem !important;
+    left: 1rem !important;
+    right: 1rem !important;
+    max-width: 1040px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-top: 0.55rem !important;
+    padding-bottom: 0.55rem !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    border-radius: 9999px !important;
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    box-shadow: 0 14px 35px -6px rgba(0, 0, 0, 0.12), 0 4px 14px -2px rgba(0, 0, 0, 0.06) !important;
+    background-color: rgba(238, 236, 235, 0.92) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+}
+
+body.dark-mode #main-header.header-scrolled {
+    background-color: rgba(12, 12, 12, 0.92) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 16px 40px -6px rgba(0, 0, 0, 0.7) !important;
+}
+
+@media (max-width: 639px) {
+    #main-header.header-scrolled {
+        top: 0.5rem !important;
+        left: 0.75rem !important;
+        right: 0.75rem !important;
+        border-radius: 16px !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+}
+
+/* ==========================================
+   📌 STACKING CARDS SCROLL SYSTEM (Services & Solutions)
+   ========================================== */
+.stacking-cards-pin-wrapper {
+    position: relative;
+}
+
+.stacking-card {
+    will-change: transform, top;
+    box-shadow: 0 -8px 25px -4px rgba(0, 0, 0, 0.08), 0 25px 35px -5px rgba(0, 0, 0, 0.12);
+}
+
+.stacking-card-1 {
+    background-color: #CBE5FF;
+}
+
+.stacking-card-2 {
+    background-color: #DCF5B7;
+}
+
+.stacking-card-3 {
+    background-color: #FBCB43;
+}
+
+.stacking-card-4 {
+    background-color: #FFD6DD;
+}
+
+/* Dark Mode Overrides for Stacking Cards System */
+body.dark-mode .stacking-card {
+    box-shadow: 0 -10px 30px -5px rgba(0, 0, 0, 0.5), 0 25px 45px -5px rgba(0, 0, 0, 0.8) !important;
+}
+
+body.dark-mode .stacking-card-1 {
+    background-color: #1E293B !important;
+    border-color: rgba(56, 189, 248, 0.35) !important;
+}
+
+body.dark-mode .stacking-card-2 {
+    background-color: #142E1B !important;
+    border-color: rgba(74, 222, 128, 0.35) !important;
+}
+
+body.dark-mode .stacking-card-3 {
+    background-color: #2D2305 !important;
+    border-color: rgba(250, 204, 21, 0.35) !important;
+}
+
+body.dark-mode .stacking-card-4 {
+    background-color: #2D1219 !important;
+    border-color: rgba(251, 113, 133, 0.35) !important;
+}
+
+body.dark-mode .stacking-card .text-slate-900 {
+    color: #F8FAFC !important;
+}
+
+body.dark-mode .stacking-card .text-slate-800,
+body.dark-mode .stacking-card .text-slate-800\/90 {
+    color: #E2E8F0 !important;
+}
+
+body.dark-mode .stacking-card .text-slate-700 {
+    color: #CBD5E1 !important;
+}
+
+body.dark-mode .stacking-card .text-slate-600 {
+    color: #94A3B8 !important;
+}
+
+body.dark-mode .stacking-card .border-slate-900\/15 {
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+body.dark-mode .stacking-card .bg-white\/95 {
+    background-color: rgba(15, 23, 42, 0.92) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* ==========================================================================
+   HERO TYPOGRAPHY - "eMotion Designer" (Massive Top Headline + GSAP Typing)
+   ========================================================================== */
+.font-pixel-mono {
+    font-family: 'Jersey 25', 'Silkscreen', 'VT323', monospace !important;
+}
+
+.hero-massive-title {
+    font-family: 'Jersey 25', 'Silkscreen', 'VT323', monospace !important;
+    font-weight: 400 !important;
+    font-size: clamp(3rem, 11vw, 10.5rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    display: block;
+    width: 100%;
+    text-align: center;
+    min-height: 1.1em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#hero-typing-a,
+#hero-typing-b {
+    white-space: pre;
+    font-family: inherit;
+    font-weight: 400 !important;
+    color: #121212;
+}
+
+#hero-typing-cur {
+    display: inline-block;
+    position: relative;
+    width: 0;
+    height: 0.80em;
+    vertical-align: -0.15em;
+    animation: blinkCur 1s ease-in-out infinite;
+}
+
+#hero-typing-cur::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: clamp(3px, 0.038em, 6px);
+    transform: translateX(-50%);
+    background: #FF8598;
+}
+
+#hero-typing-cur.typing {
+    animation: none !important;
+    opacity: 1 !important;
+}
+
+@keyframes blinkCur {
+    0%, 48% {
+        opacity: 1;
+    }
+    58%, 90% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+body.dark-mode #hero-typing-a,
+body.dark-mode #hero-typing-b {
+    color: #F8FAFC !important;
+}
+
+body.dark-mode #hero-typing-cur::after {
+    background: #FF8598 !important;
+}
+
+/* ==========================================================================
+   HERO STAGE - portrait with the title in a fixed bounding box over the body
+   ========================================================================== */
+:root {
+    --hero-red: #ED0024;
+}
+
+/* isolation: the title's multiply blend only mixes with the photo inside this stage,
+   so over the empty background the text stays pure red in both themes. */
+.hero-stage {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 24px;
+}
+
+.hero-me {
+    position: relative;
+    margin: 0;
+    height: min(88vh, calc(96vw * 4557 / 5230));
+    aspect-ratio: 5230 / 4557;
+    cursor: pointer;
+}
+
+.hero-me img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.hero-me .hero-me-outline {
+    display: none !important;
+}
+
+.hero-me .hero-me-photo {
+    position: relative;
+    filter: grayscale(1);
+    transition: filter 0.6s ease;
+}
+
+.hero-me:hover .hero-me-photo,
+.hero-me.is-colour .hero-me-photo {
+    filter: grayscale(0);
+}
+
+/* No z-index or transform here: either would cut the title off from the photo
+   and stop the blend. Pointer passes through so hovering the body colours it. */
+.hero-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 64%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    pointer-events: none;
+}
+
+.hero-socials {
+    pointer-events: auto;
+}
+
+/* The bounding box is always shown, like a selected text layer. It hugs the text,
+   so it grows and shrinks with the typing, and stays centred in the hero. */
+.hero-title-box {
+    position: relative;
+    width: auto;
+    min-width: 0.6em; /* keeps the handles apart while the text is empty between loops */
+    max-width: 100%;
+    padding: 0 0.07em;
+    font-size: clamp(2.5rem, 12.3vw, 15rem);
+    border: 2px solid var(--hero-red, #ED0024);
+    box-shadow: 0 0 0 1px rgba(237, 0, 36, 0.06);
+}
+
+.hero-handle {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    margin: -7px 0 0 -7px;
+    background: #FFFFFF;
+    border: 2px solid var(--hero-red, #ED0024);
+}
+
+.hero-handle.tl { left: 0; top: 0; }
+.hero-handle.tc { left: 50%; top: 0; }
+.hero-handle.tr { left: 100%; top: 0; }
+.hero-handle.ml { left: 0; top: 50%; }
+.hero-handle.mr { left: 100%; top: 50%; }
+.hero-handle.bl { left: 0; top: 100%; }
+.hero-handle.bc { left: 50%; top: 100%; }
+.hero-handle.br { left: 100%; top: 100%; }
+
+/* Jersey 25 leaves 0.19em above the capitals and 0.05em below the descenders inside
+   a 1em line. The margins trim that so the box sits about 0.07em from the ink. */
+#hero .hero-massive-title {
+    font-size: 1em;
+    line-height: 1;
+    min-height: 0;
+    width: auto;
+    text-align: left;
+    margin: -0.12em 0 0.016em;
+    mix-blend-mode: multiply;
+}
+
+#hero #hero-typing-a,
+#hero #hero-typing-b,
+body.dark-mode #hero #hero-typing-a,
+body.dark-mode #hero #hero-typing-b {
+    color: var(--hero-red) !important;
+}
+
+#hero #hero-typing-cur::after,
+body.dark-mode #hero #hero-typing-cur::after {
+    background: #FF8598 !important;
+}
+
+@media (max-width: 639px) {
+    .hero-handle {
+        width: 10px;
+        height: 10px;
+        margin: -5px 0 0 -5px;
+        border-width: 1.5px;
+    }
+    .hero-title-box { border-width: 1.5px; }
+    .hero-overlay { gap: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-me .hero-me-photo { transition: none; }
+}

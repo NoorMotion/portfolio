@@ -1,0 +1,9 @@
+{
+  "name": "nralam-portfolio",
+  "private": true,
+  "description": "nralam.com — static site on GitHub Pages. Only the CSS has a build step.",
+  "scripts": {
+    "build:css": "npx --yes tailwindcss@3.4.17 -i style.css -o style.min.css --minify",
+    "watch:css": "npx --yes tailwindcss@3.4.17 -i style.css -o style.min.css --watch"
+  }
+}
