@@ -284,7 +284,7 @@
     position: relative;
     overflow: hidden;
   }
-  .canvas-stage-wrapper.hand { cursor: grab; }
+  .canvas-stage-wrapper { cursor: grab; }
   .canvas-stage-wrapper.panning { cursor: grabbing; }
 
   .canvas-stage {
@@ -746,6 +746,10 @@
     transition: border-color 150ms var(--ease), color 150ms var(--ease);
   }
   .media-slot:hover, .media-slot.drag-over { border-color: var(--accent); border-style: solid; color: var(--accent); }
+  .media-slot.has-color { border-style: solid; border-color: rgba(0, 0, 0, 0.08); }
+  .media-slot.has-color:hover, .media-slot.has-color.drag-over { border-color: var(--accent); }
+  .media-slot.on-light { color: rgba(0, 0, 0, 0.55); }
+  .media-slot.on-dark { color: rgba(255, 255, 255, 0.75); }
   .media-slot img, .media-slot video {
     position: absolute; inset: 0; width: 100%; height: 100%;
     object-fit: cover; pointer-events: none;
@@ -1166,7 +1170,7 @@
             <input type="checkbox" id="checkTransparentBg">
             <span>Transparent</span>
           </label>
-          <select id="zoomSelect" class="preset-select sm" title="Scroll over the comp to zoom · Shift+scroll, middle-drag or Space+drag to pan · double-click beside the comp to fit">
+          <select id="zoomSelect" class="preset-select sm" title="Scroll over the comp to zoom · drag to move it · double-click beside the comp to fit">
             <option value="fit" selected>Fit</option>
             <option value="0.25">25%</option>
             <option value="0.5">50%</option>
@@ -1339,7 +1343,6 @@
             <span class="form-label">Repeat media to fill empty cards</span>
             <input type="checkbox" id="checkRepeatMedia" checked>
           </div>
-          <p class="hint">Click a slot to place a file on that card, or drop files onto a slot. "Add" fills empty cards in order (and adds cards if needed). You can also drop files straight onto the canvas.</p>
         </div>
 
         <div class="control-section">
@@ -2634,6 +2637,29 @@ function disposeMediaIn(container) {
 
 let slotTargetIndex = null;
 
+/**
+ * Show each card's palette color on its media slot: a full fill while the slot is empty,
+ * a strip along the bottom once media covers it, so the palette reads next to the media.
+ */
+function paintMediaSlots() {
+  const grid = document.getElementById('mediaGrid');
+  if (!grid) return;
+  [...grid.children].forEach((slot, i) => {
+    const color = cardColor(i);
+    const empty = !slot.querySelector('img, video');
+    slot.classList.add('has-color');
+    slot.style.backgroundColor = empty ? color : '';
+    slot.style.boxShadow = empty ? '' : `inset 0 -4px 0 ${color}`;
+    let light = true;
+    if (/^#[0-9a-f]{6}$/i.test(color)) {
+      const [r, g, b] = hexToRgb(color);
+      light = 0.2126 * r + 0.7152 * g + 0.0722 * b > 140;
+    }
+    slot.classList.toggle('on-light', empty && light);
+    slot.classList.toggle('on-dark', empty && !light);
+  });
+}
+
 function renderMediaGrid() {
   const grid = document.getElementById('mediaGrid');
   disposeMediaIn(grid);
@@ -2692,6 +2718,7 @@ function renderMediaGrid() {
 
     grid.appendChild(slot);
   }
+  paintMediaSlots();
 
   const placed = placedMediaCount();
   document.getElementById('mediaCount').textContent = placed
@@ -3194,12 +3221,14 @@ function renderColorSwatches() {
       ensureColorCount();
       state.customColors[i] = e.target.value;
       swatch.style.backgroundColor = e.target.value;
+      paintMediaSlots();
       renderCards(state.currentTime);
     });
 
     swatch.appendChild(input);
     container.appendChild(swatch);
   }
+  paintMediaSlots();
 }
 
 function updateCanvasSize() {
@@ -3739,13 +3768,12 @@ function setupEventListeners() {
     zoomViewerAt(Math.exp(-clamp(dy, -200, 200) * (e.ctrlKey ? 0.01 : 0.002)), e.clientX, e.clientY);
   }, { passive: false });
 
-  // Hand tool: hold Space (a quick tap still plays) or use the middle button, then drag.
-  let spaceHeld = false, handPan = null;
+  // The comp viewer is a hand tool: dragging anywhere over it moves the comp, nothing else.
+  let handPan = null;
   viewer.addEventListener('mousedown', (e) => {
-    if (!(e.button === 1 || (e.button === 0 && spaceHeld))) return;
+    if (e.button !== 0 && e.button !== 1) return;
     e.preventDefault();
     handPan = { x: e.clientX, y: e.clientY };
-    if (spaceHeld) spaceHeld = 'used';
     viewer.classList.add('panning');
   });
   window.addEventListener('mousemove', (e) => {
@@ -3770,15 +3798,10 @@ function setupEventListeners() {
     const tag = e.target.tagName;
     if (e.code === 'Space' && tag !== 'INPUT' && tag !== 'TEXTAREA' && tag !== 'SELECT') {
       e.preventDefault();
-      if (!e.repeat && !spaceHeld) { spaceHeld = true; viewer.classList.add('hand'); }
+      if (e.repeat) return;
+      state.isPlaying = !state.isPlaying;
+      updatePlayBtn();
     }
-  });
-  window.addEventListener('keyup', (e) => {
-    if (e.code !== 'Space' || !spaceHeld) return;
-    // Space toggles playback on release, unless it was held to pan the comp.
-    if (spaceHeld !== 'used') { state.isPlaying = !state.isPlaying; updatePlayBtn(); }
-    spaceHeld = false;
-    viewer.classList.remove('hand');
   });
 
   // Replay
