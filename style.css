@@ -1156,61 +1156,135 @@
     }
 
     /* ----------------------------------------------------------------------
-       What I do
+       What I do: service tabs → step list → step detail (Ajmal pipeline)
        ---------------------------------------------------------------------- */
-    .services { display: grid; grid-template-columns: minmax(0, 1fr); border-top: 1px solid var(--rule); }
+    .pipe-tabs {
+        display: flex;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
 
-    @media (min-width: 768px) {
-        .services { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pipe-tabs::-webkit-scrollbar { display: none; }
+
+    .pipe-tab {
+        flex: none;
+        min-height: 46px;
+        padding: 0 22px;
+        margin-right: -1px;
+        border: 1px solid var(--rule);
+        border-bottom: 0;
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 13px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--fg-muted);
+        transition: color 0.15s ease, background-color 0.15s ease;
+    }
+
+    .pipe-tab:hover { color: var(--fg); }
+    .pipe-tab[aria-selected="true"] { color: var(--fg); background: var(--rule); }
+
+    .pipe-body {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 40px;
+        border-top: 1px solid var(--rule);
     }
 
     @media (min-width: 1024px) {
-        .services { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        .pipe-body { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; }
     }
 
-    .service {
+    /* Red squares at the four corners of a panel. */
+    .corner-marks {
+        position: absolute;
+        inset: -5px;
+        pointer-events: none;
+        z-index: 2;
+        --m: linear-gradient(var(--accent), var(--accent));
+        background:
+            var(--m) left top / 10px 10px no-repeat,
+            var(--m) right top / 10px 10px no-repeat,
+            var(--m) left bottom / 10px 10px no-repeat,
+            var(--m) right bottom / 10px 10px no-repeat;
+    }
+
+    .pipe-list { position: relative; border-inline: 1px solid var(--rule); }
+
+    .pipe-step {
+        display: grid;
+        grid-template-columns: clamp(44px, 5vw, 88px) minmax(0, 1fr) auto;
+        align-items: center;
+        width: 100%;
+        min-height: 84px;
+        padding: 0 20px;
+        border-bottom: 1px solid var(--rule);
+        text-align: left;
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        text-transform: uppercase;
+        color: var(--fg-muted);
+        transition: color 0.15s ease;
+    }
+
+    @media (min-width: 1024px) {
+        .pipe-step { min-height: 124px; padding: 0 32px; }
+    }
+
+    .pipe-num { font-size: clamp(22px, 2.4vw, 36px); line-height: 1; }
+    .pipe-name { font-size: clamp(15px, 1.6vw, 24px); line-height: 1.2; letter-spacing: 0.05em; }
+
+    .pipe-arrow {
+        width: clamp(32px, 3.6vw, 52px);
+        height: auto;
+        fill: currentColor;
+        shape-rendering: crispEdges;
+        opacity: 0;
+        transform: translateX(-8px);
+        transition: opacity 0.18s ease, transform 0.2s var(--ease-out);
+    }
+
+    .pipe-step:hover { color: var(--fg); }
+
+    .pipe-step[aria-pressed="true"] {
+        color: var(--fg);
+        background-image: radial-gradient(var(--rule-strong) 1px, transparent 1px);
+        background-size: 5px 5px;
+    }
+
+    .pipe-step[aria-pressed="true"] .pipe-arrow { opacity: 1; transform: none; }
+
+    .pipe-detail {
         position: relative;
         display: flex;
         flex-direction: column;
-        gap: 12px;
-        padding: 28px 0 32px;
-        border-bottom: 1px solid var(--rule);
-    }
-
-    @media (min-width: 768px) {
-        .service { padding: 32px 28px 36px; border-right: 1px solid var(--rule); }
-        .service:nth-child(2n) { border-right: 0; }
-        .service:nth-child(2n + 1) { padding-left: 0; }
+        justify-content: center;
+        gap: 24px;
+        padding: 40px 24px;
+        border: 1px solid var(--rule);
     }
 
     @media (min-width: 1024px) {
-        .service { border-bottom: 0; }
-        .service:nth-child(2n) { border-right: 1px solid var(--rule); }
-        .service:nth-child(2n + 1) { padding-left: 28px; }
-        .service:first-child { padding-left: 0; }
-        .service:last-child { border-right: 0; padding-right: 0; }
+        .pipe-detail { padding: 64px clamp(40px, 5vw, 88px); }
     }
 
-    /* A red "work area" bar slides in along the top edge on hover. */
-    .service::before {
-        content: "";
-        position: absolute;
-        top: -1px;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: var(--accent);
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 0.25s var(--ease-out);
+    .pipe-text {
+        font-size: clamp(26px, 3vw, 46px);
+        font-weight: 600;
+        line-height: 1.12;
+        letter-spacing: -0.045em;
+        text-wrap: pretty;
     }
 
-    .service:hover::before,
-    .service:focus-within::before { transform: scaleX(1); }
-
-    .service-icon { width: 32px; height: 32px; margin-bottom: 12px; stroke-width: 1.5; color: var(--fg); }
-    .service-title { font-size: 20px; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
-    .service-time { display: flex; align-items: center; gap: 10px; margin-top: auto; padding-top: 12px; }
+    .pipe-foot {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px 24px;
+        margin-top: 16px;
+        padding-top: 20px;
+        border-top: 1px solid var(--rule);
+    }
 
     .service-link {
         display: inline-flex;
@@ -1222,106 +1296,6 @@
 
     .service-link .icon { width: 16px; height: 16px; transition: transform 0.2s var(--ease-out); }
     .service-link:hover .icon { transform: translateX(3px); }
-
-    /* ----------------------------------------------------------------------
-       Process: tabs are AE layer bars, a playhead marks the active step
-       ---------------------------------------------------------------------- */
-    .proc-scroll { overflow-x: auto; scrollbar-width: none; margin-inline: calc(-1 * var(--pad)); padding-inline: var(--pad); }
-    .proc-scroll::-webkit-scrollbar { display: none; }
-
-    .proc-tabs {
-        --i: 0;
-        position: relative;
-        display: grid;
-        grid-template-columns: repeat(5, minmax(168px, 1fr));
-        border-top: 1px solid var(--rule-strong);
-        border-bottom: 1px solid var(--rule);
-    }
-
-    .proc-tab {
-        position: relative;
-        display: grid;
-        gap: 6px;
-        padding: 20px 16px 22px 0;
-        text-align: left;
-        color: var(--fg-muted);
-        transition: color 0.18s ease;
-    }
-
-    .proc-tab:hover, .proc-tab[aria-selected="true"] { color: var(--fg); }
-    .proc-tab[aria-selected="true"] .mono { color: var(--accent-ink); }
-    .proc-name { font-size: 16px; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; }
-
-    /* Layer duration bars, staggered like a comp timeline. */
-    .proc-bar {
-        display: block;
-        height: 8px;
-        margin-top: 10px;
-        margin-right: 12px;
-        border-radius: 2px;
-        background: var(--rule-strong);
-        opacity: 0.55;
-        transition: background-color 0.2s ease, opacity 0.2s ease;
-    }
-
-    .proc-tab:nth-child(2) .proc-bar { margin-right: 40%; }
-    .proc-tab:nth-child(3) .proc-bar { margin-right: 20%; }
-    .proc-tab:nth-child(4) .proc-bar { margin-right: 4px; }
-    .proc-tab:nth-child(5) .proc-bar { margin-right: 30%; }
-    .proc-tab:nth-child(6) .proc-bar { margin-right: 12%; }
-    .proc-tab[aria-selected="true"] .proc-bar { background: var(--accent); opacity: 1; }
-
-    .proc-playhead {
-        position: absolute;
-        top: -1px;
-        bottom: 0;
-        left: 0;
-        width: 20%;
-        transform: translateX(calc(var(--i) * 100%));
-        transition: transform 0.45s var(--ease-out);
-        pointer-events: none;
-    }
-
-    .proc-playhead::before {    /* CTI head */
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 11px;
-        height: 13px;
-        margin-left: -5.5px;
-        background: var(--accent);
-        clip-path: polygon(0 0, 100% 0, 100% 55%, 50% 100%, 0 55%);
-    }
-
-    .proc-playhead::after {     /* CTI line */
-        content: "";
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        width: 1px;
-        margin-left: -0.5px;
-        background: var(--accent);
-    }
-
-    .proc-panel {
-        display: grid;
-        gap: 24px;
-        padding-top: 32px;
-    }
-
-    .proc-panel[hidden] { display: none; }
-    .proc-panel h3 { margin-bottom: 12px; }
-    .proc-panel h3 + p { max-width: 52ch; font-size: 18px; line-height: 1.55; }
-
-    @media (min-width: 1024px) {
-        .proc-panel { grid-template-columns: 7fr 4fr; gap: 64px; padding-top: 44px; }
-    }
-
-    .kf-list { display: grid; gap: 10px; }
-    .kf-list li { display: flex; align-items: baseline; gap: 12px; }
-    .kf-list li::before { content: ""; flex: none; width: 7px; height: 7px; background: var(--accent); transform: translateY(-2px) rotate(45deg); }
 
     /* ----------------------------------------------------------------------
        Tools I built

@@ -409,141 +409,109 @@
     }
 
     /* ----------------------------------------------------------------------
-       Process tabs (WAI-ARIA tabs pattern). While on screen and untouched,
-       the playhead steps through the stages on its own.
+       What I do: service tabs → steps → step detail
        ---------------------------------------------------------------------- */
-    const procTabs = $(".proc-tabs");
-    if (procTabs) {
-        const tabs = $$('[role="tab"]', procTabs);
-        let current = 0;
-        let timer = null;
-        let touched = false;
+    const SERVICES = {
+        explainer: {
+            type: "SaaS explainer video",
+            time: "Timeline · 2–4 weeks",
+            steps: [
+                ["Discovery & Brief", "I learn the product, the audience and where the video will run, then agree scope, timeline and a fixed quote."],
+                ["Script & Voiceover", "I turn the feature list into a short story (problem, product, payoff) and record the voiceover that sets the timing."],
+                ["Storyboard & Style Frames", "You see every scene sketched and a few frames fully designed in your brand before any animation starts."],
+                ["Animation & Sound", "The approved frames come to life in After Effects, with UI motion that matches your real product, plus music and sound."],
+                ["Revisions & Delivery", "We refine the cut together, then I render final files for your site, socials and ads."],
+            ],
+        },
+        walkthrough: {
+            type: "Product walkthrough / onboarding",
+            time: "Timeline · 1–3 weeks",
+            steps: [
+                ["Product Tour", "You walk me through the feature, and we note exactly where new users usually get stuck."],
+                ["Flow & Script", "I map the clicks in order and write narration that explains each one in plain words."],
+                ["UI Capture & Rebuild", "Screens are captured or rebuilt cleanly, so the video stays sharp and on-brand at any size."],
+                ["Animation & Callouts", "Zooms, highlights and callouts guide the eye to the one thing that matters on each screen."],
+                ["Delivery & Updates", "Final videos for your help centre, onboarding emails and in-app guides, built to update when the UI changes."],
+            ],
+        },
+        promo: {
+            type: "Promo / launch video",
+            time: "Timeline · 2–3 weeks",
+            steps: [
+                ["Launch Goals", "We pin down the one message, the audience and every place the video will run."],
+                ["Hook & Concept", "I pitch a concept and a first-three-seconds hook built to stop the scroll."],
+                ["Style Frames", "Key frames set the look, pace and typography before animation begins."],
+                ["Animation & Music", "Fast, rhythmic motion cut to music, built around your product's best moments."],
+                ["Cut-downs & Delivery", "The master edit plus short cut-downs and aspect ratios for every channel."],
+            ],
+        },
+        tools: {
+            type: "Custom After Effects tool",
+            time: "Timeline · Custom scope",
+            steps: [
+                ["Workflow Audit", "I watch how your team works in After Effects and find the steps that eat the most time."],
+                ["Tool Spec", "We agree what the script, preset or panel should do, and what it shouldn't."],
+                ["Prototype", "A working first version your team can try on a real project."],
+                ["Build & Test", "I finish the tool and test it across your projects and After Effects versions."],
+                ["Handoff & Support", "Documentation, a short walkthrough video and fixes once your team starts using it."],
+            ],
+        },
+    };
 
-        /** Activates step i; moveFocus is true for keyboard navigation only. */
-        const select = (i, moveFocus = false) => {
-            current = (i + tabs.length) % tabs.length;
-            tabs.forEach((tab, n) => {
-                const on = n === current;
-                tab.setAttribute("aria-selected", String(on));
-                tab.tabIndex = on ? 0 : -1;
-                $("#" + tab.getAttribute("aria-controls")).hidden = !on;
-            });
-            procTabs.style.setProperty("--i", String(current));
-            const tab = tabs[current];
-            if (moveFocus) tab.focus();
-            // Keep the active step visible inside the horizontal scroller on phones.
-            const scroller = procTabs.parentElement;
-            const left = tab.offsetLeft - (scroller.clientWidth - tab.offsetWidth) / 2;
-            scroller.scrollTo({ left, behavior: reduceMotion.matches ? "auto" : "smooth" });
+    // Pixel arrow on an 8×7 grid, matching the hero's pixel type: a shaft plus a stepped chevron.
+    const PIXEL_ARROW = '<svg class="pipe-arrow" viewBox="0 0 8 7" aria-hidden="true"><rect x="0" y="3" width="8" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/></svg>';
+
+    const pipeTabs = $$(".pipe-tab");
+    const stepList = $("#pipe-steps");
+    if (pipeTabs.length && stepList) {
+        const panel = $("#pipe-panel");
+        const text = $("#pipe-text");
+        const time = $("#pipe-time");
+        const cta = $("#pipe-cta");
+        let service = SERVICES.explainer;
+
+        /** Highlights step i of the current service and shows its description. */
+        const selectStep = (i) => {
+            $$(".pipe-step", stepList).forEach((btn, n) => btn.setAttribute("aria-pressed", String(n === i)));
+            text.textContent = service.steps[i][1];
         };
 
-        const stopAuto = () => { touched = true; clearInterval(timer); timer = null; };
+        /** Switches the tab, rebuilds the 5 step rows and resets to step 1. */
+        const selectService = (tab, moveFocus = false) => {
+            pipeTabs.forEach((t) => {
+                const on = t === tab;
+                t.setAttribute("aria-selected", String(on));
+                t.tabIndex = on ? 0 : -1;
+            });
+            if (moveFocus) tab.focus();
+            panel.setAttribute("aria-labelledby", tab.id);
+            service = SERVICES[tab.dataset.service];
+            time.textContent = service.time;
+            cta.dataset.projectType = service.type;
 
-        tabs.forEach((tab, n) => {
-            tab.addEventListener("click", () => { stopAuto(); select(n); });
+            stepList.innerHTML = service.steps.map(([name], i) =>
+                `<li><button type="button" class="pipe-step" aria-pressed="false"><span class="pipe-num">${String(i + 1).padStart(2, "0")}</span><span class="pipe-name">${name}</span>${PIXEL_ARROW}</button></li>`
+            ).join("");
+            $$(".pipe-step", stepList).forEach((btn, i) => {
+                btn.addEventListener("click", () => selectStep(i));
+                btn.addEventListener("focus", () => selectStep(i));
+                // Hover previews a step on pointer devices, like scrubbing a timeline.
+                btn.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") selectStep(i); });
+            });
+            selectStep(0);
+        };
+
+        pipeTabs.forEach((tab, n) => {
+            tab.addEventListener("click", () => selectService(tab));
             tab.addEventListener("keydown", (e) => {
-                const keys = { ArrowRight: current + 1, ArrowLeft: current - 1, Home: 0, End: tabs.length - 1 };
+                const keys = { ArrowRight: n + 1, ArrowLeft: n - 1, Home: 0, End: pipeTabs.length - 1 };
                 if (!(e.key in keys)) return;
                 e.preventDefault();
-                stopAuto();
-                select(keys[e.key], true);
+                selectService(pipeTabs[(keys[e.key] + pipeTabs.length) % pipeTabs.length], true);
             });
         });
 
-        if (!reduceMotion.matches && "IntersectionObserver" in window) {
-            new IntersectionObserver(([entry]) => {
-                if (touched) return;
-                if (entry.isIntersecting && !timer) timer = setInterval(() => select(current + 1), 5000);
-                else if (!entry.isIntersecting) { clearInterval(timer); timer = null; }
-            }, { threshold: 0.5 }).observe(procTabs);
-        }
-    }
-
-    /* ----------------------------------------------------------------------
-       Work cards: AE selection box + filters
-       ---------------------------------------------------------------------- */
-    const HANDLES = ["tl", "tc", "tr", "ml", "mr", "bl", "bc", "br"];
-    $$(".work-media").forEach((media) => {
-        const sel = document.createElement("span");
-        sel.className = "sel";
-        sel.setAttribute("aria-hidden", "true");
-        sel.innerHTML = '<svg><rect x="0" y="0" width="100%" height="100%" pathLength="1"/></svg>' +
-            HANDLES.map((h) => `<span class="handle ${h}"></span>`).join("");
-        media.appendChild(sel);
-    });
-
-    const grid = $("#work-grid");
-    const chips = $$("[data-filter]");
-    if (grid && chips.length) {
-        const cards = $$(".work-card", grid);
-        $$("[data-work-total]").forEach((el) => { el.textContent = String(cards.length); });
-
-        $("#work-more")?.addEventListener("click", () => {
-            grid.classList.add("is-expanded");
-            // Move focus to the first newly shown card so keyboard users land in the new content.
-            $(".work-card:nth-child(7) .work-open", grid)?.focus();
-            if (hasGSAP) ScrollTrigger.refresh();
-        });
-
-        chips.forEach((chip) => {
-            const f = chip.dataset.filter;
-            const count = f === "all" ? cards.length : cards.filter((c) => c.dataset.cat === f).length;
-            chip.insertAdjacentHTML("beforeend", ` <span class="chip-count">${count}</span>`);
-
-            chip.addEventListener("click", () => {
-                chips.forEach((c) => c.setAttribute("aria-pressed", String(c === chip)));
-                grid.classList.toggle("is-filtered", f !== "all");
-                const shown = [];
-                cards.forEach((card) => {
-                    const match = f === "all" || card.dataset.cat === f;
-                    card.hidden = !match;
-                    if (match) shown.push(card);
-                });
-                if (hasGSAP && !reduceMotion.matches) {
-                    gsap.fromTo(shown, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out", stagger: 0.04, overwrite: true });
-                    ScrollTrigger.refresh();
-                }
-            });
-        });
-    }
-
-    /* ----------------------------------------------------------------------
-       Showreel: muted looping preview only while on screen
-       ---------------------------------------------------------------------- */
-    const reel = $("#reel");
-    const reelFrame = $("#reel-frame");
-    const saveData = navigator.connection?.saveData === true;
-    if (reel && reelFrame && "IntersectionObserver" in window && !reduceMotion.matches && !saveData) {
-        let iframe = null;
-        const command = (func) => iframe?.contentWindow?.postMessage(JSON.stringify({ event: "command", func, args: [] }), "*");
-
-        new IntersectionObserver(([entry]) => {
-            if (entry.isIntersecting) {
-                if (!iframe) {
-                    iframe = createPlayer({ type: "youtube", id: reel.dataset.youtube }, { muted: true, loop: true, controls: false, title: "Showreel preview (muted)" });
-                    iframe.tabIndex = -1;
-                    iframe.addEventListener("load", () => setTimeout(() => reelFrame.classList.add("is-ready"), 600), { once: true });
-                    reelFrame.appendChild(iframe);
-                } else {
-                    command("playVideo");
-                }
-            } else if (iframe) {
-                command("pauseVideo");
-            }
-        }, { threshold: 0.35 }).observe(reel);
-    }
-
-    /* ----------------------------------------------------------------------
-       Reveals: 24px rise + fade, 0.6s, power3.out, stagger 0.06
-       ---------------------------------------------------------------------- */
-    if (hasGSAP && !reduceMotion.matches) {
-        const items = $$("[data-reveal]");
-        gsap.set(items, { opacity: 0, y: 24 });
-        ScrollTrigger.batch(items, {
-            start: "top 90%",
-            once: true,
-            onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out", stagger: 0.06, overwrite: true }),
-        });
+        selectService(pipeTabs[0]);
     }
 
     /* ----------------------------------------------------------------------
