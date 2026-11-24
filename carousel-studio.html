@@ -284,8 +284,8 @@
     position: relative;
     overflow: hidden;
   }
-  .canvas-stage-wrapper { cursor: grab; }
-  .canvas-stage-wrapper.panning { cursor: grabbing; }
+  .canvas-stage-wrapper.hand { cursor: grab; }
+  .canvas-stage-wrapper.hand.panning { cursor: grabbing; }
 
   .canvas-stage {
     position: relative;
@@ -1170,7 +1170,7 @@
             <input type="checkbox" id="checkTransparentBg">
             <span>Transparent</span>
           </label>
-          <select id="zoomSelect" class="preset-select sm" title="Scroll over the comp to zoom · drag to move it · double-click beside the comp to fit">
+          <select id="zoomSelect" class="preset-select sm" title="Scroll over the comp to zoom · hold Space and drag to move it · double-click beside the comp to fit">
             <option value="fit" selected>Fit</option>
             <option value="0.25">25%</option>
             <option value="0.5">50%</option>
@@ -3771,20 +3771,31 @@ function setupEventListeners() {
     zoomViewerAt(Math.exp(-clamp(dy, -200, 200) * (e.ctrlKey ? 0.01 : 0.002)), e.clientX, e.clientY);
   }, { passive: false });
 
-  // The comp viewer is a hand tool: dragging anywhere over it moves the comp, nothing else.
-  let handPan = null;
+  // Hand tool, as in After Effects: with the mouse over the comp, hold Space and drag to move it
+  // (the middle button works too). A quick tap of Space still plays.
+  let handPan = null, spaceHand = null, overViewer = false;
+  viewer.addEventListener('mouseenter', () => { overViewer = true; });
+  viewer.addEventListener('mouseleave', () => { overViewer = false; });
   viewer.addEventListener('mousedown', (e) => {
-    if (e.button !== 0 && e.button !== 1) return;
+    if (!(e.button === 1 || (e.button === 0 && spaceHand))) return;
     e.preventDefault();
+    if (spaceHand) spaceHand.used = true;
     handPan = { x: e.clientX, y: e.clientY };
-    viewer.classList.add('panning');
+    viewer.classList.add('hand', 'panning');
   });
+  const endSpaceHand = () => { spaceHand = null; if (!handPan) viewer.classList.remove('hand'); };
+  window.addEventListener('blur', () => { endSpaceHand(); handPan = null; viewer.classList.remove('hand', 'panning'); });
   window.addEventListener('mousemove', (e) => {
     if (!handPan) return;
     panViewer(e.clientX - handPan.x, e.clientY - handPan.y);
     handPan = { x: e.clientX, y: e.clientY };
   });
-  window.addEventListener('mouseup', () => { handPan = null; viewer.classList.remove('panning'); });
+  window.addEventListener('mouseup', () => {
+    if (!handPan) return;
+    handPan = null;
+    viewer.classList.remove('panning');
+    if (!spaceHand) viewer.classList.remove('hand');
+  });
   viewer.addEventListener('dblclick', (e) => {
     if (e.target !== viewer) return;
     state.zoomLevel = 'fit';
@@ -3804,12 +3815,21 @@ function setupEventListeners() {
     if (e.code !== 'Space' || typingIn(e.target)) return;
     e.preventDefault();
     if (e.repeat) return;
+    if (overViewer) {
+      // Over the comp, Space arms the hand tool; playback toggles on release if no drag happened.
+      spaceHand = { used: false };
+      viewer.classList.add('hand');
+      return;
+    }
     state.isPlaying = !state.isPlaying;
     updatePlayBtn();
   }, true);
   // Buttons and checkboxes activate on Space release, so swallow that too.
   window.addEventListener('keyup', (e) => {
-    if (e.code === 'Space' && !typingIn(e.target)) e.preventDefault();
+    if (e.code !== 'Space' || typingIn(e.target)) return;
+    e.preventDefault();
+    if (spaceHand && !spaceHand.used) { state.isPlaying = !state.isPlaying; updatePlayBtn(); }
+    if (spaceHand) endSpaceHand();
   }, true);
 
   // Replay
