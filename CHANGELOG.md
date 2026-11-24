@@ -47,3 +47,4 @@
 - Section labels larger (16–22px) without [NN] numbering.
 - Client words (testimonial) section removed.
 - Work filter chips larger (14px, 46px tall).
+- Stats band rebuilt in the ahmadajmal.co style: light uppercase headline + mono copy left, full-bleed stat rows right with red markers on the divider and a dot-grid hover row.

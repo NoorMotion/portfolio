@@ -419,24 +419,19 @@
         </section>
 
         <!-- ============================== 5. STATS (DARK) ============================== -->
-        <section class="band band--dark section" id="numbers" aria-labelledby="numbers-title">
-            <div class="wrap wrap--guides">
-                <div class="sec-head">
-                    <p class="layer-label mono"><span class="kf" aria-hidden="true"></span>In numbers<span class="caret" aria-hidden="true">_</span></p>
-                </div>
-                <div class="ruler" aria-hidden="true"></div>
-
-                <div class="grid lg:grid-cols-12 gap-14 lg:gap-6 mt-12 lg:mt-16 items-end">
-                    <h2 class="t-display t-display--md lg:col-span-6" id="numbers-title" data-reveal>Complex products. Clear motion.</h2>
-                    <!-- Numbers ship as final text (no-JS / reduced motion); script.js counts up to data-count. -->
-                    <dl class="stats lg:col-span-6">
-                        <div class="stat" data-reveal><dt class="mono t-muted">Years in motion</dt><dd class="stat-num"><span data-count="5">5</span>+</dd></div>
-                        <div class="stat" data-reveal><dt class="mono t-muted">Videos delivered</dt><dd class="stat-num"><span data-count="150">150</span>+</dd></div>
-                        <div class="stat" data-reveal><dt class="mono t-muted">Brands in the work above</dt><dd class="stat-num"><span data-count="9">9</span></dd></div>
-                        <div class="stat" data-reveal><dt class="mono t-muted">Free AE tools released</dt><dd class="stat-num"><span data-count="4">4</span></dd></div>
-                    </dl>
-                </div>
+        <!-- Ajmal-style band: headline left, full-bleed stat rows right with red markers on the divider.
+             Numbers ship as final text (no-JS / reduced motion); script.js counts up to data-count. -->
+        <section class="band band--dark numbers" id="numbers" aria-labelledby="numbers-title">
+            <div class="numbers-intro" data-reveal>
+                <h2 class="numbers-title" id="numbers-title">Complex products. Clear motion.</h2>
+                <p class="numbers-copy">Explainers, walkthroughs and launch videos for software teams, made with After Effects tools I build myself.</p>
             </div>
+            <dl class="numbers-rows">
+                <div class="num-row" data-reveal><dt class="num-label">Years in<br>motion design</dt><dd class="num-value"><span data-count="5">5</span>+</dd></div>
+                <div class="num-row" data-reveal><dt class="num-label">Videos<br>delivered</dt><dd class="num-value"><span data-count="150">150</span>+</dd></div>
+                <div class="num-row" data-reveal><dt class="num-label">Brands in<br>the work above</dt><dd class="num-value"><span data-count="9">9</span></dd></div>
+                <div class="num-row" data-reveal><dt class="num-label">Free AE tools<br>released</dt><dd class="num-value"><span data-count="4">4</span></dd></div>
+            </dl>
         </section>
 
         <!-- ============================== 6. WHAT I DO ============================== -->
