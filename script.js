@@ -409,109 +409,63 @@
     }
 
     /* ----------------------------------------------------------------------
-       What I do: service tabs → steps → step detail
+       What I do: 4 services → selected service detail
        ---------------------------------------------------------------------- */
-    const SERVICES = {
-        explainer: {
+    const SERVICES = [
+        {
+            name: "SaaS Explainer Videos",
             type: "SaaS explainer video",
             time: "Timeline · 2–4 weeks",
-            steps: [
-                ["Discovery & Brief", "I learn the product, the audience and where the video will run, then agree scope, timeline and a fixed quote."],
-                ["Script & Voiceover", "I turn the feature list into a short story (problem, product, payoff) and record the voiceover that sets the timing."],
-                ["Storyboard & Style Frames", "You see every scene sketched and a few frames fully designed in your brand before any animation starts."],
-                ["Animation & Sound", "The approved frames come to life in After Effects, with UI motion that matches your real product, plus music and sound."],
-                ["Revisions & Delivery", "We refine the cut together, then I render final files for your site, socials and ads."],
-            ],
+            text: "I turn what your product does into a 90-second story: script, voiceover, style frames and UI animation that matches your real product.",
         },
-        walkthrough: {
+        {
+            name: "Product Walkthroughs & Onboarding",
             type: "Product walkthrough / onboarding",
             time: "Timeline · 1–3 weeks",
-            steps: [
-                ["Product Tour", "You walk me through the feature, and we note exactly where new users usually get stuck."],
-                ["Flow & Script", "I map the clicks in order and write narration that explains each one in plain words."],
-                ["UI Capture & Rebuild", "Screens are captured or rebuilt cleanly, so the video stays sharp and on-brand at any size."],
-                ["Animation & Callouts", "Zooms, highlights and callouts guide the eye to the one thing that matters on each screen."],
-                ["Delivery & Updates", "Final videos for your help centre, onboarding emails and in-app guides, built to update when the UI changes."],
-            ],
+            text: "Step-by-step feature tours and setup guides that help new users get going and cut down support tickets.",
         },
-        promo: {
+        {
+            name: "Promo & Launch Videos",
             type: "Promo / launch video",
             time: "Timeline · 2–3 weeks",
-            steps: [
-                ["Launch Goals", "We pin down the one message, the audience and every place the video will run."],
-                ["Hook & Concept", "I pitch a concept and a first-three-seconds hook built to stop the scroll."],
-                ["Style Frames", "Key frames set the look, pace and typography before animation begins."],
-                ["Animation & Music", "Fast, rhythmic motion cut to music, built around your product's best moments."],
-                ["Cut-downs & Delivery", "The master edit plus short cut-downs and aspect ratios for every channel."],
-            ],
+            text: "Short, punchy cuts for launches, landing pages, ads and plugin listings, with a hook built to stop the scroll.",
         },
-        tools: {
+        {
+            name: "Custom AE Scripts & Tools",
             type: "Custom After Effects tool",
             time: "Timeline · Custom scope",
-            steps: [
-                ["Workflow Audit", "I watch how your team works in After Effects and find the steps that eat the most time."],
-                ["Tool Spec", "We agree what the script, preset or panel should do, and what it shouldn't."],
-                ["Prototype", "A working first version your team can try on a real project."],
-                ["Build & Test", "I finish the tool and test it across your projects and After Effects versions."],
-                ["Handoff & Support", "Documentation, a short walkthrough video and fixes once your team starts using it."],
-            ],
+            text: "Scripts, presets and panels that take the repetitive work out of your team's After Effects pipeline.",
         },
-    };
+    ];
 
     // Pixel arrow on an 8×7 grid, matching the hero's pixel type: a shaft plus a stepped chevron.
     const PIXEL_ARROW = '<svg class="pipe-arrow" viewBox="0 0 8 7" aria-hidden="true"><rect x="0" y="3" width="8" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="5" y="5" width="1" height="1"/><rect x="4" y="6" width="1" height="1"/></svg>';
 
-    const pipeTabs = $$(".pipe-tab");
     const stepList = $("#pipe-steps");
-    if (pipeTabs.length && stepList) {
-        const panel = $("#pipe-panel");
+    if (stepList) {
         const text = $("#pipe-text");
         const time = $("#pipe-time");
         const cta = $("#pipe-cta");
-        let service = SERVICES.explainer;
 
-        /** Highlights step i of the current service and shows its description. */
-        const selectStep = (i) => {
+        stepList.innerHTML = SERVICES.map((svc, i) =>
+            `<li><button type="button" class="pipe-step" aria-pressed="false"><span class="pipe-num">${String(i + 1).padStart(2, "0")}</span><span class="pipe-name">${svc.name}</span>${PIXEL_ARROW}</button></li>`
+        ).join("");
+
+        /** Highlights service i and shows its description, timeline and form pre-select. */
+        const select = (i) => {
             $$(".pipe-step", stepList).forEach((btn, n) => btn.setAttribute("aria-pressed", String(n === i)));
-            text.textContent = service.steps[i][1];
+            text.textContent = SERVICES[i].text;
+            time.textContent = SERVICES[i].time;
+            cta.dataset.projectType = SERVICES[i].type;
         };
 
-        /** Switches the tab, rebuilds the 5 step rows and resets to step 1. */
-        const selectService = (tab, moveFocus = false) => {
-            pipeTabs.forEach((t) => {
-                const on = t === tab;
-                t.setAttribute("aria-selected", String(on));
-                t.tabIndex = on ? 0 : -1;
-            });
-            if (moveFocus) tab.focus();
-            panel.setAttribute("aria-labelledby", tab.id);
-            service = SERVICES[tab.dataset.service];
-            time.textContent = service.time;
-            cta.dataset.projectType = service.type;
-
-            stepList.innerHTML = service.steps.map(([name], i) =>
-                `<li><button type="button" class="pipe-step" aria-pressed="false"><span class="pipe-num">${String(i + 1).padStart(2, "0")}</span><span class="pipe-name">${name}</span>${PIXEL_ARROW}</button></li>`
-            ).join("");
-            $$(".pipe-step", stepList).forEach((btn, i) => {
-                btn.addEventListener("click", () => selectStep(i));
-                btn.addEventListener("focus", () => selectStep(i));
-                // Hover previews a step on pointer devices, like scrubbing a timeline.
-                btn.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") selectStep(i); });
-            });
-            selectStep(0);
-        };
-
-        pipeTabs.forEach((tab, n) => {
-            tab.addEventListener("click", () => selectService(tab));
-            tab.addEventListener("keydown", (e) => {
-                const keys = { ArrowRight: n + 1, ArrowLeft: n - 1, Home: 0, End: pipeTabs.length - 1 };
-                if (!(e.key in keys)) return;
-                e.preventDefault();
-                selectService(pipeTabs[(keys[e.key] + pipeTabs.length) % pipeTabs.length], true);
-            });
+        $$(".pipe-step", stepList).forEach((btn, i) => {
+            btn.addEventListener("click", () => select(i));
+            btn.addEventListener("focus", () => select(i));
+            // Hover previews a service on pointer devices, like scrubbing a timeline.
+            btn.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") select(i); });
         });
-
-        selectService(pipeTabs[0]);
+        select(0);
     }
 
     /* ----------------------------------------------------------------------

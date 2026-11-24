@@ -29,7 +29,7 @@
     <link rel="preload" as="image" type="image/avif"
         imagesrcset="Assets/img/me-640.avif 640w, Assets/img/me-1000.avif 1000w, Assets/img/me-1600.avif 1600w"
         imagesizes="(min-width: 1024px) 780px, 100vw" fetchpriority="high">
-    <link rel="stylesheet" href="style.min.css?v=e08a2287">
+    <link rel="stylesheet" href="style.min.css?v=1c9d4163">
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" href="favicon.png">
@@ -60,7 +60,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
     <script src="site.config.js?v=e5c34b09" defer></script>
-    <script src="script.js?v=e588c089" defer></script>
+    <script src="script.js?v=b60f5e86" defer></script>
 </head>
 
 <body>
@@ -95,7 +95,7 @@
                 <a href="#work">Work</a>
                 <a href="#about">About</a>
                 <a href="#tools">Tools</a>
-                <a href="#services">Process</a>
+                <a href="#services">Services</a>
             </nav>
 
             <div class="header-actions">
@@ -128,7 +128,7 @@
                 <a href="#work" data-menu-close><span class="mono">01</span>Work</a>
                 <a href="#about" data-menu-close><span class="mono">02</span>About</a>
                 <a href="#tools" data-menu-close><span class="mono">03</span>Tools</a>
-                <a href="#services" data-menu-close><span class="mono">04</span>Process</a>
+                <a href="#services" data-menu-close><span class="mono">04</span>Services</a>
             </nav>
             <div class="menu-foot">
                 <div class="menu-meta">
@@ -430,35 +430,27 @@
             </dl>
         </section>
 
-        <!-- ============================== 6. WHAT I DO + PROCESS ============================== -->
-        <!-- Ajmal-style pipeline: service tabs → that service's 5 steps → the active step explained.
-             Step copy lives in script.js (SERVICES) and is rendered into #pipe-steps. -->
+        <!-- ============================== 6. WHAT I DO ============================== -->
+        <!-- Ajmal-style pipeline: the 4 services on the left, the selected one explained on the right.
+             Service copy lives in script.js (SERVICES) and is rendered into #pipe-steps. -->
         <section class="section" id="services" aria-labelledby="services-title">
             <div class="wrap wrap--guides">
                 <div class="sec-head">
                     <p class="layer-label mono"><span class="kf" aria-hidden="true"></span>What I do<span class="caret" aria-hidden="true">_</span></p>
-                    <p class="mono t-muted">4 services · 5 steps each</p>
                 </div>
                 <div class="ruler" aria-hidden="true"></div>
 
                 <h2 class="t-h1 mt-10 lg:mt-14 mb-10 lg:mb-14 max-w-[18ch]" id="services-title" data-reveal>Four things, done properly.</h2>
 
                 <div class="pipe" data-reveal>
-                    <div class="pipe-tabs" role="tablist" aria-label="Services">
-                        <button type="button" class="pipe-tab" role="tab" id="svc-explainer" data-service="explainer" aria-controls="pipe-panel" aria-selected="true">SaaS Explainer</button>
-                        <button type="button" class="pipe-tab" role="tab" id="svc-walkthrough" data-service="walkthrough" aria-controls="pipe-panel" aria-selected="false" tabindex="-1">Product Walkthrough</button>
-                        <button type="button" class="pipe-tab" role="tab" id="svc-promo" data-service="promo" aria-controls="pipe-panel" aria-selected="false" tabindex="-1">Promo &amp; Launch</button>
-                        <button type="button" class="pipe-tab" role="tab" id="svc-tools" data-service="tools" aria-controls="pipe-panel" aria-selected="false" tabindex="-1">Custom AE Tools</button>
-                    </div>
-
-                    <div class="pipe-body" id="pipe-panel" role="tabpanel" aria-labelledby="svc-explainer">
+                    <div class="pipe-body">
                         <div class="pipe-list">
                             <span class="corner-marks" aria-hidden="true"></span>
-                            <ol class="pipe-steps" id="pipe-steps" aria-label="Steps"></ol>
+                            <ol class="pipe-steps" id="pipe-steps" aria-label="Services"></ol>
                         </div>
                         <div class="pipe-detail">
                             <span class="corner-marks" aria-hidden="true"></span>
-                            <p class="mono t-muted">[Inside this step]<span class="caret" aria-hidden="true">_</span></p>
+                            <p class="mono t-muted">[Inside this service]<span class="caret" aria-hidden="true">_</span></p>
                             <p class="pipe-text" id="pipe-text" aria-live="polite"></p>
                             <div class="pipe-foot">
                                 <span class="mono t-muted" id="pipe-time"></span>

@@ -1156,34 +1156,8 @@
     }
 
     /* ----------------------------------------------------------------------
-       What I do: service tabs → step list → step detail (Ajmal pipeline)
+       What I do: service list → service detail (Ajmal pipeline)
        ---------------------------------------------------------------------- */
-    .pipe-tabs {
-        display: flex;
-        overflow-x: auto;
-        scrollbar-width: none;
-    }
-
-    .pipe-tabs::-webkit-scrollbar { display: none; }
-
-    .pipe-tab {
-        flex: none;
-        min-height: 46px;
-        padding: 0 22px;
-        margin-right: -1px;
-        border: 1px solid var(--rule);
-        border-bottom: 0;
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 13px;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        color: var(--fg-muted);
-        transition: color 0.15s ease, background-color 0.15s ease;
-    }
-
-    .pipe-tab:hover { color: var(--fg); }
-    .pipe-tab[aria-selected="true"] { color: var(--fg); background: var(--rule); }
-
     .pipe-body {
         display: grid;
         grid-template-columns: minmax(0, 1fr);
@@ -1227,7 +1201,11 @@
     }
 
     @media (min-width: 1024px) {
-        .pipe-step { min-height: 124px; padding: 0 32px; }
+        .pipe-step { min-height: 124px; height: 100%; padding: 0 32px; }
+
+        /* Rows share the height of the detail panel so the list has no empty band. */
+        .pipe-list { display: flex; flex-direction: column; }
+        .pipe-steps { flex: 1; display: grid; grid-auto-rows: 1fr; }
     }
 
     .pipe-num { font-size: clamp(22px, 2.4vw, 36px); line-height: 1; }

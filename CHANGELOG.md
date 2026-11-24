@@ -49,3 +49,4 @@
 - Work filter chips larger (14px, 46px tall).
 - Stats band rebuilt in the ahmadajmal.co style: light uppercase headline + mono copy left, full-bleed stat rows right with red markers on the divider and a dot-grid hover row.
 - What I do rebuilt as an Ajmal-style pipeline: service tabs, 5 steps per service with a pixel-arrow active row, step detail panel with red corner marks. Replaces both the 4-column services and the separate Process section; the "Process" nav link now points here.
+- What I do simplified: no tabs, just the 4 services on the left and the selected service on the right. Nav "Process" renamed "Services".
