@@ -51,3 +51,4 @@
 - What I do rebuilt as an Ajmal-style pipeline: service tabs, 5 steps per service with a pixel-arrow active row, step detail panel with red corner marks. Replaces both the 4-column services and the separate Process section; the "Process" nav link now points here.
 - What I do simplified: no tabs, just the 4 services on the left and the selected service on the right. Nav "Process" renamed "Services".
 - Stats updated to 4+ years, 115+ videos, 9 brands, 6 tools. Tool cards trimmed to name, line and Gumroad link (no type tag, Free / Donation or Demo). Top-right meta removed from every section head.
+- Hero: corner taglines "Motion that grabs attention" / "Audiences that convert" (shown on mobile too), positioning line removed, meta row "Based in Dhaka · Helping founders · Working worldwide", title 20% larger on desktop and lowered so it reads clearly. Availability setting removed from site.config.js.

@@ -316,8 +316,6 @@
         });
     }
 
-    const availability = $("[data-availability]");
-    if (availability && CONFIG.availableFrom) availability.textContent = `Available ${CONFIG.availableFrom}`;
 
     /* ----------------------------------------------------------------------
        Project modal (work cards + full showreel)

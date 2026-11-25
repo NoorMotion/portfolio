@@ -12,9 +12,5 @@ window.SITE_CONFIG = {
     // Left empty, "Book a 20-min call" opens an email instead.
     calendlyUrl: "",
 
-    // Shown in the hero meta row as "Available <value>", e.g. "January 2027".
-    // Left empty, the row reads "Open for new projects".
-    availableFrom: "",
-
     email: "nralamyt@gmail.com",
 };

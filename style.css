@@ -550,25 +550,37 @@
         .hero { padding-bottom: 48px; }
     }
 
-    .hero-corner {
-        position: absolute;
-        top: 0;
-        display: none;
-        color: var(--fg-muted);
+    /* Two taglines: a row above the photo on phones, pinned to the top corners on desktop. */
+    .hero-corners {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 16px;
+        color: var(--fg);
     }
 
-    .hero-corner--l { left: var(--pad); }
-    .hero-corner--r { right: var(--pad); }
+    .hero-corners p { max-width: 46%; }
+    .hero-corners p:last-child { text-align: right; }
 
     @media (min-width: 1024px) {
-        .hero-corner { display: block; }
+        .hero-corners {
+            position: absolute;
+            top: 0;
+            left: var(--pad);
+            right: var(--pad);
+            margin: 0;
+        }
     }
 
-    /* The stage height drives both the photo and the title size, so the title
-       always sits across the chest and never spills into the copy below. */
-    .hero-stage {
+    /* The stage height drives the photo, the title size and how far the title hangs
+       below the photo, so the title stays readable and never collides with the copy. */
+    .hero {
         --stage-h: min(56vh, calc((100vw - 2 * var(--pad)) / 1.2206), 640px);
         --stage-h: min(56svh, calc((100vw - 2 * var(--pad)) / 1.2206), 640px);
+        --title-drop: calc(var(--stage-h) * 0.16);   /* how far the title hangs below the photo */
+    }
+
+    .hero-stage {
         position: relative;
         isolation: isolate;     /* keeps the title's multiply blend inside the stage */
         display: flex;
@@ -607,7 +619,7 @@
         position: absolute;
         left: 0;
         right: 0;
-        bottom: 3%;
+        bottom: calc(-1 * var(--title-drop));
         display: flex;
         justify-content: center;
         pointer-events: none;
@@ -618,7 +630,7 @@
         min-width: 0.6em;          /* keeps the handles apart while the text is empty between loops */
         max-width: 100%;
         padding: 0 0.07em;
-        font-size: clamp(48px, min(14vw, calc(var(--stage-h) * 0.27)), 184px);
+        font-size: clamp(48px, min(14vw, calc(var(--stage-h) * 0.324)), 220px);
         border: 2px solid var(--accent);
     }
 
@@ -695,14 +707,8 @@
         flex-direction: column;
         align-items: center;
         gap: 24px;
-        margin-top: 28px;
+        margin-top: calc(var(--title-drop) + 32px);
         text-align: center;
-    }
-
-    .hero-line { max-width: 24ch; }
-
-    @media (min-width: 768px) {
-        .hero-line { max-width: 34ch; }
     }
 
     .hero-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
