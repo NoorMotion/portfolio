@@ -56,3 +56,4 @@
 - Work: removed the video count next to each group title.
 - Logo strip: real client logos (DrivePhase, Payrun, NextCRM, Next3 Offload, Salonly, Cleanly, Next Video Reviews, Washer, Gain IO, School Management) converted to one-colour marks with optical sizing, inverted in dark theme. The strip now drifts, speeds up and follows page-scroll direction, stops on press-and-hold, and can be dragged and thrown left or right (red "Drag" cursor on desktop).
 - Logo strip: default cursor (drag pill removed), no top/bottom rules, label centred.
+- Logo strip: NextCRM and Next Video Reviews now include their app icons.

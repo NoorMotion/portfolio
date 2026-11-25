@@ -836,8 +836,8 @@
     /* Optical sizing: wide wordmarks run smaller, compact marks larger, so all read at one weight. */
     .logo-item--drivephase { --h: 26px; }
     .logo-item--next3 { --h: 24px; }
-    .logo-item--next-video-reviews { --h: 24px; }
-    .logo-item--nextcrm { --h: 26px; }
+    .logo-item--next-video-reviews { --h: 28px; }
+    .logo-item--nextcrm { --h: 30px; }
     .logo-item--salonly { --h: 34px; }
     .logo-item--washer { --h: 32px; }
 
