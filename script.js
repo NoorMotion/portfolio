@@ -380,7 +380,6 @@
     const marquee = $("#logo-marquee");
     if (marquee && !reduceMotion.matches) {
         const track = $(".marquee-track", marquee);
-        const label = $(".marquee-cursor", marquee);
         const BASE = 36;                 // px/s idle drift
         let loopW = 0;                   // width of one list; x wraps inside [-loopW, 0)
         let x = 0;
@@ -419,12 +418,8 @@
             dragging = false;
             lastX = e.clientX; lastT = e.timeStamp; dragV = 0;
             marquee.setPointerCapture(e.pointerId);
-            marquee.classList.add("is-dragging");
         });
         marquee.addEventListener("pointermove", (e) => {
-            const r = marquee.getBoundingClientRect();
-            label?.style.setProperty("--cx", `${e.clientX - r.left}px`);
-            label?.style.setProperty("--cy", `${e.clientY - r.top}px`);
             if (!held) return;
             const dx = e.clientX - lastX;
             if (!dragging && Math.abs(dx) < 3) return;
@@ -442,12 +437,9 @@
             }
             held = false;
             dragging = false;
-            marquee.classList.remove("is-dragging");
         };
         marquee.addEventListener("pointerup", release);
         marquee.addEventListener("pointercancel", release);
-        marquee.addEventListener("pointerenter", () => marquee.classList.add("is-hover"));
-        marquee.addEventListener("pointerleave", () => marquee.classList.remove("is-hover"));
 
         measure();
         new ResizeObserver(measure).observe(track.firstElementChild);
