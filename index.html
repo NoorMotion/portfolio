@@ -29,7 +29,7 @@
     <link rel="preload" as="image" type="image/avif"
         imagesrcset="Assets/img/me-640.avif 640w, Assets/img/me-1000.avif 1000w, Assets/img/me-1600.avif 1600w"
         imagesizes="(min-width: 1024px) 780px, 100vw" fetchpriority="high">
-    <link rel="stylesheet" href="style.min.css?v=7ab9eb59">
+    <link rel="stylesheet" href="style.min.css?v=32c189c5">
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" href="favicon.png">
@@ -60,7 +60,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
     <script src="site.config.js?v=dc3f8ca7" defer></script>
-    <script src="script.js?v=2e784ff5" defer></script>
+    <script src="script.js?v=2b317469" defer></script>
 </head>
 
 <body>
@@ -259,156 +259,137 @@
                 <div class="ruler" aria-hidden="true"></div>
 
                 <div class="grid lg:grid-cols-12 gap-6 items-end mt-10 lg:mt-14 mb-10 lg:mb-12">
-                    <h2 class="t-h1 lg:col-span-8" id="work-title" data-reveal>Explainers, walkthroughs and launches for software teams.</h2>
+                    <h2 class="t-h1 lg:col-span-8" id="work-title" data-reveal>Videos That We Craft.</h2>
                     <p class="t-muted lg:col-span-3 lg:col-start-10" data-reveal>Each project starts with a product that's hard to describe in a sentence, and ends with a video that does it in ninety seconds.</p>
                 </div>
 
-                <div class="flex flex-wrap gap-2 mb-10" role="group" aria-label="Filter projects by type" data-reveal>
-                    <button type="button" class="chip mono" data-filter="all" aria-pressed="true">All</button>
-                    <button type="button" class="chip mono" data-filter="saas" aria-pressed="false">SaaS Explainer</button>
-                    <button type="button" class="chip mono" data-filter="walkthrough" aria-pressed="false">Product Walkthrough</button>
-                    <button type="button" class="chip mono" data-filter="promo" aria-pressed="false">Promo</button>
-                    <button type="button" class="chip mono" data-filter="plugin" aria-pressed="false">Plugin Promo</button>
-                </div>
-
-                <!-- Cards hold the indexable copy; video + case study for each data-project live in script.js (PROJECTS). -->
-                <div class="work-grid" id="work-grid">
-                    <article class="work-card is-featured" data-cat="saas" data-reveal>
+                <!-- Cards hold the indexable copy; the video for each data-project lives in script.js (PROJECTS) and plays in place. -->
+                <div class="work-group" aria-labelledby="group-saas">
+                    <h3 class="work-group-title" id="group-saas" data-reveal><span class="kf" aria-hidden="true"></span>SaaS Explainer<span class="work-group-count mono">04 videos</span></h3>
+                    <div class="work-grid">
+                    <article class="work-card" data-reveal>
                         <div class="work-media">
                             <img src="Assets/img/work/drivephase-640.webp" srcset="Assets/img/work/drivephase-640.webp 640w, Assets/img/work/drivephase-1280.webp 1280w" sizes="(min-width: 1024px) 628px, (min-width: 768px) 50vw, 100vw" width="1280" height="720" loading="lazy" decoding="async" alt="DrivePhase.ai explainer: animated pipeline board with deal cards">
                             <span class="work-tag mono" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg>Play</span>
                         </div>
                         <div class="work-info">
-                            <h3 class="work-client"><button type="button" class="work-open" data-project="drivephase">DrivePhase.ai<span class="sr-only">: play the explainer and case study</span></button></h3>
+                            <h4 class="work-client"><button type="button" class="work-open" data-project="drivephase">DrivePhase.ai<span class="sr-only">: play video</span></button></h4>
                             <p class="work-title">AI deal-pipeline explainer</p>
-                            <p class="work-meta mono"><span class="kf" aria-hidden="true"></span>SaaS Explainer</p>
                         </div>
                     </article>
-
-                    <article class="work-card is-featured" data-cat="walkthrough" data-reveal>
+                    <article class="work-card" data-reveal>
                         <div class="work-media">
-                            <img src="Assets/img/work/payrun-onboarding-640.webp" srcset="Assets/img/work/payrun-onboarding-640.webp 640w, Assets/img/work/payrun-onboarding-1280.webp 1280w" sizes="(min-width: 1024px) 628px, (min-width: 768px) 50vw, 100vw" width="1280" height="720" loading="lazy" decoding="async" alt="Payrun onboarding tutorial: account, organisation and dashboard setup steps">
-                            <span class="work-tag mono" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg>Play · 3-part series</span>
-                        </div>
-                        <div class="work-info">
-                            <h3 class="work-client"><button type="button" class="work-open" data-project="payrun-onboarding">Payrun<span class="sr-only">: play the onboarding series and case study</span></button></h3>
-                            <p class="work-title">Onboarding &amp; initial setup series</p>
-                            <p class="work-meta mono"><span class="kf" aria-hidden="true"></span>Product Walkthrough</p>
-                        </div>
-                    </article>
-
-                    <article class="work-card" data-cat="saas" data-reveal>
-                        <div class="work-media">
-                            <img src="Assets/img/work/nextcrm-640.webp" srcset="Assets/img/work/nextcrm-640.webp 640w, Assets/img/work/nextcrm-1280.webp 1280w" sizes="(min-width: 1024px) 410px, (min-width: 768px) 50vw, 100vw" width="1280" height="720" loading="lazy" decoding="async" alt="NextCRM explainer: contacts connected through automated email, chat and SMS">
+                            <img src="Assets/img/work/nextcrm-640.webp" srcset="Assets/img/work/nextcrm-640.webp 640w, Assets/img/work/nextcrm-1280.webp 1280w" sizes="(min-width: 1024px) 628px, (min-width: 768px) 50vw, 100vw" width="1280" height="720" loading="lazy" decoding="async" alt="NextCRM explainer: contacts connected through automated email, chat and SMS">
                             <span class="work-tag mono" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg>Play</span>
                         </div>
                         <div class="work-info">
-                            <h3 class="work-client"><button type="button" class="work-open" data-project="nextcrm">NextCRM<span class="sr-only">: play video</span></button></h3>
+                            <h4 class="work-client"><button type="button" class="work-open" data-project="nextcrm">NextCRM<span class="sr-only">: play video</span></button></h4>
                             <p class="work-title">Marketing automation explainer</p>
-                            <p class="work-meta mono"><span class="kf" aria-hidden="true"></span>SaaS Explainer</p>
                         </div>
                     </article>
+                    <article class="work-card" data-reveal>
+                        <div class="work-media">
+                            <img src="Assets/img/work/cleanly-640.webp" srcset="Assets/img/work/cleanly-640.webp 640w, Assets/img/work/cleanly-1280.webp 1280w" sizes="(min-width: 1024px) 628px, (min-width: 768px) 50vw, 100vw" width="1280" height="720" loading="lazy" decoding="async" alt="Cleanly promo: booking dashboard on a laptop and phone in an office">
+                            <span class="work-tag mono" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg>Play</span>
+                        </div>
+                        <div class="work-info">
+                            <h4 class="work-client"><button type="button" class="work-open" data-project="cleanly">Cleanly<span class="sr-only">: play video</span></button></h4>
+                            <p class="work-title">Cleaning business booking system</p>
+                        </div>
+                    </article>
+                    <article class="work-card" data-reveal>
+                        <div class="work-media">
+                            <img src="Assets/img/work/school-640.webp" srcset="Assets/img/work/school-640.webp 640w, Assets/img/work/school-1280.webp 1280w" sizes="(min-width: 1024px) 628px, (min-width: 768px) 50vw, 100vw" width="1280" height="720" loading="lazy" decoding="async" alt="School management software promo: student profile screen">
+                            <span class="work-tag mono" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg>Play</span>
+                        </div>
+                        <div class="work-info">
+                            <h4 class="work-client"><button type="button" class="work-open" data-project="school">School Management Software<span class="sr-only">: play video</span></button></h4>
+                            <p class="work-title">Product promo</p>
+                        </div>
+                    </article>
+                    </div>
+                </div>
 
-                    <article class="work-card" data-cat="walkthrough" data-reveal>
+                <div class="work-group" aria-labelledby="group-plugin">
+                    <h3 class="work-group-title" id="group-plugin" data-reveal><span class="kf" aria-hidden="true"></span>Plugin Promo<span class="work-group-count mono">04 videos</span></h3>
+                    <div class="work-grid">
+                    <article class="work-card" data-reveal>
+                        <div class="work-media">
+                            <img src="Assets/img/work/salonly-640.webp" srcset="Assets/img/work/salonly-640.webp 640w, Assets/img/work/salonly-1280.webp 1280w" sizes="(min-width: 1024px) 628px, (min-width: 768px) 50vw, 100vw" width="1280" height="720" loading="lazy" decoding="async" alt="Salonly promo: booking chat bubbles and incoming client calls">
+                            <span class="work-tag mono" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg>Play</span>
+                        </div>
+                        <div class="work-info">
+                            <h4 class="work-client"><button type="button" class="work-open" data-project="salonly">Salonly<span class="sr-only">: play video</span></button></h4>
+                            <p class="work-title">Salon booking plugin launch</p>
+                        </div>
+                    </article>
+                    <article class="work-card" data-reveal>
+                        <div class="work-media">
+                            <img src="Assets/img/work/next3-640.webp" srcset="Assets/img/work/next3-640.webp 640w, Assets/img/work/next3-1280.webp 1280w" sizes="(min-width: 1024px) 628px, (min-width: 768px) 50vw, 100vw" width="1280" height="720" loading="lazy" decoding="async" alt="Next3 promo: fast-loading store and news pages side by side">
+                            <span class="work-tag mono" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg>Play</span>
+                        </div>
+                        <div class="work-info">
+                            <h4 class="work-client"><button type="button" class="work-open" data-project="next3">Next3<span class="sr-only">: play video</span></button></h4>
+                            <p class="work-title">Offload &amp; optimizer plugin promo</p>
+                        </div>
+                    </article>
+                    <article class="work-card" data-reveal>
+                        <div class="work-media">
+                            <img src="Assets/img/work/nextvideoreview-640.webp" srcset="Assets/img/work/nextvideoreview-640.webp 640w, Assets/img/work/nextvideoreview-1280.webp 1280w" sizes="(min-width: 1024px) 628px, (min-width: 768px) 50vw, 100vw" width="1280" height="720" loading="lazy" decoding="async" alt="Next Video Review promo: customer video testimonials on a product page">
+                            <span class="work-tag mono" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg>Play</span>
+                        </div>
+                        <div class="work-info">
+                            <h4 class="work-client"><button type="button" class="work-open" data-project="nextvideoreview">Next Video Review<span class="sr-only">: play video</span></button></h4>
+                            <p class="work-title">Video review plugin promo</p>
+                        </div>
+                    </article>
+                    <article class="work-card" data-reveal>
+                        <div class="work-media">
+                            <img src="Assets/img/work/washer-640.webp" srcset="Assets/img/work/washer-640.webp 640w, Assets/img/work/washer-1280.webp 1280w" sizes="(min-width: 1024px) 628px, (min-width: 768px) 50vw, 100vw" width="1280" height="720" loading="lazy" decoding="async" alt="Car wash booking plugin explainer: package selection and checkout form">
+                            <span class="work-tag mono" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg>Play</span>
+                        </div>
+                        <div class="work-info">
+                            <h4 class="work-client"><button type="button" class="work-open" data-project="washer">Washer Service Booking<span class="sr-only">: play video</span></button></h4>
+                            <p class="work-title">Car wash booking plugin explainer</p>
+                        </div>
+                    </article>
+                    </div>
+                </div>
+
+                <div class="work-group" aria-labelledby="group-walkthrough">
+                    <h3 class="work-group-title" id="group-walkthrough" data-reveal><span class="kf" aria-hidden="true"></span>Product Walkthrough<span class="work-group-count mono">03 videos</span></h3>
+                    <div class="work-grid work-grid--3">
+                    <article class="work-card" data-reveal>
+                        <div class="work-media">
+                            <img src="Assets/img/work/payrun-onboarding-640.webp" srcset="Assets/img/work/payrun-onboarding-640.webp 640w, Assets/img/work/payrun-onboarding-1280.webp 1280w" sizes="(min-width: 1024px) 410px, (min-width: 768px) 50vw, 100vw" width="1280" height="720" loading="lazy" decoding="async" alt="Payrun onboarding tutorial: account, organisation and dashboard setup steps">
+                            <span class="work-tag mono" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg>Play</span>
+                        </div>
+                        <div class="work-info">
+                            <h4 class="work-client"><button type="button" class="work-open" data-project="payrun-onboarding">Payrun<span class="sr-only">: play the onboarding guide</span></button></h4>
+                            <p class="work-title">Onboarding &amp; initial setup series</p>
+                        </div>
+                    </article>
+                    <article class="work-card" data-reveal>
                         <div class="work-media">
                             <img src="Assets/img/work/payrun-attendance-640.webp" srcset="Assets/img/work/payrun-attendance-640.webp 640w, Assets/img/work/payrun-attendance-1280.webp 1280w" sizes="(min-width: 1024px) 410px, (min-width: 768px) 50vw, 100vw" width="1280" height="720" loading="lazy" decoding="async" alt="Payrun attendance module walkthrough: shift timeline view">
                             <span class="work-tag mono" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg>Play</span>
                         </div>
                         <div class="work-info">
-                            <h3 class="work-client"><button type="button" class="work-open" data-project="payrun-attendance">Payrun<span class="sr-only">: play the attendance module guide</span></button></h3>
+                            <h4 class="work-client"><button type="button" class="work-open" data-project="payrun-attendance">Payrun<span class="sr-only">: play the attendance module guide</span></button></h4>
                             <p class="work-title">Attendance module guide</p>
-                            <p class="work-meta mono"><span class="kf" aria-hidden="true"></span>Product Walkthrough</p>
                         </div>
                     </article>
-
-                    <article class="work-card" data-cat="plugin" data-reveal>
-                        <div class="work-media">
-                            <img src="Assets/img/work/salonly-640.webp" srcset="Assets/img/work/salonly-640.webp 640w, Assets/img/work/salonly-1280.webp 1280w" sizes="(min-width: 1024px) 410px, (min-width: 768px) 50vw, 100vw" width="1280" height="720" loading="lazy" decoding="async" alt="Salonly promo: booking chat bubbles and incoming client calls">
-                            <span class="work-tag mono" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg>Play</span>
-                        </div>
-                        <div class="work-info">
-                            <h3 class="work-client"><button type="button" class="work-open" data-project="salonly">Salonly<span class="sr-only">: play video</span></button></h3>
-                            <p class="work-title">Salon booking plugin launch</p>
-                            <p class="work-meta mono"><span class="kf" aria-hidden="true"></span>Plugin Promo</p>
-                        </div>
-                    </article>
-
-                    <article class="work-card" data-cat="plugin" data-reveal>
-                        <div class="work-media">
-                            <img src="Assets/img/work/next3-640.webp" srcset="Assets/img/work/next3-640.webp 640w, Assets/img/work/next3-1280.webp 1280w" sizes="(min-width: 1024px) 410px, (min-width: 768px) 50vw, 100vw" width="1280" height="720" loading="lazy" decoding="async" alt="Next3 promo: fast-loading store and news pages side by side">
-                            <span class="work-tag mono" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg>Play</span>
-                        </div>
-                        <div class="work-info">
-                            <h3 class="work-client"><button type="button" class="work-open" data-project="next3">Next3<span class="sr-only">: play video</span></button></h3>
-                            <p class="work-title">Offload &amp; optimizer plugin promo</p>
-                            <p class="work-meta mono"><span class="kf" aria-hidden="true"></span>Plugin Promo</p>
-                        </div>
-                    </article>
-
-                    <article class="work-card" data-cat="walkthrough" data-reveal>
+                    <article class="work-card" data-reveal>
                         <div class="work-media">
                             <img src="Assets/img/work/payrun-leave-640.webp" srcset="Assets/img/work/payrun-leave-640.webp 640w, Assets/img/work/payrun-leave-1280.webp 1280w" sizes="(min-width: 1024px) 410px, (min-width: 768px) 50vw, 100vw" width="1280" height="720" loading="lazy" decoding="async" alt="Payrun leave module walkthrough: leave request screens">
                             <span class="work-tag mono" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg>Play</span>
                         </div>
                         <div class="work-info">
-                            <h3 class="work-client"><button type="button" class="work-open" data-project="payrun-leave">Payrun<span class="sr-only">: play the leave module guide</span></button></h3>
+                            <h4 class="work-client"><button type="button" class="work-open" data-project="payrun-leave">Payrun<span class="sr-only">: play the leave module guide</span></button></h4>
                             <p class="work-title">Leave module guide</p>
-                            <p class="work-meta mono"><span class="kf" aria-hidden="true"></span>Product Walkthrough</p>
                         </div>
                     </article>
-
-                    <article class="work-card" data-cat="promo" data-reveal>
-                        <div class="work-media">
-                            <img src="Assets/img/work/cleanly-640.webp" srcset="Assets/img/work/cleanly-640.webp 640w, Assets/img/work/cleanly-1280.webp 1280w" sizes="(min-width: 1024px) 410px, (min-width: 768px) 50vw, 100vw" width="1280" height="720" loading="lazy" decoding="async" alt="Cleanly promo: booking dashboard on a laptop and phone in an office">
-                            <span class="work-tag mono" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg>Play</span>
-                        </div>
-                        <div class="work-info">
-                            <h3 class="work-client"><button type="button" class="work-open" data-project="cleanly">Cleanly<span class="sr-only">: play video</span></button></h3>
-                            <p class="work-title">Cleaning business booking system</p>
-                            <p class="work-meta mono"><span class="kf" aria-hidden="true"></span>Promo</p>
-                        </div>
-                    </article>
-
-                    <article class="work-card" data-cat="promo" data-reveal>
-                        <div class="work-media">
-                            <img src="Assets/img/work/school-640.webp" srcset="Assets/img/work/school-640.webp 640w, Assets/img/work/school-1280.webp 1280w" sizes="(min-width: 1024px) 410px, (min-width: 768px) 50vw, 100vw" width="1280" height="720" loading="lazy" decoding="async" alt="School management software promo: student profile screen">
-                            <span class="work-tag mono" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg>Play</span>
-                        </div>
-                        <div class="work-info">
-                            <h3 class="work-client"><button type="button" class="work-open" data-project="school">School Management Software<span class="sr-only">: play video</span></button></h3>
-                            <p class="work-title">Product promo</p>
-                            <p class="work-meta mono"><span class="kf" aria-hidden="true"></span>Promo</p>
-                        </div>
-                    </article>
-
-                    <article class="work-card" data-cat="plugin" data-reveal>
-                        <div class="work-media">
-                            <img src="Assets/img/work/nextvideoreview-640.webp" srcset="Assets/img/work/nextvideoreview-640.webp 640w, Assets/img/work/nextvideoreview-1280.webp 1280w" sizes="(min-width: 1024px) 410px, (min-width: 768px) 50vw, 100vw" width="1280" height="720" loading="lazy" decoding="async" alt="Next Video Review promo: customer video testimonials on a product page">
-                            <span class="work-tag mono" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg>Play</span>
-                        </div>
-                        <div class="work-info">
-                            <h3 class="work-client"><button type="button" class="work-open" data-project="nextvideoreview">Next Video Review<span class="sr-only">: play video</span></button></h3>
-                            <p class="work-title">Video review plugin promo</p>
-                            <p class="work-meta mono"><span class="kf" aria-hidden="true"></span>Plugin Promo</p>
-                        </div>
-                    </article>
-
-                    <article class="work-card" data-cat="plugin" data-reveal>
-                        <div class="work-media">
-                            <img src="Assets/img/work/washer-640.webp" srcset="Assets/img/work/washer-640.webp 640w, Assets/img/work/washer-1280.webp 1280w" sizes="(min-width: 1024px) 410px, (min-width: 768px) 50vw, 100vw" width="1280" height="720" loading="lazy" decoding="async" alt="Car wash booking plugin explainer: package selection and checkout form">
-                            <span class="work-tag mono" aria-hidden="true"><svg class="icon"><use href="#i-play"/></svg>Play</span>
-                        </div>
-                        <div class="work-info">
-                            <h3 class="work-client"><button type="button" class="work-open" data-project="washer">Washer Service Booking<span class="sr-only">: play video</span></button></h3>
-                            <p class="work-title">Car wash booking plugin explainer</p>
-                            <p class="work-meta mono"><span class="kf" aria-hidden="true"></span>Plugin Promo</p>
-                        </div>
-                    </article>
-                </div>
-                <div class="work-more justify-center mt-10">
-                    <button type="button" class="btn btn--ghost w-full" id="work-more">Show all <span data-work-total>11</span> projects
-                        <svg class="icon icon--stroke icon--nudge-y" aria-hidden="true"><use href="#i-arrow-down"/></svg>
-                    </button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -691,31 +672,6 @@
         </div>
     </footer>
 
-    <!-- Project / reel player: native modal dialog (focus trap, Esc to close) -->
-    <dialog class="modal" id="project-modal" aria-labelledby="modal-title">
-        <div class="modal-head">
-            <p class="mono" id="modal-kicker"></p>
-            <button type="button" class="modal-close" data-modal-close aria-label="Close video">
-                <svg class="icon icon--stroke" aria-hidden="true"><use href="#i-close"/></svg>
-            </button>
-        </div>
-        <div class="modal-player" id="modal-player"></div>
-        <div class="modal-body">
-            <h2 class="t-h2" id="modal-title"></h2>
-            <div class="episodes" id="modal-episodes" role="group" aria-label="Episodes in this series" hidden></div>
-            <dl class="case" id="modal-case" hidden>
-                <div><dt class="mono"><span class="kf" aria-hidden="true"></span>Challenge</dt><dd data-case="challenge"></dd></div>
-                <div><dt class="mono"><span class="kf" aria-hidden="true"></span>Approach</dt><dd data-case="approach"></dd></div>
-                <div><dt class="mono"><span class="kf" aria-hidden="true"></span>Result</dt><dd data-case="result"></dd></div>
-            </dl>
-            <div class="modal-foot">
-                <p class="t-muted">Need something like this for your product?</p>
-                <a href="#contact" class="btn btn--accent" data-modal-close>Start a project
-                    <svg class="icon icon--stroke icon--nudge-x" aria-hidden="true"><use href="#i-arrow-right"/></svg>
-                </a>
-            </div>
-        </div>
-    </dialog>
 </body>
 
 </html>

@@ -17,35 +17,23 @@
        what the player needs. Video sources: { type: "youtube" | "vimeo" | "mp4" | "drive", id | src }.
        "drive" is a stopgap: those videos should move to YouTube/Vimeo/MP4.
        ---------------------------------------------------------------------- */
-    const CASE_TODO = {
-        challenge: "[Challenge — one line: what made this product hard to explain?]",
-        approach: "[Approach — one line: the idea, structure or style you chose.]",
-        result: "[Result — one line, with a real number or outcome if you have one.]",
-    };
-
     const PROJECTS = {
-        drivephase: { client: "DrivePhase.ai", title: "AI deal-pipeline explainer", category: "SaaS Explainer", video: { type: "drive", id: "1p22ilqvf2cyatv4v5cVLOdEq7K0-tfoT" }, ...CASE_TODO },
-        "payrun-onboarding": { client: "Payrun", title: "Onboarding & initial setup", category: "Product Walkthrough", series: "payrun", video: { type: "youtube", id: "yI97ztJJiwA" }, ...CASE_TODO },
-        "payrun-attendance": { client: "Payrun", title: "Attendance module guide", category: "Product Walkthrough", series: "payrun", video: { type: "youtube", id: "vcYG2NTIf7o" }, ...CASE_TODO },
-        "payrun-leave": { client: "Payrun", title: "Leave module guide", category: "Product Walkthrough", series: "payrun", video: { type: "youtube", id: "32xnuExV4oM" }, ...CASE_TODO },
-        nextcrm: { client: "NextCRM", title: "Marketing automation explainer", category: "SaaS Explainer", video: { type: "drive", id: "1a_OsNZAlauYXjLN6Meoh6ryZhqQE0Y9r" }, ...CASE_TODO },
-        salonly: { client: "Salonly", title: "Salon booking plugin launch", category: "Plugin Promo", video: { type: "drive", id: "1hc2joGAoRFD3e0jqdivD9inTIYIXckZJ" }, ...CASE_TODO },
-        next3: { client: "Next3", title: "Offload & optimizer plugin promo", category: "Plugin Promo", video: { type: "drive", id: "1R0L7_DTxNBJHL_B7PMc1OStOiCMcGAEC" }, ...CASE_TODO },
-        cleanly: { client: "Cleanly", title: "Cleaning business booking system", category: "Promo", video: { type: "drive", id: "13WzQi1z3SSCRwcKSTVyWQV6fb5FwYucF" }, ...CASE_TODO },
-        school: { client: "School Management Software", title: "Product promo", category: "Promo", video: { type: "drive", id: "1A7NU3RcdVyAI4CL4w2_hnXHDGuPmpLJX" }, ...CASE_TODO },
-        nextvideoreview: { client: "Next Video Review", title: "Video review plugin promo", category: "Plugin Promo", video: { type: "drive", id: "1h89xJaYIL_Crq97M6JXh0eWEN1u3d4Xr" }, ...CASE_TODO },
-        washer: { client: "Washer Service Booking", title: "Car wash booking plugin explainer", category: "Plugin Promo", video: { type: "drive", id: "1lIxJSS9FBU143EQFGamtFwmglblQvbgW" }, ...CASE_TODO },
+        drivephase: { client: "DrivePhase.ai", title: "AI deal-pipeline explainer", video: { type: "drive", id: "1p22ilqvf2cyatv4v5cVLOdEq7K0-tfoT" } },
+        nextcrm: { client: "NextCRM", title: "Marketing automation explainer", video: { type: "drive", id: "1a_OsNZAlauYXjLN6Meoh6ryZhqQE0Y9r" } },
+        cleanly: { client: "Cleanly", title: "Cleaning business booking system", video: { type: "drive", id: "13WzQi1z3SSCRwcKSTVyWQV6fb5FwYucF" } },
+        school: { client: "School Management Software", title: "Product promo", video: { type: "drive", id: "1A7NU3RcdVyAI4CL4w2_hnXHDGuPmpLJX" } },
+        salonly: { client: "Salonly", title: "Salon booking plugin launch", video: { type: "drive", id: "1hc2joGAoRFD3e0jqdivD9inTIYIXckZJ" } },
+        next3: { client: "Next3", title: "Offload & optimizer plugin promo", video: { type: "drive", id: "1R0L7_DTxNBJHL_B7PMc1OStOiCMcGAEC" } },
+        nextvideoreview: { client: "Next Video Review", title: "Video review plugin promo", video: { type: "drive", id: "1h89xJaYIL_Crq97M6JXh0eWEN1u3d4Xr" } },
+        washer: { client: "Washer Service Booking", title: "Car wash booking plugin explainer", video: { type: "drive", id: "1lIxJSS9FBU143EQFGamtFwmglblQvbgW" } },
+        "payrun-onboarding": { client: "Payrun", title: "Onboarding & initial setup", video: { type: "youtube", id: "yI97ztJJiwA" } },
+        "payrun-attendance": { client: "Payrun", title: "Attendance module guide", video: { type: "youtube", id: "vcYG2NTIf7o" } },
+        "payrun-leave": { client: "Payrun", title: "Leave module guide", video: { type: "youtube", id: "32xnuExV4oM" } },
     };
-
-    const SERIES = {
-        payrun: { label: "Payrun series", episodes: ["payrun-onboarding", "payrun-attendance", "payrun-leave"] },
-    };
-
-    const REEL = { client: "Noor Motion", title: "SaaS Explainer Showreel 2026", category: "Showreel", video: { type: "youtube", id: "pdp05Yl0Bp4" } };
 
     /**
      * Builds the player element for a video source. Kept in one place so the
-     * modal, the reel and any future hover previews agree on embed parameters.
+     * work cards, the reel and any future hover previews agree on embed parameters.
      * @param {{type: string, id?: string, src?: string}} video
      * @param {{autoplay?: boolean, muted?: boolean, loop?: boolean, controls?: boolean, title?: string}} [opts]
      * @returns {HTMLIFrameElement | HTMLVideoElement}
@@ -184,16 +172,6 @@
         setTimeout(() => dialog.close(), delay);
     }
 
-    /* Clicking the dimmed area outside a modal closes it. */
-    function closeOnBackdrop(dialog) {
-        dialog?.addEventListener("click", (e) => {
-            if (e.target !== dialog) return;
-            const r = dialog.getBoundingClientRect();
-            const inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
-            if (!inside) closeDialog(dialog);
-        });
-    }
-
     /* ----------------------------------------------------------------------
        Mobile menu
        ---------------------------------------------------------------------- */
@@ -318,56 +296,94 @@
 
 
     /* ----------------------------------------------------------------------
-       Project modal (work cards + full showreel)
+       Inline players: work cards and the showreel play where they are.
+       One video at a time: starting another removes the previous iframe,
+       which is what stops it.
        ---------------------------------------------------------------------- */
-    const modal = $("#project-modal");
-    const player = $("#modal-player");
+    let stopCurrent = null;
 
-    /** Fills the modal with one project (or the reel) and starts its video with sound. */
-    function showProject(project, key) {
-        $("#modal-kicker").textContent = `${project.client} · ${project.category}`;
-        $("#modal-title").textContent = project.title;
+    /**
+     * Mounts a player over `mount` and marks `host` as playing.
+     * @param {HTMLElement} host  gets `is-playing` (hides the poster UI and the card's hit area)
+     * @param {HTMLElement} mount positioned element the player fills
+     * @param {{type: string, id?: string, src?: string}} video
+     * @param {string} title
+     */
+    function playInline(host, mount, video, title) {
+        if (host.classList.contains("is-playing")) return;
+        stopCurrent?.();
+        const wrap = document.createElement("div");
+        wrap.className = "inline-player";
+        const el = createPlayer(video, { title });
+        wrap.appendChild(el);
+        mount.appendChild(wrap);
+        host.classList.add("is-playing");
+        el.focus({ preventScroll: true });
+        stopCurrent = () => { wrap.remove(); host.classList.remove("is-playing"); stopCurrent = null; };
+    }
 
-        player.replaceChildren(createPlayer(project.video, { title: `${project.client}: ${project.title}` }));
+    /* AE selection box drawn around each card on hover/focus. */
+    const HANDLES = ["tl", "tc", "tr", "ml", "mr", "bl", "bc", "br"];
+    $$(".work-media").forEach((media) => {
+        const sel = document.createElement("span");
+        sel.className = "sel";
+        sel.setAttribute("aria-hidden", "true");
+        sel.innerHTML = '<svg><rect x="0" y="0" width="100%" height="100%" pathLength="1"/></svg>' +
+            HANDLES.map((h) => `<span class="handle ${h}"></span>`).join("");
+        media.appendChild(sel);
+    });
 
-        const caseList = $("#modal-case");
-        const hasCase = Boolean(project.challenge || project.approach || project.result);
-        caseList.hidden = !hasCase;
-        if (hasCase) $$("[data-case]", caseList).forEach((dd) => { dd.textContent = project[dd.dataset.case] || "—"; });
+    $$(".work-open").forEach((btn) => btn.addEventListener("click", () => {
+        const project = PROJECTS[btn.dataset.project];
+        const card = btn.closest(".work-card");
+        if (!project || !card) return;
+        playInline(card, $(".work-media", card), project.video, `${project.client}: ${project.title}`);
+    }));
 
-        const episodes = $("#modal-episodes");
-        const series = project.series && SERIES[project.series];
-        episodes.hidden = !series;
-        episodes.replaceChildren();
-        if (series) {
-            series.episodes.forEach((epKey, i) => {
-                const ep = PROJECTS[epKey];
-                const btn = document.createElement("button");
-                btn.type = "button";
-                btn.className = "chip mono";
-                btn.textContent = `${String(i + 1).padStart(2, "0")} ${ep.title}`;
-                btn.setAttribute("aria-pressed", String(epKey === key));
-                btn.addEventListener("click", () => showProject(ep, epKey));
-                episodes.appendChild(btn);
-            });
+    /* Showreel: muted looping preview while on screen; "Watch full reel" swaps in the player with sound. */
+    const reel = $("#reel");
+    const reelFrame = $("#reel-frame");
+    if (reel) {
+        let preview = null;
+        const command = (func) => preview?.contentWindow?.postMessage(JSON.stringify({ event: "command", func, args: [] }), "*");
+        const reelVideo = { type: "youtube", id: reel.dataset.youtube };
+
+        $$("[data-open-reel]", reel).forEach((btn) => btn.addEventListener("click", () => {
+            command("pauseVideo");
+            playInline(reel, reel, reelVideo, "Showreel 2026");
+        }));
+
+        const saveData = navigator.connection?.saveData === true;
+        if (reelFrame && "IntersectionObserver" in window && !reduceMotion.matches && !saveData) {
+            new IntersectionObserver(([entry]) => {
+                if (reel.classList.contains("is-playing")) return;
+                if (entry.isIntersecting) {
+                    if (!preview) {
+                        preview = createPlayer(reelVideo, { muted: true, loop: true, controls: false, title: "Showreel preview (muted)" });
+                        preview.tabIndex = -1;
+                        preview.addEventListener("load", () => setTimeout(() => reelFrame.classList.add("is-ready"), 600), { once: true });
+                        reelFrame.appendChild(preview);
+                    } else {
+                        command("playVideo");
+                    }
+                } else {
+                    command("pauseVideo");
+                }
+            }, { threshold: 0.35 }).observe(reel);
         }
     }
 
-    if (modal && player) {
-        closeOnBackdrop(modal);
-        $$("[data-modal-close]", modal).forEach((el) => el.addEventListener("click", () => closeDialog(modal)));
-
-        $$(".work-open").forEach((btn) => btn.addEventListener("click", () => {
-            const key = btn.dataset.project;
-            if (!PROJECTS[key]) return;
-            showProject(PROJECTS[key], key);
-            openDialog(modal, () => player.replaceChildren());   // removing the iframe stops playback
-        }));
-
-        $$("[data-open-reel]").forEach((btn) => btn.addEventListener("click", () => {
-            showProject(REEL, "reel");
-            openDialog(modal, () => player.replaceChildren());
-        }));
+    /* ----------------------------------------------------------------------
+       Reveals: 24px rise + fade, 0.6s, power3.out, stagger 0.06
+       ---------------------------------------------------------------------- */
+    if (hasGSAP && !reduceMotion.matches) {
+        const items = $$("[data-reveal]");
+        gsap.set(items, { opacity: 0, y: 24 });
+        ScrollTrigger.batch(items, {
+            start: "top 90%",
+            once: true,
+            onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out", stagger: 0.06, overwrite: true }),
+        });
     }
 
     /* ----------------------------------------------------------------------
