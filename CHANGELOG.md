@@ -57,3 +57,4 @@
 - Logo strip: real client logos (DrivePhase, Payrun, NextCRM, Next3 Offload, Salonly, Cleanly, Next Video Reviews, Washer, Gain IO, School Management) converted to one-colour marks with optical sizing, inverted in dark theme. The strip now drifts, speeds up and follows page-scroll direction, stops on press-and-hold, and can be dragged and thrown left or right (red "Drag" cursor on desktop).
 - Logo strip: default cursor (drag pill removed), no top/bottom rules, label centred.
 - Logo strip: NextCRM and Next Video Reviews now include their app icons.
+- FAQ restyled: full-width list, large questions, solid rules, circled-arrow toggle that flips when open. About: call hours removed. Footer: "Find me here." above the social links. Drive videos render at 640px and scale to fit the card, so their controls no longer spill off the bottom on small cards.

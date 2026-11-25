@@ -29,7 +29,7 @@
     <link rel="preload" as="image" type="image/avif"
         imagesrcset="Assets/img/me-640.avif 640w, Assets/img/me-1000.avif 1000w, Assets/img/me-1600.avif 1600w"
         imagesizes="(min-width: 1024px) 780px, 100vw" fetchpriority="high">
-    <link rel="stylesheet" href="style.min.css?v=485d7487">
+    <link rel="stylesheet" href="style.min.css?v=361d35c6">
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" href="favicon.png">
@@ -60,7 +60,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
     <script src="site.config.js?v=dc3f8ca7" defer></script>
-    <script src="script.js?v=fcdee0f5" defer></script>
+    <script src="script.js?v=de17e0ac" defer></script>
 </head>
 
 <body>
@@ -72,7 +72,7 @@
         <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15a.6.6 0 0 0 .9.5l12.2-7.5a.6.6 0 0 0 0-1L7.9 4a.6.6 0 0 0-.9.5Z"/></symbol>
         <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
         <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></symbol>
-        <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+        <symbol id="i-circle-down" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14.5"/><path d="M16 9v13.5M10.5 17l5.5 5.5 5.5-5.5"/></symbol>
         <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></symbol>
         <symbol id="i-youtube" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></symbol>
         <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></symbol>
@@ -533,7 +533,6 @@
                             <div><dt class="mono t-muted">Based in</dt><dd>Dhaka, Bangladesh</dd></div>
                             <div><dt class="mono t-muted">Languages</dt><dd>English, Bangla</dd></div>
                             <div><dt class="mono t-muted">Timezone</dt><dd>GMT+6</dd></div>
-                            <div><dt class="mono t-muted">Call hours</dt><dd>[13:00–22:00 GMT+6: EU mornings, US East mornings]</dd></div>
                         </dl>
                     </div>
                 </div>
@@ -548,31 +547,31 @@
                 </div>
                 <div class="ruler" aria-hidden="true"></div>
 
-                <div class="grid lg:grid-cols-12 gap-10 lg:gap-6 mt-12 lg:mt-16">
-                    <h2 class="t-h1 lg:col-span-4" id="faq-title" data-reveal>Questions, answered.</h2>
-                    <div class="faq lg:col-span-7 lg:col-start-6" data-reveal>
+                <div class="mt-12 lg:mt-16">
+                    <h2 class="t-h1 mb-10 lg:mb-14" id="faq-title" data-reveal>Questions, answered.</h2>
+                    <div class="faq" data-reveal>
                         <details name="faq">
-                            <summary>What does a project usually cost?<svg class="icon icon--stroke" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+                            <summary>What does a project usually cost?<svg class="faq-icon" aria-hidden="true"><use href="#i-circle-down"/></svg></summary>
                             <p>[Your typical range, e.g. "Most explainers land between $X and $Y depending on length and style."] Every project gets a fixed quote after the brief, so there are no surprises.</p>
                         </details>
                         <details name="faq">
-                            <summary>How long does it take?<svg class="icon icon--stroke" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+                            <summary>How long does it take?<svg class="faq-icon" aria-hidden="true"><use href="#i-circle-down"/></svg></summary>
                             <p>Explainers take 2–4 weeks, walkthroughs 1–3 weeks and promos 2–3 weeks from approved brief to final render. Tight deadline? Ask; sometimes it's possible.</p>
                         </details>
                         <details name="faq">
-                            <summary>How many revisions are included?<svg class="icon icon--stroke" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+                            <summary>How many revisions are included?<svg class="faq-icon" aria-hidden="true"><use href="#i-circle-down"/></svg></summary>
                             <p>[Number] rounds at each stage: script, storyboard and animation. Sign-off at each stage keeps late changes small.</p>
                         </details>
                         <details name="faq">
-                            <summary>What files do I get?<svg class="icon icon--stroke" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+                            <summary>What files do I get?<svg class="faq-icon" aria-hidden="true"><use href="#i-circle-down"/></svg></summary>
                             <p>[Final MP4 in 16:9 plus the cut-downs and aspect ratios you need. Say whether project files are included.]</p>
                         </details>
                         <details name="faq">
-                            <summary>Do you write the script and handle the voiceover?<svg class="icon icon--stroke" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+                            <summary>Do you write the script and handle the voiceover?<svg class="faq-icon" aria-hidden="true"><use href="#i-circle-down"/></svg></summary>
                             <p>[Yes / with a partner / you provide it. Say how voice artists are chosen and whether their fee is in the quote.]</p>
                         </details>
                         <details name="faq">
-                            <summary>How does payment work?<svg class="icon icon--stroke" aria-hidden="true"><use href="#i-plus"/></svg></summary>
+                            <summary>How does payment work?<svg class="faq-icon" aria-hidden="true"><use href="#i-circle-down"/></svg></summary>
                             <p>[e.g. "50% to start, 50% on delivery, via Payoneer, Wise or bank transfer."]</p>
                         </details>
                     </div>
@@ -660,14 +659,17 @@
     <footer class="band band--dark site-footer">
         <div class="wrap wrap--guides py-12 lg:py-16 grid gap-10">
             <div class="flex flex-wrap items-start justify-between gap-8">
-                <ul class="socials" aria-label="Social profiles">
-                    <li><a class="social" href="https://www.linkedin.com/in/motionoor-alam-/" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn</a></li>
-                    <li><a class="social" href="https://www.youtube.com/@Motionoor" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-youtube"/></svg>YouTube</a></li>
-                    <li><a class="social" href="https://www.facebook.com/Nr.Alm96" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-facebook"/></svg>Facebook</a></li>
-                    <li><a class="social" href="https://wa.me/8801867739749" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>WhatsApp</a></li>
-                    <li><a class="social" href="https://t.me/+8801867739749" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-telegram"/></svg>Telegram</a></li>
-                    <li><a class="social" href="https://nralam.gumroad.com/" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-gumroad"/></svg>Gumroad</a></li>
-                </ul>
+                <div class="grid gap-4">
+                    <p class="mono t-muted" id="socials-title">Find me here.</p>
+                    <ul class="socials" aria-labelledby="socials-title">
+                        <li><a class="social" href="https://www.linkedin.com/in/motionoor-alam-/" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn</a></li>
+                        <li><a class="social" href="https://www.youtube.com/@Motionoor" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-youtube"/></svg>YouTube</a></li>
+                        <li><a class="social" href="https://www.facebook.com/Nr.Alm96" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-facebook"/></svg>Facebook</a></li>
+                        <li><a class="social" href="https://wa.me/8801867739749" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>WhatsApp</a></li>
+                        <li><a class="social" href="https://t.me/+8801867739749" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-telegram"/></svg>Telegram</a></li>
+                        <li><a class="social" href="https://nralam.gumroad.com/" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-gumroad"/></svg>Gumroad</a></li>
+                    </ul>
+                </div>
                 <nav class="flex gap-2" aria-label="More">
                     <a class="social" href="blog.html">Blog</a>
                     <a class="social" href="carousel-studio.html">Studio</a>

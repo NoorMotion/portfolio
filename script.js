@@ -317,9 +317,15 @@
         const el = createPlayer(video, { title });
         wrap.appendChild(el);
         mount.appendChild(wrap);
+        let fit = null;
+        if (video.type === "drive") {
+            wrap.classList.add("inline-player--drive");
+            fit = new ResizeObserver(([entry]) => wrap.style.setProperty("--s", String(Math.min(1, entry.contentRect.width / 640))));
+            fit.observe(wrap);
+        }
         host.classList.add("is-playing");
         el.focus({ preventScroll: true });
-        stopCurrent = () => { wrap.remove(); host.classList.remove("is-playing"); stopCurrent = null; };
+        stopCurrent = () => { fit?.disconnect(); wrap.remove(); host.classList.remove("is-playing"); stopCurrent = null; };
     }
 
     /* AE selection box drawn around each card on hover/focus. */
