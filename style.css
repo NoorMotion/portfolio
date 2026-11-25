@@ -798,42 +798,86 @@
     /* ----------------------------------------------------------------------
        Client logo marquee
        ---------------------------------------------------------------------- */
+    /* One-colour marks (black on transparency) so mixed brand logos sit as one set;
+       inverted for dark theme. Motion + drag live in script.js. */
     .marquee {
+        position: relative;
         overflow: hidden;
-        -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
-        mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+        padding-block: 28px;
+        border-block: 1px solid var(--rule);
+        cursor: grab;
+        touch-action: pan-y;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+        mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
     }
 
-    .marquee-track {
-        display: flex;
-        width: max-content;
-        animation: marquee 40s linear infinite;
-    }
+    .marquee.is-dragging { cursor: grabbing; }
 
-    .marquee:hover .marquee-track { animation-play-state: paused; }
+    .marquee-track { display: flex; width: max-content; will-change: transform; }
 
     .marquee-list { display: flex; align-items: center; }
 
     .logo-item {
+        --h: 30px;
         display: flex;
         align-items: center;
-        gap: 48px;
-        padding-right: 48px;
-        font-size: clamp(22px, 2.4vw, 30px);
+        gap: 10px;
+        height: 48px;
+        padding-inline: clamp(28px, 3.6vw, 52px);
+        font-size: calc(var(--h) * 0.72);
         font-weight: 700;
         letter-spacing: -0.03em;
         white-space: nowrap;
-        color: var(--fg-muted);
-        opacity: 0.75;
-        filter: grayscale(1);
-        transition: color 0.2s ease, opacity 0.2s ease, filter 0.2s ease;
+        color: #000;
+        opacity: 0.5;
+        transition: opacity 0.25s ease;
     }
 
-    .logo-item img { height: 32px; width: auto; }
-    .logo-item:hover { color: var(--fg); opacity: 1; filter: none; }
-    .logo-item .kf { background: var(--rule-strong); }
+    .logo-item img { height: var(--h); width: auto; pointer-events: none; }
 
-    @keyframes marquee { to { transform: translateX(-50%); } }
+    /* Optical sizing: wide wordmarks run smaller, compact marks larger, so all read at one weight. */
+    .logo-item--drivephase { --h: 26px; }
+    .logo-item--next3 { --h: 24px; }
+    .logo-item--next-video-reviews { --h: 24px; }
+    .logo-item--nextcrm { --h: 26px; }
+    .logo-item--salonly { --h: 34px; }
+    .logo-item--washer { --h: 32px; }
+
+    @media (hover: hover) {
+        .marquee:hover .logo-item { opacity: 0.32; }
+        .marquee:hover .logo-item:hover { opacity: 1; }
+    }
+
+    :root[data-theme="dark"] .logo-item img { filter: invert(1); }
+    :root[data-theme="dark"] .logo-item { color: #fff; opacity: 0.55; }
+
+    /* "Drag" label that follows the pointer over the strip (fine pointers only). */
+    .marquee-cursor {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 2;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: var(--accent);
+        color: #fff;
+        font-size: 12px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        pointer-events: none;
+        opacity: 0;
+        transform: translate(var(--cx, 0), var(--cy, 0)) translate(-50%, -50%) scale(0.6);
+        transition: opacity 0.2s ease, transform 0.2s var(--ease-out);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+        .marquee { cursor: none; }
+        .marquee.is-hover .marquee-cursor { opacity: 1; transform: translate(var(--cx, 0), var(--cy, 0)) translate(-50%, -50%) scale(1); transition: opacity 0.2s ease; }
+        .marquee.is-dragging .marquee-cursor { transform: translate(var(--cx, 0), var(--cy, 0)) translate(-50%, -50%) scale(0.85); }
+    }
 
     /* ----------------------------------------------------------------------
        Selected work
@@ -1429,7 +1473,9 @@
     }
 
     .marquee { -webkit-mask-image: none; mask-image: none; }
-    .marquee-track { animation: none; width: auto; }
+    .marquee, .marquee.is-dragging { cursor: auto; }
+    .marquee-cursor { display: none; }
+    .marquee-track { width: auto; }
     .marquee-list { flex-wrap: wrap; justify-content: center; row-gap: 12px; }
     .marquee-list[aria-hidden="true"] { display: none; }
     .layer-label .caret, .rec-dot, .hero-cursor { animation: none; }

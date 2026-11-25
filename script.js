@@ -374,6 +374,88 @@
     }
 
     /* ----------------------------------------------------------------------
+       Logo strip: drifts on its own, page scroll pushes it (and sets its
+       direction), press-and-hold stops it, dragging scrubs it with a throw.
+       ---------------------------------------------------------------------- */
+    const marquee = $("#logo-marquee");
+    if (marquee && !reduceMotion.matches) {
+        const track = $(".marquee-track", marquee);
+        const label = $(".marquee-cursor", marquee);
+        const BASE = 36;                 // px/s idle drift
+        let loopW = 0;                   // width of one list; x wraps inside [-loopW, 0)
+        let x = 0;
+        let dir = -1;                    // -1 = leftwards; flips with scroll / throw direction
+        let v = BASE * dir;              // current px/s
+        let dragging = false, held = false;
+        let lastX = 0, lastT = 0, dragV = 0;
+        let lastScroll = window.scrollY;
+        let running = false, prev = 0, raf = 0;
+
+        const measure = () => { loopW = track.firstElementChild.getBoundingClientRect().width; };
+        const wrap = () => { if (loopW) x = ((x % loopW) - loopW) % loopW; };
+        const render = () => { track.style.transform = `translate3d(${x.toFixed(2)}px,0,0)`; };
+
+        const frame = (t) => {
+            const dt = Math.min(0.05, (t - prev) / 1000 || 0);
+            prev = t;
+            const dy = window.scrollY - lastScroll;
+            lastScroll = window.scrollY;
+            if (!dragging) {
+                if (dy) { dir = dy > 0 ? -1 : 1; v += -dy * 0.9; }   // scrolling down pushes left, up pushes right
+                const target = held ? 0 : BASE * dir;
+                v += (target - v) * Math.min(1, dt * (held ? 14 : 2.2));
+                x += v * dt;
+                wrap();
+                render();
+            }
+            raf = requestAnimationFrame(frame);
+        };
+        const start = () => { if (!running) { running = true; prev = performance.now(); lastScroll = window.scrollY; raf = requestAnimationFrame(frame); } };
+        const stop = () => { running = false; cancelAnimationFrame(raf); };
+
+        marquee.addEventListener("pointerdown", (e) => {
+            if (e.button !== 0) return;
+            held = true;
+            dragging = false;
+            lastX = e.clientX; lastT = e.timeStamp; dragV = 0;
+            marquee.setPointerCapture(e.pointerId);
+            marquee.classList.add("is-dragging");
+        });
+        marquee.addEventListener("pointermove", (e) => {
+            const r = marquee.getBoundingClientRect();
+            label?.style.setProperty("--cx", `${e.clientX - r.left}px`);
+            label?.style.setProperty("--cy", `${e.clientY - r.top}px`);
+            if (!held) return;
+            const dx = e.clientX - lastX;
+            if (!dragging && Math.abs(dx) < 3) return;
+            dragging = true;
+            const dt = Math.max(1, e.timeStamp - lastT) / 1000;
+            dragV = dragV * 0.6 + (dx / dt) * 0.4;
+            lastX = e.clientX; lastT = e.timeStamp;
+            x += dx; wrap(); render();
+        });
+        const release = () => {
+            if (!held) return;
+            if (dragging) {                           // throw: keep the drag speed, settle back to drift that way
+                v = Math.max(-2400, Math.min(2400, dragV));
+                if (Math.abs(dragV) > 20) dir = dragV < 0 ? -1 : 1;
+            }
+            held = false;
+            dragging = false;
+            marquee.classList.remove("is-dragging");
+        };
+        marquee.addEventListener("pointerup", release);
+        marquee.addEventListener("pointercancel", release);
+        marquee.addEventListener("pointerenter", () => marquee.classList.add("is-hover"));
+        marquee.addEventListener("pointerleave", () => marquee.classList.remove("is-hover"));
+
+        measure();
+        new ResizeObserver(measure).observe(track.firstElementChild);
+        // Only animate while the strip is on screen.
+        new IntersectionObserver(([entry]) => (entry.isIntersecting ? start() : stop())).observe(marquee);
+    }
+
+    /* ----------------------------------------------------------------------
        Reveals: 24px rise + fade, 0.6s, power3.out, stagger 0.06
        ---------------------------------------------------------------------- */
     if (hasGSAP && !reduceMotion.matches) {
