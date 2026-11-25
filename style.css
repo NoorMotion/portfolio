@@ -857,14 +857,6 @@
         letter-spacing: -0.03em;
     }
 
-    .work-group-count {
-        margin-left: auto;
-        font-size: 14px;
-        font-weight: 400;
-        letter-spacing: 0;
-        color: var(--fg-muted);
-    }
-
     .work-grid {
         display: grid;
         grid-template-columns: minmax(0, 1fr);

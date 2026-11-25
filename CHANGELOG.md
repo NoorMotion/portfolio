@@ -53,3 +53,4 @@
 - Stats updated to 4+ years, 115+ videos, 9 brands, 6 tools. Tool cards trimmed to name, line and Gumroad link (no type tag, Free / Donation or Demo). Top-right meta removed from every section head.
 - Hero: corner taglines "Motion that grabs attention" / "Audiences that convert" (shown on mobile too), positioning line removed, meta row "Based in Dhaka · Helping founders · Working worldwide", title 20% larger on desktop and lowered so it reads clearly. Availability setting removed from site.config.js.
 - Work: heading "Videos That We Craft.", filters replaced by three groups (SaaS Explainer, Plugin Promo, Product Walkthrough). Cleanly and School moved under SaaS Explainer. Videos and the full showreel now play in place (one at a time); the video popup and its case-study placeholders are gone. Restored the scroll reveals, card selection box and muted reel preview that an earlier commit dropped by mistake.
+- Work: removed the video count next to each group title.
