@@ -1,6 +1,6 @@
 /** Tailwind is only used for layout utilities; the design system lives in style.css. */
 module.exports = {
-    content: ["./index.html", "./blog.html", "./script.js"],
+    content: ["./index.html", "./blog.html", "./js/script.js"],
     darkMode: ["selector", '[data-theme="dark"]'],
     theme: {
         extend: {

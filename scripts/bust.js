@@ -7,14 +7,19 @@
 const fs = require("fs");
 const crypto = require("crypto");
 
-const ASSETS = ["style.min.css", "site.config.js", "script.js"];
-let html = fs.readFileSync("index.html", "utf8");
+const ASSETS = ["css/style.min.css", "js/site.config.js", "js/script.js"];
+const PAGES = ["index.html", "blog.html"];
 
-for (const file of ASSETS) {
+const hashes = ASSETS.map((file) => {
     const hash = crypto.createHash("md5").update(fs.readFileSync(file)).digest("hex").slice(0, 8);
-    const escaped = file.replace(/\./g, "\\.");
-    html = html.replace(new RegExp(`(["'])${escaped}(\\?v=[^"']*)?\\1`, "g"), `$1${file}?v=${hash}$1`);
     console.log(`${file} → ?v=${hash}`);
-}
+    return { file, escaped: file.replace(/\./g, "\\."), hash };
+});
 
-fs.writeFileSync("index.html", html);
+for (const page of PAGES) {
+    let html = fs.readFileSync(page, "utf8");
+    for (const { file, escaped, hash } of hashes) {
+        html = html.replace(new RegExp(`(["'])${escaped}(\\?v=[^"']*)?\\1`, "g"), `$1${file}?v=${hash}$1`);
+    }
+    fs.writeFileSync(page, html);
+}

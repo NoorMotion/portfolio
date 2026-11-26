@@ -1,7 +1,7 @@
 /* ==========================================================================
    NOOR MOTION — "The After Effects Workspace"
    Source stylesheet. Build the file the page loads with:
-     npm run build:css   (npx tailwindcss@3.4.17 -i style.css -o style.min.css --minify)
+     npm run build:css   (npx tailwindcss@3.4.17 -i css/style.css -o css/style.min.css --minify)
    ========================================================================== */
 
 @tailwind base;
@@ -14,7 +14,7 @@
    -------------------------------------------------------------------------- */
 @font-face {
     font-family: "Inter";
-    src: url("Assets/fonts/inter-latin.woff2") format("woff2");
+    src: url("../Assets/fonts/inter-latin.woff2") format("woff2");
     font-weight: 400 800;
     font-style: normal;
     font-display: swap;
@@ -32,7 +32,7 @@
 
 @font-face {
     font-family: "JetBrains Mono";
-    src: url("Assets/fonts/jetbrains-mono-latin.woff2") format("woff2");
+    src: url("../Assets/fonts/jetbrains-mono-latin.woff2") format("woff2");
     font-weight: 400 500;
     font-style: normal;
     font-display: swap;
@@ -40,7 +40,7 @@
 
 @font-face {
     font-family: "Jersey 25";
-    src: url("Assets/fonts/jersey25.woff2") format("woff2");
+    src: url("../Assets/fonts/jersey25.woff2") format("woff2");
     font-weight: 400;
     font-style: normal;
     font-display: swap;

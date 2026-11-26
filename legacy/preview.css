@@ -3,7 +3,7 @@
    Strict Architectural Hairline Grid with ZERO Corner Radius
    ========================================================================== */
 
-@import url('style.css');
+@import url('../css/style.css');
 
 /* ==========================================================================
    1. STRICT ZERO-RADIUS ENFORCEMENT ACROSS ALL ELEMENTS
