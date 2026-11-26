@@ -340,10 +340,10 @@
     .btn--sm { min-height: 40px; padding: 0 16px; font-size: 14px; }
 
     .btn--accent { background: var(--accent); color: var(--on-accent); }
-    .btn--accent:hover { background: var(--fg); color: var(--bg); }
+    .btn--accent:hover { background: var(--on-accent); color: var(--accent); border-color: var(--accent); }
 
     .btn--ghost { border-color: var(--rule-strong); color: var(--fg); }
-    .btn--ghost:hover { border-color: var(--fg); background: var(--fg); color: var(--bg); }
+    .btn--ghost:hover { border-color: var(--accent); background: var(--accent); color: var(--on-accent); }
 
     .chip {
         display: inline-flex;
