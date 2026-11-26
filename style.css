@@ -1444,22 +1444,23 @@
     .nav-links a[aria-current="page"] { color: var(--accent-ink); }
     .menu-links a[aria-current="page"] { color: var(--accent-ink); }
 
-    .blog-list { display: grid; }
+    .blog-list {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 48px 24px;
+    }
+
+    @media (min-width: 768px) {
+        .blog-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
     .blog-card {
         display: grid;
         grid-template-columns: minmax(0, 1fr);
-        gap: 24px;
-        padding: 32px 0;
+        align-content: start;
+        gap: 18px;
+        padding-top: 24px;
         border-top: 1px solid var(--rule);
-    }
-    .blog-card:last-child { border-bottom: 1px solid var(--rule); }
-
-    @media (min-width: 768px) {
-        .blog-card {
-            grid-template-columns: 320px minmax(0, 1fr);
-            gap: 32px;
-            align-items: center;
-        }
     }
 
     .blog-thumb {
