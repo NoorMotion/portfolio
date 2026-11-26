@@ -548,7 +548,7 @@
     }
 
     /* ----------------------------------------------------------------------
-       Contact: Calendly link + form (Formspree via config, email fallback)
+       Contact: Calendly link (email fallback)
        ---------------------------------------------------------------------- */
     const email = CONFIG.email || "nralamyt@gmail.com";
     $$("[data-calendly]").forEach((a) => {
@@ -558,69 +558,6 @@
             a.rel = "noopener noreferrer";
         } else {
             a.href = `mailto:${email}?subject=${encodeURIComponent("Booking a 20-min call")}`;
-        }
-    });
-
-    const form = $("#contact-form");
-    const status = $("#form-status");
-
-    // "Start a project" on a service pre-selects that project type in the form.
-    $$("[data-project-type]").forEach((link) => link.addEventListener("click", () => {
-        const select = $("#f-type");
-        if (select) select.value = link.dataset.projectType;
-    }));
-
-    /** Shows a form message; kind is "ok", "error" or "" (neutral). */
-    function setStatus(msg, kind = "") {
-        status.textContent = msg;
-        status.classList.toggle("is-ok", kind === "ok");
-        status.classList.toggle("is-error", kind === "error");
-    }
-
-    form?.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        if (!form.checkValidity()) {
-            const firstInvalid = form.querySelector(":invalid");
-            setStatus("Please fill in the fields marked *.", "error");
-            firstInvalid?.focus();
-            return;
-        }
-
-        const data = Object.fromEntries(new FormData(form));
-        if (data._gotcha) return;   // honeypot filled: a bot, drop silently
-
-        if (!CONFIG.formEndpoint) {
-            // No form service configured: hand the message to the visitor's email app.
-            const body = [
-                `Name: ${data.name}`,
-                `Email: ${data.email}`,
-                `Company / URL: ${data.company || "—"}`,
-                `Project type: ${data.project_type}`,
-                `Budget: ${data.budget || "Not sure yet"}`,
-                "",
-                data.message,
-            ].join("\n");
-            window.location.href = `mailto:${email}?subject=${encodeURIComponent(`Project inquiry: ${data.project_type}`)}&body=${encodeURIComponent(body)}`;
-            setStatus("Opening your email app…");
-            return;
-        }
-
-        const submit = form.querySelector('[type="submit"]');
-        submit.disabled = true;
-        setStatus("Sending…");
-        try {
-            const res = await fetch(CONFIG.formEndpoint, {
-                method: "POST",
-                headers: { "Content-Type": "application/json", Accept: "application/json" },
-                body: JSON.stringify(data),
-            });
-            if (!res.ok) throw new Error(String(res.status));
-            form.reset();
-            setStatus("Thanks — message received. I'll reply by email.", "ok");
-        } catch (err) {
-            setStatus(`Couldn't send. Please email ${email} instead.`, "error");
-        } finally {
-            submit.disabled = false;
         }
     });
 

@@ -1357,66 +1357,51 @@
     .faq details p { padding: 0 64px clamp(24px, 3vw, 40px) 0; color: var(--fg-muted); font-size: clamp(16px, 1.3vw, 19px); line-height: 1.6; max-width: 70ch; }
 
     /* ----------------------------------------------------------------------
-       Closing CTA + form
+       Closing CTA + direct contact paths
        ---------------------------------------------------------------------- */
     .contact-aside { display: grid; gap: 24px; align-content: start; }
 
-    .form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 24px; }
+    .contact-paths { display: grid; align-content: start; }
+    .contact-paths li { border-top: 1px solid var(--rule); }
+    .contact-paths li:last-child { border-bottom: 1px solid var(--rule); }
 
-    .field { display: grid; gap: 8px; grid-column: span 2; }
-
-    @media (min-width: 640px) {
-        .field--half { grid-column: span 1; }
-    }
-
-    .field label { color: var(--fg-muted); }
-    .field label .req { color: var(--accent-ink); }
-
-    .field input,
-    .field select,
-    .field textarea {
-        width: 100%;
-        min-height: 48px;
-        padding: 10px 0;
-        border: 0;
-        border-bottom: 1px solid var(--rule-strong);
-        border-radius: 0;
-        background: transparent;
+    .contact-path {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 20px;
+        padding: 24px 0;
         color: var(--fg);
-        font-size: 16px;            /* 16px stops iOS zooming on focus */
-        line-height: 1.4;
-        transition: border-color 0.15s ease;
+        transition: color 0.18s ease;
     }
 
-    .field select {
-        appearance: none;
-        background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(-45deg, transparent 50%, currentColor 50%);
-        background-position: right 6px center, right 0 center;
-        background-size: 6px 6px;
-        background-repeat: no-repeat;
-        padding-right: 24px;
+    .contact-path-icon {
+        display: inline-grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border: 1px solid var(--rule);
+        border-radius: var(--radius);
+        color: var(--fg-muted);
+        transition: border-color 0.18s ease, color 0.18s ease;
     }
 
-    .field select option { color: #0F0F10; }
-    .field textarea { min-height: 120px; resize: vertical; }
+    .contact-path-meta { display: grid; gap: 4px; }
+    .contact-path-val {
+        font-size: clamp(18px, 1.8vw, 24px);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+    }
 
-    .field input::placeholder,
-    .field textarea::placeholder { color: var(--fg-muted); opacity: 0.7; }
+    .contact-path-arrow {
+        color: var(--fg-muted);
+        transition: transform 0.2s var(--ease-out), color 0.18s ease;
+    }
 
-    .field input:focus,
-    .field select:focus,
-    .field textarea:focus { outline: none; border-bottom-color: var(--accent); box-shadow: 0 1px 0 0 var(--accent); }
-
-    .field input:user-invalid,
-    .field textarea:user-invalid { border-bottom-color: #FF5C7A; }
-
-    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-
-    .form-foot { grid-column: span 2; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; }
-
-    .form-status { color: var(--fg-muted); min-height: 1.4em; }
-    .form-status.is-ok { color: #7BD88F; }
-    .form-status.is-error { color: #FF5C7A; }
+    .contact-path:hover { color: var(--accent-ink); }
+    .contact-path:hover .contact-path-icon { border-color: var(--accent); color: var(--accent-ink); }
+    .contact-path:hover .contact-path-arrow { color: var(--accent-ink); transform: translate(3px, -3px); }
 
     /* ----------------------------------------------------------------------
        Footer
