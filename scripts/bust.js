@@ -8,18 +8,23 @@ const fs = require("fs");
 const crypto = require("crypto");
 
 const ASSETS = ["css/style.min.css", "js/site.config.js", "js/script.js"];
-const PAGES = ["index.html", "blog.html"];
+const PAGES = [
+    { path: "index.html", prefix: "" },
+    { path: "pages/blog.html", prefix: "../" },
+];
 
 const hashes = ASSETS.map((file) => {
     const hash = crypto.createHash("md5").update(fs.readFileSync(file)).digest("hex").slice(0, 8);
     console.log(`${file} → ?v=${hash}`);
-    return { file, escaped: file.replace(/\./g, "\\."), hash };
+    return { file, hash };
 });
 
-for (const page of PAGES) {
+for (const { path: page, prefix } of PAGES) {
     let html = fs.readFileSync(page, "utf8");
-    for (const { file, escaped, hash } of hashes) {
-        html = html.replace(new RegExp(`(["'])${escaped}(\\?v=[^"']*)?\\1`, "g"), `$1${file}?v=${hash}$1`);
+    for (const { file, hash } of hashes) {
+        const ref = prefix + file;
+        const escaped = ref.replace(/\./g, "\\.");
+        html = html.replace(new RegExp(`(["'])${escaped}(\\?v=[^"']*)?\\1`, "g"), `$1${ref}?v=${hash}$1`);
     }
     fs.writeFileSync(page, html);
 }
