@@ -1,149 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog & Insights | NoorMotion</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blog &amp; Insights — Noor Motion</title>
+    <meta name="description"
+        content="Motion design insights, After Effects ExtendScript guides, and SaaS explainer video breakdowns by Noor Alam (Noor Motion).">
+    <link rel="canonical" href="https://nralam.com/blog.html">
+    <meta name="theme-color" content="#EEECEB">
+
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#E11D48',
-                        accentRed: '#FF334B'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                        serif: ['Instrument Serif', 'serif']
-                    }
-                }
-            }
-        }
+        try { if (localStorage.getItem("motionTheme") === "dark") document.documentElement.dataset.theme = "dark"; } catch (e) {}
     </script>
-    
-    <!-- Google Fonts & FontAwesome -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Favicon -->
+
+    <link rel="preload" href="Assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="Assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="style.min.css">
+
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" href="favicon.png">
-    <!-- Supabase JS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <link rel="stylesheet" href="legacy.css">
-</head>
-<body class="bg-[#EEECEB] dark:bg-[#050505] text-slate-900 dark:text-slate-100 min-h-screen flex flex-col font-sans transition-colors duration-300">
+    <link rel="apple-touch-icon" href="favicon.png">
 
-    <!-- HEADER NAVIGATION -->
-    <header class="w-full border-b border-black/10 dark:border-white/10 py-4 px-4 sm:px-8 bg-white/80 dark:bg-[#111111]/80 backdrop-blur-md sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto flex items-center justify-between">
-            <a href="index.html" class="flex items-center space-x-2.5 text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-                <img src="favicon.svg" class="w-7 h-7 rounded-md object-contain" alt="NoorMotion Logo">
-                <span>NOOR<span class="font-serif-italic font-normal italic text-[#E11D48] dark:text-[#FF334B] ml-0.5">Motion</span></span>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="site.config.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <svg width="0" height="0" class="absolute" aria-hidden="true" focusable="false">
+        <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+        <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+        <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+        <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+        <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></symbol>
+        <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></symbol>
+        <symbol id="i-youtube" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></symbol>
+        <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></symbol>
+        <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></symbol>
+        <symbol id="i-telegram" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></symbol>
+        <symbol id="i-gumroad" viewBox="0 0 24 24"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0Zm-.007 5.12c4.48 0 5.995 3.025 6.064 4.744h-3.239c-.069-.962-.897-2.406-2.896-2.406-2.136 0-3.514 1.857-3.514 4.126 0 2.27 1.378 4.125 3.514 4.125 1.93 0 2.758-1.512 3.103-3.025h-3.103v-1.238h6.509v6.327h-2.855v-3.989c-.207 1.444-1.102 4.264-4.617 4.264-3.516 0-5.584-2.82-5.584-6.326 0-3.645 2.276-6.602 6.618-6.602z"/></symbol>
+    </svg>
+
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" id="site-header">
+        <div class="wrap header-row">
+            <a href="index.html#top" class="logo" aria-label="Noor Motion, home">
+                <img src="favicon.svg" alt="" width="24" height="24">
+                <span>NOOR<b>MOTION</b></span>
             </a>
 
-            <div class="flex items-center space-x-4">
-                <a href="blog.html" class="text-xs font-mono-custom font-semibold text-[#E11D48] dark:text-[#FF334B]">Blog</a>
-                <a href="index.html#contact" class="text-xs font-mono-custom font-semibold text-[#E11D48] dark:text-[#FF334B]">Contact</a>
+            <nav class="nav-links" aria-label="Primary">
+                <a href="index.html#work">Work</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#tools">Tools</a>
+                <a href="index.html#services">Services</a>
+                <a href="carousel-studio.html" target="_blank" rel="noopener noreferrer">Studio</a>
+                <a href="blog.html" aria-current="page">Blog</a>
+            </nav>
+
+            <div class="header-actions">
+                <button type="button" class="theme-toggle mono" data-theme-toggle aria-label="Switch to dark theme">THEME[<span data-theme-label>L</span>]</button>
+                <a href="index.html#contact" class="btn btn--accent btn--sm">Book a call</a>
+                <button type="button" class="menu-btn" id="menu-open" aria-label="Open menu" aria-haspopup="dialog" aria-controls="menu">
+                    <svg class="icon icon--stroke" aria-hidden="true"><use href="#i-menu"/></svg>
+                </button>
             </div>
+        </div>
+        <div class="playhead" id="playhead" aria-hidden="true">
+            <span class="playhead-fill"></span>
+            <span class="playhead-head"></span>
         </div>
     </header>
 
-    <!-- MAIN CONTAINER -->
-    <main class="flex-1 max-w-4xl mx-auto w-full px-4 sm:px-6 py-12">
-        
-        <!-- SINGLE BLOG VIEW -->
-        <article id="single-blog-container" class="hidden space-y-8">
-            <a href="blog.html" class="inline-flex items-center text-xs font-mono-custom text-[#E11D48] dark:text-[#FF334B] font-bold hover:underline mb-4">
-                <i class="fa-solid fa-arrow-left mr-2"></i> Back to all articles
-            </a>
-
-            <div>
-                <div class="flex items-center space-x-3 mb-3">
-                    <span id="blog-badge" class="px-3 py-1 bg-[#E11D48]/10 text-[#E11D48] dark:text-[#FF334B] text-xs font-mono-custom font-bold uppercase rounded-full"></span>
-                    <span id="blog-date" class="text-xs font-mono-custom text-slate-500"></span>
+    <dialog class="menu" id="menu" aria-label="Menu">
+        <div class="menu-inner">
+            <div class="menu-top">
+                <a href="index.html#top" class="logo" data-menu-close>
+                    <img src="favicon.svg" alt="" width="24" height="24">
+                    <span>NOOR<b>MOTION</b></span>
+                </a>
+                <button type="button" class="menu-btn" data-menu-close aria-label="Close menu">
+                    <svg class="icon icon--stroke" aria-hidden="true"><use href="#i-close"/></svg>
+                </button>
+            </div>
+            <nav class="menu-links" aria-label="Mobile">
+                <a href="index.html#work" data-menu-close><span class="mono">01</span>Work</a>
+                <a href="index.html#about" data-menu-close><span class="mono">02</span>About</a>
+                <a href="index.html#tools" data-menu-close><span class="mono">03</span>Tools</a>
+                <a href="index.html#services" data-menu-close><span class="mono">04</span>Services</a>
+                <a href="carousel-studio.html" target="_blank" rel="noopener noreferrer" data-menu-close><span class="mono">05</span>Studio</a>
+                <a href="blog.html" aria-current="page" data-menu-close><span class="mono">06</span>Blog</a>
+            </nav>
+            <div class="menu-foot">
+                <div class="menu-meta">
+                    <button type="button" class="theme-toggle mono" data-theme-toggle aria-label="Switch to dark theme">THEME[<span data-theme-label>L</span>]</button>
+                    <span class="mono"><span data-clock>--:--</span> Dhaka</span>
                 </div>
-                <h1 id="blog-title" class="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight mb-4"></h1>
-                <p id="blog-excerpt" class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed font-normal"></p>
+                <a href="index.html#contact" class="btn btn--accent" data-menu-close>Book a call
+                    <svg class="icon icon--stroke icon--nudge-x" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+                </a>
             </div>
+        </div>
+    </dialog>
 
-            <div class="aspect-video w-full rounded-2xl overflow-hidden bg-slate-900 border border-slate-200 dark:border-white/10 shadow-xl">
-                <img id="blog-cover" src="" class="w-full h-full object-cover">
-            </div>
+    <main id="main">
+        <section class="section">
+            <div class="wrap wrap--guides">
+                <!-- SINGLE BLOG VIEW -->
+                <article id="single-blog-container" class="hidden">
+                    <div class="sec-head">
+                        <a href="blog.html" class="blog-back mono">
+                            <svg class="icon icon--stroke" aria-hidden="true"><use href="#i-arrow-left"/></svg>
+                            Back to all articles
+                        </a>
+                    </div>
+                    <div class="ruler" aria-hidden="true"></div>
 
-            <div id="blog-body-content" class="prose dark:prose-invert max-w-none text-slate-800 dark:text-slate-300 leading-relaxed space-y-6 text-base sm:text-lg">
-                <!-- Content injected here -->
-            </div>
-        </article>
+                    <div class="grid gap-6 mt-10 lg:mt-14 mb-8">
+                        <div class="blog-meta">
+                            <span id="blog-badge" class="blog-tag mono"></span>
+                            <span id="blog-date" class="mono t-muted"></span>
+                        </div>
+                        <h1 id="blog-title" class="t-h1 max-w-[18ch]"></h1>
+                        <p id="blog-excerpt" class="t-lead !font-normal max-w-[48ch]"></p>
+                    </div>
 
-        <!-- BLOG LISTING VIEW -->
-        <section id="blog-list-container" class="space-y-8">
-            <div class="border-b border-slate-200 dark:border-white/10 pb-6">
-                <span class="px-3 py-1 bg-[#E11D48]/10 text-[#E11D48] dark:text-[#FF334B] text-xs font-mono-custom font-bold uppercase rounded-full">ARTICLES & TUTORIALS</span>
-                <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-3">
-                    Motion Design <span class="font-serif-italic font-normal italic text-[#E11D48] dark:text-[#FF334B]">&</span> AE Insights
-                </h1>
-                <p class="text-slate-600 dark:text-slate-400 mt-2 font-normal">Workflow automation guides, After Effects ExtendScript tips, and SaaS video breakdown.</p>
-            </div>
+                    <div class="blog-cover mb-10">
+                        <img id="blog-cover" src="" alt="">
+                    </div>
 
-            <div id="articles-grid" class="grid grid-cols-1 gap-8">
-                <!-- Articles rendered dynamically -->
+                    <div id="blog-body-content" class="blog-prose"></div>
+                </article>
+
+                <!-- BLOG LISTING VIEW -->
+                <section id="blog-list-container" aria-labelledby="blog-list-title">
+                    <div class="sec-head">
+                        <p class="layer-label mono"><span class="kf" aria-hidden="true"></span>Articles &amp; tutorials<span class="caret" aria-hidden="true">_</span></p>
+                    </div>
+                    <div class="ruler" aria-hidden="true"></div>
+
+                    <div class="grid gap-4 mt-10 lg:mt-14 mb-10 lg:mb-14">
+                        <h1 class="t-h1" id="blog-list-title">Motion design &amp; AE insights.</h1>
+                        <p class="t-lead !font-normal max-w-[44ch]">Workflow automation guides, After Effects ExtendScript tips, and SaaS video breakdowns.</p>
+                    </div>
+
+                    <div id="articles-grid" class="blog-list"></div>
+                </section>
             </div>
         </section>
     </main>
 
-    <!-- FOOTER -->
-    <footer class="border-t border-black/10 dark:border-white/10 py-8 px-4 text-center text-xs font-mono-custom text-slate-500">
-        <p>&copy; <span id="year">2026</span> NoorMotion. All rights reserved.</p>
+    <footer class="band band--dark site-footer">
+        <div class="wrap wrap--guides py-12 lg:py-16 grid gap-10">
+            <div class="flex flex-wrap items-start justify-between gap-8">
+                <div class="grid gap-4">
+                    <p class="mono t-muted" id="socials-title">Find me here.</p>
+                    <ul class="socials" aria-labelledby="socials-title">
+                        <li><a class="social" href="https://www.linkedin.com/in/motionoor-alam-/" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn</a></li>
+                        <li><a class="social" href="https://www.youtube.com/@Motionoor" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-youtube"/></svg>YouTube</a></li>
+                        <li><a class="social" href="https://www.facebook.com/Nr.Alm96" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-facebook"/></svg>Facebook</a></li>
+                        <li><a class="social" href="https://wa.me/8801867739749" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>WhatsApp</a></li>
+                        <li><a class="social" href="https://t.me/+8801867739749" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-telegram"/></svg>Telegram</a></li>
+                        <li><a class="social" href="https://nralam.gumroad.com/" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-gumroad"/></svg>Gumroad</a></li>
+                    </ul>
+                </div>
+                <nav class="flex gap-2" aria-label="More">
+                    <a class="social" href="index.html">Home</a>
+                    <a class="social" href="carousel-studio.html" target="_blank" rel="noopener noreferrer">Studio</a>
+                </nav>
+            </div>
+            <div class="footer-bar mono border-t border-[color:var(--rule)] pt-6">
+                <p>&copy; 2026 Noor Alam · Noor Motion</p>
+                <p>Dhaka <span data-clock>--:--</span> · GMT+6</p>
+            </div>
+        </div>
     </footer>
 
     <script>
-        const STORAGE_BLOGS = 'noormotion_cms_blogs';
+        const STORAGE_BLOGS = "noormotion_cms_blogs";
 
         const defaultBlogs = [
             {
-                id: 'b2',
-                title: 'My Step-by-Step Working Process: How I Craft High-Converting SaaS Explainer Videos',
-                slug: 'saas-explainer-working-process',
-                tags: 'SAAS EXPLAINER, WORKFLOW, PROCESS',
-                excerpt: 'A comprehensive 6-stage video production pipeline breakdown—from initial discovery and scriptwriting to UI motion graphics, sound design, and master delivery.',
+                id: "b2",
+                title: "My Step-by-Step Working Process: How I Craft High-Converting SaaS Explainer Videos",
+                slug: "saas-explainer-working-process",
+                tags: "SAAS EXPLAINER, WORKFLOW, PROCESS",
+                excerpt: "A comprehensive 6-stage video production pipeline breakdown—from initial discovery and scriptwriting to UI motion graphics, sound design, and master delivery.",
                 content: `
-                    <p class="lead text-lg font-medium text-slate-700 dark:text-slate-200">
+                    <p class="lead">
                         Creating a compelling SaaS product explainer video isn't just about making elements move in After Effects—it's a strategic fusion of narrative storytelling, technical product understanding, crisp UI recreation, and fluid motion design.
                     </p>
-                    <p class="mt-4">
+                    <p>
                         Whether launching a new SaaS platform, introducing a complex WordPress plugin, or scaling a digital product, potential users decide within the first 5 seconds if your software is worth their attention. Here is an inside look at my exact 6-stage production pipeline designed to transform complex products into engaging, high-converting video assets.
                     </p>
-                    
-                    <hr class="my-8 border-black/10 dark:border-white/10" />
 
-                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-8 mb-3">Phase 1: Discovery, Strategy & Product Deep-Dive</h3>
+                    <hr>
+
+                    <h3>Phase 1: Discovery, Strategy &amp; Product Deep-Dive</h3>
                     <p>
                         Before writing a single line of script or opening After Effects, I dive deep into understanding your software. We analyze your platform's core problem-solving capability, target buyer personas, and key value propositions.
                     </p>
-                    <ul class="list-disc pl-6 space-y-2 text-slate-700 dark:text-slate-300 mt-3">
+                    <ul>
                         <li><strong>Target Audience Alignment:</strong> Identifying whether we are speaking to developers, agency owners, or non-technical business managers.</li>
-                        <li><strong>The Core Problem & Solution:</strong> Pinpointing the exact friction point your software eliminates.</li>
-                        <li><strong>Brand Identity & Style Guide:</strong> Incorporating your brand's colors, typography, and visual tokens for seamless alignment with your web app.</li>
+                        <li><strong>The Core Problem &amp; Solution:</strong> Pinpointing the exact friction point your software eliminates.</li>
+                        <li><strong>Brand Identity &amp; Style Guide:</strong> Incorporating your brand's colors, typography, and visual tokens for seamless alignment with your web app.</li>
                     </ul>
 
-                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-8 mb-3">Phase 2: High-Converting Scriptwriting & Voiceover</h3>
+                    <h3>Phase 2: High-Converting Scriptwriting &amp; Voiceover</h3>
                     <p>
                         A great explainer video relies 80% on the strength of its narrative. I craft concise, engaging scripts structured to hook viewers instantly and highlight benefits over raw feature dumps.
                     </p>
-                    <div class="bg-slate-100 dark:bg-[#111111] p-6 rounded-xl border border-black/10 dark:border-white/10 my-6">
-                        <h4 class="font-bold text-[#E11D48] dark:text-[#FF334B] text-sm font-mono-custom uppercase mb-2"><i class="fa-solid fa-bullseye mr-2"></i>The Proven Explainer Script Structure:</h4>
-                        <ol class="list-decimal pl-5 space-y-2 text-sm text-slate-800 dark:text-slate-200">
+                    <div class="blog-callout">
+                        <h4>The Proven Explainer Script Structure</h4>
+                        <ol>
                             <li><strong>0–5s (The Hook):</strong> Call out the primary pain point or ask a relatable problem question.</li>
                             <li><strong>5–15s (The Agitation):</strong> Show how much time or revenue traditional methods waste.</li>
-                            <li><strong>15–45s (The Solution & UI Walkthrough):</strong> Showcase your SaaS in action with clean visual highlights.</li>
+                            <li><strong>15–45s (The Solution &amp; UI Walkthrough):</strong> Showcase your SaaS in action with clean visual highlights.</li>
                             <li><strong>45–60s (Call-to-Action):</strong> Guide the viewer directly to start a free trial or book a demo.</li>
                         </ol>
                     </div>
@@ -151,146 +225,144 @@
                         Once the script is refined and approved, a professional voiceover (VO) is recorded with precise timing and studio-grade audio mastering.
                     </p>
 
-                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-8 mb-3">Phase 3: High-Fidelity UI Storyboarding & Vector Prep</h3>
+                    <h3>Phase 3: High-Fidelity UI Storyboarding &amp; Vector Prep</h3>
                     <p>
                         With the voiceover track locked, I prepare the visual assets. Using Adobe Illustrator and Figma, I recreate or clean up UI screens into scalable vector layers. This allows us to zoom infinitely into dashboards and highlight buttons without pixelation.
                     </p>
 
-                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-8 mb-3">Phase 4: Motion Design & UI Animation (After Effects)</h3>
+                    <h3>Phase 4: Motion Design &amp; UI Animation (After Effects)</h3>
                     <p>
                         This is where your static software screens transform into a dynamic visual story. Inside Adobe After Effects, I utilize custom workflow automation tools and custom keyframe easing:
                     </p>
-                    <ul class="list-disc pl-6 space-y-2 text-slate-700 dark:text-slate-300 mt-3">
-                        <li><strong>Realistic Cursor & Interaction FX:</strong> Simulating natural mouse navigation, clicks, drag-and-drop actions, and active states.</li>
-                        <li><strong>3D Camera Zooms & Focal Tracking:</strong> Directing the viewer's eyes directly to key features and data visualizations.</li>
-                        <li><strong>Kinetic Typography & Graphic Overlays:</strong> Reinforcing important takeaways with sleek animated text callouts.</li>
+                    <ul>
+                        <li><strong>Realistic Cursor &amp; Interaction FX:</strong> Simulating natural mouse navigation, clicks, drag-and-drop actions, and active states.</li>
+                        <li><strong>3D Camera Zooms &amp; Focal Tracking:</strong> Directing the viewer's eyes directly to key features and data visualizations.</li>
+                        <li><strong>Kinetic Typography &amp; Graphic Overlays:</strong> Reinforcing important takeaways with sleek animated text callouts.</li>
                     </ul>
 
-                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-8 mb-3">Phase 5: Sound Design, SFX & Audio Mastering</h3>
+                    <h3>Phase 5: Sound Design, SFX &amp; Audio Mastering</h3>
                     <p>
                         Visual animation feels empty without tactile audio. I layer royalty-free background tracks with precise sound effects (SFX)—such as subtle UI clicks, gentle swooshes, pop notifications, and interface ticks—that sync with every keyframe.
                     </p>
 
-                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-8 mb-3">Phase 6: Review, Polish & Multi-Format Delivery</h3>
+                    <h3>Phase 6: Review, Polish &amp; Multi-Format Delivery</h3>
                     <p>
                         We conduct collaborative review rounds using frame-accurate video feedback tools. After final approval, I export optimized master files ready for deployment across all channels:
                     </p>
-                    <ul class="list-disc pl-6 space-y-2 text-slate-700 dark:text-slate-300 mt-3">
+                    <ul>
                         <li><strong>Landing Page MP4 / WebM:</strong> Highly optimized for fast web page load speed without quality loss.</li>
                         <li><strong>4K / 1080p Widescreen (16:9):</strong> Perfect for YouTube, Vimeo, and full-screen presentations.</li>
-                        <li><strong>Social Media Cutdowns (1:1 & 9:16):</strong> Bite-sized promos tailored for LinkedIn, X (Twitter), and Instagram ads.</li>
+                        <li><strong>Social Media Cutdowns (1:1 &amp; 9:16):</strong> Bite-sized promos tailored for LinkedIn, X (Twitter), and Instagram ads.</li>
                     </ul>
 
-                    <blockquote class="p-5 border-l-4 border-[#E11D48] bg-slate-100 dark:bg-[#111111] italic text-slate-800 dark:text-slate-200 my-8 rounded-r-xl">
+                    <blockquote>
                         "A great SaaS explainer video doesn't just explain features—it builds trust, eliminates buying friction, and converts viewers into paying customers."
                     </blockquote>
                 `,
-                cover_image: 'https://noormotion.carrd.co/assets/videos/video11_thumbnail.jpg?v=86a3e49b',
+                cover_image: "https://noormotion.carrd.co/assets/videos/video11_thumbnail.jpg?v=86a3e49b",
                 created_at: new Date().toISOString()
             },
             {
-                id: 'b1',
-                title: 'How to Automate After Effects Keyframes & Shape Layers with ExtendScript',
-                slug: 'automate-after-effects-keyframes',
-                tags: 'AE SCRIPTING, TUTORIAL',
-                excerpt: 'Discover how writing custom JSX scripts can speed up your motion graphics workflow by eliminating repetitive layer alignments and keyframe staggering.',
+                id: "b1",
+                title: "How to Automate After Effects Keyframes & Shape Layers with ExtendScript",
+                slug: "automate-after-effects-keyframes",
+                tags: "AE SCRIPTING, TUTORIAL",
+                excerpt: "Discover how writing custom JSX scripts can speed up your motion graphics workflow by eliminating repetitive layer alignments and keyframe staggering.",
                 content: `
                     <p>As motion designers, we spend hours manually adjusting shape layer bounding boxes, centering anchor points, and staggering keyframes across dozens of compositions. What if you could execute all of that with a single click?</p>
-                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-6">Why ExtendScript is a Superpower for Motion Designers</h3>
+                    <h3>Why ExtendScript is a Superpower for Motion Designers</h3>
                     <p>Adobe After Effects exposes a powerful JavaScript runtime engine (ExtendScript). By tapping into AE's DOM model, you can read layer bounds, automate keyframe interpolation curves, and dynamically build UI dialogs.</p>
-                    <blockquote class="p-4 border-l-4 border-[#E11D48] bg-slate-100 dark:bg-[#111111] italic text-slate-700 dark:text-slate-300 my-4">
+                    <blockquote>
                         "Automation doesn't take away creativity; it frees your mind to focus purely on storytelling."
                     </blockquote>
                     <p>Check out our custom After Effects tools in the portfolio to see live scripts in action!</p>
                 `,
-                cover_image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80',
-                created_at: '2026-09-01T10:00:00.000Z'
+                cover_image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
+                created_at: "2026-09-01T10:00:00.000Z"
             }
         ];
 
-        document.addEventListener('DOMContentLoaded', async () => {
+        document.addEventListener("DOMContentLoaded", async () => {
             let blogs = [];
-            const supabaseUrl = localStorage.getItem('noormotion_supabase_url');
-            const supabaseKey = localStorage.getItem('noormotion_supabase_key');
+            const supabaseUrl = localStorage.getItem("noormotion_supabase_url");
+            const supabaseKey = localStorage.getItem("noormotion_supabase_key");
 
             if (supabaseUrl && supabaseKey && window.supabase) {
                 try {
                     const client = window.supabase.createClient(supabaseUrl, supabaseKey);
-                    const { data, error } = await client.from('blogs').select('*').order('created_at', { ascending: false });
+                    const { data, error } = await client.from("blogs").select("*").order("created_at", { ascending: false });
                     if (!error && data && data.length > 0) {
                         blogs = data;
                         localStorage.setItem(STORAGE_BLOGS, JSON.stringify(blogs));
                     }
                 } catch (e) {
-                    console.warn('Supabase blog fetch fallback:', e);
+                    console.warn("Supabase blog fetch fallback:", e);
                 }
             }
 
             if (blogs.length === 0) {
-                let stored = localStorage.getItem(STORAGE_BLOGS);
+                const stored = localStorage.getItem(STORAGE_BLOGS);
                 blogs = stored ? JSON.parse(stored) : defaultBlogs;
             }
 
-            // Merge defaultBlogs if missing
-            defaultBlogs.forEach(db => {
-                if (!blogs.some(b => b.slug === db.slug)) {
-                    blogs.push(db);
-                }
+            defaultBlogs.forEach((db) => {
+                if (!blogs.some((b) => b.slug === db.slug)) blogs.push(db);
             });
 
-            const urlParams = new URLSearchParams(window.location.search);
-            const slug = urlParams.get('slug');
-
+            const slug = new URLSearchParams(window.location.search).get("slug");
             if (slug) {
-                const article = blogs.find(b => b.slug === slug) || blogs[0];
-                renderSingleArticle(article);
+                renderSingleArticle(blogs.find((b) => b.slug === slug) || blogs[0]);
             } else {
                 renderArticlesList(blogs);
             }
         });
 
         function renderSingleArticle(article) {
-            document.getElementById('blog-list-container').classList.add('hidden');
-            document.getElementById('single-blog-container').classList.remove('hidden');
+            document.getElementById("blog-list-container").classList.add("hidden");
+            document.getElementById("single-blog-container").classList.remove("hidden");
 
-            document.title = `${article.title} | NoorMotion Blog`;
-            document.getElementById('blog-badge').innerText = article.tags || 'ARTICLE';
-            document.getElementById('blog-date').innerText = new Date(article.created_at || Date.now()).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-            document.getElementById('blog-title').innerText = article.title;
-            document.getElementById('blog-excerpt').innerText = article.excerpt || '';
-            document.getElementById('blog-cover').src = article.cover_image;
-            document.getElementById('blog-body-content').innerHTML = article.content;
+            document.title = `${article.title} — Noor Motion`;
+            document.getElementById("blog-badge").textContent = article.tags || "ARTICLE";
+            document.getElementById("blog-date").textContent = new Date(article.created_at || Date.now()).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+            document.getElementById("blog-title").textContent = article.title;
+            document.getElementById("blog-excerpt").textContent = article.excerpt || "";
+            const cover = document.getElementById("blog-cover");
+            cover.src = article.cover_image;
+            cover.alt = article.title;
+            document.getElementById("blog-body-content").innerHTML = article.content;
         }
 
         function renderArticlesList(blogs) {
-            const grid = document.getElementById('articles-grid');
+            const grid = document.getElementById("articles-grid");
             if (!blogs || blogs.length === 0) {
-                grid.innerHTML = `<p class="text-slate-500 font-mono-custom">No articles published yet. Check back soon!</p>`;
+                grid.innerHTML = '<p class="mono t-muted">No articles published yet. Check back soon.</p>';
                 return;
             }
 
-            grid.innerHTML = blogs.map(b => `
-                <article class="bg-white dark:bg-[#111111] border border-black/10 dark:border-white/10 rounded-2xl overflow-hidden p-6 sm:p-8 flex flex-col md:flex-row gap-6 items-center hover:border-[#E11D48] transition duration-300 shadow-sm">
-                    <img src="${b.cover_image}" class="w-full md:w-64 h-44 object-cover rounded-xl border border-black/10 dark:border-white/10">
-                    <div class="flex-1 space-y-3">
-                        <div class="flex items-center space-x-3">
-                            <span class="px-2.5 py-0.5 bg-[#E11D48]/10 text-[#E11D48] dark:text-[#FF334B] text-[11px] font-mono-custom font-bold uppercase rounded font-semibold">${b.tags}</span>
-                            <span class="text-xs font-mono-custom text-slate-400">${new Date(b.created_at || Date.now()).toLocaleDateString()}</span>
+            grid.innerHTML = blogs.map((b) => `
+                <article class="blog-card">
+                    <a class="blog-thumb" href="blog.html?slug=${b.slug}">
+                        <img src="${b.cover_image}" alt="${b.title}" loading="lazy" decoding="async">
+                    </a>
+                    <div class="grid gap-3">
+                        <div class="blog-meta">
+                            <span class="blog-tag mono">${b.tags}</span>
+                            <span class="mono t-muted">${new Date(b.created_at || Date.now()).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</span>
                         </div>
-                        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white leading-snug hover:text-[#E11D48] transition">
+                        <h2 class="blog-card-title">
                             <a href="blog.html?slug=${b.slug}">${b.title}</a>
                         </h2>
-                        <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">${b.excerpt}</p>
+                        <p class="t-muted">${b.excerpt}</p>
                         <div>
-                            <a href="blog.html?slug=${b.slug}" class="inline-flex items-center text-xs font-mono-custom font-bold text-[#E11D48] dark:text-[#FF334B] uppercase tracking-wider hover:underline">
-                                Read Full Article <i class="fa-solid fa-arrow-right ml-1 text-[10px]"></i>
+                            <a href="blog.html?slug=${b.slug}" class="service-link">
+                                Read article <svg class="icon icon--stroke" aria-hidden="true"><use href="#i-arrow-right"/></svg>
                             </a>
                         </div>
                     </div>
                 </article>
-            `).join('');
+            `).join("");
         }
     </script>
-    <script src="legacy.js"></script>
 </body>
+
 </html>
