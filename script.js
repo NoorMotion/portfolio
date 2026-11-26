@@ -500,25 +500,21 @@
         {
             name: "SaaS Explainer Videos",
             type: "SaaS explainer video",
-            time: "Timeline · 2–4 weeks",
             text: "I turn what your product does into a 90-second story: script, voiceover, style frames and UI animation that matches your real product.",
         },
         {
             name: "Product Walkthroughs & Onboarding",
             type: "Product walkthrough / onboarding",
-            time: "Timeline · 1–3 weeks",
             text: "Step-by-step feature tours and setup guides that help new users get going and cut down support tickets.",
         },
         {
             name: "Promo & Launch Videos",
             type: "Promo / launch video",
-            time: "Timeline · 2–3 weeks",
             text: "Short, punchy cuts for launches, landing pages, ads and plugin listings, with a hook built to stop the scroll.",
         },
         {
             name: "Custom AE Scripts & Tools",
             type: "Custom After Effects tool",
-            time: "Timeline · Custom scope",
             text: "Scripts, presets and panels that take the repetitive work out of your team's After Effects pipeline.",
         },
     ];
@@ -529,18 +525,16 @@
     const stepList = $("#pipe-steps");
     if (stepList) {
         const text = $("#pipe-text");
-        const time = $("#pipe-time");
         const cta = $("#pipe-cta");
 
         stepList.innerHTML = SERVICES.map((svc, i) =>
             `<li><button type="button" class="pipe-step" aria-pressed="false"><span class="pipe-num">${String(i + 1).padStart(2, "0")}</span><span class="pipe-name">${svc.name}</span>${PIXEL_ARROW}</button></li>`
         ).join("");
 
-        /** Highlights service i and shows its description, timeline and form pre-select. */
+        /** Highlights service i and shows its description and form pre-select. */
         const select = (i) => {
             $$(".pipe-step", stepList).forEach((btn, n) => btn.setAttribute("aria-pressed", String(n === i)));
             text.textContent = SERVICES[i].text;
-            time.textContent = SERVICES[i].time;
             cta.dataset.projectType = SERVICES[i].type;
         };
 
