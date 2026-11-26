@@ -319,8 +319,13 @@
         mount.appendChild(wrap);
         let fit = null;
         if (video.type === "drive") {
+            const DRIVE_MIN_WIDTH = 960;
+            const updateScale = (w) => {
+                if (w > 0) wrap.style.setProperty("--s", String(Math.min(1, w / DRIVE_MIN_WIDTH)));
+            };
             wrap.classList.add("inline-player--drive");
-            fit = new ResizeObserver(([entry]) => wrap.style.setProperty("--s", String(Math.min(1, entry.contentRect.width / 640))));
+            updateScale(mount.clientWidth);
+            fit = new ResizeObserver(([entry]) => updateScale(entry.contentRect.width));
             fit.observe(wrap);
         }
         host.classList.add("is-playing");
